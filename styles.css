@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css?family=Roboto:300&display=swap');
 
 body{
@@ -7,13 +8,24 @@ body{
 	}
 
 header{
-	position: absolute;
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+	background-color: orange;
+	z-index: 1;
+	position: fixed;
 	left: 0px;
 	right: 0px;
 	top: 0px;
-	display: block;
+	display: inline-block;
 }
 
+.Portfolio{
+	width: 200px;
+	background-color: red;
+	display: flex;
+	flex-direction: row;
+}
 header h1{
 	text-decoration: underline blue;
 	text-align: center;
@@ -24,15 +36,6 @@ height: 70em;
 width: auto;
 }
 
-div.corner{
-position: absolute;
-left: -70px;
-margin-top: 10px;
-padding-left: 70px;
-padding-right: 70px;
-background-color: blue;
-transform: rotateZ(-45deg);
-}
 @media only screen and (max-width: 850px){
 		div.logo1{
 			flex-wrap: wrap;
@@ -154,7 +157,7 @@ div.HC:hover{
 }
 div.A:hover{
 	transition: 0.5s;
-	height: 500px;
+	height: 550px;
 }
 div.Py:hover{
 	transition: 0.5s;
