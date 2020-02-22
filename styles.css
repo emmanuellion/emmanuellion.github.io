@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300&display=swap');
+
+body{
+	font-family: 'Roboto', sans-serif;
+	background-color: #151D21;
+	color: #aaa;
+	}
+
+header{
+	position: absolute;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	display: block;
+}
+
+header h1{
+	text-decoration: underline blue;
+	text-align: center;
+}
+
+div.main{
+height: 70em;
+width: auto;
+}
+
+div.corner{
+position: absolute;
+left: -70px;
+margin-top: 10px;
+padding-left: 70px;
+padding-right: 70px;
+background-color: blue;
+transform: rotateZ(-45deg);
+}
+@media only screen and (max-width: 850px){
+		div.logo1{
+			flex-wrap: wrap;
+			flex-direction: column;
+		}
+		div.part {
+			transform: translateY(-220px);
+		}
+		div.art:hover div.part{
+			transform: translateY(0px);
+			transition: 0.5s;
+		}
+}
+
+.slider-wrapper{
+	display: flex;
+	position: absolute;
+	top: 125px;
+	left: 380px;
+	font-size: 20px;
+	font-weight: bold;Q
+	text-transform: uppercase;
+	border: 5px solid red;
+	padding:20px;
+}
+div.slider{
+	padding-left: 15px;
+	overflow: hidden;
+	height: 30px;
+	margin-bottom: 0px;
+	padding: 2px 15px;
+	text-align: center;
+	box-sizing: border-box;
+}
+div.slide1{
+	background:white;
+	margin-bottom: 30px;
+	height: 30px;
+	animation: slide 7s linear infinite;
+}
+div.slide2{
+	background:yellow;
+	height: 30px;
+	margin-bottom: 30px;
+}
+div.slide3{
+	background:orangered;
+	height: 30px;
+	margin-bottom: 30px;
+}
+div.slide4{
+	background:darkturquoise;
+	height: 30px;
+	margin-bottom: 30px;
+}
+div.slide5{
+	background:steelblue;
+	height: 30px;
+	margin-bottom: 30px;
+}
+div.slide6{
+	background:salmon;
+	height: 30px;
+	margin-bottom: 30px;
+}
+@keyframes slide {
+	0%{margin-top: -360px;}
+	5%{margin-top: -300px;}
+	16%{margin-top: -300px;}
+	21%{margin-top: -240px;}
+	32%{margin-top: -240px;}
+	37%{margin-top: -180px;}
+	48%{margin-top: -180px;}
+	53%{margin-top: -120px;}
+	64%{margin-top: -120px;}
+	69%{margin-top: -60px;}
+	80%{margin-top: -60px;}
+	85%{margin-top: 0px;}
+	100%{margin-top: 0px;}
+}
+
+
+div.logo1{
+	left: 0px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	background-color: blue;
+	margin-top: 250px;
+	overflow: hidden;
+	flex-direction: row;
+}
+
+div.art{
+	margin-right: 30px;
+	margin-left: 30px;
+	width: 30%;
+	font-size: 20px;
+	overflow: hidden;
+	height: 150px;
+	transition: 0.5s;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	text-align: center;
+}
+
+div.java:hover{
+	transition: 0.5s;
+	height: 500px;
+}
+div.HC:hover{
+	transition: 0.5s;
+	height: 530px;
+}
+div.A:hover{
+	transition: 0.5s;
+	height: 500px;
+}
+div.Py:hover{
+	transition: 0.5s;
+	height: 450px;
+}
+
+div.art:hover div.part{
+	transform: translateY(0px);
+	transition: 0.5s;
+}
+
+		
+div.part{
+	transition: 0.5s;
+	transform: translateY(220px);
+	margin-bottom: 10px;
+}
+
+div.part h3{
+	text-decoration: underline;
+}
+
+img.java{
+	width: 33%;
+}
+img.HC{
+	width: 50%;
+}
+img.A{
+	width: 43%;
+}
+div.logo2{
+	left: 0px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: absolute;
+	background-color: blue;
+	margin-top:420px;
+	overflow: hidden;
+	transition: 0.5s;
+}
+img.Py{
+	width: 50%;
+}
+
+
