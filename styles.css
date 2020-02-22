@@ -48,12 +48,15 @@ transform: rotateZ(-45deg);
 }
 
 .slider-wrapper{
+	margin-left: auto;
+	margin-right: auto;
+	width: 41%;
 	display: flex;
 	position: absolute;
 	top: 125px;
 	left: 380px;
 	font-size: 20px;
-	font-weight: bold;Q
+	font-weight: bold;
 	text-transform: uppercase;
 	border: 5px solid red;
 	padding:20px;
