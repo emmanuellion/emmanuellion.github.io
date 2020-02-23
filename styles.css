@@ -7,28 +7,62 @@ body{
 	color: #aaa;
 	}
 
+a{
+	text-decoration: none;
+	color: black;
+}
+
 header{
 	display: flex;
-	flex-direction: row;
 	width: 100%;
-	background-color: orange;
 	z-index: 1;
 	position: fixed;
 	left: 0px;
 	right: 0px;
 	top: 0px;
-	display: inline-block;
+	border-bottom: 2px solid #AAAAAA;
+}
+.fa-id-card-o{
+	margin-top: 11px;
+	padding-right: 10px;
+	padding-left: 10px;
 }
 
 .Portfolio{
-	width: 200px;
-	background-color: red;
+	height: 70px;
+	width: 180px;
 	display: flex;
-	flex-direction: row;
+	position: absolute;
 }
-header h1{
-	text-decoration: underline blue;
-	text-align: center;
+
+.div_bar{
+	width: 800px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.nav_bar{
+	height: 70px;
+	width: 800px;
+}
+
+ul{
+	margin-top: 0px;
+	height: 70px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+li{
+	font-weight: bold;
+	color: #AAAAAA;
+	font-size: 20px;
+	list-style: none;
+	padding: 10px;
+	border: 2px solid #AAAAAA;
+	border-radius: 4px;
+	margin-right: 10px;
 }
 
 div.main{
