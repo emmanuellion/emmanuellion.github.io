@@ -13,6 +13,7 @@ a{
 }
 
 header{
+	flex-grow: 1;
 	background-color: white;
 	display: flex;
 	width: 100%;
@@ -21,7 +22,7 @@ header{
 	left: 0px;
 	right: 0px;
 	top: 0px;
-	border-bottom: 2px solid #AAAAAA;
+	border-bottom: 2px solid black;
 }
 .fa-id-card-o{
 	margin-top: 11px;
@@ -39,7 +40,7 @@ header{
 .div_bar{
 	width: 800px;
 	margin-left: auto;
-	margin-right: auto;
+ 	margin-right: 40px;
 }
 
 .nav_bar{
@@ -66,6 +67,13 @@ li{
 	margin-right: 10px;
 }
 
+.head_name{
+	margin-right: 10px;
+	font-size: 30px;
+	align-items: center;
+	display: flex;
+}
+
 div.main{
 height: 70em;
 width: auto;
@@ -85,20 +93,33 @@ width: auto;
 		}
 }
 
+.propos{
+	margin-top: 50px;
+	width: 500px;
+	background-color: red;
+}
+
 .slider-wrapper{
 	margin-left: auto;
 	margin-right: auto;
-	width: 41%;
-	display: flex;
-	position: absolute;
-	top: 125px;
-	left: 380px;
+	width: 550px;
+	margin-top: 150px;
 	font-size: 20px;
 	font-weight: bold;
 	text-transform: uppercase;
 	border: 5px solid red;
-	padding:20px;
+	padding-left: 10px;
+	padding-right: 10px;
+	padding-bottom: 10px;
+	padding-top: 5px;
 }
+
+.slider-wrapper h4{
+width: 400px;
+margin-left: auto;
+margin-right: auto;
+}
+
 div.slider{
 	padding-left: 15px;
 	overflow: hidden;
@@ -162,9 +183,8 @@ div.logo1{
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	position: absolute;
 	background-color: blue;
-	margin-top: 250px;
+	margin-top: 50px;
 	overflow: hidden;
 	flex-direction: row;
 }
@@ -230,9 +250,7 @@ div.logo2{
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	position: absolute;
 	background-color: blue;
-	margin-top:420px;
 	overflow: hidden;
 	transition: 0.5s;
 }
