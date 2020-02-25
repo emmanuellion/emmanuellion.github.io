@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html style="scroll-behavior: smooth;">
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="styles.css">
@@ -7,6 +7,7 @@
 	<title>Accueil</title>
 </head>
 <body>
+	<hr id="Accueil">
 	<header>
 		<div class="Portfolio">
 			<i class="fa fa-id-card-o fa-3x" aria-hidden="true"></i><h2>Portfolio</h2>
@@ -14,11 +15,11 @@
 		<div class="div_bar">
 			<nav class="nav_bar">
 			<ul>
-				<a href="#propos"><li>Accueil</li></a>
-				<a href=""><li>A propos de moi</li></a>
-				<a href=""><li>Mes compétences</li></a>
-				<a href=""><li>Expérience</li></a>
-				<a href=""><li>Me contacter</li></a>
+				<a href="#Accueil"><li>Accueil</li></a>
+				<a href="#propos"><li>A propos de moi</li></a>
+				<a href="#compétences"><li>Mes compétences</li></a>
+				<a href="#experience"><li>Expérience</li></a>
+				<a href="#contact"><li>Me contacter</li></a>
 			</ul>
 		</nav>
 		</div>
@@ -28,8 +29,22 @@
 	</header>
 	<div class="main">
 		
-		<div class="propos" id="propos">
-			<div><h4>A propos de moi:</h4></div>
+		<div class="article" id="propos">
+			<div class="head_article"><h4>A propos de moi:</h4></div>
+			<p class="p_article">
+				Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+			</p>
+		</div>
+
+		<div class="article" id="compétences">
+			<div class="head_article"><h4>Mes compétences:</h4></div>
+			<p class="p_article">
+				Turpis massa tincidunt dui ut ornare lectus sit. Posuere ac ut consequat semper viverra nam libero justo laoreet. Pellentesque adipiscing commodo elit at imperdiet dui accumsan sit amet. Rhoncus est pellentesque elit ullamcorper dignissim cras tincidunt. Nunc sed blandit libero volutpat sed. Est pellentesque elit ullamcorper dignissim cras tincidunt lobortis feugiat vivamus. Fermentum leo vel orci porta non. Sit amet venenatis urna cursus eget. Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Auctor augue mauris augue neque. Enim facilisis gravida neque convallis a. Faucibus purus in massa tempor nec feugiat nisl pretium. Feugiat nisl pretium fusce id velit ut tortor pretium. Lacus suspendisse faucibus interdum posuere lorem. Mauris ultrices eros in cursus turpis massa tincidunt.
+			</p>
+		</div>
+
+		<div class="experience" id="experience">
+		<h1>Expérience:</h1><hr>	
 		</div>
 
 		<div class="slider-wrapper">
@@ -87,7 +102,6 @@
 		</div>
 		</div>
 
-		
 	</div>
 	<script type="text/javascript">
 		var python = document.getElementsByClassName("logo2") [0]
@@ -114,5 +128,10 @@ logo3.onmouseout = function () {
 python.style.marginTop = "0px";
 } ;
 	</script>
+
+	<footer id="contact">
+		<h1>CACA</h1>
+	</footer>
+
 </body>
 </html>
