@@ -297,3 +297,12 @@ footer{
 	color: #AAAAAA;
 	width: 100%;
 	height: 200px;
+}
+
+.contact_title{
+width: 50px;
+margin-right: auto;
+margin-left: auto;
+text-decoration: underline;
+
+}
