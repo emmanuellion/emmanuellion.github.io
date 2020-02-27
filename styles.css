@@ -9,7 +9,7 @@ body{
 
 a{
 	text-decoration: none;
-	color: black;
+	color: #AAAAAA;
 }
 
 button{
@@ -314,10 +314,20 @@ text-decoration: underline;
 -----------------------------------------
 .mail{
 	justify-content: center;
+	align-items: center;
+	display: flex;
+}
+
+.title_mail{
+	margin-top: 50px;
+	width: 300px;
+	margin-left: auto;
+	margin-right: auto;
+	color: #AAAAAA;
 }
 
 .mail_box{
-	margin-top: 10%;
+	margin-top: 5%;
 	width: 25%;
 	height: 350px;
 	display: flex;
@@ -327,14 +337,14 @@ text-decoration: underline;
 	margin-right: auto;
 	flex-direction: column;
 	background-color: black;
+	box-shadow: 0px 0px 40px black;
 }
 
 .box{
 	border: 2px solid #AAAAAA;
-	padding: 5px 10px 5px 10px;
-	margin:5px;
-	border-radius: 20px;
-	width: 200px;
+	padding: 15px 20px 15px 20px;
+	margin: 5px;
+	border-radius: 40px;
 	transition: 0.6s;
 	color: white;
 	outline: none;
@@ -343,11 +353,29 @@ text-decoration: underline;
 
 .box:focus{
 	transition: 0.6s;
-	width: 250px;
 	border: 2px solid green;
-	padding: 10px 15px 10px 15px;	 
+	padding: 15px 50px 15px 50px;	
+	border-radius: 60px; 
 }
 
 .send_mail{
-	width: 225px;
+	border: 2px solid #AAAAAA;
+	padding: 15px 80px 15px 80px;
+	margin: 5px;
+	border-radius: 40px;
+	transition: 0.6s;
+	outline: none;
+	color: white;
+	background-color: transparent;
+}
+
+.send_mail:hover{
+	cursor: pointer;
+}
+
+.send_mail:focus{
+	transition: 0.6s;
+	border-color: green;
+	padding: 15px 110px 15px 110px;
+	border-radius: 60px;
 }
