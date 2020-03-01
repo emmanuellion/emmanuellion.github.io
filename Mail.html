@@ -8,13 +8,15 @@
 <body class="mail">
 	<div class="title_mail"><h1>Formulaire d'envoi : </h1></div>
 	<div class="mail_box">
+		<form class="mail_box" method="post" action="Send mail.php">
 		<div>
-			<input type="text" name="" max="20" placeholder="Adresse e-mail" class="box">
+			<input type="email" name="" max="20" placeholder="Adresse e-mail" class="box" required autocomplete="off">
 		</div>
 		<div>
-			<input type="text" name="" placeholder="Contenu du mail" class="box">
+			<input type="text" name="contents" placeholder="Contenu du mail" class="box" min="5" required autocomplete="off">
 		</div>
-		<button class="send_mail">Envoyer</button>
+		<input type="submit" name="submit" value="Envoyer" class="send_mail">
+		</form>
 	</div>
 </body>
 </html>

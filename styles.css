@@ -5,6 +5,7 @@ body{
 	font-family: 'Roboto', sans-serif;
 	background-color: #151D21;
 	color: #aaa;
+	display: block;
 	}
 
 a{
@@ -177,6 +178,7 @@ margin-right: auto;
 }
 
 div.slider{
+	color: black;
 	padding-left: 15px;
 	overflow: hidden;
 	height: 30px;
@@ -311,14 +313,19 @@ div.logo2{
 	color: #19447D;
 	overflow: hidden;
 	transition: 0.5s;
-	margin-bottom: 100px;
 }
 img.Py{
 	width: 50%;
 }
 
+.space{
+	width: 100%;
+	height: 1px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+}
+
 footer{
-	margin-top: 250px;
 	border-top: 2px solid #AAAAAA;
 	background-color: black;
 	color: #AAAAAA;
