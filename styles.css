@@ -74,12 +74,13 @@ li{
 .head_name{
 	margin-right: 10px;
 	font-size: 30px;
+	font-weight: bold;
 	align-items: center;
 	display: flex;
 }
 
 div.main{
-height: 150em;
+height: auto;
 width: auto;
 }
 
@@ -106,8 +107,8 @@ width: auto;
 	margin-top: 125px;
 	margin-left: auto;
 	margin-right: auto;
-	width: 1200px;
-	height: 780px;	
+	width: 1000px;
+	height: 580px;	
 }
 
 .propos{
@@ -130,7 +131,7 @@ width: auto;
 	display: flex;
 	align-items: center;
 	border-bottom: 2px solid #AAAAAA;
-	font-size: 130%;
+	font-size:200%;
 	height: 10%;	
 	z-index: 1;
 }
@@ -141,7 +142,7 @@ width: auto;
 
 .p_article{
 	z-index: 1;
-	font-size: 130%;
+	font-size: 170%;
 	margin-left: 5px;
 	margin-right: 5px;
 }
