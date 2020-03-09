@@ -17,7 +17,6 @@ button{
 }
 
 header{
-	flex-grow: 1;
 	background-color: white;
 	display: flex;
 	width: 100%;
@@ -38,12 +37,12 @@ header{
 	height: 70px;
 	width: 180px;
 	display: flex;
-	position: absolute;
+	margin-right: 40px;
 }
 
 .div_bar{
 	width: 800px;
-	margin-left: auto;
+	margin-left: 40px;
  	margin-right: 40px;
 }
 
@@ -74,8 +73,8 @@ li{
 	margin-right: 10px;
 	font-size: 30px;
 	font-weight: bold;
-	align-items: center;
 	display: flex;
+	align-items: center;
 }
 
 div.main{
@@ -104,8 +103,8 @@ width: auto;
 	flex-direction: column;
 	border-radius: 5px;
 	margin-top: 125px;
-	margin-left: auto;
-	margin-right: auto;
+	margin: auto;
+	margin-bottom: 50px;
 	width: 1000px;
 	height: 580px;	
 }
@@ -115,6 +114,7 @@ width: auto;
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 	position: relative;
+	margin-top: 150px;
 }
 
 .overlay{
@@ -151,6 +151,11 @@ width: auto;
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 	position: relative;
+}
+
+.openclassrooms{
+	text-decoration: underline;
+	color: blue;
 }
 
 .donwload_list{
@@ -247,14 +252,16 @@ div.slide6{
 	100%{margin-top: 0px;}
 }
 
+.article-main{
+ background-color: #31A5FE;
+}
 
 div.logo1{
-	left: 0px;
-	width: 100%;
+	width: 1300px;
+	margin:auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #31A5FE;
 	color: #19447D;
 	margin-top: 50px;
 	overflow: hidden;
@@ -317,12 +324,11 @@ img.A{
 	width: 43%;
 }
 div.logo2{
-	left: 0px;
-	width: 100%;
+	width: 1200px;
+	margin: auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	background-color: #31A5FE;
 	color: #19447D;
 	overflow: hidden;
 	transition: 0.5s;
