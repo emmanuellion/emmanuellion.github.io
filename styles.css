@@ -100,10 +100,10 @@ width: auto;
 	padding: 0px;
 	border: 2px solid #AAAAAA;
 	display: flex;
+	margin: auto;
 	flex-direction: column;
 	border-radius: 5px;
 	margin-top: 125px;
-	margin: auto;
 	margin-bottom: 50px;
 	width: 1000px;
 	height: 580px;	
@@ -146,14 +146,23 @@ width: auto;
 	margin-right: 5px;
 }
 
+.p_article_end{
+	z-index: 1;
+	font-size: 160%;
+	margin-left: 5px;
+	margin-right: 5px;
+	margin-top: 0px;
+}
+
 .experiences{
 	background-image: url("img/banniere experience.jpg");
 	background-repeat: no-repeat;
 	background-size: 100% 100%;
 	position: relative;
+	height: 600px;
 }
 
-.openclassrooms{
+.links{
 	text-decoration: underline;
 	color: blue;
 }
@@ -161,7 +170,7 @@ width: auto;
 .donwload_list{
 	z-index: 1;
 	height: auto;
-	margin-top: 50px;
+	margin-top: 0px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -298,6 +307,11 @@ div.Py:hover{
 	height: 450px;
 }
 
+div.Cpp:hover {
+	transition: 0.5s;
+	height: 400px;
+}
+
 div.art:hover div.part{
 	transform: translateY(0px);
 	transition: 0.5s;
@@ -335,6 +349,10 @@ div.logo2{
 }
 img.Py{
 	width: 50%;
+}
+
+img.Cpp{
+	width: 37%;
 }
 
 .space{
