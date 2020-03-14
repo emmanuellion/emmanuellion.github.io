@@ -80,6 +80,7 @@ li{
 div.main{
 height: auto;
 width: auto;
+padding: 0px;
 }
 
 @media only screen and (max-width: 850px){
@@ -354,11 +355,21 @@ img.Py{
 img.Cpp{
 	width: 37%;
 }
+.div_canvas{
+	margin-top: 50px;
+	justify-content: center;
+	display: flex;
+}
+
+.canvas{
+	width:650px; 
+	height:400px; 
+	background-color: transparent;
+}
 
 .space{
 	width: 100%;
 	height: 1px;
-	margin-top: 50px;
 	margin-bottom: 50px;
 }
 
@@ -395,7 +406,7 @@ text-decoration: underline;
 
 .mail_box{
 	margin-top: 5%;
-	width: 25%;
+	width: 30%;
 	height: 350px;
 	display: flex;
 	align-items: center;

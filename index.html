@@ -4,7 +4,9 @@
 	<meta charset="utf-8">
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
 	<title>Accueil</title>
+	<meta name="description" content="Bienvenue sur mon portfolion - LION Emmanuel">
 </head>
 <body>
 	<hr id="Accueil">
@@ -44,7 +46,7 @@
 				<a href="https://openclassrooms.com/fr/courses/1603881-apprenez-a-creer-votre-site-web-avec-html5-et-css3" class="links" target="blank" title="https://openclassrooms.com/fr/courses/1603881-apprenez-a-creer-votre-site-web-avec-html5-et-css3">Apprenez à créer votre site web avec HTML5 et CSS3</a>.<br>
 				Je possède de plus la partie algorithmie et programmation que m'on enseigné les cours. 
 			</p>
-		</div>
+		</div>	
 
 		<div class="box_article experiences" id="experience">
 			<div class="head_article"><h4>Mes expériences:</h4></div>
@@ -135,6 +137,10 @@
 
 		</div>
 
+		<div class="div_canvas">
+			<canvas id="graph" class="canvas"></canvas>	
+		</div>
+
 		<div class="space"></div>
 
 		<footer class="footer" id="contact">
@@ -148,6 +154,7 @@
 
 	</div>
 <script type="text/javascript">
+//oui
 var python = document.getElementsByClassName("logo2") [0]
 var pytho = document.getElementsByClassName("footer") [1]
 var logo1 = document.getElementsByClassName("art") [0]
@@ -172,8 +179,27 @@ python.style.marginTop = "0px";
 logo3.onmouseout = function () {
 python.style.marginTop = "0px";
 };
+
+var ctx = document.getElementById("graph").getContext("2d");
+
+var options = {
+	responsive: false,//Adaptation ou non à son parent en terme de taille
+}	
+Chart.defaults.global.defaultFontColor = 'white';
+var graph = new Chart(ctx,{
+	type: 'bar',
+	data: {
+		datasets: [{
+			label: "Connaissances dans un langage, noté subjectivement sur 20",
+			backgroundColor: 'white',
+			data: [15,4,16,3,5,5]
+		}],
+		labels: ['Arduino','C++','HTML et CSS','Java','JavaScript','Python']
+	},
+	options: options
+});
 </script>
 	
-
+	
 </body>
 </html>
