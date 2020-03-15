@@ -223,42 +223,55 @@ div.slide1{
 }
 div.slide2{
 	background:yellow;
+	color: black;
+	height: 30px;
+	margin-bottom: 30px;
+}
+div.slide25{
+	background:blue;
+	color: yellow;
 	height: 30px;
 	margin-bottom: 30px;
 }
 div.slide3{
 	background:orangered;
+	color: blue;
 	height: 30px;
 	margin-bottom: 30px;
 }
 div.slide4{
-	background:darkturquoise;
+	background:white;
+	color: darkturquoise;
 	height: 30px;
 	margin-bottom: 30px;
 }
 div.slide5{
-	background:steelblue;
+	background:darkblue;
+	color: white;
 	height: 30px;
 	margin-bottom: 30px;
 }
 div.slide6{
 	background:salmon;
+	color:darkcyan;
 	height: 30px;
 	margin-bottom: 30px;
 }
 @keyframes slide {
-	0%{margin-top: -360px;}
-	5%{margin-top: -300px;}
-	16%{margin-top: -300px;}
-	21%{margin-top: -240px;}
-	32%{margin-top: -240px;}
-	37%{margin-top: -180px;}
-	48%{margin-top: -180px;}
-	53%{margin-top: -120px;}
-	64%{margin-top: -120px;}
-	69%{margin-top: -60px;}
-	80%{margin-top: -60px;}
-	85%{margin-top: 0px;}
+	0%{margin-top: -390px;}
+	5%{margin-top: -360px;}
+	14%{margin-top: -360px;}
+	19%{margin-top: -300px;}
+	28%{margin-top: -300px;}
+	33%{margin-top: -240px;}
+	42%{margin-top: -240px;}
+	47%{margin-top: -180px;}
+	56%{margin-top: -180px;}
+	61%{margin-top: -120px;}
+	70%{margin-top: -120px;}
+	75%{margin-top: -60px;}
+	84%{margin-top: -60px;}
+	89%{margin-top: 0px;}
 	100%{margin-top: 0px;}
 }
 
@@ -297,7 +310,7 @@ div.java:hover{
 }
 div.HC:hover{
 	transition: 0.5s;
-	height: 530px;
+	height: 500px;
 }
 div.A:hover{
 	transition: 0.5s;
@@ -305,14 +318,18 @@ div.A:hover{
 }
 div.Py:hover{
 	transition: 0.5s;
-	height: 450px;
+	height: 480px;
 }
 
 div.Cpp:hover {
 	transition: 0.5s;
-	height: 400px;
+	height: 370px;
 }
 
+div.JS:hover {
+	transition: 0.5s;
+	height: 400px;
+}
 div.art:hover div.part{
 	transform: translateY(0px);
 	transition: 0.5s;
@@ -354,6 +371,10 @@ img.Py{
 
 img.Cpp{
 	width: 37%;
+}
+
+img.JS{
+	width: 35%; 
 }
 .div_canvas{
 	margin-top: 50px;

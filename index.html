@@ -73,12 +73,13 @@
 		<div class="slider-wrapper">
 			<h4>Langage "appris" jusqu'à maintenant :</h4>  
 			<div class="slider">
-				<div class="slide1">ET BIEN PLUS</div>
-				<div class="slide2">PYTHON</div>
-				<div class="slide3">JAVA</div>
-				<div class="slide4">ARDUINO</div>
-				<div class="slide5">CSS</div>
-				<div class="slide6">HTML</div>
+				<div class="slide1">Et bien plus</div>
+				<div class="slide2"> JavaScript</div>
+				<div class="slide25">Python</div>
+				<div class="slide3">Java</div>
+				<div class="slide4">Arduino</div>
+				<div class="slide5">C++</div>
+				<div class="slide6">Html et Css</div>
 			</div>
 		</div>
 
@@ -130,6 +131,15 @@
 			    		<h3>C++</h3>
 			    		<p>
 			    			<br>Le C++ (ou cpp) est un programme dont j'ai appris certainnes bases en autodidacte, suffisament pour faire de petits projet comme l'analyseur de parenthèses cité plus tôt.
+			   			</p>
+			 		</div>
+			 	</div>
+			 	<div class="art JS" id="art">
+					<img src="img/logoJS.png" class="JS">
+					<div class="part"> 
+			    		<h3>JavaScript</h3>
+			    		<p>
+			    			<br>Le JavaScript est le petit nouveau chez moi que je suis entrain d'apprendre, notamment pour l'utilisation des canvas ou bien la création de graphique. Langage "tout-terrain" et assez facile à comprendre pour une évolution assez rapide.
 			   			</p>
 			 		</div>
 			 	</div>
@@ -185,16 +195,16 @@ var ctx = document.getElementById("graph").getContext("2d");
 var options = {
 	responsive: false,//Adaptation ou non à son parent en terme de taille
 }	
-Chart.defaults.global.defaultFontColor = 'white';
+Chart.defaults.global.defaultFontColor = 'white';//Met la couleur de toutes les écritures par défault en blanc
 var graph = new Chart(ctx,{
 	type: 'bar',
 	data: {
 		datasets: [{
 			label: "Connaissances dans un langage, noté subjectivement sur 20",
 			backgroundColor: 'white',
-			data: [15,4,16,3,5,5]
+			data: [15,4,16,3,5,5,15]
 		}],
-		labels: ['Arduino','C++','HTML et CSS','Java','JavaScript','Python']
+		labels: ['Arduino','C++','HTML et CSS','Java','JavaScript','Python','Algorithmie']
 	},
 	options: options
 });
