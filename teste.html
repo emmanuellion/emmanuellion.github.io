@@ -96,18 +96,28 @@
 		}
 		var rep;
 		function teste(){
+			var zetta = new Array(0,0,0,0);
 			var valeur1 = document.getElementById("checkbox1").checked;
 			var valeur2 = document.getElementById("checkbox2").checked;
 			var valeur3 = document.getElementById("checkbox3").checked;
 			var valeur4 = document.getElementById("checkbox4").checked;
 			var val = new Array(valeur1,valeur2,valeur3,valeur4);
+			var appareils = 0;
   			for(var i = 0; i<4; i++){
   				if (val[i] === true) {
+  					console.log(i);
+  					console.log(val[i]);
   					rep = i + 1;
+  					appareils++;
   				}
   			}
-		}
+  			if (appareils>=2 || appareils == 0){
+  			 	rep = rep * 2;
+  			 	console.log("Debug effectué !");
+  			}
+   		}
 		function result(){
+			span.innerHTML = ga;
 			if (question == 1){
 				check1.style.display = "block";
 				options1.style.backgroundColor = "green";
@@ -124,10 +134,58 @@
 					options1.style.backgroundColor = "red";
 					croix2.style.display = "block";
 					options2.style.backgroundColor = "red";
-					croix3.style.display = "block";
-					options3.style.backgroundColor = "red";
-					check4.style.display = "block";
-					options4.style.backgroundColor = "green";
+					check3.style.display = "block";
+					options3.style.backgroundColor = "green";
+					croix4.style.display = "block";
+					options4.style.backgroundColor = "red";
+				}
+				else{
+					if (question == 3){
+						croix1.style.display = "block";
+						options1.style.backgroundColor = "red";
+						check2.style.display = "block";
+						options2.style.backgroundColor = "green";
+						croix3.style.display = "block";
+						options3.style.backgroundColor = "red";
+						croix4.style.display = "block";
+						options4.style.backgroundColor = "red";
+					}
+					else{
+						if (question == 4) {
+							croix1.style.display = "block";
+							options1.style.backgroundColor = "red";
+							croix2.style.display = "block";
+							options2.style.backgroundColor = "red";
+							croix3.style.display = "block";
+							options3.style.backgroundColor = "red";
+							check4.style.display = "block";
+							options4.style.backgroundColor = "green";
+						}
+						else{
+							if (question == 5) {
+								croix1.style.display = "block";
+								options1.style.backgroundColor = "red";
+								croix2.style.display = "block";
+								options2.style.backgroundColor = "red";
+								check3.style.display = "block";
+								options3.style.backgroundColor = "green";
+								croix4.style.display = "block";
+								options4.style.backgroundColor = "red";
+							}
+							else{
+								if (question == 6) {
+									croix1.style.display = "block";
+									options1.style.backgroundColor = "red";
+									check2.style.display = "block";
+									options2.style.backgroundColor = "green";
+									croix3.style.display = "block";
+									options3.style.backgroundColor = "red";
+									croix4.style.display = "block";
+									options4.style.backgroundColor = "red";
+								}
+							}
+						}
+					}
 				}
 			}
 			boutton.style.display = "none";
@@ -161,10 +219,21 @@
 			document.getElementById("checkbox2").checked = false;
 			document.getElementById("checkbox3").checked = false;
 			document.getElementById("checkbox4").checked = false;
-			span.innerHTML = ga;
 			question++;
-			if (question >= 2){
-				var quest2 = new quest ("1","1.1","1.2","1.3","1.4",4);
+			if (question == 2){
+				var quest2 = new quest ("Qui est le président (actuel) de la république ?","Emmanuel Macron","François Holland",'La réponse "d"',"Charles de Gaulle",3);
+			}
+			if (question == 3){
+				var quest3 = new quest ("Quel est LE meilleur animé ?","Naruto","One Piece","Tokyo Ghoul","Bleach",2);
+			}
+			if (question == 4){
+				var quest4 = new quest('Quel est le nombres TOTAL de grades dans le serveur "Dhuocord"?',"[10-15]","[20-25]","[30-35]","[40-45]",4); 
+			}
+			if (question == 5){
+				var quest5 = new quest("Quelle est la vitesse la plus élevée qu'un homme a réussi à faire atteindre à un objet ?","La vitesse de la lumière","~100 000 000 km/h","99,9999991% de la vitesse de la lumière","~27 000 km/h",3);
+			}
+			if (question == 6){
+				var quest6 = new quest("Quelle est la réponse au calcul: 2+5*17/(10+2/4)","36","~10.095","47.6","Une des réponses d'avant",2);
 			}
 			//if (question == 3){
 								
