@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html style="scroll-behavior: smooth;">
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<title>Testez de vos connaissances</title>
+</head>
+<body style="display:flex; flex-direction:column; align-items:center; justify-content: center; height: 35em;">
+	<div class="tout" style="width:auto; height:300px; justify-content:center; align-items:center; text-align:center;">
+		<div class="question">
+			<p id="question">
+				
+			</p>
+		</div>
+		<div class="answers">
+			<div class="options" id="options1">
+				<span class="span" id="span_1"></span>
+				<input type="checkbox" class="checkbox" id="checkbox1" value="0">
+				<div class="i">
+					<div class="check"><i class="fa fa-check" aria-hidden="true"></i></div> 
+					<div class="false"><i class="fa fa-times" aria-hidden="true"></i></div> 
+				</div>
+			</div>
+			<div class="options" id="options2">
+				<span class="span" id="span_2"></span>
+				<input type="checkbox" class="checkbox" id="checkbox2" value="0">
+				<div class="i">
+					<div class="check"><i class="fa fa-check" aria-hidden="true"></i></div> 
+					<div class="false"><i class="fa fa-times" aria-hidden="true"></i></div> 
+				</div>
+			</div>
+			<div class="options" id="options3">
+				<span class="span" id="span_3"></span>
+				<input type="checkbox" class="checkbox" id="checkbox3" value="0">
+				<div class="i">
+					<div class="check"><i class="fa fa-check" aria-hidden="true"></i></div> 
+					<div class="false"><i class="fa fa-times" aria-hidden="true"></i></div> 
+				</div> 
+			</div>
+			<div class="options" id="options4">
+				<span class="span" id="span_4"></span>
+				<input type="checkbox" class="checkbox" id="checkbox4" value="0">
+				<div class="i">
+					<div class="check"><i class="fa fa-check" aria-hidden="true"></i></div> 
+					<div class="false"><i class="fa fa-times" aria-hidden="true"></i></div> 
+				</div>
+			</div>
+		</div>
+		<div class="div_submit">
+			<button class="submit1" id="sub">Soumettre</button><button class="submit2" id="Next">Suivant</button>
+		</div>
+		<div class="number_ga">
+			<label>Nombre(s) de bonne(s) réponse(s) : <span id="ga">0</span></label>
+		</div>
+	</div>
+	<script type="text/javascript">
+		var boutton = document.getElementById("sub");
+		var next = document.getElementById("Next");
+		var span = document.getElementById("ga");
+		var check1 = document.getElementsByClassName("check")[0];
+		var croix1 = document.getElementsByClassName("false")[0];
+		var check2 = document.getElementsByClassName("check")[1];
+		var croix2 = document.getElementsByClassName("false")[1];
+		var check3 = document.getElementsByClassName("check")[2];
+		var croix3 = document.getElementsByClassName("false")[2];
+		var check4 = document.getElementsByClassName("check")[3];
+		var croix4 = document.getElementsByClassName("false")[3];
+		var checkbox1 = document.getElementById("checkbox1");
+		var checkbox2 = document.getElementById("checkbox2");
+		var checkbox3 = document.getElementById("checkbox3");
+		var checkbox4 = document.getElementById("checkbox4");
+		var options1 = document.getElementById("options1");
+		var options2 = document.getElementById("options2");
+		var options3 = document.getElementById("options3");
+		var options4 = document.getElementById("options4");
+		var valeur = document.getElementsByClassName("checkbox");
+		var valeur1 = document.getElementById("checkbox1").checked;
+		var valeur2 = document.getElementById("checkbox2").checked;
+		var valeur3 = document.getElementById("checkbox3").checked;
+		var valeur4 = document.getElementById("checkbox4").checked;
+		var val = new Array(valeur1,valeur2,valeur3,valeur4);
+		var p = document.getElementById("question");
+		var span_1 = document.getElementById("span_1");
+		var span_2 = document.getElementById("span_2");
+		var span_3 = document.getElementById("span_3");
+		var span_4 = document.getElementById("span_4");
+		var reponse;
+		function quest (question,possible1,possible2,possible3,possible4,response){
+			p.innerHTML = question;
+			span_1.innerHTML = possible1;
+			span_2.innerHTML = possible2;
+			span_3.innerHTML = possible3;
+			span_4.innerHTML = possible4;
+			reponse = response;
+		}
+		var rep;
+		function teste(){
+			var valeur1 = document.getElementById("checkbox1").checked;
+			var valeur2 = document.getElementById("checkbox2").checked;
+			var valeur3 = document.getElementById("checkbox3").checked;
+			var valeur4 = document.getElementById("checkbox4").checked;
+			var val = new Array(valeur1,valeur2,valeur3,valeur4);
+  			for(var i = 0; i<4; i++){
+  				if (val[i] === true) {
+  					rep = i + 1;
+  				}
+  			}
+		}
+		function result(){
+			if (question == 1){
+				check1.style.display = "block";
+				options1.style.backgroundColor = "green";
+				croix2.style.display = "block";
+				options2.style.backgroundColor = "red";
+				croix3.style.display = "block";
+				options3.style.backgroundColor = "red";
+				croix4.style.display = "block";
+				options4.style.backgroundColor = "red";
+			}
+			else{
+				if (question == 2){
+					croix1.style.display = "block";
+					options1.style.backgroundColor = "red";
+					croix2.style.display = "block";
+					options2.style.backgroundColor = "red";
+					croix3.style.display = "block";
+					options3.style.backgroundColor = "red";
+					check4.style.display = "block";
+					options4.style.backgroundColor = "green";
+				}
+			}
+			boutton.style.display = "none";
+			next.style.display = "block";
+			checkbox1.disabled = true;
+			checkbox2.disabled = true;
+			checkbox3.disabled = true;
+			checkbox4.disabled = true;
+		}
+
+		function reset1(){
+			check1.style.display = "none";
+			croix1.style.display = "none";
+			options1.style.backgroundColor = "transparent";
+			check2.style.display = "none";
+			croix2.style.display = "none";
+			options2.style.backgroundColor = "transparent";
+			check3.style.display = "none";
+			croix3.style.display = "none";
+			options3.style.backgroundColor = "transparent";
+			check4.style.display = "none";
+			croix4.style.display = "none";
+			options4.style.backgroundColor = "transparent";
+			boutton.style.display = "block";
+			next.style.display = "none";
+			checkbox1.disabled = false;
+			checkbox2.disabled = false;
+			checkbox3.disabled = false;
+			checkbox4.disabled = false;	
+			document.getElementById("checkbox1").checked = false;
+			document.getElementById("checkbox2").checked = false;
+			document.getElementById("checkbox3").checked = false;
+			document.getElementById("checkbox4").checked = false;
+			span.innerHTML = ga;
+			question++;
+			if (question >= 2){
+				var quest2 = new quest ("1","1.1","1.2","1.3","1.4",4);
+			}
+			//if (question == 3){
+								
+			//}
+		}
+		var question = 1;
+		var ga = 0;
+		var quest1 = new quest ("Comment le binaire marche-t-il ?","Avec des 0 et des 1","Avec des nombres pairs","Avec des nombres impairs","Avec des nombres en duo",1);
+		boutton.onclick = function (){
+			teste();
+			if (rep == reponse){
+				ga ++;
+			}
+			result();
+		}
+		Next.onclick = function(){
+			reset1();
+		}
+	</script>
+</body>
+</html>	

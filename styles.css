@@ -395,6 +395,9 @@ img.JS{
 }
 
 footer{
+	position: absolute;
+	margin-bottom: 0px;
+	left: 0px;
 	border-top: 2px solid #AAAAAA;
 	background-color: black;
 	color: #AAAAAA;
@@ -477,4 +480,112 @@ text-decoration: underline;
 	border-color: green;
 	padding: 15px 110px 15px 110px;
 	border-radius: 60px;
+}
+----------------------------------------
+.tout{
+	
+}
+
+.question{
+	width: 350px;
+	margin: auto;
+}
+
+.answers{
+	text-align: center;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 20px;
+}
+
+.options{
+	background-color: transparent;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin-right: 50px;
+	height: auto;
+	border: 2px solid white;
+	padding-right: 15px;
+	padding-left: 15px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	border-radius: 20px;
+}
+
+.checkbox{
+	margin-bottom: 5px;
+}
+
+input:hover{
+	cursor: pointer;
+}
+
+
+.i{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	margin-bottom: 0px;
+}
+
+.check{
+	display: none;
+}
+
+.false{
+	display: none;
+}
+
+.div_submit{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.submit1{
+	outline: none;
+	background-color: transparent;
+	border: 1px solid white;
+	border-radius: 25px;
+	color: white;
+	width: 150px;
+	height: 50px;
+	font-size: 20px;
+	transition: 0.1s;
+}
+
+.submit2{
+	outline: none;
+	background-color: transparent;
+	border: 1px solid white;
+	border-radius: 25px;
+	color: white;
+	width: 150px;
+	height: 50px;
+	font-size: 20px;
+	transition: 0.1s;
+	display: none;
+}
+
+.submit1:active{
+	box-shadow:	5px 5px 30px black;
+	transition: 0.1s;
+	background-color: red;
+}
+
+.submit2:active{
+	box-shadow:	5px 5px 30px black;
+	transition: 0.1s;
+	background-color: red;
+}
+
+.number_ga{
+	margin-top: 10px;
+	justify-content: center;
+	align-items: center;
+	display: flex;
 }
