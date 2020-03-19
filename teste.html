@@ -12,6 +12,8 @@
 			<p id="question">
 				
 			</p>
+			<span id="final_ga"></span>
+			<span id="points"></span>
 		</div>
 		<div class="answers">
 			<div class="options" id="options1">
@@ -50,7 +52,7 @@
 		<div class="div_submit">
 			<button class="submit1" id="sub">Soumettre</button><button class="submit2" id="Next">Suivant</button>
 		</div>
-		<div class="number_ga">
+		<div class="number_ga" id="number_ga">
 			<label>Nombre(s) de bonne(s) réponse(s) : <span id="ga">0</span></label>
 		</div>
 	</div>
@@ -86,6 +88,9 @@
 		var span_3 = document.getElementById("span_3");
 		var span_4 = document.getElementById("span_4");
 		var reponse;
+		var maxquestion = 11;
+		var final_ga = document.getElementById("final_ga");
+		var points = document.getElementById("points");
 		function quest (question,possible1,possible2,possible3,possible4,response){
 			p.innerHTML = question;
 			span_1.innerHTML = possible1;
@@ -112,11 +117,11 @@
   				}
   			}
   			if (appareils>=2 || appareils == 0){
-  			 	rep = rep * 2;
-  			 	console.log("Debug effectué !");
+  			 	rep = rep * 5;
+  				console.log("Debug effectué !");
   			}
-   		}
-		function result(){
+     	}
+		function result(){/*
 			span.innerHTML = ga;
 			if (question == 1){
 				check1.style.display = "block";
@@ -130,12 +135,12 @@
 			}
 			else{
 				if (question == 2){
-					croix1.style.display = "block";
-					options1.style.backgroundColor = "red";
+					check1.style.display = "block";
+					options1.style.backgroundColor = "green";
 					croix2.style.display = "block";
 					options2.style.backgroundColor = "red";
-					check3.style.display = "block";
-					options3.style.backgroundColor = "green";
+					croix3.style.display = "block";
+					options3.style.backgroundColor = "red";
 					croix4.style.display = "block";
 					options4.style.backgroundColor = "red";
 				}
@@ -183,11 +188,59 @@
 									croix4.style.display = "block";
 									options4.style.backgroundColor = "red";
 								}
+								else{
+									if (question == 7) {
+										check1.style.display = "block";
+										options1.style.backgroundColor = "green";
+										croix2.style.display = "block";
+										options2.style.backgroundColor = "red";
+										croix3.style.display = "block";
+										options3.style.backgroundColor = "red";
+										croix4.style.display = "block";
+										options4.style.backgroundColor = "red";
+									}
+									else{
+										if (question == 8) {
+										croix1.style.display = "block";
+										options1.style.backgroundColor = "red";
+										check2.style.display = "block";
+										options2.style.backgroundColor = "green";
+										croix3.style.display = "block";
+										options3.style.backgroundColor = "red";
+										croix4.style.display = "block";
+										options4.style.backgroundColor = "red";
+										}
+										else{
+											if (question == 9) {
+												croix1.style.display = "block";
+												options1.style.backgroundColor = "red";
+												croix2.style.display = "block";
+												options2.style.backgroundColor = "red";
+												croix3.style.display = "block";
+												options3.style.backgroundColor = "red";
+												check4.style.display = "block";
+												options4.style.backgroundColor = "green";
+											}
+											else{
+												if (question == 10) {
+													croix1.style.display = "block";
+													options1.style.backgroundColor = "red";
+													check2.style.display = "block";
+													options2.style.backgroundColor = "green";
+													croix3.style.display = "block";
+													options3.style.backgroundColor = "red";
+													check4.style.display = "block";
+													options4.style.backgroundColor = "green";
+												}
+											}
+										}
+									}
+								}
 							}
 						}
 					}
 				}
-			}
+			}*/
 			boutton.style.display = "none";
 			next.style.display = "block";
 			checkbox1.disabled = true;
@@ -221,7 +274,7 @@
 			document.getElementById("checkbox4").checked = false;
 			question++;
 			if (question == 2){
-				var quest2 = new quest ("Qui est le président (actuel) de la république ?","Emmanuel Macron","François Holland",'La réponse "d"',"Charles de Gaulle",3);
+				var quest2 = new quest ("Qui est le président (actuel) de la république ?","Emmanuel Macron","François Holland",'La réponse "d"',"Charles de Gaulle",1);
 			}
 			if (question == 3){
 				var quest3 = new quest ("Quel est LE meilleur animé ?","Naruto","One Piece","Tokyo Ghoul","Bleach",2);
@@ -233,11 +286,54 @@
 				var quest5 = new quest("Quelle est la vitesse la plus élevée qu'un homme a réussi à faire atteindre à un objet ?","La vitesse de la lumière","~100 000 000 km/h","99,9999991% de la vitesse de la lumière","~27 000 km/h",3);
 			}
 			if (question == 6){
-				var quest6 = new quest("Quelle est la réponse au calcul: 2+5*17/(10+2/4)","36","~10.095","47.6","Une des réponses d'avant",2);
+				var quest6 = new quest("Quelle est la réponse au calcul: 2+5*17/(10+2/4)","36","~10.095","47.6","Un nombre entier compris dans [0;100]",2);
 			}
-			//if (question == 3){
-								
-			//}
+			if (question == 7){
+				var quest7 = new quest("Quel est élément n'est pas une particule élémentaire ?","Proton","Photon","Boson de Higgs",'Un quark "Up"',1);
+			}
+			if (question == 8){
+				var quest8 = new quest("Qu'est-ce-qu'est un Pulsar ?","Un objet permettant d'effectuer des pulsations","Une étoile à eutrons faisant 1 tour sur elle-même en quelques millisecondes",'Une abréviation de "plus tard"',"Une grosse étoile dans l'Univers",2);
+			}
+			if (question == 9){
+				var quest9 = new quest('Qui était "Nikola Tesla"','Le créateur et fondateur de la marque "Tesla"',"Le créateur du courant continu","Le créateur de l'électricité","Le créateur du courant alternatif",4);
+			}
+			if (question == 10){
+				var quest10 = new quest("Pourquoi ne peut-on pas voyager dans le temps ?","Car c'est trop rapide !","Car ca demande trop d'énergie négative !","Car c'est trop tard !","Car on est trop lourd !",4);
+			}
+			if (question == maxquestion){
+				options1.style.display = "none";	
+				options2.style.display = "none";	
+				options3.style.display = "none";	
+				options4.style.display = "none";
+				boutton.style.display = "none";
+				document.getElementById("number_ga").style.display = "none";
+				if (ga == 10){
+					p.innerHTML = "Bravo tu as : ";
+					final_ga.innerHTML = ga;
+					points.innerHTML = " points";
+				}
+				if (ga>=7 && ga != 10){
+					p.innerHTML = "Jolie et honorable score avec : ";
+					final_ga.innerHTML = ga;
+					points.innerHTML = " points";
+				}
+				if (ga>=4 && ga<7){
+					p.innerHTML = "Vraiment BOF avec : ";
+					final_ga.innerHTML = ga;
+					points.innerHTML = " points";
+				}
+				if (ga<4 && ga != 0){
+					p.innerHTML = "Va te faire relooker sale merde! T'as que : ";
+					final_ga.innerHTML = ga;
+					points.innerHTML = " points";
+				}
+				if (ga == 0){
+					p.innerHTML = "J'espère SINCEREMENT, que tu vas mourir dans les plus brefs delais ! T'as : ";
+					final_ga.innerHTML = ga;
+					document.getElementById("points").innerHTML = " points";
+				}
+				
+			}
 		}
 		var question = 1;
 		var ga = 0;
@@ -249,6 +345,8 @@
 			}
 			result();
 		}
+			
+	
 		Next.onclick = function(){
 			reset1();
 		}
