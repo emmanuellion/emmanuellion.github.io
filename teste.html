@@ -14,6 +14,8 @@
 			</p>
 			<span id="final_ga"></span>
 			<span id="points"></span>
+			<br>
+			<span id="reward">Récompense : <a href="" style="background-color: red;">Clique ici !</a></span>
 		</div>
 		<div class="answers">
 			<div class="options" id="options1">
@@ -91,6 +93,7 @@
 		var maxquestion = 11;
 		var final_ga = document.getElementById("final_ga");
 		var points = document.getElementById("points");
+		var reward = document.getElementById("reward");
 		function quest (question,possible1,possible2,possible3,possible4,response){
 			p.innerHTML = question;
 			span_1.innerHTML = possible1;
@@ -311,6 +314,7 @@
 					p.innerHTML = "Bravo tu as : ";
 					final_ga.innerHTML = ga;
 					points.innerHTML = " points";
+					reward.style.display = "block";
 				}
 				if (ga>=7 && ga != 10){
 					p.innerHTML = "Jolie et honorable score avec : ";

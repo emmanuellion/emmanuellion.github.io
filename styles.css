@@ -589,3 +589,7 @@ input:hover{
 	align-items: center;
 	display: flex;
 }
+
+#reward{
+	display: none;
+}
