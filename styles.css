@@ -523,6 +523,8 @@ text-decoration: underline;
 
 .checkbox{
 	margin-bottom: 5px;
+	width: 18px;
+	height: 18px;
 }
 
 input:hover{

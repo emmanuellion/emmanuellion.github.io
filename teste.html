@@ -19,7 +19,7 @@
 		</div>
 		<div class="answers">
 			<div class="options" id="options1">
-				<span class="span" id="span_1"></span>
+				<span class="label" id="label_1"></span>
 				<input type="checkbox" class="checkbox" id="checkbox1" value="0">
 				<div class="i">
 					<div class="check"><i class="fa fa-check" aria-hidden="true"></i></div> 
@@ -27,7 +27,7 @@
 				</div>
 			</div>
 			<div class="options" id="options2">
-				<span class="span" id="span_2"></span>
+				<span class="label" id="label_2"></span>
 				<input type="checkbox" class="checkbox" id="checkbox2" value="0">
 				<div class="i">
 					<div class="check"><i class="fa fa-check" aria-hidden="true"></i></div> 
@@ -35,7 +35,7 @@
 				</div>
 			</div>
 			<div class="options" id="options3">
-				<span class="span" id="span_3"></span>
+				<span class="label" id="label_3"></span>
 				<input type="checkbox" class="checkbox" id="checkbox3" value="0">
 				<div class="i">
 					<div class="check"><i class="fa fa-check" aria-hidden="true"></i></div> 
@@ -43,7 +43,7 @@
 				</div> 
 			</div>
 			<div class="options" id="options4">
-				<span class="span" id="span_4"></span>
+				<span class="label" id="label_4"></span>
 				<input type="checkbox" class="checkbox" id="checkbox4" value="0">
 				<div class="i">
 					<div class="check"><i class="fa fa-check" aria-hidden="true"></i></div> 
@@ -85,10 +85,10 @@
 		var valeur4 = document.getElementById("checkbox4").checked;
 		var val = new Array(valeur1,valeur2,valeur3,valeur4);
 		var p = document.getElementById("question");
-		var span_1 = document.getElementById("span_1");
-		var span_2 = document.getElementById("span_2");
-		var span_3 = document.getElementById("span_3");
-		var span_4 = document.getElementById("span_4");
+		var label_1 = document.getElementById("label_1");
+		var label_2 = document.getElementById("label_2");
+		var label_3 = document.getElementById("label_3");
+		var label_4 = document.getElementById("label_4");
 		var reponse;
 		var maxquestion = 11;
 		var final_ga = document.getElementById("final_ga");
@@ -96,15 +96,14 @@
 		var reward = document.getElementById("reward");
 		function quest (question,possible1,possible2,possible3,possible4,response){
 			p.innerHTML = question;
-			span_1.innerHTML = possible1;
-			span_2.innerHTML = possible2;
-			span_3.innerHTML = possible3;
-			span_4.innerHTML = possible4;
+			label_1.innerHTML = possible1;
+			label_2.innerHTML = possible2;
+			label_3.innerHTML = possible3;
+			label_4.innerHTML = possible4;
 			reponse = response;
 		}
 		var rep;
 		function teste(){
-			var zetta = new Array(0,0,0,0);
 			var valeur1 = document.getElementById("checkbox1").checked;
 			var valeur2 = document.getElementById("checkbox2").checked;
 			var valeur3 = document.getElementById("checkbox3").checked;
@@ -283,7 +282,7 @@
 				var quest3 = new quest ("Quel est LE meilleur animé ?","Naruto","One Piece","Tokyo Ghoul","Bleach",2);
 			}
 			if (question == 4){
-				var quest4 = new quest('Quel est le nombres TOTAL de grades dans le serveur "Dhuocord"?',"[10-15]","[20-25]","[30-35]","[40-45]",4); 
+				var quest4 = new quest('Quel est le nombres TOTAL de grades dans le serveur "Dhuocord"?',"[20 et moins]","[20-30]","[40-50]","[50 et plus]",4); 
 			}
 			if (question == 5){
 				var quest5 = new quest("Quelle est la vitesse la plus élevée qu'un homme a réussi à faire atteindre à un objet ?","La vitesse de la lumière","~100 000 000 km/h","99,9999991% de la vitesse de la lumière","~27 000 km/h",3);
