@@ -19,6 +19,7 @@ button{
 header{
 	background-color: white;
 	display: flex;
+	justify-content: space-between;
 	width: 100%;
 	z-index: 10;
 	position: fixed;
@@ -78,9 +79,12 @@ li{
 }
 
 div.main{
+position: absolute;
 height: auto;
-width: auto;
-padding: 0px;
+width: 100%;
+margin: 0px;
+left: 0px;
+top: 0px;
 }
 
 @media only screen and (max-width: 850px){
@@ -277,6 +281,8 @@ div.slide6{
 
 .article-main{
  background-color: #31A5FE;
+ width: 100%;
+ margin: 0px;
 }
 
 div.logo1{
