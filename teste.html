@@ -34,6 +34,9 @@
 					<div class="false"><i class="fa fa-times" aria-hidden="true"></i></div> 
 				</div>
 			</div>
+			<div class="options" id="laste">
+				<input type="number" id="input">
+			</div>
 			<div class="options" id="options3">
 				<span class="label" id="label_3"></span>
 				<input type="checkbox" class="checkbox" id="checkbox3" value="0">
@@ -90,7 +93,7 @@
 		var label_3 = document.getElementById("label_3");
 		var label_4 = document.getElementById("label_4");
 		var reponse;
-		var maxquestion = 11;
+		var maxquestion = 12;
 		var final_ga = document.getElementById("final_ga");
 		var points = document.getElementById("points");
 		var reward = document.getElementById("reward");
@@ -102,6 +105,15 @@
 			label_4.innerHTML = possible4;
 			reponse = response;
 		}
+		var last_response;
+		var div_last = document.getElementById("laste");
+		div_last.style.display = "none";
+		var input = document.getElementById("input");
+		function laste(question,response){
+			p.innerHTML = question;
+			reponse = response;
+			div_last.style.display = "block";
+		}
 		var rep;
 		function teste(){
 			var valeur1 = document.getElementById("checkbox1").checked;
@@ -110,18 +122,24 @@
 			var valeur4 = document.getElementById("checkbox4").checked;
 			var val = new Array(valeur1,valeur2,valeur3,valeur4);
 			var appareils = 0;
-  			for(var i = 0; i<4; i++){
-  				if (val[i] === true) {
-  					console.log(i);
-  					console.log(val[i]);
-  					rep = i + 1;
-  					appareils++;
+			if(question < 11){
+				for(var i = 0; i<4; i++){
+  					if (val[i] === true) {
+  						console.log(i);
+  						console.log(val[i]);
+  						rep = i + 1;
+  						appareils++;
+  					}
   				}
-  			}
-  			if (appareils>=2 || appareils == 0){
-  			 	rep = rep * 5;
-  				console.log("Debug effectué !");
-  			}
+  				if (appareils>=2 || appareils == 0){
+  			 		rep = rep * 5;
+  					console.log("Debug effectué !");
+  				}
+			}
+			if (question == 11){
+				rep = input.value;
+			}
+  			
      	}
 		function result(){///*
 			span.innerHTML = ga;
@@ -302,20 +320,27 @@
 			if (question == 10){
 				var quest10 = new quest("Quel est le temps de cuisson pour faire un ou des oeuf(s) mollet(s) ?","3 minutes","4 minutes","5 minutes","6 minutes",4);
 			}
+			if (question == 11){
+				var laste1 = new laste("Quel est l'ordre des bonnes réponses des questions précedentes ? (exmple : 1111111111)",1124321244);
+				options1.style.display = "none";	
+				options2.style.display = "none";	
+				options3.style.display = "none";	
+				options4.style.display = "none";
+			}
 			if (question == maxquestion){
 				options1.style.display = "none";	
 				options2.style.display = "none";	
 				options3.style.display = "none";	
 				options4.style.display = "none";
-				boutton.style.display = "none";
+				div_last.style.display = "none";
 				document.getElementById("number_ga").style.display = "none";
-				if (ga == 10){
+				if (ga == 11){
 					p.innerHTML = "Bravo tu as : ";
 					final_ga.innerHTML = ga;
 					points.innerHTML = " points";
 					reward.style.display = "block";
 				}
-				if (ga>=7 && ga != 10){
+				if (ga>=7 && ga < 11){
 					p.innerHTML = "Jolie et honorable score avec : ";
 					final_ga.innerHTML = ga;
 					points.innerHTML = " points";
@@ -333,9 +358,8 @@
 				if (ga == 0){
 					p.innerHTML = "J'espère SINCEREMENT, que tu vas mourir dans les plus brefs delais ! T'as : ";
 					final_ga.innerHTML = ga;
-					document.getElementById("points").innerHTML = " points";
+					points.innerHTML = " points";
 				}
-				
 			}
 		}
 		var question = 1;
@@ -346,7 +370,13 @@
 			if (rep == reponse){
 				ga ++;
 			}
-			result();
+			if (question<11){
+				result();
+			}else{
+				reset1();
+				boutton.style.display = "none";
+				next.style.display = "none";
+			}
 		}
 			
 	
