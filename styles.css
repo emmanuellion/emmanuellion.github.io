@@ -162,6 +162,7 @@ top: 0px;
 	opacity: 0.8;
 }
 .head_article{
+	transition: 1.5s;
 	padding-top: 0.1%;
 	display: flex;
 	align-items: center;
@@ -172,6 +173,7 @@ top: 0px;
 }
 
 .head_article h4{
+	transition: -1.5s;
 	margin-left: 10px;
 }
 
