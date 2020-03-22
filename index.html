@@ -8,24 +8,27 @@
 	<title>Accueil</title>
 	<meta name="description" content="Bienvenue sur mon portfolion - LION Emmanuel">
 </head>
-<body>
+<body id="body">
 	<hr id="Accueil">
-	<header>
+	<header id="header">
 		<div class="Portfolio">
 			<i class="fa fa-id-card-o fa-3x" aria-hidden="true"></i><h2>Portfolio</h2>
+		</div>
+		<div class="sun_moon">
+			<img src="img/moon.png" id="moon"><img src="img/sun.png" id="sun">
 		</div>
 		<div class="div_bar">
 			<nav class="nav_bar">
 				<ul>
-					<a href="#Accueil"><li>Accueil</li></a>
-					<a href="#propos"><li>A propos de moi</li></a>
-					<a href="#compétences"><li>Mes compétences</li></a>
-					<a href="#experience"><li>Expérience</li></a>
-					<a href="#contact"><li>Me contacter</li></a>
+					<a href="#Accueil"><li name="liste">Accueil</li></a>
+					<a href="#propos"><li name="liste">A propos de moi</li></a>
+					<a href="#compétences"><li name="liste">Mes compétences</li></a>
+					<a href="#experience"><li name="liste">Expérience</li></a>
+					<a href="#contact"><li name="liste"	>Me contacter</li></a>
 				</ul>
 			</nav>
 		</div>
-		<div class="head_name">LION Emmanuel</div>
+		<div class="head_name" id="head_name">LION Emmanuel</div>
 	</header>
 
 	<div class="main">
@@ -59,13 +62,13 @@
 				J'ai fait plusieurs tests de petit jeux vidéos, ainsi que des tests dans différents langages comprenant : Python, Java, C++ et Arduino par le biai des cours. mais il me reste quelques projets dont j'ai encore le code, en voici la liste (lien de téléchargement):
 				<ul class="donwload_list">
 					<a href="file/Calcul Game.zip" download="Calcul Game.zip" class="download">
-						<li>Calcul Game (Python)</li>
+						<li name="liste">Calcul Game (Python)</li>
 					</a>
 					<a href="file/Projet Mindlfex.zip" download="Projet Mindlfex.zip" class="download">
-						<li>Projet Mindlfex (Arduino)</li>
+						<li name="liste">Projet Mindlfex (Arduino)</li>
 					</a>
 					<a href="file/main.zip" download="main.zip" class="download">
-						<li>Analyseur de parenthèses (C++)</li>
+						<li name="liste">Analyseur de parenthèses (C++)</li>
 					</a>
 				</ul>
 				<p class="p_article_end">
@@ -83,7 +86,7 @@
 		</div>
 
 		<div class="slider-wrapper">
-			<h4>Langage "appris" jusqu'à maintenant :</h4>  
+			<h4 class="head_slide">Langage "appris" jusqu'à maintenant :</h4>  
 			<div class="slider">
 				<div class="slide1">Et bien plus</div>
 				<div class="slide2"> JavaScript</div>
@@ -168,9 +171,9 @@
 		<footer class="footer" id="contact">
 			<h1 class="contact_title">Contact:</h1>
 			<ul class="footer_list">
-				<a href="#Accueil" style="cursor: default;"><li class="list">Numéro : 06 52 80 67 36</li></a>
-				<a href="#Accueil" style="cursor: default;"><li>Adresse : Centre-ville de Nîmes</li></a>
-				<a href="Mail.html"><li>Formulaire e-mail</li></a>
+				<a href="#Accueil" style="cursor: default;"><li name="liste">Numéro : 06 52 80 67 36</li></a>
+				<a href="#Accueil" style="cursor: default;"><li name="liste">Adresse : Centre-ville de Nîmes</li></a>
+				<a href="Mail.html"><li name="liste">Formulaire e-mail</li></a>
 			</ul>
 		</footer>
 
@@ -203,23 +206,115 @@ python.style.marginTop = "0px";
 };
 
 var ctx = document.getElementById("graph").getContext("2d");
-
+var blanc;
+var noir;
 var options = {
 	responsive: false,//Adaptation ou non à son parent en terme de taille
 }	
-Chart.defaults.global.defaultFontColor = 'white';//Met la couleur de toutes les écritures par défault en blanc
-var graph = new Chart(ctx,{
+Chart.defaults.global.defaultFontColor = "white";
+blanc = {
+
 	type: 'bar',
 	data: {
 		datasets: [{
-			label: "Connaissances dans un langage, noté subjectivement sur 20",
+			label: "Connaissances dans un langage, noté sur 20",
 			backgroundColor: 'white',
-			data: [15,4,16,3,5,5,15]
+			data: [13,4,15,3,8,4,12]
 		}],
 		labels: ['Arduino','C++','HTML et CSS','Java','JavaScript','Python','Algorithmie']
 	},
-	options: options
-});
+	options: options,
+}
+noir = {
+
+	type: 'bar',
+	data: {
+		datasets: [{
+			label: "Connaissances dans un langage, noté sur 20",
+			backgroundColor: 'black',
+			data: [13,4,15,3,8,4,12]
+		}],
+		labels: ['Arduino','C++','HTML et CSS','Java','JavaScript','Python','Algorithmie']
+	},
+	options: options,
+}
+var graph1 = new Chart(ctx,blanc);
+
+//Met la couleur de toutes les écritures par défault en blanc
+
+</script>
+
+<script type="text/javascript">
+//Changement de couleur -- Mode sombre <==> clair
+var moon = document.getElementById("moon");
+var sun = document.getElementById("sun");
+var body = document.getElementById("body");
+var header = document.getElementById("header");
+var list = document.getElementsByTagName("li");
+var head_name = document.getElementById("head_name");
+var box = document.getElementsByClassName("box_article");
+var overlay = document.getElementsByClassName("overlay");
+var head_article = document.getElementsByClassName("head_article");
+var h4 = document.getElementsByClassName("head_slide");
+var footer = document.getElementById("contact");
+sun.onclick = function(){
+	var graph2 = new Chart(ctx,noir);
+	Chart.defaults.global.defaultFontColor = 'black';
+	body.style.backgroundColor = "#aaa";
+	header.style.backgroundColor = "white";
+	header.style.borderBottomColor = "black";
+	header.style.color = "black";
+	for(var i=0, l=list.length;i<l;i++){
+		list[i].style.borderColor = "black";
+		list[i].style.color = "black";
+	}
+	head_name.style.color = "black";
+	for(var i=0, b=box.length;i<b;i++){
+		box[i].style.borderColor = "black";
+		box[i].style.color = "black";
+	}
+	for(var i=0, o=overlay.length;i<o;i++){
+		overlay[i].style.backgroundColor = "#aaa";
+	}
+	for(var i=0, h=head_article.length;i<h;i++){
+		head_article[i].style.borderBottomColor = "black";
+	}
+	h4[0].style.color = "black";
+	footer.style.borderTopColor = "black";
+	footer.style.backgroundColor = "white";
+	footer.style.color = "black";
+	sun.style.display = "none";
+	moon.style.display = "block";
+}
+moon.onclick = function(){
+	var graph3 = new Chart(ctx,blanc);
+	Chart.defaults.global.defaultFontColor = 'white';
+	body.style.backgroundColor = "#151D21";
+	header.style.backgroundColor = "black";
+	header.style.borderBottomColor = "white";
+	header.style.color = "white";
+	for(var i=0, l=list.length;i<l;i++){
+		list[i].style.borderColor = "white";
+		list[i].style.color = "white";
+	}
+	head_name.style.color = "white";
+	for(var i=0, b=box.length;i<b;i++){
+		box[i].style.borderColor = "white";
+		box[i].style.color = "white";
+	}
+	for(var i=0, o=overlay.length;i<o;i++){
+		overlay[i].style.backgroundColor = "black";
+	}
+	for(var i=0, h=head_article.length;i<h;i++){
+		head_article[i].style.borderBottomColor = "white";
+	}
+	h4[0].style.color = "white";
+	footer.style.borderTopColor = "white";
+	footer.style.backgroundColor = "black";
+	footer.style.color = "white";
+	sun.style.display = "block";
+	moon.style.display = "none";
+}
 </script>
 	
 	

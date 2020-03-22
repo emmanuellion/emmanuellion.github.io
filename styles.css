@@ -4,7 +4,7 @@
 body{
 	font-family: 'Roboto', sans-serif;
 	background-color: #151D21;
-	color: #aaa;
+	transition: 1.5s;
 	}
 
 a{
@@ -17,7 +17,7 @@ button{
 }
 
 header{
-	background-color: white;
+	background-color: black;
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
@@ -26,7 +26,9 @@ header{
 	left: 0px;
 	right: 0px;
 	top: 0px;
-	border-bottom: 2px solid black;
+	border-bottom: 2px solid white;
+	color: white;
+	transition: 1.5s;
 }
 .fa-id-card-o{
 	margin-top: 11px;
@@ -39,6 +41,29 @@ header{
 	width: 180px;
 	display: flex;
 	margin-right: 40px;
+}
+
+.sun_moon{
+	display: flex;
+	justify-content: center; 
+	align-items: center;
+	height: auto;
+	width: auto;
+}
+
+#moon{
+	border-radius: 100px;
+	width: 35%;
+	display: none;
+}
+
+#sun {
+	width: 35%;
+	border-radius: 100px;
+}
+
+img:hover{
+	cursor: pointer;
 }
 
 .div_bar{
@@ -61,16 +86,19 @@ ul{
 }
 
 li{
-	color: #AAAAAA;
+	transition: 1.5s;
 	font-size: 20px;
 	list-style: none;
 	padding: 10px;
-	border: 2px solid #AAAAAA;
+	border: 2px solid white;
 	border-radius: 4px;
 	margin-right: 10px;
+	color: white;
 }
 
 .head_name{
+	transition: 1.5s;
+	color: white;
 	margin-right: 10px;
 	font-size: 30px;
 	font-weight: bold;
@@ -102,8 +130,10 @@ top: 0px;
 }
 
 .box_article{
+	transition: 1.5s;
 	padding: 0px;
-	border: 2px solid #AAAAAA;
+	border: 2px solid white;
+	color: white;
 	display: flex;
 	margin: auto;
 	flex-direction: column;
@@ -123,6 +153,7 @@ top: 0px;
 }
 
 .overlay{
+	transition: 1.5s;
 	background-color: black;
 	position: absolute;
 	width: 100%;
@@ -134,7 +165,7 @@ top: 0px;
 	padding-top: 0.1%;
 	display: flex;
 	align-items: center;
-	border-bottom: 2px solid #AAAAAA;
+	border-bottom: 2px solid white;
 	font-size:200%;
 	height: 10%;	
 	z-index: 1;
@@ -207,6 +238,11 @@ top: 0px;
 width: 400px;
 margin-left: auto;
 margin-right: auto;
+}
+
+.head_slide{
+	transition: 1.5s;
+	color: white;
 }
 
 div.slider{
@@ -401,12 +437,13 @@ img.JS{
 }
 
 footer{
+	transition: 1.5s;
 	position: absolute;
 	margin-bottom: 0px;
 	left: 0px;
-	border-top: 2px solid #AAAAAA;
+	border-top: 2px solid white;
 	background-color: black;
-	color: #AAAAAA;
+	color: white;
 	width: 100%;
 	height: 200px;
 }
