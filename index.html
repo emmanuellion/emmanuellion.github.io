@@ -37,16 +37,16 @@
 				<a href="teste.html" class="links" title="Cliques ! Aies confiance ..." style="color:red; text-align:center; font-weight:bold;">Lien pour le questionnaire de la chasse au trésor</a>
 			</marquee>
 		</div> -->
-		
-		<div class="box_article propos" id="propos" style="height: 300px;">
+		<span id="propos"></span>
+		<div class="box_article propos" style="height: 300px;">
 			<div class="head_article"><h4>A propos de moi:</h4></div>
 			<p class="p_article">
 				Je m'appelle Emmanuel Lion, j'ai 17 ans et suis actuellement en terminale STI2D au lycée DHUODA à Nîmes. Je suis passionné depuis petit par le monde de la programmation, je voulais au début créer des jeux puis mes envies se sont portées plus vers le monde des applications et des logiciels (tout en ayant de l'intérêt pour les jeux).
 			</p>
 			<div class="overlay"></div>
 		</div>
-
-		<div class="box_article" id="compétences" style="height: 300px;">
+		<span id="compétences"></span>
+		<div class="box_article" style="height: 300px;">
 			<div class="head_article" style="height: 20%;"><h4>Mes compétences:</h4></div>
 			<p class="p_article">
 				J'ai des bases dans plusieurs programmes (énumérés plus bas).<br>
@@ -55,11 +55,11 @@
 				J'ai des connaissances approfondies dans la création des algorithmes mais aussi dans la l'usage des langages tels que Arduino, C++, HTML et CSS, Python ... 
 			</p>
 		</div>	
-
-		<div class="box_article experiences" id="experience">
+		<span id="experience"></span>
+		<div class="box_article experiences">
 			<div class="head_article"><h4>Mes expériences:</h4></div>
 			<p class="p_article">
-				J'ai fait plusieurs tests de petit jeux vidéos, ainsi que des tests dans différents langages comprenant : Python, Java, C++ et Arduino par le biai des cours. mais il me reste quelques projets dont j'ai encore le code, en voici la liste (lien de téléchargement):
+				J'ai fait plusieurs tests de petit jeux vidéos, ainsi que des tests dans différents langages comprenant : Python, Java, C++ et Arduino par le biais des cours. Mais il me reste quelques projets dont j'ai encore le code, en voici la liste (lien de téléchargement):
 				<ul class="donwload_list">
 					<a href="file/Calcul Game.zip" download="Calcul Game.zip" class="download">
 						<li name="liste">Calcul Game (Python)</li>
@@ -257,6 +257,7 @@ var overlay = document.getElementsByClassName("overlay");
 var head_article = document.getElementsByClassName("head_article");
 var h4 = document.getElementsByClassName("head_slide");
 var footer = document.getElementById("contact");
+var download = document.getElementsByClassName("download");
 sun.onclick = function(){
 	var graph2 = new Chart(ctx,noir);
 	Chart.defaults.global.defaultFontColor = 'black';
@@ -278,6 +279,9 @@ sun.onclick = function(){
 	}
 	for(var i=0, h=head_article.length;i<h;i++){
 		head_article[i].style.borderBottomColor = "black";
+	}
+	for(var i=0, d=download.length;i<d;i++){
+		download[i].style.textDecoration = "underline black";
 	}
 	h4[0].style.color = "black";
 	footer.style.borderTopColor = "black";
@@ -307,6 +311,9 @@ moon.onclick = function(){
 	}
 	for(var i=0, h=head_article.length;i<h;i++){
 		head_article[i].style.borderBottomColor = "white";
+	}
+	for(var i=0, d=download.length;i<d;i++){
+		download[i].style.textDecoration = "underline white";
 	}
 	h4[0].style.color = "white";
 	footer.style.borderTopColor = "white";
