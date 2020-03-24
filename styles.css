@@ -5,6 +5,12 @@ body{
 	font-family: 'Roboto', sans-serif;
 	background-color: #151D21;
 	transition: 1.5s;
+	margin: 0px;
+	width: 100%;
+	justify-content: center;
+	align-items: center;
+	display: flex;
+	height: auto;
 	}
 
 a{
@@ -20,12 +26,11 @@ header{
 	background-color: black;
 	display: flex;
 	justify-content: space-between;
-	width: 100%;
 	z-index: 10;
 	position: fixed;
-	left: 0px;
-	right: 0px;
+	width: 100%;
 	top: 0px;
+	left: 0px;
 	border-bottom: 2px solid white;
 	color: white;
 	transition: 1.5s;
@@ -44,20 +49,25 @@ header{
 }
 
 .sun_moon{
+	margin-right: 0px;
 	display: flex;
 	justify-content: center; 
 	align-items: center;
 	height: auto;
 	width: auto;
+	font-size: 100%;
+	font-weight: bold;
 }
 
 #moon{
 	border-radius: 100px;
 	width: 35%;
 	display: none;
+	margin-left: 10%;
 }
 
 #sun {
+	margin-left: 10%;
 	width: 35%;
 	border-radius: 100px;
 }
@@ -107,12 +117,12 @@ li{
 }
 
 div.main{
-position: absolute;
 height: auto;
-width: 100%;
+width: auto;	
 margin: 0px;
-left: 0px;
-top: 0px;
+justify-content: center;
+align-items: center;
+
 }
 
 @media only screen and (max-width: 850px){
@@ -140,7 +150,7 @@ top: 0px;
 	border-radius: 5px;
 	margin-top: 125px;
 	margin-bottom: 50px;
-	width: 1000px;
+	width: 80%;
 	height: 580px;	
 }
 
@@ -261,7 +271,7 @@ div.slide1{
 	background:white;
 	margin-bottom: 30px;
 	height: 30px;
-	animation: slide 7s linear infinite;
+	animation: slide 14s linear infinite;
 }
 div.slide2{
 	background:yellow;

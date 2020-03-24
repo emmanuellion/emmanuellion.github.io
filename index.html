@@ -9,12 +9,13 @@
 	<meta name="description" content="Bienvenue sur mon portfolion - LION Emmanuel">
 </head>
 <body id="body">
-	<hr id="Accueil">
-	<header id="header">
+	<div class="main">
+		<header id="header">
 		<div class="Portfolio">
 			<i class="fa fa-id-card-o fa-3x" aria-hidden="true"></i><h2>Portfolio</h2>
 		</div>
 		<div class="sun_moon">
+			<span id="mod">Mode : </span>
 			<img src="img/moon.png" id="moon"><img src="img/sun.png" id="sun">
 		</div>
 		<div class="div_bar">
@@ -30,8 +31,6 @@
 		</div>
 		<div class="head_name" id="head_name">LION Emmanuel</div>
 	</header>
-
-	<div class="main">
 		<!-- <div class="box_article" style="height:100px; justify-content:center;">
 			<marquee scrolldelay="60">
 				<a href="teste.html" class="links" title="Cliques ! Aies confiance ..." style="color:red; text-align:center; font-weight:bold;">Lien pour le questionnaire de la chasse au trésor</a>
@@ -167,17 +166,15 @@
 		</div>
 
 		<div class="space"></div>
-
 		<footer class="footer" id="contact">
-			<h1 class="contact_title">Contact:</h1>
-			<ul class="footer_list">
-				<a href="#Accueil" style="cursor: default;"><li name="liste">Numéro : 06 52 80 67 36</li></a>
-				<a href="#Accueil" style="cursor: default;"><li name="liste">Adresse : Centre-ville de Nîmes</li></a>
-				<a href="Mail.html"><li name="liste">Formulaire e-mail</li></a>
-			</ul>
-		</footer>
-
-	</div>
+		<h1 class="contact_title">Contact:</h1>
+		<ul class="footer_list">
+			<a href="#Accueil" style="cursor: default;"><li name="liste">Numéro : 06 52 80 67 36</li></a>
+			<a href="#Accueil" style="cursor: default;"><li name="liste">Adresse : Centre-ville de Nîmes</li></a>
+			<a href="Mail.html"><li name="liste">Formulaire e-mail</li></a>
+		</ul>
+	</footer>
+	</div> 
 <script type="text/javascript">
 //oui
 var python = document.getElementsByClassName("logo2") [0]
@@ -258,6 +255,7 @@ var head_article = document.getElementsByClassName("head_article");
 var h4 = document.getElementsByClassName("head_slide");
 var footer = document.getElementById("contact");
 var download = document.getElementsByClassName("download");
+var span_mod = document.getElementById("mod");
 sun.onclick = function(){
 	var graph2 = new Chart(ctx,noir);
 	Chart.defaults.global.defaultFontColor = 'black';
@@ -265,6 +263,7 @@ sun.onclick = function(){
 	header.style.backgroundColor = "white";
 	header.style.borderBottomColor = "black";
 	header.style.color = "black";
+	span_mod.style.color = "black";
 	for(var i=0, l=list.length;i<l;i++){
 		list[i].style.borderColor = "black";
 		list[i].style.color = "black";
@@ -298,6 +297,7 @@ moon.onclick = function(){
 	header.style.backgroundColor = "black";
 	header.style.borderBottomColor = "white";
 	header.style.color = "white";
+	span_mod.style.color = "white";
 	for(var i=0, l=list.length;i<l;i++){
 		list[i].style.borderColor = "white";
 		list[i].style.color = "white";
