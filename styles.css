@@ -136,7 +136,7 @@ div.main{
 	align-items: center;
 }
 
-@media only all and (max-width: 850px) and (max-device-width: 480px){
+@media only all and (max-width: 850px) and (max-device-width: 850px){
 
 	header{
 		left: 0px;
