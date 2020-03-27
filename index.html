@@ -77,11 +77,22 @@
 			<div class="overlay"></div>
 		</div>
 
-		<div class="box_article" style="height: 220px;">
+		<div class="box_article" style="">
 			<div class="head_article" style="height: 20%;"><h4>Mon application mobile</h4></div>
 			<p class="p_article">
 				J'ai aussi créé une application mobibile et apossède donc un compte développeur sur le Google Play Store dont voici le lien de l'application : <a href="https://play.google.com/store/apps/details?id=appinventor.ai_tmboisse.CalculMental&hl=fr" class="links" title="https://play.google.com/store/apps/details?id=appinventor.ai_tmboisse.CalculMental&hl=fr">Lord of Calcul</a>
 			</p>
+			<p class="p_article_end">Gallerie :</p>
+			<div id="alignement">
+				<div class="gallerie">
+					<img src="img/Screen1.jpg" class="demo" id="img1">
+					<img src="img/CM.jpg" class="demo" id="img2">
+					<img src="img/Screen2.jpg" class="demo" id="img3">
+					<img src="img/logo creafriendly.jpg" class="demo" id="img4">
+					<img src="img/Screen3.jpg" class="demo" id="img5">
+				</div>
+				<button class="next_pic" id="next_pic">></button>
+			</div>
 		</div>
 
 		<div class="slider-wrapper">
@@ -176,7 +187,32 @@
 	</footer>
 	</div> 
 <script type="text/javascript">
-//oui
+//déplacement gallerie
+var next = document.getElementById("next_pic");
+var img1 = document.getElementById("img1");
+var round = 1;
+next.onclick = function(){
+	if (round == 0) {
+		img1.style.marginLeft = "0px";
+	}
+	if (round == 1) {
+		img1.style.marginLeft = "-130px";
+	}
+	if (round == 2) {
+		img1.style.marginLeft = "-350px";
+	}
+	if (round == 3) {
+		img1.style.marginLeft = "-550px";
+	}
+	round++;
+	if (round == 4){
+		round = 0;
+	}
+}
+</script>
+
+<script type="text/javascript">
+//divers
 var python = document.getElementsByClassName("logo2") [0]
 var pytho = document.getElementsByClassName("footer") [1]
 var logo1 = document.getElementsByClassName("art") [0]
@@ -256,6 +292,7 @@ var h4 = document.getElementsByClassName("head_slide");
 var footer = document.getElementById("contact");
 var download = document.getElementsByClassName("download");
 var span_mod = document.getElementById("mod");
+var gallerie = document.getElementById("alignement");
 sun.onclick = function(){
 	var graph2 = new Chart(ctx,noir);
 	Chart.defaults.global.defaultFontColor = 'black';
@@ -264,6 +301,7 @@ sun.onclick = function(){
 	header.style.borderBottomColor = "black";
 	header.style.color = "black";
 	span_mod.style.color = "black";
+	gallerie.style.borderColor = "black";
 	for(var i=0, l=list.length;i<l;i++){
 		list[i].style.borderColor = "black";
 		list[i].style.color = "black";
@@ -296,6 +334,7 @@ moon.onclick = function(){
 	body.style.backgroundColor = "#151D21";
 	header.style.backgroundColor = "black";
 	header.style.borderBottomColor = "white";
+	gallerie.style.borderColor = "white";
 	header.style.color = "white";
 	span_mod.style.color = "white";
 	for(var i=0, l=list.length;i<l;i++){
