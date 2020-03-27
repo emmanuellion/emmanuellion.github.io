@@ -25,27 +25,29 @@ header{
 	background-color: black;
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	z-index: 10;
 	position: fixed;
 	width: 100%;
 	top: 0px;
-	left: 0px;
 	border-bottom: 2px solid white;
 	color: white;
 	transition: 1.5s;
 }
 
+#sun-moon{
+	display: none;
+}
+
 .fa-id-card-o{
-	margin-top: 11px;
-	padding-right: 10px;
-	padding-left: 10px;
+	margin-top: 7%;
+	padding-right: 5%;
+	padding-left: 5%;
 }
 
 .Portfolio{
-	height: 70px;
-	width: 180px;
 	display: flex;
-	margin-right: 40px;
+	margin-right: 3%;
 }
 
 .sun_moon{
@@ -62,7 +64,7 @@ header{
 }
 
 #moon{
-	border-radius: 100px;
+	border-radius: 100%;
 	width: 35%;
 	display: none;
 	margin-left: 10%;
@@ -71,7 +73,7 @@ header{
 #sun {
 	margin-left: 10%;
 	width: 35%;
-	border-radius: 100px;
+	border-radius: 100%;
 }
 
 img:hover{
@@ -79,18 +81,19 @@ img:hover{
 }
 
 .div_bar{
-	width: 800px;
-	margin-left: 40px;
- 	margin-right: 40px;
+	padding: 0px;
+	width: 80%;
+	height: 10%;
+	margin-left: 2%;
+ 	margin-right: 3%;
 }
 
 .nav_bar{
-	height: 70px;
-	width: 800px;
+	padding: 0px;
+	width: 100%;
 }
 
 ul{
-	margin-top: 0px;
 	height: 70px;
 	display: flex;
 	justify-content: center;
@@ -99,13 +102,20 @@ ul{
 
 li{
 	transition: 1.5s;
-	font-size: 20px;
+	font-size: 17px;
 	list-style: none;
 	padding: 10px;
 	border: 2px solid white;
 	border-radius: 4px;
 	margin-right: 10px;
 	color: white;
+}
+
+.header_responsive1{
+	display: flex;
+}
+.header_responsive2{
+	display: flex;
 }
 
 .head_name{
@@ -127,8 +137,124 @@ div.main{
 }
 
 @media only screen and (max-width: 850px){
+
+	header{
+		left: 0px;
+		right: 0px;
+		width: 13%;
+		height: 15%;
+		overflow: hidden;
+		flex-grow: 1;
+		border: 2px solid white;
+	}
+
+	ul{
+		display: none;
+	}
+	.Portfolio{
+		display: none;
+	}
+
+	.sun_moon{
+		display: none;
+	}
+
+	.head_name{
+		display: none;
+	}
+
+	header:hover{
+		width: 100%;
+		height: 95px;
+	}
+
+	header:hover .Portfolio{
+		margin-left: 1px;
+		display: flex;
+	}
+
+	header:hover .fa-id-card-o{
+		margin-right: 5px;
+	}
+
+	header:hover .sun_moon{
+		display: flex;
+	}
+
+	header:hover .head_name{
+		display: block
+	}
+
+	header:hover .div_bar{
+		margin-left: 10px;
+		margin-right:10px;
+		margin-bottom: 10px;
+		height: 80%;
+		justify-content: center;
+		align-items: center;
+	}
+
+	header:hover ul{
+		display: flex;
+		height: 100%;
+		margin: 0px;
+	}
+
+	header:hover #link_propos{
+		height: 65px;
+		margin-bottom: 10px;
+	}
+
+	.header_responsive1{
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 11px;
+	}
+	.header_responsive2{
+		display: flex;
+		flex-direction: column;
+		margin-bottom: 10px;
+	}
+
+	header:hover li{
+	font-size: 15px;
+	padding: 5px;
+	border: 2px solid white;
+	border-radius: 4px;
+	margin-right: 5px;
+	display: flex;
+	text-align: center;
+	justify-content: center;
+	align-items: center;
+	color: white;
+	}
+
+	header:hover #sun-moon{
+		display: none;
+	}
+
+	#sun-moon{
+		display: block;
+		width: 100%;
+		transition: 1.5s;
+	}
+
+	body{
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		text-align: center;
+	}
+
 	div.logo1{
 		flex-wrap: wrap;
+		width: auto;
+		flex-direction: column;
+	}
+	div.logo2{
+		flex-wrap: wrap;
+		width: auto;
 		flex-direction: column;
 	}
 
@@ -139,6 +265,11 @@ div.main{
 	div.art:hover div.part{
 		transform: translateY(0px);
 		transition: 0.5s;
+	}
+}
+@media only screen and (max-width: 850px){
+	ul{
+		height: 100px;
 	}
 }
 
@@ -374,19 +505,19 @@ div.slide6{
 	background-color: #31A5FE;
 	width: 100%;
 	margin: 0px;
+	margin-top: 40px;
 }
 
 div.logo1{
-	width: 1300px;
-	margin:auto;
+	width: 1200px;
+	margin: auto;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	color: #19447D;
-	margin-top: 50px;
 	overflow: hidden;
-	flex-direction: row;
-}
+	transition: 0.5s;
+	}
 
 div.art{
 	margin-right: 30px;
@@ -501,14 +632,10 @@ img.JS{
 
 footer{
 	transition: 1.5s;
-	position: absolute;
-	margin-bottom: 0px;
-	left: 0px;
 	border-top: 2px solid white;
-	background-color: black;
+	background-color: transparent;
 	color: white;
-	width: 100%;
-	height: 200px;
+	width: auto;
 }
 
 .contact_title{
