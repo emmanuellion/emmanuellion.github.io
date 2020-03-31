@@ -16,10 +16,10 @@ body::-webkit-scrollbar{
 	width: 0.25rem;
 }
 body::-webkit-scrollbar-track{
-	background-color: black;
+	background-color: yellow;
 }
 body::-webkit-scrollbar-thumb{
-	background-color: #6649B8;
+	background-color: red;
 }
 
 a{
@@ -50,6 +50,11 @@ header{
 	display: none;
 }
 
+.mobile{
+	display: flex;
+	width: 35%;
+}
+
 .fa-id-card-o{
 	margin-top: 7%;
 	padding-right: 5%;
@@ -58,7 +63,8 @@ header{
 
 .Portfolio{
 	display: flex;
-	margin-right: 3%;
+	margin-left: 10px;
+	margin-right: 25%;
 }
 
 .sun_moon{
@@ -69,8 +75,8 @@ header{
 	text-align: center;
 	text-orientation: row;
 	height: auto;
-	width: 10%;
-	font-size: 100%;
+	width: 100%;
+	font-size: 24px;
 	font-weight: bold;
 }
 
@@ -147,6 +153,7 @@ div.main{
 	justify-content: center;
 	align-items: center;
 }
+/*----------------------------------------------------------------------*/
 @media only all and (max-device-width: 600px){
 	header{
 		left: 0px;
@@ -154,8 +161,11 @@ div.main{
 		width: 9%;
 		height: 10%;
 		overflow: hidden;
-		flex-grow: 1;
 		border: 2px solid white;
+	}
+
+	.mobile{
+		display: none;
 	}
 
 	ul{
@@ -175,11 +185,21 @@ div.main{
 
 	header:hover{
 		width: 100%;
-		height: 95px;
+		height: 100%;
+	}
+
+	header:hover .mobile{
+		justify-content: center;
+		align-items: center;
+		text-align: left;
+		display: flex;
+		flex-direction: column;
+		margin-left: 5px;
 	}
 
 	header:hover .Portfolio{
 		margin-left: 1px;
+		font-size: 15px;
 		display: flex;
 	}
 
@@ -188,17 +208,24 @@ div.main{
 	}
 
 	header:hover .sun_moon{
+		font-size: 20px;
 		display: flex;
+	}
+	#sun{
+		width: 13%;
+	}
+	#moon{
+		width: 13%;
 	}
 
 	header:hover .head_name{
+		font-size: 40px;
 		display: block
 	}
 
 	header:hover .div_bar{
 		margin-left: 10px;
 		margin-right:10px;
-		margin-bottom: 10px;
 		height: 80%;
 		justify-content: center;
 		align-items: center;
@@ -206,13 +233,24 @@ div.main{
 
 	header:hover ul{
 		display: flex;
-		height: 100%;
+		height: auto;
 		margin: 0px;
 	}
 
 	header:hover #link_propos{
-		height: 65px;
-		margin-bottom: 10px;
+		height: 110px;
+	}
+	#link_compet{
+		
+	}
+	#link_exp{
+		  
+	}
+	#link_app{
+		
+	}
+	#link_contact{
+		
 	}
 
 	.header_responsive1{
@@ -227,7 +265,7 @@ div.main{
 	}
 
 	header:hover li{
-	font-size: 15px;
+	font-size: 25px;
 	padding: 5px;
 	border: 2px solid white;
 	border-radius: 4px;
@@ -249,8 +287,8 @@ div.main{
 		transition: 1.5s;
 	}
 }
-
-@media only all and (max-width: 850px){
+/*----------------------------------------------------------------------*/
+@media only all and (max-width: 1000px){
 
 	header{
 		left: 0px;
@@ -381,7 +419,7 @@ div.main{
 		transition: 0.5s;
 	}
 }
-
+/*----------------------------------------------------------------------*/
 
 .box_article{
 	transition: 1.5s;
@@ -662,7 +700,7 @@ div.Py:hover{
 	height: 480px;
 }
 
-div.Cpp:hover {
+div.C:hover {
 	transition: 0.5s;
 	height: 370px;
 }
@@ -714,7 +752,7 @@ img.Py{
 	width: 50%;
 }
 
-img.Cpp{
+img.C{
 	width: 37%;
 }
 
