@@ -1,0 +1,150 @@
+body{
+	background-color: #1695DA;
+	font-family: 'Kenia', cursive;
+	justify-content: center;
+	margin: 0px;
+	justify-content: center;
+}
+.presentation{
+	height: auto;
+	position: relative;
+}
+.title{
+	position: absolute;
+	background-color: white;
+	width: 20%;
+	border-radius: 5px;
+	left: 38%;
+	top: 28%;
+	padding: 15px;
+	text-align: center;
+	z-index: 2;
+}
+h1{
+	color: green;
+}
+p{
+	color: orange;
+}
+.blue{
+	background-color: #1695DA;
+	position: absolute;
+	height: 100%;
+	width: 100%;
+	z-index: 1;
+	opacity: 0.5;
+}
+nav{
+	width: 100%;
+	height: 200px;
+	display: flex; 
+	justify-content: space-between;
+	margin-top: 50px;
+}
+a{
+	width: 100%;
+	height: 100%;
+}
+a:hover{
+	cursor: pointer;
+}
+a:hover .b{
+	background-size: 130%;
+	transition: 0.6s;
+}
+button{
+	width: 100%;
+	height: 100%;
+	color: white;
+	background-color: transparent;
+	border: none;
+	font-size: 20px;
+	font-family: 'Kenia';
+}
+button:hover{
+	cursor: pointer;
+}
+.bpizza{
+	background-image: url("images/pizza-banner.jpg");
+	transition: 0.6s;
+	background-size: 120%;
+}
+.bsalade{
+	background-image: url("images/salad-banner.jpg");
+	transition: 0.6s;
+	background-size: 120%;
+}
+.bburger{	
+	background-image: url("images/burger-banner.jpg");
+	transition: 0.6s;
+	background-size: 120%;
+}
+.bboisson{
+	background-image: url("images/boisson-banner.jpg");	
+	transition: 0.6s;
+	background-size: 120%;
+}
+.slider{
+	width: 100%;
+	height: 340px;
+	margin: auto;
+	display: flex;
+	overflow: hidden;
+}
+.slide{
+	width: 50%;
+}
+.img1{
+	animation: glisse 15s linear infinite;
+}
+@keyframes glisse{
+	0%{margin-left: 0px;}
+	93.33%{margin-left: -1500px;}
+	100%{margin-left: 0px;}
+}
+.article{
+	display: flex;
+	width: 800px;
+	margin: auto;
+	margin-top: 10px;
+}
+.food{
+	padding-left: 2%;
+	background-color: white;
+	width: 100%;
+	font-size: 20px;
+}
+.food:hover{
+	cursor: pointer;
+}
+.food h3{
+	text-transform: uppercase;
+}
+section{
+	margin: auto;
+	margin-top: 30px;
+	width: 75%;
+	height: auto;
+	align-items: center;
+	justify-content: center;
+	font-family: sans-serif;
+	background-size: 140%;
+}
+.img_descri{
+	width: 50%;
+}
+#pizza{
+	background-image: url("images/pizza-banner.jpg");
+}
+#salade{
+	background-image: url("images/salad-banner.jpg");
+}
+#burger{
+	background-image: url("images/burger-banner.jpg");
+}
+#boisson{
+	background-image: url("images/boisson-banner.jpg");
+}
+iframe{
+	margin-left: 27%;
+}
