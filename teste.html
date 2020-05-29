@@ -6,7 +6,8 @@
 	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
 	<title>Testez de vos connaissances</title>
 </head>
-<body style="display:flex; flex-direction:column; align-items:center; justify-content: center; height: 35em;">
+<body id="body_teste" style="display:flex; flex-direction:column; align-items:center; justify-content: center; height: 35em; color: white;">
+	<button id="mode">Changer de mode</button>
 	<div class="tout" style="width:auto; height:300px; justify-content:center; align-items:center; text-align:center;">
 		<div class="question">
 			<p id="question"></p>
@@ -36,6 +37,7 @@
 					<div class="false"><i class="fa fa-times" aria-hidden="true"></i></div> 
 				</div>
 			</div>
+
 			<div class="options" id="laste" style="margin-left: 50px;">
 				<input type="number" id="input" placeholder="1234567890" maxlength="10">
 			</div>
@@ -101,6 +103,7 @@
 		var final_ga = document.getElementById("final_ga");
 		var points = document.getElementById("points");
 		var reward = document.getElementById("reward");
+
 		function quest (question,possible1,possible2,possible3,possible4,response){
 			p.innerHTML = question;
 			label_1.innerHTML = possible1;
@@ -126,7 +129,7 @@
 			var valeur4 = document.getElementById("checkbox4").checked;
 			var val = new Array(valeur1,valeur2,valeur3,valeur4);
 			var appareils = 0;
-			if(question < 11){
+			if(question < 11 && question > 1){
 				for(var i = 0; i<4; i++){
   					if (val[i] === true) {
   						console.log(i);
@@ -140,14 +143,28 @@
   					console.log("Debug effectué !");
   				}
 			}
-			if (question == 11){
-				rep = input.value;
+			if (question == 1){
+				rep = 1;
 			}
   			
      	}
+     	var change_mode = 0;
+     	const mode = document.querySelector('#mode');
+     	mode.addEventListener('click', () => {
+			change_mode++;
+			if (change_mode%2==0){
+				alert ("Mode avec réponse colorées");
+				console.log(change_mode);	
+			}else{
+				alert ("Mode sans réponse colorées");
+				console.log(change_mode);	
+			}
+		});
+
 		function result(){
 			span.innerHTML = ga;
-			if (question == 1){
+			
+				if (question == 1){
 				check1.style.display = "block";
 				options1.style.backgroundColor = "green";
 				croix2.style.display = "block";
@@ -156,8 +173,7 @@
 				options3.style.backgroundColor = "red";
 				croix4.style.display = "block";
 				options4.style.backgroundColor = "red";
-			}
-			else{
+				}else{
 				if (question == 2){
 					check1.style.display = "block";
 					options1.style.backgroundColor = "green";
@@ -246,7 +262,7 @@
 												options4.style.backgroundColor = "green";
 											}
 											else{
-												if (question == 10) {
+												if (question == 10){
 													croix1.style.display = "block";
 													options1.style.backgroundColor = "red";
 													croix2.style.display = "block";
@@ -255,6 +271,17 @@
 													options3.style.backgroundColor = "red";
 													check4.style.display = "block";
 													options4.style.backgroundColor = "green";
+												}else{
+													check1.style.display = "block";
+													options1.style.backgroundColor = "green";
+													croix2.style.display = "block";
+													options2.style.backgroundColor = "red";
+													croix3.style.display = "block";
+													options3.style.backgroundColor = "red";
+													croix4.style.display = "block";
+													options4.style.backgroundColor = "red";
+												}
+
 												}
 											}
 										}
@@ -264,7 +291,6 @@
 						}
 					}
 				}
-			}
 			boutton.style.display = "none";
 			next.style.display = "block";
 			checkbox1.disabled = true;
@@ -298,38 +324,34 @@
 			document.getElementById("checkbox4").checked = false;
 			question++;
 			if (question == 2){
-				var quest2 = new quest ("Qui est le président (actuel) de la république ?","Emmanuel Macron","François Holland",'La réponse "d"',"Charles de Gaulle",1);
+				var quest2 = new quest ("Quel est respectivement l'énergie à la l'entrée et à la sortie du panneau photovoltaïque ?","énergie lumineuse/énergie électrique","énergie thermique/énergie électrique","énergie thermique/énergie thermique","énergie lumineuse/énergie rayonnante",1);
 			}
 			if (question == 3){
-				var quest3 = new quest ("Quel est LE meilleur animé ?","Naruto","One Piece","Tokyo Ghoul","Dragon Ball Z",2);
+				var quest3 = new quest ("Quelle est LA formule pour calculer la puissance rayonnée par un corps NOIR ? (on ne va pas parler des unitées sauf du σ qui est une constante donnée)","σ = (P/T).S","P = σ.S.T^4","La loi d'ohm","P = σ.S.T",2);
 			}
 			if (question == 4){
-				var quest4 = new quest('Quel est le nombres TOTAL de grades dans le serveur "Dhuocord"?',"[20 et moins]","[20-30]","[40-50]","[50 et plus]",4); 
+				var quest4 = new quest("Qu'est ce qu'une intensité de court-circuit ? (abrégée par Icc) ","Le moment où l'intensité provoque un court-circuit","Le moment où l'intensité crée par la cellule photovoltaïque est nul","Le moment où la tension provoque un court-circuit","Le moment où la tension aux bornes de la cellule photovoltaïque est nul",4); 
 			}
 			if (question == 5){
-				var quest5 = new quest("Quelle est la vitesse la plus élevée qu'un homme a réussi à faire atteindre à un objet ?","La vitesse de la lumière","~100 000 000 km/h","99,9999991% de la vitesse de la lumière","~27 000 km/h",3);
+				var quest5 = new quest("Qu'est la tension en circuit ouvert ? (abrégée par Uco)","Le moment où l'intensité provoque un court-circuit","Le moment où la tension provoque un court-circuit","Le moment où l'intensité crée par la cellule photovoltaïque est nul","Le moment où la tension aux bornes de la cellule photovoltaïque est nul",3);
 			}
 			if (question == 6){
-				var quest6 = new quest("Quelle est la réponse au calcul: 2+5*17/(10+2/4)","36","~10.095","47.6","Un nombre entier compris dans [0;100]",2);
+				var quest6 = new quest("Quelle est LA formule pour calculer le rendement ? (on ne va pas parler des unitées sauf du η qui est en %)","R = η.E utile","η = E utilie/E absorbé","R = η.E absorbé","La réponse D ?",2);
 			}
 			if (question == 7){
-				var quest7 = new quest("Comment peut-on participer à la recherche mondiale de la 9ème planète du système solaire ?","En se rendant sur un site internet","En faisant des calculs","En regardant le ciel","En attendant",1);
+				var quest7 = new quest("Comment convertir une puissance en énergie ?","E = P.t (avec E en Joule, P en Watt et t en seconde)","E = P.t (avec E en Joule, P en Watt et t en heure)","P = E.t (téléphone - maison)","En attendant... LLLLooooonnnnggggggttteeeemmmpppppppssssss",1);
 			}
 			if (question == 8){
-				var quest8 = new quest("Qu'est-ce-qu'est un Pulsar ?","Un objet permettant d'effectuer des pulsations","Une étoile à eutrons faisant 1 tour sur elle-même en quelques millisecondes",'Une abréviation de "plus tard"',"Une grosse étoile dans l'Univers",2);
+				var quest8 = new quest("Qu'elle est le schéma d'un capteur solaire thermique ?",'<img src="img/PP1.png">','<img src="img/CST.jpg">','<img src="img/CST2.jpg">','<img src="img/PP2.jpg">',2);
 			}
 			if (question == 9){
-				var quest9 = new quest('Qui était "Nikola Tesla"','Le créateur et fondateur de la marque "Tesla"',"Celui qui a mis au point le courant continu","Celui qui a découvert l'électricité","Celui qui a mis au point le courant alternatif",4);
+				var quest9 = new quest('Comment fonctionne les panneau photovoltaïque','Les électrons de cristal de silicium peuvent passer de la bande de conduction à la bande de valensce',"L'électron nique tout est par un processur nucléaire donne de l'électricité","C'est un jeu de billard nanoscopique (si tu comprends pas pourquoi je dis envoies moi un mp + ping)",'<img src="img/D1.png">',4);
 			}
 			if (question == 10){
-				var quest10 = new quest("Quel est le temps de cuisson pour faire un ou des oeuf(s) mollet(s) ?","3 minutes","4 minutes","5 minutes","6 minutes",4);
+				var quest10 = new quest("Quel est le schéma du capteur solaire thermique ?",'<img src="img/SC1.jpg">','<img src="img/SC2.jpg">','<img src="img/SC4.jpg">','<img src="img/SC3.jpg">',4);
 			}
 			if (question == 11){
-				var laste1 = new laste("Quel est l'ordre des bonnes réponses des questions précedentes ? <br>(exmple : 1234567890) <br>Sachant que la case 1 correspond à 1, la case 2 correspond à 2, la case 3 correspond à 3 et la case 4 à 4)",1124321244);
-				options1.style.display = "none";	
-				options2.style.display = "none";	
-				options3.style.display = "none";	
-				options4.style.display = "none";
+				var quest11 = new quest("Quel est le schéma du panneau photovoltaïque ?",'<img src="img/SC1.jpg">','<img src="img/SC2.jpg">','<img src="img/SC4.jpg">','<img src="img/SC3.jpg">',1);
 			}
 			if (question == maxquestion){
 				options1.style.display = "none";	
@@ -345,7 +367,7 @@
 					reward.style.display = "block";
 				}
 				if (ga>=7 && ga < 11){
-					p.innerHTML = "Jolie et honorable score avec : ";
+					p.innerHTML = "Joli et honorable score avec : ";
 					final_ga.innerHTML = ga;
 					points.innerHTML = " points";
 				}
@@ -355,7 +377,7 @@
 					points.innerHTML = " points";
 				}
 				if (ga<4 && ga != 0){
-					p.innerHTML = "Va te faire relooker sale merde! T'as que : ";
+					p.innerHTML = "Vas te faire relooker sale merde! T'as que : ";
 					final_ga.innerHTML = ga;
 					points.innerHTML = " points";
 				}
@@ -369,15 +391,18 @@
 		}
 		var question = 1;
 		var ga = 0;
-		var quest1 = new quest ("Comment le binaire marche-t-il ?","Avec des 0 et des 1","Avec des nombres pairs","Avec des nombres impairs","Avec des nombres en duo",1);
+		var quest1 = new quest ("Te sens tu prêt ?","Oui !","Non !","Je sais pas, je pense...","J'pense pas",1);
 		boutton.onclick = function (){
 			teste();
 			if (rep == reponse){
 				ga ++;
 			}
-			if (question<11){
-				reset1();
-				//result();
+			if (question<12){
+				if (change_mode%2 == 0){
+				result();
+				}else{
+					reset1();
+				}	
 			}else{
 				reset1();
 				boutton.style.display = "none";

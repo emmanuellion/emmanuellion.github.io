@@ -975,3 +975,24 @@ input:hover{
 #reward{
 	display: none;
 }
+
+#mode{
+	color: white;
+	padding: 10px 20px;
+	position: absolute;
+	left: 44%;
+	top: 10%;
+	background-color: transparent;
+	border: 1px solid white;
+}
+
+#body_teste img{
+	width: 80%;
+}
+
+#body_teste img:active{
+	top: 0;
+	right: 40%;
+	position: absolute;
+	width: 30%;
+}
