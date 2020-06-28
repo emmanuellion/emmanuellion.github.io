@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Hacked</title>
+	<title>IP Finder</title>
 	<link rel="stylesheet" type="text/css" href="styles.css">
+	<link rel="icon" type="text/css" href="logo2.png">
 </head>
 <body>
-	
-	<h1>
-		Découvre ton adresse IP en cliquant sur le bouton juste en dessous !
-	</h1>
+	<h1>Découvre ton adresse IP en cliquant sur le bouton juste en dessous !</h1>
 	<button class="button" id="button">Effectuer le calcul</button>
+	<h3 id="h3">Votre adresse IP est : <span id="span"></span></h3>
 	<script type="application/javascript">
-
+	const h3 = document.getElementById("h3");
+	const span = document.getElementById("span");
  	function getIP(json) {
     	const button = document.getElementById("button");
 		button.addEventListener("click" , () =>{
-			console.log("Coucou ;), je connais ton IP qui est : ", json.ip, ". Tu peux aller vérifier sur le site juste au dessus...");
-			alert(json.ip);
+			// console.log("Coucou ;), je connais ton IP qui est : ", json.ip, ". Tu peux aller vérifier sur le site juste au dessus...");
+			// alert(json.ip);
+			h3.style.display = "block";
+			span.innerHTML = json.ip;
 		});
     	
   	}
