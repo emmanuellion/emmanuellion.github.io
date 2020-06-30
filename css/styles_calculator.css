@@ -29,7 +29,7 @@ a{
 	position: absolute;
 	text-align: center;
 	top: 1%;
-	height: 10%;
+	height: auto;
 	width: 70%;
 	left: 15%;
 	border-radius: 20px;
@@ -40,6 +40,16 @@ a{
 #input{
 	position: absolute;
 	top: 20%;
+	height: 10%;
+	width: 20%;
+	left: 40%;
+	border-radius: 20px;
+	border: 2px solid black;
+}
+
+#select{
+	position: absolute;
+	top: 30%;
 	height: 10%;
 	width: 20%;
 	left: 40%;
@@ -63,4 +73,15 @@ a{
 	top: 60%;
 	width: 1%;
 	left: 49.5%;
+}
+
+#reset{
+	position: absolute;
+	top: 70%;
+	height: 8%;
+	width: 20%;
+	left: 40%;
+	border-radius: 20px;
+	border: 2px solid black;
+	background-color: white;
 }
