@@ -12,4 +12,17 @@ body{
 	background-repeat: no-repeat;
 	background-size: cover;
 	min-height: 100vh;
+	color: white;
+}
+
+h1{
+	width: 50%;
+	margin: auto;
+}
+
+ul{
+	margin-top: 150px;
+	width: 30%;
+	margin: auto;
+	/* list-style: none; */
 }
