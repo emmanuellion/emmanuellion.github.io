@@ -21,7 +21,7 @@ h1{
 }
 
 ul{
-	margin-top: 150px;
+	top: 40%;
 	width: 30%;
 	margin: auto;
 	/* list-style: none; */
