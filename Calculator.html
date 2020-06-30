@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculateur compte</title>
+	<link rel="stylesheet" type="text/css" href="css/styles_calculator.css">
+	<link rel="icon" type="text/css" href="img/logo.png">
+	<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+	<meta charset="utf-8">
+</head>
+<body onkeydown="touche(event);">
+	<a href="index.html"><i class="fa fa-home fa-3x" aria-hidden="true"></i></a>
+	<h4 id="explic">Rentrez votre nombre dans le champ de saissi puis pour en rentrer un nouveau appuyez sur "Entrée" et réitérez l'opération autant de fois que vous avez des chiffres à additionner</h4>
+	<input type="number" name="" id="input" placeholder="Chiffre">
+	<button id="button">Additionner le tout</button>
+	<h2 id="h"></h2>
+	<script type="text/javascript">
+		var nb = 0;
+		var table_nb = [];
+		function touche(e)
+		{
+			var touche = event.keyCode;
+			if (touche==13)
+			{
+				table_nb[nb] = parseFloat(document.getElementById("input").value	);
+				nb++;
+				document.getElementById("input").value = null;
+			}
+		}
+
+		document.getElementById("button").addEventListener("click" , () =>{
+			var total;
+			total = 0;
+			for (var i = 0; i<nb; i++)
+			{
+		 		total = total + table_nb[i];
+		 		console.log(total);
+			}
+			console.log("%cLe total est de :","color:red");
+			console.log(total);
+			document.getElementById("h").innerHTML = total;
+		});
+	</script>
+</body>
+</html>
