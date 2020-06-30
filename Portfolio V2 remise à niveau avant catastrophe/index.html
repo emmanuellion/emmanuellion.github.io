@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html style="scroll-behavior: smooth;">
+<head>
+	<link rel="stylesheet" type="text/css" href="css/style_index.css">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Mon Portfolio</title>
+</head>
+<body id="body">
+<!------------ Header --------------------------->
+<header class="header">
+        <h1 class="title">Portfolio</h1>
+        <label class="menu-container" for="menu">
+            <span class="menu-title">Menu</span>
+            <div id="menu" class="burger"></div>
+        </label>
+        <ul class="nav-links">
+            <li>
+                <a href="#presentation_see_more" class="nav_a">See more</a>
+            </li>
+            <li>
+                <a href="#" class="nav_a">Contact</a>
+            </li>
+        </ul>
+</header>
+<!------------ Section menu --------------------------->
+<section id="section_menu">
+	<div id="top_presentation">
+		<h4>Welcome to</h4>
+		<h1>
+			 L'éponge Bob's Portfolio
+		</h1>
+		<div id="menu_page">
+			<button><a href="#presentation_see_more" class="links">See more</a></button>
+			<button><a href="#" class="links">Contact</a></button>
+			
+		</div>
+	</div>
+</section>
+<!------------ Section See more --------------------------->
+<section id="section_see_more">
+	<div id="article_see_more">
+		<div id="presentation_see_more">
+			<br>
+			<div class="calibrage">
+				<h2>French web developer</h2>&thinsp;
+				<a href="#body" class="links home"><i class="fas fa-home"></i></a>
+			</div>
+			<span>Skills in programmation :</span>
+		</div>
+		<div class="father_of_chart">
+			<div class="first_row_of_chart">
+				<div class="box_chart">
+					<span>HTML</span>
+					<div class="chart" data-percent="80">80%</div>
+				</div>
+				<hr class="separate separate_1">
+				<div class="box_chart chart_middle">
+					<span>Css</span>
+					<div class="chart" data-percent="65">65%</div>
+				</div>
+				<hr class="separate separate_2">
+				<div class="box_chart">
+					<span>JavaScript</span>
+					<div class="chart" data-percent="40">40%</div>
+				</div>
+			</div>
+			<hr class="separate separate_row">
+			<div class="second_row_of_chart">
+				<div class="box_chart">
+					<span>PHP</span>
+					<div class="chart" data-percent="25">25%</div>
+				</div>
+			</div>
+		</div>
+		<a href="#stage2" class="links links_into_page go_down"><i class="fas fa-arrow-circle-down"></i></a>
+	</div>
+<!------------ Etage de mon parcours scolaire --------------------------->
+	<div class="article_all_on_me" id="article_all_on_me">
+		<br>
+		<a href="#article_see_more" class="links links_into_page" id="stage2"><i class="fas fa-arrow-circle-up"></i></a>
+		<h1>My studies</h1>
+		<div class="contain_all_on_me">
+			<div class="studies container_all_on_me">
+				<h3>My university background : </h3>
+				<ul>
+					<li><i class="fas fa-school"></i> Student during my middle school in "Révolution" in France</li>
+					<li><i class="fas fa-school"></i> Student during my high school in "Dhuoda" in the sector "STI2D" with the option "SIN" (Computer and digital science) in France</li>
+					<li><i class="fas fa-school"></i> Student during my higher education in the IUT of (University and technology institute) in France </li>
+				</ul>
+			</div>
+			<hr class="separate_container">
+			<div class="qualifications container_all_on_me">
+				<h3>My diplomas : </h3>
+				<ul>
+					<li><i class="fas fa-graduation-cap"></i> Graduated of the "Brevet des collèges"</li>
+					<li><i class="fas fa-graduation-cap"></i> Graduated of the "Baccalauréat" with appreciation "Pretty good" or "ASSEZ BIEN" (and maybe "Good" or "BIEN")</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<a href="#stage3" class="links links_into_page go_down"><i class="fas fa-arrow-circle-down"></i></a>
+<!------------ Etage des expériences professionelle --------------------------->
+	<a href="#stage2" class="links links_into_page" id="stage3"><i class="fas fa-arrow-circle-up"></i></a>
+	<div id="experiences">
+		<div class="container_experiences top_container">
+			<h2>Projects</h2>
+			<ul class="list_experiences">
+				<li><i class="fas fa-laptop-code"></i> Web site with creation of new dish with a real time display, possibility to create an account with connection with use "cookies" including a database.</li>
+			</ul>
+		</div>
+		<div class="container_experiences">
+			<h2>Professional experiences</h2>
+			<ul class="list_experiences">
+				<li><i class="fas fa-briefcase"></i> Traineeship with the information of an High school</li>
+			</ul>
+		</div>
+	</div>
+</section>
+<!------------ Script / link JavaScript --------------------------->
+<script src="js/main.js"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="jquery.easypiechart.js"></script>
+<script>
+    $(function(){
+        $('.chart').easyPieChart({
+            barColor: '#17D3E6',
+            scaleColor: false,
+            trackColor: '#373737',
+            lineCap: 'circle',
+            animate: 2000,
+        });
+    });
+</script>
+<script src="https://kit.fontawesome.com/7f62026b48.js" crossorigin="anonymous"></script>
+</body>
+</html>
