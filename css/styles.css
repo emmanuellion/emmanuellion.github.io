@@ -18,11 +18,23 @@ body{
 h1{
 	width: 50%;
 	margin: auto;
+	text-decoration: underline;
 }
 
 ul{
-	top: 40%;
 	width: 30%;
 	margin: auto;
-	/* list-style: none; */
+}
+
+li{
+	margin-top: 20px;
+	text-align: center;
+	width: 100%;
+}
+
+a{
+	text-align: center;
+	width: 100%;
+	color: white;
+	text-decoration: underline blue;
 }
