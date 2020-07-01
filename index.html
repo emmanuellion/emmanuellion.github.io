@@ -13,7 +13,20 @@
 		<li><a href="https://senary-hardness.000webhostapp.com">IP finder</a></li>
 		<li><a href="Portfolio V2 remise à niveau avant catastrophe/index.html">Portfolio en cours de création</a></li>
 		<li><a href="Hack/index.html">Mon tout premier site $érieux :')</a></li>
+		<li><a href="karaté site/index.html">Site de karaté</a></li>
 	</ul>
 
+	<script type="application/javascript">
+		const karaté = document.getElementsByTagName('li')[4];
+		function getIP(json)
+	 	{
+	 		if(json.ip=="109.8.94.131")
+	 		{
+	 			karaté.style.display = "none";
+	 			console.log("%cAdresse IP bloquée !","color: red");
+	 		}
+	 	}
+	</script>
+	<script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
 </body>
 </html>
