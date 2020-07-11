@@ -11,17 +11,6 @@ def command():
     global turn_anti_path
     verif_each_path = False #Demander à chaque fois si plusieurs actions à faire le lieu d'enregistrement du contenu (False = non)
     show_command = True #Commande pour débogger et voir les variables à la fin de chaque procédure
-
-    #------------script destination contenu-----------
-    if turn_anti_path == 0 :
-        path = ""
-        path = str(GetDir())
-    if verif_each_path == True:
-        turn_anti_path = 0
-    else:
-        turn_anti_path += 1
-    #------------------------------------------------
-
     command = str(input("Que voulez vous faire ? "))
 
     #------------fermer / arrêter le script----------
@@ -35,7 +24,9 @@ def command():
               'commandes\n-"create '
               'file" : procédure '
               'pour créer un fichier\n-"create folder" : procédure pour créer un dossier\n'
-              '-"website" : procédure pour créer tout un projet de site web\n********************\n\n')
+              '-"create website" : procédure pour créer tout un projet de site web\n'
+              '-"delete file" : procédure pour supprimer un fichier\n'
+              '-"delete folder" : procédure pour supprimer un dossier\n********************\n\n')
         reboot()
     #----------------------------------------------------------------------------------
 
@@ -49,6 +40,18 @@ def command():
             extension = str(input("Extension du fichier (.html, .txt, .c, ...) : "))
             name_file = name_file + extension
             print(name_file)
+
+            # ------------script destination contenu-----------
+            print("Choisissez un emplacement")
+            if turn_anti_path == 0:
+                path = ""
+                path = str(filedialog.askdirectory())
+            if verif_each_path == True:
+                turn_anti_path = 0
+            else:
+                turn_anti_path += 1
+            # ------------------------------------------------
+
             try:
                 if path == "":
                     path = "C:\\Users\\drake\\Desktop"
@@ -67,9 +70,31 @@ def command():
             reboot()
         #-------------------------------------------------------------------------
 
+        #---------------------------procédure pour supprimer un fichier--------------------
+        elif command == "delete file":
+            name_file = str(filedialog.askopenfilename())
+            try:
+                os.remove(name_file)
+            except OSError as e:
+                print("Fichier inexistant")
+            else:
+                print("Fichier " + name_file + " supprimé !")
+            reboot()
+        #------------------------------------------------------------------------------------
+
         #--------------------------procédure création nouveau dossier--------------------------------------
         elif command == "create folder":
             name_folder = str(input("Nom du dossier : "))
+            # ------------script destination contenu-----------
+            print("Choisissez un emplacement")
+            if turn_anti_path == 0:
+                path = ""
+                path = str(filedialog.askdirectory())
+            if verif_each_path == True:
+                turn_anti_path = 0
+            else:
+                turn_anti_path += 1
+            # ------------------------------------------------
             try:
                 if path == "":
                     path = "C:\\Users\\drake\\Desktop"
@@ -85,8 +110,35 @@ def command():
             reboot()
         #--------------------------------------------------------------------------------------------------
 
+        #---------------------------procédure pour supprimer un dossier--------------------
+        elif command == "delete folder":
+            name_folder = str(filedialog.askdirectory())
+            print("\n**ATTENTION !** Si votre dossier contient des fichiers ou d'autres dossiers ils seront eux aussi supprimés\n")
+            choice = str(input('Pour confirmer la suppression du dossier choisit veuillez écrire "continuer" sinon écrivez autre chose\n Choix : '))
+            if choice == "continuer":
+                try:
+                    shutil.rmtree(name_folder)
+                except OSError as e:
+                    print("Dossier inexistant")
+                else:
+                    print("Dossier " + name_folder + " supprimé !")
+            else:
+                print("\nProcédure annulée\n")
+            reboot()
+        # ------------------------------------------------------------------------------------
+
         #---------------------procédure créaton pack démarrage site web-----------------------------------
-        elif command == "website":
+        elif command == " create website":
+            # ------------script destination contenu-----------
+            print("Choisissez un emplacement")
+            if turn_anti_path == 0:
+                path = ""
+                path = str(filedialog.askdirectory())
+            if verif_each_path == True:
+                turn_anti_path = 0
+            else:
+                turn_anti_path += 1
+            # ------------------------------------------------
             if path == "":
                 path = "C:\\Users\\drake\\Desktop"      #destination par défaut si aucune précisée
             print("L'extension des fichiers est déjà renseignée ; )\n")
@@ -202,5 +254,6 @@ if __name__ == '__main__':
     from os import getcwd, chdir, mkdir
     from tkinter import *
     from tkinter import filedialog
+    import shutil
     print('**********\nPour avoir la liste des commandes existantes faites "commandes"\n**********\n\n')
     command()
