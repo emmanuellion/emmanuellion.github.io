@@ -114,8 +114,8 @@ def command():
         elif command == "delete folder":
             name_folder = str(filedialog.askdirectory())
             print("\n**ATTENTION !** Si votre dossier contient des fichiers ou d'autres dossiers ils seront eux aussi supprimés\n")
-            choice = str(input('Pour confirmer la suppression du dossier choisit veuillez écrire "continuer" sinon écrivez autre chose\n Choix : '))
-            if choice == "continuer":
+            choice = str(input('Pour confirmer la suppression du dossier veuillez écrire "oui"\n Choix : '))
+            if choice == "oui":
                 try:
                     shutil.rmtree(name_folder)
                 except OSError as e:
