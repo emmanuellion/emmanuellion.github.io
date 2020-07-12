@@ -6,6 +6,8 @@ def GetDir():
     return dirname
 
 
+user = str(os.environ["USERNAME"])
+desktop_path = "C:\\Users\\" + user + "\\Desktop"
 turn_anti_path = 0
 def command():
     global turn_anti_path
