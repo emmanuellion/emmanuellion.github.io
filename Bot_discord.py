@@ -9,7 +9,7 @@ from pprint import pprint
 import datetime
 from discord.ext.commands import Bot
 bot = discord.Client()
-token = "NzMxODM5MTQ0MTU3OTA1MDA3.Xwr4YA.MrKsl2CP4Y3NPiCdvAozcyY2wxI"#serve La Bagarre : NzMxODc5MjI5ODYzNjI0Nzc1.Xwsd8w.-n00dk21CmtQjiPBPKwtCnOIuXI
+token = "Votre token"
 bot = commands.Bot(command_prefix="!")
 print("Bot lancé !")
 
@@ -22,11 +22,11 @@ async def on_ready():
 @bot.event
 async def on_member_join(member):
     await member.send("Bienvenue " + str(member.mention) + " dans " + str(member.guild) +
-                    " !!! Par contre pourquoi ce putain de MEE6 dit encore de la merde ??!")
+                    " !!! Par contre pourquoi MEE6 dit encore n'importe quoi ??!")
     if int(member.premium_since) > 0:
         await member.send("Alors comme ça on paie pour être premium ... Et en plus depuis" + str(member.premium_since))
     else:
-        await member.send("Ca va, toi t'es unn vrai, tu paies pas le premium ...")
+        await member.send("Ca va, toi t'es un vrai, tu paies pas le premium ...")
 
 
 @bot.event
@@ -105,7 +105,6 @@ async def id(ctx, membre: discord.Member):
     id = membre.id
     print(str(pseudo))
     print(str(id))
-    await ctx.send(str(pseudo) + " : " + str(id) + " is your id") # "{}" format(ctx.message.author.id)
-
+    await ctx.send(str(pseudo) + " : " + str(id) + " is your id")
 
 bot.run(token)
