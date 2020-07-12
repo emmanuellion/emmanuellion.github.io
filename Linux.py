@@ -54,7 +54,7 @@ def command():
 
             try:
                 if path == "":
-                    path = "C:\\Users\\drake\\Desktop"
+                    path = desktop_path
                     path = os.path.join(path, name_file)
                     #os.makedirs(path)
                     with open(path, "w") as f:
@@ -97,7 +97,7 @@ def command():
             # ------------------------------------------------
             try:
                 if path == "":
-                    path = "C:\\Users\\drake\\Desktop"
+                    path = desktop_path
                     path = os.path.join(path, name_folder)
                     os.makedirs(path)
                 else:
@@ -140,7 +140,7 @@ def command():
                 turn_anti_path += 1
             # ------------------------------------------------
             if path == "":
-                path = "C:\\Users\\drake\\Desktop"      #destination par défaut si aucune précisée
+                path = desktop_path      #destination par défaut si aucune précisée
             print("L'extension des fichiers est déjà renseignée ; )\n")
             name_project = str(input("Nom du projet : "))
             name_css_file = str(input("Nom du fichier css : ")) + ".css"
@@ -178,7 +178,8 @@ def command():
             #--------------------------------------------------------------------------
 
             #---------------------création dossier img-------------------------
-            path = "C:\\Users\\drake\\Desktop\\" + name_project
+            project_path = desktop_path + name_project
+            path = project_path
             name_folder = "img"
             path = os.path.join(path, name_folder)
             os.makedirs(path)
@@ -186,7 +187,7 @@ def command():
             #-------------------------------------------------------------------
 
             #---------------------création dossier js-----------------------
-            path = "C:\\Users\\drake\\Desktop\\" + name_project
+            path = project_path
             name_folder = "js"
             path = os.path.join(path, name_folder)
             os.makedirs(path)
@@ -200,7 +201,7 @@ def command():
             #-------------------------------------------------------
 
             #--------------création dossier css----------------
-            path = "C:\\Users\\drake\\Desktop\\" + name_project
+            path = project_path
             name_folder = "css"
             path = os.path.join(path, name_folder)
             os.makedirs(path)
