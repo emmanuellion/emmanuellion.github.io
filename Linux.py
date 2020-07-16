@@ -6,6 +6,12 @@ def GetDir():
     return dirname
 
 
+import sys
+from os import getcwd, chdir, mkdir
+from tkinter import *
+from tkinter import filedialog
+import shutil
+import os
 user = str(os.environ["USERNAME"])
 desktop_path = "C:\\Users\\" + user + "\\Desktop"
 turn_anti_path = 0
@@ -130,7 +136,7 @@ def command():
         # ------------------------------------------------------------------------------------
 
         #---------------------procédure créaton pack démarrage site web-----------------------------------
-        elif command == " create website":
+        elif command == "create website":
             # ------------script destination contenu-----------
             print("Choisissez un emplacement")
             if turn_anti_path == 0:
@@ -149,14 +155,16 @@ def command():
             name_js_file = str(input("Nom du fichier js : ")) + ".js"
 
             #----------------création dossier du projet--------------
-            path = os.path.join(path, name_project)
-            os.makedirs(path)
+            project_path = os.path.join(path, name_project)
+            os.makedirs(project_path)
+            print(str(project_path))
             print("Votre dossier " + name_project + "a bien été crée !")
             #-------------------------------------------------------
 
             #----------------------------------création fichier html---------------------------------------------------
             name_file = "index.html"
-            path = os.path.join(path, name_file)
+            path = os.path.join(project_path, name_file)
+            print(str(path))
             with open(path, "w") as file:
                 file.write("<!DOCTYPE html>\n")
                 file.write("<html lang='fr' style='scroll-behavior: smooth;'>\n")
@@ -180,11 +188,11 @@ def command():
             #--------------------------------------------------------------------------
 
             #---------------------création dossier img-------------------------
-            project_path = desktop_path + name_project
             path = project_path
             name_folder = "img"
             path = os.path.join(path, name_folder)
             os.makedirs(path)
+            print(str(path))
             print("Votre dossier " + name_folder + " a bien été crée !")
             #-------------------------------------------------------------------
 
@@ -193,11 +201,13 @@ def command():
             name_folder = "js"
             path = os.path.join(path, name_folder)
             os.makedirs(path)
+            print(str(path))
             print("Votre dossier " + name_folder + " a bien été crée !")
             #----------------------------------------------------------------
 
             #-------------------création fichier js-----------------
             path = os.path.join(path, name_js_file)
+            print(str(path))
             with open(path, "w") as file:
                 print("Votre fichier " + name_js_file + " a bien été crée !")
             #-------------------------------------------------------
@@ -207,11 +217,13 @@ def command():
             name_folder = "css"
             path = os.path.join(path, name_folder)
             os.makedirs(path)
+            print(str(path))
             print("Votre dossier " + name_folder + " a bien été crée !")
             #--------------------------------------------------
 
             #------------------------création fichier css---------------------------
             path = os.path.join(path, name_css_file)
+            print(str(path))
             with open(path, "w") as file:
                 file.write("@import url('https://fonts.googleapis.com/css?family=Roboto:300&display=swap');\n")
                 file.write("\n*{\n")
@@ -252,11 +264,5 @@ def reboot():
 
 
 if __name__ == '__main__':
-    import sys
-    import os
-    from os import getcwd, chdir, mkdir
-    from tkinter import *
-    from tkinter import filedialog
-    import shutil
     print('**********\nPour avoir la liste des commandes existantes faites "commandes"\n**********\n\n')
     command()
