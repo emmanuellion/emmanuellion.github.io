@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>IP Finder</title>
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<link rel="icon" type="text/css" href="logo2.png">
+	<meta charset="utf-8">
+</head>
+<body id="body">
+	<h1>Découvre ton adresse IP en cliquant sur le bouton juste en dessous !</h1>
+	<button class="button" id="button">Effectuer le calcul</button>
+	<h3 id="h3">Votre adresse IP est : <span id="span"></span></h3>
+
+	<script type="application/javascript">
+		const h3 = document.getElementById("h3");
+		const span = document.getElementById("span");
+
+	 	function getIP(json)
+	 	{
+			document.getElementById("button").addEventListener("click" , () =>{
+				var vari = json.ip;
+				const sender = vari;
+				if(sender!=undefined)
+				{
+					console.log("%cIP bien reçu !","color: green");
+					console.log("%cIP:","color:green",sender);
+					h3.style.display = "block";
+					span.innerHTML = sender;
+					//window.location.href = "index.php?var1=" + sender;
+					var xhr = new XMLHttpRequest();
+					xhr.open("POST", "index.php", true);
+					xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+					xhr.send("var1=" + encodeURI(sender));	
+				}
+				else
+				{
+					console.log("%cEchec de l'échange !","color: #F13637");
+					alert ("Il y a eu un problème lors du calcul de votre adresse IP !");
+				}
+			});	
+  		}
+	</script>
+	<script type="application/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+</body>
+</html>
+
