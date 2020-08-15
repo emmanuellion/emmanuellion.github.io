@@ -31,5 +31,9 @@ function size()
 setInterval(size,100)
 
 function sizy(){
-	alert(Ls = screen.width);
+	alert(screen.width);
+}
+
+function highty(){
+	alert(screen.height);
 }
