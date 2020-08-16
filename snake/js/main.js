@@ -5,7 +5,8 @@ const left = document.getElementsByTagName("div")[1];
 const down = document.getElementsByTagName("div")[2];
 const right = document.getElementsByTagName("div")[3];
 const ctx = canvas.getContext('2d');
-var nb_case = Math.floor(screen.width/12);
+var nb_case = Math.floor(screen.width/25);
+const difficulty = 2/10;
 canvas.width = nb_case*10;
 var w_canvas = canvas.width;
 var case_size = w_canvas/nb_case;
@@ -26,6 +27,7 @@ xB = Math.floor(Math.random() * (nb_case - 1) + 1) - 1;
 yB = Math.floor(Math.random() * (nb_case - 1) + 1) - 1;
 var start;
 var end;
+const nexus_color = "yellow";
 
 for (i = 0; i < nb_case; i++){
  	ctx.beginPath();
@@ -103,7 +105,7 @@ for (i = 0; i < nb_case; i++){
 
 for (i = 0; i < nb_case; i++){
 	for(j = 0; j < nb_case; j++){
-		if (Math.random()<0.2){
+		if (Math.random()<difficulty){
 			grid[i][j].wall = true;
 			grid[i][j].show("#000");
 		}
@@ -113,8 +115,8 @@ for (i = 0; i < nb_case; i++){
 start = grid[xA][yA];
 end = grid[xB][yB];
 console.log("x : " + end.i + "\ny : " + end.j);
-grid[xA][yA].show("green");
-grid[xB][yB].show("red");
+grid[xA][yA].show(nexus_color);
+grid[xB][yB].show(nexus_color);
 start.wall = false;
 end.wall = false;
 
@@ -145,9 +147,9 @@ function A(){
 			}
 			for (i = 0; i < path.length; i++){
 				if (i==0){
-					grid[path[i].i][path[i].j].show("red");
+					grid[path[i].i][path[i].j].show(nexus_color);
 				}else if(i == path.length-1){
-					grid[path[i].i][path[i].j].show("green");
+					grid[path[i].i][path[i].j].show(nexus_color);
 				}else{
 					grid[path[i].i][path[i].j].show("orange");
 				}
@@ -184,20 +186,20 @@ function A(){
 	}	
 	for(i = 0; i < openList.length; i++){
 		if (openList[i].i==xA && openList[i].j==yA){
-			grid[openList[i].i][openList[i].j].show("green");
+			grid[openList[i].i][openList[i].j].show(nexus_color);
 		}else if(openList[i].i==xB && openList[i].j==yB){
-			grid[openList[i].i][openList[i].j].show("red");
+			grid[openList[i].i][openList[i].j].show(nexus_color);
 		}else{
-			grid[openList[i].i][openList[i].j].show("blue");
+			grid[openList[i].i][openList[i].j].show("red");
 		}
 	}
 	for(i = 0; i < closedList.length; i++){
 		if (closedList[i].i==xA && closedList[i].j==yA){
-			grid[closedList[i].i][closedList[i].j].show("green");
+			grid[closedList[i].i][closedList[i].j].show(nexus_color);
 		}else if(closedList[i].i==xB && closedList[i].j==yB){
-			grid[closedList[i].i][closedList[i].j].show("red");
+			grid[closedList[i].i][closedList[i].j].show(nexus_color);
 		}else{
-			grid[closedList[i].i][closedList[i].j].show("grey");
+			grid[closedList[i].i][closedList[i].j].show("blue");
 		}
 	}
 }
