@@ -179,6 +179,7 @@ function A(){
 		}
 	}else{
 		console.log("Pas d'issues");
+		alert("Aucune issue existente")
 		return -1;
 	}	
 	for(i = 0; i < openList.length; i++){
