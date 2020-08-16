@@ -4,7 +4,7 @@ const left = document.getElementsByTagName("div")[1];
 const down = document.getElementsByTagName("div")[2];
 const right = document.getElementsByTagName("div")[3];
 const ctx = canvas.getContext('2d');
-var nb_case = 30;
+var nb_case = 80;
 canvas.width = nb_case*10;
 var w_canvas = canvas.width;
 var case_size = w_canvas/nb_case;
@@ -80,7 +80,7 @@ function RemoveFromArray(arr, elt){
 }
 
 function heuristic(a,b){
-	var d = Math.sqrt((b.i-a.i)*(b.i-a.i)+(b.j+a.j)*(b.j+a.j));
+	var d = Math.abs(a.i - b.i) + Math.abs(a.j - b.j);
 	return d;
 }
 
@@ -120,14 +120,19 @@ end.wall = false;
 openList.push(start);
 
 function A(){
-	if (openList.length > 0){
+	if (this.openList.length > 0){
 		var lowestIndex = 0;
-		for (i = 0; i < openList.length; i++){
-			if(openList[i].f < openList[lowestIndex].f){
+		for (i = 0; i < this.openList.length; i++){
+			if(this.openList[i].f < this.openList[lowestIndex].f){
 				lowestIndex = i;
 			}
+			if(this.openList[i].f == this.openList[lowestIndex].f){
+				if (this.openList[i].g == this.openList[lowestIndex].g){
+					lowestIndex = i;
+				}
+			}
 		}
-		var current = openList[lowestIndex];
+		var current = this.openList[lowestIndex];
 		if (current === end){
 			console.log("Finis !");
 			path = [];
@@ -149,29 +154,32 @@ function A(){
 			stop();
 			openList = 0;
 		}
-		RemoveFromArray(openList, current);
-		closedList.push(current);
+		this.RemoveFromArray(this.openList, current);
+		this.closedList.push(current);
 		var neighbors = current.neighbors;
 		for (i = 0; i < neighbors.length; i++){
 			var neighbor = neighbors[i];
 			if (!closedList.includes(neighbor) && !neighbor.wall){
-				var tempG = current.g + 1;
-				if (openList.includes(neighbor)){
-					if(tempG < neighbor.g ){
-						neighbor.g = tempG;
-					}
-				}else{
-					neighbor.g = tempG;
-					openList.push(neighbor);
+				var tempG = current.g + this.heuristic(neighbor, current);
+				if (!this.openList.includes(neighbor)){
+					this.openList.push(neighbor);
+					// if(tempG < neighbor.g ){
+					// 	neighbor.g = tempG;
+					// }
+				}else if (tempG >= neighbor.g){
+					continue
+					// neighbor.g = tempG;
+					// openList.push(neighbor);
 				}
-				neighbor.h = heuristic(neighbor,end);
+				neighbor.g = tempG;
+				neighbor.h = this.heuristic(neighbor, end);
 				neighbor.f = neighbor.g + neighbor.h;
 				neighbor.previous = current;
 			}
 		}
 	}else{
 		console.log("Pas d'issues");
-		return 0;
+		return -1;
 	}	
 	for(i = 0; i < openList.length; i++){
 		if (openList[i].i==xA && openList[i].j==yA){
@@ -196,5 +204,5 @@ function A(){
 var interval = setInterval(A,1);
 
 function stop(){
-	return 0;
+	return -1;
 }
