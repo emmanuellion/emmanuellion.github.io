@@ -1,10 +1,11 @@
 const canvas = document.querySelector("#canvas");
+const body = document.querySelector("#body");
 const up = document.getElementsByTagName("div")[0];
 const left = document.getElementsByTagName("div")[1];
 const down = document.getElementsByTagName("div")[2];
 const right = document.getElementsByTagName("div")[3];
 const ctx = canvas.getContext('2d');
-var nb_case = 80;
+var nb_case = Math.floor(screen.width/12);
 canvas.width = nb_case*10;
 var w_canvas = canvas.width;
 var case_size = w_canvas/nb_case;
@@ -151,8 +152,7 @@ function A(){
 					grid[path[i].i][path[i].j].show("orange");
 				}
 			}
-			stop();
-			openList = 0;
+			return false;
 		}
 		this.RemoveFromArray(this.openList, current);
 		this.closedList.push(current);
@@ -180,7 +180,7 @@ function A(){
 	}else{
 		console.log("Pas d'issues");
 		alert("Aucune issue existente")
-		return -1;
+		return false;
 	}	
 	for(i = 0; i < openList.length; i++){
 		if (openList[i].i==xA && openList[i].j==yA){
@@ -203,7 +203,3 @@ function A(){
 }
 
 var interval = setInterval(A,1);
-
-function stop(){
-	return -1;
-}
