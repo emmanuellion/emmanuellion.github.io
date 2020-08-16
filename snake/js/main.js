@@ -4,16 +4,19 @@ const left = document.getElementsByTagName("div")[1];
 const down = document.getElementsByTagName("div")[2];
 const right = document.getElementsByTagName("div")[3];
 const ctx = canvas.getContext('2d');
+var nb_case = 30;
+canvas.width = nb_case*10;
 var w_canvas = canvas.width;
-var nb_case = 10;
 var case_size = w_canvas/nb_case;
+canvas.height = nb_case*10;
 var grid = new Array (nb_case);
 var i;
 var j;
-var xA = 0;
-var yA = 0;
-var xB = 5;
-var yB = 7;
+var xA;
+var yA;
+var xB;
+var yB; 
+var path;
 
 for (i = 0; i < nb_case; i++){
  	ctx.beginPath();
@@ -30,16 +33,47 @@ for (i = 0; i < nb_case; i++){
 }
 
 function Cells(i,j){
-	this.x = i;
-	this.y = j;
+	this.i = i;
+	this.j = j;
 	this.show = function (color){
 		ctx.fillStyle = color;
-		ctx.fillRect(this.x*case_size,this.y*case_size,case_size,case_size);
+		ctx.fillRect(this.i*case_size,this.j*case_size,case_size,case_size);
 	}
 	this.wall = false;
 	this.f = 0;
 	this.g = 0;
 	this.h = 0;
+	this.neighbors = [];
+	this.previous = undefined;
+	this.addNeighbors = function(grid) {
+		var i = this.i;
+		var j = this.j;
+		if(i < nb_case - 1){
+			this.neighbors.push(grid[i+1][j]);
+		}
+		if (i > 0){
+			this.neighbors.push(grid[i-1][j]);
+		}
+		if (j < nb_case - 1){
+			this.neighbors.push(grid[i][j+1]);
+		}
+		if (j > 0){
+			this.neighbors.push(grid[i][j-1]);
+		}
+	}
+}
+
+function RemoveFromArray(arr, elt){
+	for (var i = arr.length - 1; i >= 0; i--) {
+		if (arr[i] == elt){
+			arr.splice(i, 1);
+		}
+	}
+}
+
+function heuristic(a,b){
+	var d = Math.sqrt((b.i-a.i)*(b.i-a.i)+(b.j+a.j)*(b.j+a.j));
+	return d;
 }
 
 for (i = 0; i < nb_case; i++){
@@ -49,7 +83,12 @@ for (i = 0; i < nb_case; i++){
 for (i = 0; i < nb_case; i++){
 	for(j = 0; j < nb_case; j++){
 		grid[i][j] = new Cells(i,j);
-		// grid[i][j].show("#fff");
+	}
+}
+
+for (i = 0; i < nb_case; i++){
+	for(j = 0; j < nb_case; j++){
+		grid[i][j].addNeighbors(grid);
 	}
 }
 
@@ -62,101 +101,70 @@ for (i = 0; i < nb_case; i++){
 	}
 }
 
-function touche(e){
-	var touche = event.keyCode;
-	if (touche == 90){
-		up();
-	}
-	else if (touche == 81){
-		left();
-	}
-	else if (touche == 83){
-		down();
-	}
-	else if (touche == 68){
-		right();
-	}
-}
+var closedList = [];
+var openList = [];
 
-function noeud(x,y,cout,heuristique){
-	var x = x;
-	var y = y;
-	var cout = cout;
-	var heuristique = heuristique;
-}
-
-var heuristique_depart = 0;
-var depart = new noeud(xA,yA,0,heuristique_depart);
+xA = Math.floor(Math.random() * (nb_case - 0) + 0) - 1;
+yA = Math.floor(Math.random() * (nb_case - 0) + 0) - 1;
+xB = Math.floor(Math.random() * (nb_case - 0) + 0) - 1;
+yB = Math.floor(Math.random() * (nb_case - 0) + 0) - 1;
+var start = grid[xA][yA];
 grid[xA][yA].show("green");
-
+var end = grid[xB][yB];
 grid[xB][yB].show("red");
-var heuristique_objectif = Math.sqrt((xB-xA)*(xB-xA)+(yB+yA)*(yB+yA));
-var objectif = new noeud(xB,yB,0,heuristique_objectif);
 
-var closedList = new Array();
-var openList = grid;
+console.log("x : " + end.i + "\ny : " + end.j);
+openList.push(start);
 
-var u = new Object();
-u.x = 0;
-u.y = 0;
-u.cout = 0;
-u.heuristique;
-var v = new Object();
-v.x = 0;
-v.y = 0;
-v.cout = 0;
-v.heuristique;
-var end = new Object();
-end.pos = [5][7];
-var z;
-
-function A(grid,depart,objectif){
-	console.log(z);
-	closedList = new Array();
-	openList = new Array();
-	openList.push(depart);
-	console.log(openList);
-	if (openList.length > null){
-		u = openList.pop();
-		if (u.x == xB && u.y == yB){
-			alert("!");
-			console.log("!");
-			for (i = 0; i < closedList.length; i++){
-				grid[u.x][u.y].show("green");
-			}			
-		}
-		console.log(u);
-		openList.pop();
-		closedList.push(u);
-		for (i = 0; i < nb_case; i++){
-			for(j = 0; j < nb_case; j++){
-				v.x = i;
-				v.y = j;
-				if (grid[i][j].wall = false || 	closedList.includes(v) || (openList.includes(v) && openList.values(v.cout) < u.cout)){
-  					v.cout = u.cout +1;
-  				 	v.heuristique = v.cout + Math.sqrt((xB-v.x)*(xB-v.x)+(yB+v.y)*(yB+v.y));
-  				 	openList.enqueue(v);
-  				 	console.log(v);
-  				}
+function A(){
+	if (openList.length > 0){
+		var lowestIndex = 0;
+		for (var i = 0; i < openList.length; i++){
+			if(openList[i].f < openList[lowestIndex].f){
+				lowestIndex = i;
 			}
-		}	
-		closedList.push(u);
-		console.log(u);
-	}
-	// alert("error");
-	z++;
+		}
+		var current = openList[lowestIndex];
+		if (current === end){
+			console.log("Finis !");
+			console.log(current);
+			console.log(end);
+			path = [];
+			var temp = current;
+			path.push(temp);
+			while(temp.previous){
+				path.push(temp.previous);
+				temp = temp.previous;
+			}
+			for (var i = 0; i < path.length; i++){
+				grid[path[i].i][path[i].j].show("orange");
+			}
+			return;
+		}
+		RemoveFromArray(openList, current);
+		closedList.push(current);
+		var neighbors = current.neighbors;
+		for (var i = 0; i < neighbors.length; i++){
+			var neighbor = neighbors[i];
+			if (!closedList.includes(neighbor)){
+				var tempG = current.g + 1;
+				grid[current.i][current.j].show("blue");
+				if (openList.includes(neighbor) || neighbor.wall == true){
+					if(tempG < neighbor.g){
+						neighbor.g = tempG;
+					}
+				}else{
+					neighbor.g = tempG;
+					openList.push(neighbor);
+				}
+				neighbor.h = heuristic(neighbor,end);
+				neighbor.f = neighbor.g + neighbor.h;
+				neighbor.previous = current;
+			}
+		}
+	}else{
+	
+	}	
 }
 
-function compare2noeuds(heuristique_depart,heuristique_objectif){
-	if (heuristique_depart<heuristique_objectif){
-		return 1;
-	}
-	else if (heuristique_depart==heuristique_objectif){
-		return 0;
-	}
-	else{
-		return -1;
-	}
-}
-
-var interval = setInterval(A(grid,depart,objectif),100);
+var interval = setInterval(A,100);
