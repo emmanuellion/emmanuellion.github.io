@@ -2,7 +2,11 @@ const canvas = document.querySelector("#canvas");
 const ctx = canvas.getContext('2d');
 
 //Part of : how many cases, what's the size ...
-var nb_case = Math.floor(screen.width/20);//Math.floor(screen.width/25);
+var nb_case = Math.floor(screen.width/10);	//Math.floor(screen.width/25);
+console.log("%c Number of case for a line : " , "color: red");
+console.log(nb_case);
+console.log("%c Number of in the entire square : " , "color: red");
+console.log(nb_case**2);
 const difficulty = 2/10;
 canvas.width = nb_case*10;
 var w_canvas = canvas.width;
@@ -54,7 +58,7 @@ function Cells(i,j){
 	this.f = 0;
 	this.g = 0;
 	this.h = 0;
-	this.show = function (color){
+	this.show = function(color){
 		ctx.fillStyle = color;
 		ctx.fillRect(this.i*case_size,this.j*case_size,case_size,case_size);
 	}
@@ -76,21 +80,6 @@ function Cells(i,j){
 			this.neighbors.push(grid[i][j-1]);
 		}
 	}
-}
-
-//Function to remove an element from an array
-function RemoveFromArray(arr, elt){
-	for (i = arr.length - 1; i >= 0; i--) {
-		if (arr[i] == elt){
-			arr.splice(i, 1);
-		}
-	}
-}
-
-//Function to calculate the actual heuristic of the current cell compared to point B
-function heuristic(a,b){
-	var d = Math.abs(a.i - b.i) + Math.abs(a.j - b.j);
-	return d;
 }
 
 //Initialisation of all the cell
@@ -121,8 +110,15 @@ for (i = 0; i < nb_case; i++){
 
 //Initialising the two points
 start = grid[xA][yA];
+console.group("%c Coordinates of the start" , "color: yellow");
+console.log("x : " + start.i);
+console.log("y : " + start.j);
+console.groupEnd();
 end = grid[xB][yB];
-console.log("x : " + end.i + "\ny : " + end.j);
+console.group("%c Coordinates of the end" , "color: yellow");
+console.log("x : " + end.i);
+console.log("y : " + end.j);
+console.groupEnd();
 grid[xA][yA].show(nexus_color);
 grid[xB][yB].show(nexus_color);
 start.wall = false;
@@ -169,6 +165,8 @@ function A(){
 					grid[path[i].i][path[i].j].show("orange");
 				}
 			}
+			console.log("%c Path length : " , "color: orange");
+			console.log(path.length);
 			return -1, false;
 		}
 
@@ -224,6 +222,29 @@ function A(){
 			grid[closedList[i].i][closedList[i].j].show("blue");
 		}
 	}
+}
+
+//Function to calculate the actual heuristic of the current cell compared to point B
+function heuristic(a,b){
+	var d = Math.abs(a.i - b.i) + Math.abs(a.j - b.j);
+	return d*2;
+}
+
+//Function to remove an element from an array
+function RemoveFromArray(arr, elt){
+	for (i = arr.length - 1; i >= 0; i--) {
+		if (arr[i] == elt){
+			arr.splice(i, 1);
+		}
+	}
+}
+
+function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
 }
 
 var interval = setInterval(A,1);
