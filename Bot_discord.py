@@ -139,7 +139,7 @@ async def ping(ctx):
     message = await ctx.send("Pong!")
     ping = datetime.datetime.now().timestamp()*1000 - now
     await message.edit(content=f"Ping!  `{int(ping)}ms`")
-    print("ping = " + str(ping))
+    print("Ping = " + str(ping))
 
 
 @bot.command(pass_context=True)

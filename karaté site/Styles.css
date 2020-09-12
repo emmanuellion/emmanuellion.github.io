@@ -338,5 +338,12 @@ header.active .title-header{
 	.medium-map{
 		display: none;
 	}
+
+	footer{
+		text-align: center;
+		background-color: black;
+		color: white;
+		text-transform: uppercase;
+	}
 } 
 

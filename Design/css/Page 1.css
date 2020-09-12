@@ -1,0 +1,185 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+ul{
+	list-style: none;
+}
+
+button:hover{
+	cursor: pointer;
+}
+
+body{
+	background-color: #151A22;
+}
+
+.art{
+	background-color: #1A2029;
+	color: white;
+}
+
+#add{
+	border: none;
+	background-color: transparent;
+	color: #474E9C;
+}
+
+#get_out{
+	margin-right: 12px;
+}
+
+.top{
+	width: 25%;
+	position: absolute;
+	left: 24%;
+	top: 20%;
+	border-radius: 10px;
+}
+
+.header_top{
+	display: flex;
+	align-items: center;
+	height: 35px;
+	margin: 10px 20px;
+}
+
+.top_left{
+	width: 50%;
+}
+
+.top_right{
+	width: 50%;
+	text-align: right;
+}
+
+.top_right button{
+	background-color: #151A22;
+	border: none;
+	border-radius: 5px;
+}
+
+.top_right button i{
+	color: #6A5F66;
+	padding: 10px;
+}
+
+.top_main{
+	margin-left: 20px;
+}
+
+.top_main ul{
+	display: flex;
+}
+
+.top_main ul li{
+	margin-right: 5px;
+}
+
+.bgshadow{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	width: 50px;
+	height: 50px;
+	border: none;
+	border-radius: 50px;
+	background-color: #151A22;
+}
+
+.bgcircle{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	width: 40px;
+	height: 40px;
+	border: none;
+	border-radius: 50px;
+	transform: translate(5px, -45px);
+	color: white;
+}
+
+.circle1{
+	background-color: #A058DF;
+}
+
+.circle2{
+	background-color: #5A71DF;
+}
+
+.circle3{
+	background-color: #C97C4C;
+}
+
+.circle4{
+	background-color: #DF5889;
+}
+
+.top_add{
+	margin-left: 20px;
+	margin-bottom: 20px;
+}
+
+#nowhere{
+	position: absolute;
+	top: 33.3%;
+	left: 52%;
+	background-color: #6D75FF;
+	padding: 15px 10px;
+	border: none;
+	border-radius: 3px;
+}
+
+#nowhere a{
+	font-size: 12px;
+	text-decoration: none;
+	color: white;
+}
+.bottom{
+	width: 13%;
+	height: 29%;
+	position: absolute;
+	left: 42%;
+	top: 47%;
+	border-radius: 10px;
+}
+
+.bottom h4{
+	margin: 15px 20px;
+}
+
+.bottom ul{
+	margin-left: 20px;
+}
+
+.bottom ul li{
+	font-size: 12px;
+	margin-bottom: 15px;
+}
+
+.circle{
+	width: 12px;
+	height: 12px;
+	border: none;
+	border-radius: 50px;
+}
+
+.bottom_add{
+	margin-top: 40px;
+	margin-left: 20px;
+}
+#line{
+	top: 0;
+	left: 31%;
+	width: 4px;
+	height: 85%;
+	position: absolute;
+	background-color: #212641;
+}

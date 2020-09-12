@@ -1,13 +1,18 @@
-const canvas = document.querySelector("#canvas");
+ const canvas = document.querySelector("#canvas");
 const ctx = canvas.getContext('2d');
 
 //Part of : how many cases, what's the size ...
-var nb_case = Math.floor(screen.width/20);//Math.floor(screen.width/25);
+// const screen_w = screen.width;
+// canvas.width = screen_w;
+//var w_canvas = canvas.width;
+// var nb_case = Math.floor(Math.random() * 136);//Math.floor(screen.width/25);
 const difficulty = 2/10;
-canvas.width = nb_case*10;
-var w_canvas = canvas.width;
-var case_size = w_canvas/nb_case;
-canvas.height = nb_case*10;
+//var case_size = 10000000/difficulty;
+// canvas.height = nb_case*10;
+const nb_case = 250;
+case_size = 10;
+canvas.width = nb_case*case_size;
+canvas.height = nb_case*case_size;
 
 //Part for all of the variable that is used
 var grid = new Array (nb_case);
@@ -17,7 +22,6 @@ var xA;
 var yA;
 var xB;
 var yB; 
-var path;
 var closedList = [];	//closedList gonna contain all the cell that were been visited
 var openList = [];		//openList gonna contain all the neighbors for the last cell visited
 
@@ -35,13 +39,13 @@ var path = [];
 for (i = 0; i < nb_case; i++){
  	ctx.beginPath();
  	ctx.moveTo(0,i*case_size);
- 	ctx.lineTo(w_canvas,i*case_size);
+ 	ctx.lineTo(canvas.width,i*case_size);
  	ctx.stroke();
  	ctx.closePath();
 /*-------------------------------*/
  	ctx.beginPath();
  	ctx.moveTo(i*case_size,0);
- 	ctx.lineTo(i*case_size,w_canvas);
+ 	ctx.lineTo(i*case_size,canvas.width);
  	ctx.stroke();
  	ctx.closePath();
 }
@@ -130,7 +134,7 @@ end.wall = false;
 
 openList.push(start);
 
-
+var zetta = 0;
 //Principal function
 function A(){
 	if (openList.length > 0){
@@ -158,19 +162,26 @@ function A(){
 				path.push(temp.previous);
 				temp = temp.previous;
 			}
-
+			
 			//Display of the good path with the orange color for each cell in the good path
-			for (i = 0; i < path.length; i++){
-				if (i==0){
-					grid[path[i].i][path[i].j].show(nexus_color);
-				}else if(i == path.length-1){
-					grid[path[i].i][path[i].j].show(nexus_color);
-				}else{
-					grid[path[i].i][path[i].j].show("orange");
+			if (zetta < 1){
+				for (i = 0; i < path.length; i++){
+					if (i==0){
+						grid[path[i].i][path[i].j].show(nexus_color);
+					}else if(i == path.length-1){
+						grid[path[i].i][path[i].j].show(nexus_color);
+					}else{
+						grid[path[i].i][path[i].j].show("orange");
+					}
+					if(zetta <= path.length){
+						console.log("x : " + path[i].i + " y : " + path[i].j);
+					}
 				}
+				zetta += 1;
 			}
-			return -1, false;
+			return -1;
 		}
+
 
 		//We actualise the list
 		RemoveFromArray(this.openList, current);
@@ -191,8 +202,8 @@ function A(){
 				}else if (tempG >= neighbor.g){
 					continue
 				}
-				neighbor.g = tempG;											//The cost of the cell increased
-				neighbor.h = heuristic(neighbor, end); //Vector of the distance (A <-> B)
+				neighbor.g = tempG;						//The cost of the cell increased
+				neighbor.h = heuristic(neighbor, end);  //Vector of the distance (A <-> B)
 				neighbor.f = neighbor.g + neighbor.h;	//Adjust the heuristic
 				neighbor.previous = current;
 			}
