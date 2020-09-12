@@ -1,15 +1,8 @@
- const canvas = document.querySelector("#canvas");
+const canvas = document.querySelector("#canvas");
 const ctx = canvas.getContext('2d');
 
 //Part of : how many cases, what's the size ...
-// const screen_w = screen.width;
-// canvas.width = screen_w;
-//var w_canvas = canvas.width;
-// var nb_case = Math.floor(Math.random() * 136);//Math.floor(screen.width/25);
-const difficulty = 2/10;
-//var case_size = 10000000/difficulty;
-// canvas.height = nb_case*10;
-const nb_case = 250;
+const nb_case = 100;
 case_size = 10;
 canvas.width = nb_case*case_size;
 canvas.height = nb_case*case_size;
@@ -30,27 +23,29 @@ xA = Math.floor(Math.random() * (nb_case - 1) + 1) - 1;
 yA = Math.floor(Math.random() * (nb_case - 1) + 1) - 1;
 xB = Math.floor(Math.random() * (nb_case - 1) + 1) - 1;
 yB = Math.floor(Math.random() * (nb_case - 1) + 1) - 1;
+
 var start;
 var end;
-const nexus_color = "yellow"; //Color of the two points
+const nexus_color = "white"; //Color of the two points A and B
 var path = [];
+const difficulty = 2/10;
 
 //Creation of the grid
-for (i = 0; i < nb_case; i++){
- 	ctx.beginPath();
- 	ctx.moveTo(0,i*case_size);
- 	ctx.lineTo(canvas.width,i*case_size);
- 	ctx.stroke();
- 	ctx.closePath();
-/*-------------------------------*/
- 	ctx.beginPath();
- 	ctx.moveTo(i*case_size,0);
- 	ctx.lineTo(i*case_size,canvas.width);
- 	ctx.stroke();
- 	ctx.closePath();
+for(i = 0; i <= nb_case; i++){
+	ctx.beginPath();
+	ctx.moveTo(0,i*case_size);
+	ctx.lineTo(canvas.width,i*case_size);
+	ctx.stroke();
+	ctx.closePath();
+
+	ctx.beginPath();
+	ctx.moveTo(i*case_size,0);
+	ctx.lineTo(i*case_size,canvas.width);
+	ctx.stroke();
+	ctx.closePath();
 }
 
-//Function for each cell
+//Function to create a "body" for each cells
 function Cells(i,j){
 	this.i = i;
 	this.j = j;
@@ -126,26 +121,25 @@ for (i = 0; i < nb_case; i++){
 //Initialising the two points
 start = grid[xA][yA];
 end = grid[xB][yB];
-console.log("x : " + end.i + "\ny : " + end.j);
 grid[xA][yA].show(nexus_color);
 grid[xB][yB].show(nexus_color);
 start.wall = false;
 end.wall = false;
 
+var zetta = 0;
 openList.push(start);
 
-var zetta = 0;
 //Principal function
 function A(){
 	if (openList.length > 0){
 		var lowestIndex = 0;
 
 		//Searching of the cell with the littler index of path to go to the point 2
-		for (i = 0; i < openList.length; i++){
-			if(openList[i].f < openList[lowestIndex].f){
+		for(i = 0; i < openList.length; i++){
+			if (openList[i].f < openList[lowestIndex].f){
 				lowestIndex = i;
 			}
-			if(openList[i].f == openList[lowestIndex].f){
+			if (openList[i].f == openList[lowestIndex].f){
 				if (openList[i].g == openList[lowestIndex].g){
 					lowestIndex = i;
 				}
@@ -155,24 +149,18 @@ function A(){
 
 		//Try if the current cell is the point 2
 		if (current === end){
-			console.log("Finis !");
+			console.log("Terminé !");
 			var temp = current;
 			path.push(temp);
 			while(temp.previous){
 				path.push(temp.previous);
 				temp = temp.previous;
 			}
-			
+
 			//Display of the good path with the orange color for each cell in the good path
 			if (zetta < 1){
-				for (i = 0; i < path.length; i++){
-					if (i==0){
-						grid[path[i].i][path[i].j].show(nexus_color);
-					}else if(i == path.length-1){
-						grid[path[i].i][path[i].j].show(nexus_color);
-					}else{
-						grid[path[i].i][path[i].j].show("orange");
-					}
+				for(i = 0; i < path.length; i++){
+					grid[path[i].i][path[i].j].show("blue");
 					if(zetta <= path.length){
 						console.log("x : " + path[i].i + " y : " + path[i].j);
 					}
@@ -182,19 +170,18 @@ function A(){
 			return -1;
 		}
 
-
 		//We actualise the list
 		RemoveFromArray(this.openList, current);
 		closedList.push(current);
 
 		//Testing all of the neighbors of the current cell (max 3)
 		var neighbors = current.neighbors;
-		for (i = 0; i < neighbors.length; i++){
+		for(i = 0; i < neighbors.length; i++){
 			var neighbor = neighbors[i];
 
 			//If he's not a wall and he's not yet visited
 			if (!closedList.includes(neighbor) && !neighbor.wall){
-				var tempG = current.g + heuristic(neighbor, current);	//Potential futur cost of the cell (increase by 1)
+				var tempG =  current.g + heuristic(neighbor, current);	//Potential futur cost of the cell (increase by 1)
 				
 				//If the neighbor is unknow of the list... We add it
 				if (!openList.includes(neighbor)){
@@ -209,32 +196,20 @@ function A(){
 			}
 		}
 	}else{
-		console.log("Pas d'issue");
-		alert("Aucune issue existante")
-		return -1, false;
-	}	
+		console.log("Pas d'issue !");
+		alert("Aucune issue existante !");
+		return -1;
+	}
 
 	//Display all the neighbors cells
 	for(i = 0; i < openList.length; i++){
-		if (openList[i].i==xA && openList[i].j==yA){
-			grid[openList[i].i][openList[i].j].show(nexus_color);
-		}else if(openList[i].i==xB && openList[i].j==yB){
-			grid[openList[i].i][openList[i].j].show(nexus_color);
-		}else{
-			grid[openList[i].i][openList[i].j].show("red");
-		}
+		grid[openList[i].i][openList[i].j].show("purple");
 	}
 
 	//Display all the visited cells
 	for(i = 0; i < closedList.length; i++){
-		if (closedList[i].i==xA && closedList[i].j==yA){
-			grid[closedList[i].i][closedList[i].j].show(nexus_color);
-		}else if(closedList[i].i==xB && closedList[i].j==yB){
-			grid[closedList[i].i][closedList[i].j].show(nexus_color);
-		}else{
-			grid[closedList[i].i][closedList[i].j].show("blue");
-		}
+		grid[closedList[i].i][closedList[i].j].show("yellow");
 	}
 }
 
-var interval = setInterval(A,1);
+var interval = setInterval(A,0);
