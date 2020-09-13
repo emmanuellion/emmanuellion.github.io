@@ -35,6 +35,7 @@ body{
 }
 
 .top{
+	min-width: 237px;
 	width: 25%;
 	position: absolute;
 	left: 24%;
@@ -129,7 +130,7 @@ body{
 
 #nowhere{
 	position: absolute;
-	top: 33.3%;
+	top: 39%;
 	left: 52%;
 	background-color: #6D75FF;
 	padding: 15px 10px;
@@ -143,11 +144,12 @@ body{
 	color: white;
 }
 .bottom{
+	min-width: 151px;
 	width: 13%;
 	height: 29%;
 	position: absolute;
 	left: 42%;
-	top: 47%;
+	top: 49%;
 	border-radius: 10px;
 }
 

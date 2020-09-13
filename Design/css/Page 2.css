@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+button:hover{
+	cursor: pointer;
+}
+
+body{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	background-color: #FAF2EA;
+}
+
+.section{
+	width: 30%;
+	height: 550px;
+	margin-top: 91px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	background-color: #111317;
+	color: #9195A0;
+	border-radius: 3px;
+}
+
+.title{
+	margin-top: 25px;
+	font-size: 24px;
+}
+
+.form{
+	width: 80%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	margin-top: 25px;
+}
+
+.input{
+	width: 100%;
+	font-size: 15px;
+	background-color: transparent;
+	border: none;
+	margin-top: 15px;
+	color: #9195A0;
+	padding: 7px;
+	border-bottom: 1px solid #7C848C;
+}
+
+.input:hover{
+	border-bottom: 1px solid #DF9215;
+}
+
+.verif{
+	width: 100%;
+	margin-top: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.checkbox{
+	display: flex;
+	justify-content: center;
+}
+
+.checkbox .in_check{
+	background-color: transparent;
+	padding: 9px;
+	border: 1px solid #9195A0;
+	border-radius: 3px;
+	margin-right: 5px;
+}
+
+.verif a{
+	color: #DF9215;
+	text-decoration: none;
+}
+
+.rules{
+	margin-top: 30px;
+	width: 60%;
+	font-size: 12px;
+	text-align: center;
+}
+
+.sign_in{
+	width: 80%;
+	font-size: 19px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-top: 10px;
+	background-color: #DF9215;
+	border: 1px solid #DF9215;
+	border-radius: 3px;
+}
+
+.good_transition{
+	margin-top: 70px;
+	color: #7C848C;
+}
+
+hr{
+	border: 0.1px solid #7C848C;
+	width: 100px;
+}
+
+.first_hr{
+	transform: translate(-105px, 10px);
+}
+
+.second_hr{
+	transform: translate(160px, -10px);
+}
+
+.create{
+	width: 80%;
+	font-size: 19px;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	margin-top: 20px;
+	background-color: #AAA9A7;
+	border: 1px solid #AAA9A7;
+	border-radius: 3px;
+}
