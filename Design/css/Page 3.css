@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:200&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+button:hover{
+	cursor: pointer;
+}
+
+body{
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: #606265;
+}
+
+.main{
+	width: 43%;
+	background-color: #EBEBEB;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	text-align: center;
+	box-shadow: 0px 0px 30px #0B0D0D;
+}
+
+.main .cls{
+	background-color: transparent;
+	border: none;
+	margin: 25px 25px 0px 0px;
+	transform: translateX(280px);
+}
+
+.main .cls i{
+	transform: rotateZ(45deg);
+}
+
+.main h2{
+	margin-top: 20px;
+}
+
+.para{
+	margin-top: 10px;
+	font-size: 85%;
+}
+
+.share{
+	margin-top: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.share button{
+	padding: 10px;
+	border: none;
+	border-radius: 3px;
+	color: white;
+	margin-right: 15px;
+	width: 105px;
+}
+
+.fb{
+	background-color: #405896;
+}
+
+.Tw{
+	background-color: #1FA2F2;
+}
+
+.Rdt{
+	background-color: black;
+}
+
+.share button i{
+	margin-right: 7px;
+}
+
+
+.shared{
+	margin-top: 25px;
+	font-size: 97%;
+}
+
+.close{
+	margin-top: 50px;
+	margin-bottom: 20px;
+	border: none;
+	background-color: transparent;
+	color: #D97E55;
+	border-collapse: collapse;
+	outline: none;
+}
