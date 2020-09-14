@@ -15,6 +15,10 @@ button:hover{
 	cursor: pointer;
 }
 
+a{
+	text-decoration: none;
+}
+
 body{
 	background-color: #AF2830;
 }
@@ -61,20 +65,27 @@ li{
 
 .start{
 	background-color: transparent;
-	color: #AF2830;
+
 	border: 1px solid #AF2830;
 	border-radius: 3px;
 	padding: 10px 15px;
 	margin-top: 40px;
 }
 
+.start a{
+	color: #AF2830;	
+}
+
 .try{
 	background-color: #AF2830;
-	color: white;
 	border: 1px solid #AF2830;
 	border-radius: 3px;
 	padding: 10px 15px;
 	margin-top: 40px;
+}
+
+.try a{
+	color: white;
 }
 
 .middle{
@@ -83,7 +94,7 @@ li{
 	background-color: grey;
 	height: 0.1px;
 	transform: rotateZ(90deg);
-	left: 37%;
+	left: 28%;
 }
 
 .right{
@@ -94,10 +105,10 @@ li{
 
 .shadow{
 	position: absolute;
-	width: 1020px;
+	width: 1050px;
 	height: 100px;
 	top: 75%;
-	left: 10%;
+	left: 15%;
 	background-color: #9F1D25;
 	border-radius: 49%;
 }

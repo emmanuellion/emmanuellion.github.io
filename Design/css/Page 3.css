@@ -38,6 +38,7 @@ body{
 
 .main .cls i{
 	transform: rotateZ(45deg);
+	color: #000;
 }
 
 .main h2{
@@ -92,7 +93,10 @@ body{
 	margin-bottom: 20px;
 	border: none;
 	background-color: transparent;
-	color: #D97E55;
 	border-collapse: collapse;
 	outline: none;
+}
+
+.close a{
+	color: #D97E55;
 }
