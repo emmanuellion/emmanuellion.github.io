@@ -1,0 +1,108 @@
+*{
+	font-family: Tahoma, Geneva, sans-serif;
+}
+
+body{
+	background-image: url("../img/background.jpg");
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+	margin: 0px;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+#page{
+	width: 800px;
+	margin: auto;
+	flex-grow: 1;
+
+}
+
+#header{
+	height: 120px;
+}
+
+#header h1{
+	font-size: 300%;
+	color: white;
+	margin-bottom: 0px;
+}
+
+#header h2{
+	font-size: 120%;
+	color: white;
+	margin-top: 0px;
+}
+
+#containment{
+	display: flex;
+}
+
+#navigator{
+	width: 140px;
+}
+
+#menu{
+	list-style: none;
+	display: flex;
+	flex-direction: column;
+}
+
+#menu li{
+	background-color: rgba(255, 255, 255, 0.5);
+	border-radius: 0px 5px 5px 0px;
+	margin-bottom: 5px;
+	width: 100px;
+	text-align: center;
+}
+
+#menu a{
+	text-decoration: none;
+	color: white;
+}
+
+#menu a:hover{
+	color: black;
+}
+
+#content{
+	margin-left: 170px;
+}
+
+.article{
+	color: black;
+	background-color: rgba(255, 255, 255, 0.5);
+	margin-bottom: 1em;
+	padding: 1em;
+	border-radius: 10px 10px 10px 10px;
+}
+
+img{
+	height: 150px;
+}
+img.gauche{
+	float: left;
+	margin: 0px 10px 10px 0px;
+}
+
+img.droite{
+	float: right;
+	margin: 0px 0px 10px 10px;
+}
+
+.deux_colonnes{
+	column-count: 2;
+	column-gap: 1em;
+}
+
+#footer{
+	color: white;
+	font-size: 0.8em;
+	text-align: center;
+	background-color: rgba(0, 0, 0, 0.5);
+	margin-top: 50px;
+	padding: 20px;
+	clear: both;
+}

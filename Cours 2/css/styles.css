@@ -1,0 +1,87 @@
+/*Feuille de style du CV de Emmanuel Lion*/
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+*{
+	font-family: 'Roboto', sans-serif;
+}
+
+body{
+	width: 70%;
+	margin-left: 15%;
+	background: linear-gradient(red, blue);
+	/*background-image: url("../img/gradient.png");
+	background-repeat: repeat-x;
+	background-attachment: fixed;*/
+}
+
+.main_title{
+	font-size: 300%;
+	border-bottom: 3px solid #f00;
+	width: 400px;
+	margin: auto;
+	text-align: center;
+	color: #000FA0;
+}
+
+h2{
+	text-align: right;
+	font-size: 170%;
+	font-weight: bold;
+	font-style: italic;
+	color: #0000ff;
+}
+
+.motivation{
+	width: 300px;
+	border: 10px;
+	padding: 30px;
+	background-color: grey;
+	text-indent: 30px;
+	margin: 0 auto;
+}
+
+.first_letter{
+	color: #f00;
+	font-size: 200%;
+}
+
+ol li{
+	list-style: square;
+}
+
+a, a:visited{
+	color: #8e849d;
+	font-weight: bold;
+	text-decoration: none;
+}
+
+a:hover{
+	text-decoration: underline black;
+}
+
+.planning{
+	background-color: #8e849d;
+}
+
+.planning, .planning tr, .planning td{
+	border: 1px solid #000;
+	border-collapse: collapse;
+}
+
+.table_title{
+	font-weight: bold;
+	text-align: center;
+}
+
+.semestre{
+	background-color: green;
+	color: white;
+	font-size: 120%;
+	font-weight: bold;
+	text-align: center;
+}
+
+.UE{
+	font-weight: bold;
+	background-color: yellow;
+}
