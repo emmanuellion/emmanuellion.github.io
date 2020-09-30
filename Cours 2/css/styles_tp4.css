@@ -42,6 +42,8 @@ header h1{
 ul{
 	list-style: none;
 	display: flex;
+	margin: 0;
+	padding: 0;
 }
 
 ul li{
@@ -75,12 +77,6 @@ li:hover i{
 	transform: rotateZ(90deg);
 }
 
-ul{
-	margin: 0;
-	padding: 0;
-	list-style: none;
-}
-
 li ul{
 	display: none;
 }
@@ -94,8 +90,6 @@ li ul li{
 	display: block;
 	background-color: lightgrey;
 }
-
-/**/
 
 #sidebar{
 	float: right;
