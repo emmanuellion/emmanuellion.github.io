@@ -47,21 +47,55 @@ ul{
 ul li{
 	background-color: yellow;
 	margin: 5px 0.5em;
-	width: 100px;
+	width: 110px;
+	padding: 3px 4px 3px 4px;
 	text-align: center;
 }
 
 ul li:hover{
 	background-color: #000;
+	color: #fff;
 }
 
 ul li a{
+	width: 100%;
 	color: #000;
 }
 
-ul li a:hover{
+ul li:hover a{
 	color: #fff;
 }
+
+li i{
+	transition: transform 0.3s;
+}
+
+li:hover i{
+	transition: transform 0.3s;
+	transform: rotateZ(90deg);
+}
+
+ul{
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+li ul{
+	display: none;
+}
+
+li ul li{
+	background-color: transparent;
+}
+
+.list:hover ul{
+	position: absolute;
+	display: block;
+	background-color: lightgrey;
+}
+
+/**/
 
 #sidebar{
 	float: right;
@@ -198,6 +232,11 @@ article aside{
 
 	#banniere h1{
 		font-size: 200%;
+	}
+
+	li:hover ul{
+		display: flex;
+		flex-direction: row;
 	}
 
 	section{

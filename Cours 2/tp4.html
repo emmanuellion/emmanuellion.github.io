@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<htmll lang="fr">
+<html lang="fr">
 	<head>
 		<link rel="stylesheet" type="text/css" href="css/styles_tp4.css">
 		<link rel="icon" type="image" href="img/movie.png">
@@ -12,11 +12,25 @@
 			<header id="banniere">
 				<h1>Mon petit cinéma</h1>
 			</header>
-			<nav id="menu">
-				<ul>
+			<nav id="nav">
+				<ul id="menu">
 					<li><a href="">Accueil</a></li>
-					<li><a href="">Films</a></li>
-					<li><a href="">réalisateurs</a></li>
+					<li class="list">
+						Films&ensp;<i class="fa fa-angle-right" aria-hidden="true"></i>
+						<ul>
+							<li><a href="">Action</a></li>
+							<li><a href="">Comédie</a></li>
+							<li><a href="">Policier</a></li>
+							<li><a href="">Thriller</a></li>
+						</ul>
+					</li>
+					<li class="list">
+						Réalisateurs&ensp;<i class="fa fa-angle-right" aria-hidden="true"></i>
+						<ul>
+							<li><a href="">France</a></li>
+							<li><a href="">Reste du monde</a></li>
+						</ul>
+					</li>
 					<li><a href="">Forum</a></li>
 					<li><a href="">Contact</a></li>
 				</ul>
@@ -46,6 +60,7 @@
 				</aside>
 			<footer>Matthew McConaughey, Anne Hathaway, Michael Caine</footer>
 		</article>
+		<footer id="footer"></footer>
 	</section>
 	<aside id="sidebar" class="petit_ecran">
 		<h2>L'auteur</h2>
@@ -54,8 +69,8 @@
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras neque elit, congue in bibendum at, aliquam eu tortor. Suspendisse lobortis tristique eros eu bibendum. Pellentesque vel erat sapien. Praesent eu nisl a velit suscipit semper.
 		</p>
 	</aside>
-<footer id="footer"></footer>
 </div>
 <script src="main.js"></script>
+<script src="https://kit.fontawesome.com/7f62026b48.js" crossorigin="anonymous"></script>
 </body>
 </html>

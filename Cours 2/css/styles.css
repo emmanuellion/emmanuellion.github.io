@@ -40,7 +40,7 @@ h2{
 	margin: 0 auto;
 }
 
-.first_letter{
+.motivation p::first-letter{
 	color: #f00;
 	font-size: 200%;
 }
