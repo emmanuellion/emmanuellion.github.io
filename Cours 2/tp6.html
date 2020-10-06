@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+	<link rel="stylesheet" type="text/css" href="css/styles_tp6.css">
+	<link rel="icon" type="image" href="img/">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Formulaire</title>
+</head>
+<body>
+	<a href="form.html">Formulaire amélioré</a>
+	<form method="post" action="http://www.stravingo.fr/iut/traitement.php">
+		<fieldset>
+			<legend>Identité</legend>
+			<label>Nom : </label><input type="text" name="nom" size="20" maxlength="50" required autocomplete="on" autofocus>
+			<br>
+			<label>Prénom : </label><input type="text" name="pre" size="20" maxlength="50" required autocomplete="on">
+			<br>
+			<label>Age : </label><input type="number" name="age" min="0" max="140">
+			<br>
+			<select>
+				<option>Allemagne</option>
+				<option>France</option>
+				<option>Espagne</option>
+				<option>Italie</option>
+				<option>Autre</option>
+			</select>
+		</fieldset>
+		<fieldset>
+			<legend>Informations personnelles</legend>
+			<label>Mot de passe</label><input type="password" name="mdp" size="10" maxlength="10">
+			<br>
+			<label>Addresse Email</label><input type="mail" name="email" size="40" maxlength="80" required autocomplete="on">
+			<br>
+			<input type="radio"> <label>Windows</label>
+			<br>
+			<input type="radio"> <label>Linux</label>
+			<br>
+			<input type="radio"> <label>MacOS</label>
+			<br>
+			<input type="radio"> <label>Autre</label>
+			<br>
+			<textarea cols="50" rows="5" maxlength="500" spellcheck="true"></textarea>
+			<br>
+			<label>Couleur préférée : </label><input type="color" name="coul" value="#ffffff">
+			<br>
+			<label>Musique favorite : </label><input type="file" name="mus" accept="audio/*">
+			<br>
+			<label for="pub">Voulez vous recevoir des publicités associées à cette adresse ? </label><input type="checkbox" name="pub"><br>
+		</fieldset>
+		
+		<input type="reset" value="Effacer tous les champs">&emsp;<input type="submit" value="Envoyer">
+	</form>
+</body>
+</html>

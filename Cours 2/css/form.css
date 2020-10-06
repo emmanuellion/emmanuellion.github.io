@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+*{
+	font-family: 'Roboto', sans-serif;
+	margin: 0;
+	padding: 0;
+	box-sizing : border-box;
+ 	-moz-user-select: none; /* Firefox */
+ 	-webkit-user-select: none; /* Chrome, Safari, Opéra depuis la version 15 */
+ 	-ms-user-select: none; /* Internet explorer depuis la version 10 et Edge */
+ 	user-select: none; /* Propriété standard */
+}
+
+form{
+	width: 250px;
+	margin: 8% auto;
+}
+
+span{
+	position: absolute;
+	z-index: -1;
+	transform: translate(10px,20px);
+	font-size: 90%;
+	transition: transform 0.6s, color 0.3s, font-size 0.4s;
+	color: #6C757D;
+}
+
+span, label{
+	font-weight: bold;
+}
+
+.required{
+	color: #f00;
+}
+
+input{
+	margin-bottom: 1em;
+	width: 100%;
+	padding: 5px 10px;
+	border: none;
+	outline: 0;
+	border-bottom: 2px solid #6C757D;
+	background-color: transparent;
+}
+
+input:focus{
+	border-color: #007BFF;
+	transition: border-color 0.4s;
+}
+
+textarea{
+	min-width: 250px;
+	max-width: 250px;
+	min-height: 100px;
+	max-height: 100px;
+}
+
+form div{
+	margin-top: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+form div input{
+	width: 45%;
+	border-radius: 5px;
+	border-bottom: none;
+	color: white;
+	font-weight: bold;
+}
+
+form div input:nth-child(1){
+	background-color: #28A745;
+}
+
+form div input:nth-child(2){
+	background-color: #DC3545;
+}
+
+form div input:hover{
+	cursor: pointer;
+}

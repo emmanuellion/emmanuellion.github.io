@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="css/form.css">
+	<link rel="icon" type="image" href="img/">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Formulaire amélioré</title>
+</head>
+<body>
+	<form>
+		<span onclick="i1.onfocus()" onblur="i1.onblur()">Nom <i class="required">*</i></span>
+		<br>
+		<input type="text" class="input">
+		<br>
+		<span>Prénom <i class="required">*</i></span>
+		<br>
+		<input type="text" class="input">
+		<br>
+		<span>Email <i class="required">*</i></span>
+		<br>
+		<input type="mail" autocomplete="on" class="input">
+		<br>
+		<span>Objet </span>
+		<br>
+		<input type="text" class="input">
+		<br>
+		<label>Contenu <i class="required">*</i></label>
+		<br>
+		<textarea cols="37" rows="5"></textarea>
+		<div>
+			<input type="submit" name="" value="Envoyer">
+			<input type="reset" value="Tout supprimer">
+		</div>
+	</form>
+	<script src="https://kit.fontawesome.com/7f62026b48.js" crossorigin="anonymous"></script>
+	<script src="form.js"></script>
+</body>
+</html>
