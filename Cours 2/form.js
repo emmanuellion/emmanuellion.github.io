@@ -17,7 +17,7 @@ function up(children){
 
 function down(obj, children){
 	if(obj.value == "" || obj.value == " "){
-		children.style.transform = "translate(10px,20px)";
+		children.style.transform = "translate(10px,30px)";
 		children.style.fontSize = "90%";
 		children.style.color = "#6C757D";
 		obj.style.borderColor = "#6C757D";

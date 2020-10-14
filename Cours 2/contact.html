@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang='fr' style='scroll-behavior: smooth;'>
+<head>
+    <link href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' integrity='sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN' crossorigin='anonymous'>
+    <link rel='icon' type='text/css' href='img/votre_logo.jpg'>
+    <link rel='stylesheet' type='text/css' href='css/styles_tp7.css'>
+    \<link rel="stylesheet" type="text/css" href="Bootstrap/css/bootstrap.min.css">
+    <meta charset='utf-8'>
+    <title></title>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="jumbotron">
+                <h1>contact.html</h1>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur neque leo, cursus non est id, eleifend venenatis lorem. Maecenas venenatis purus nec maximus posuere.
+                </p>
+            </div>
+        </header>
+        <div class="row">
+            <nav class="col-sm-3">
+                <ul>
+                    <li><a href="tp7.html">Accueil</a></li>
+                    <li><a href="produits.html">Produits</a></li>
+                    <li><a href="a_propos.html">A propos</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
+            <section class="col-sm-9">
+                <form>
+                    <span>Nom <i class="required">*</i></span>
+                    <br>
+                    <input type="text" class="input" placeholder=" " required>
+                    <br>
+                    <span>Prénom <i class="required">*</i></span>
+                    <br>
+                    <input type="text" class="input" placeholder=" " required>
+                    <br>
+                    <span>Email <i class="required">*</i></span>
+                    <br>
+                    <input type="mail" autocomplete="on" class="input" placeholder=" " required>
+                    <br>
+                    <span id="select">Type de relation <i class="required">*</i></span>
+                    <br>
+                    <select required>
+                        <option value="visitor">visiteur</option>
+                        <option value="profesionnal">professionnel</option>
+                        <option value="single">particulier</option>
+                    </select>
+                    <br>
+                    <label>Contenu <i class="required">*</i></label>
+                    <br>
+                    <textarea cols="37" rows="5"></textarea>
+                    <div>
+                        <input type="submit" name="" value="Envoyer">
+                        <input type="reset" value="Tout supprimer" id="res">
+                    </div>
+                </form>
+            </section>
+            <footer>
+                <p class="text-center small">© LION Emmanuel 2020</p>
+            </footer>
+        </div>
+    </div>
+    <script src="form.js"></script>
+    <style>
+        *{
+	        font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing : border-box;
+            -moz-user-select: none; /* Firefox */
+            -webkit-user-select: none; /* Chrome, Safari, Opéra depuis la version 15 */
+            -ms-user-select: none; /* Internet explorer depuis la version 10 et Edge */
+            user-select: none; /* Propriété standard */
+            outline: none;
+        }
+
+        form{
+            width: 400px;
+            margin: 8% auto;
+        }
+
+        span{
+            position: absolute;
+            z-index: -1;
+            transform: translate(10px,30px);
+            font-size: 90%;
+            transition: transform 0.6s, color 0.3s, font-size 0.4s;
+            color: #6C757D;
+        }
+
+        #select{
+            margin-top: 30px;
+            transform: translate(0px, -5px);
+        }
+
+        select{
+            border: 1px solid #6C757D;
+            background-color: transparent;
+        }
+
+        span, label{
+            font-weight: bold;
+        }
+
+        .required{
+            color: #f00;
+        }
+
+        input{
+            margin-bottom: 1em;
+            width: 100%;
+            padding: 5px 10px;
+            border: none;
+            outline: 0;
+            border-bottom: 2px solid #6C757D;
+            background-color: transparent;
+            transition: border-color 0.4s;
+        }
+
+        input:focus{
+            border-color: #007BFF;
+        }
+
+        /* input:not(:placeholder-shown){
+            border-color: #007BFF;
+            background-color: red;
+        } */
+
+        textarea{
+            outline: 0;
+            min-width: 400px;
+            max-width: 400px;
+            min-height: 200px;
+            max-height: 200px;
+        }
+
+        textarea:focus{
+            transition: border 1s;
+            border: 1px solid #007BFF;
+        }
+
+        form div{
+            margin-top: 10px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        form div input{
+            width: 45%;
+            border-radius: 5px;
+            border-bottom: none;
+            color: white;
+            font-weight: bold;
+        }
+
+        form div input:nth-child(1){
+            background-color: #28A745;
+        }
+
+        form div input:nth-child(2){
+            background-color: #DC3545;
+        }
+
+        form div input:hover{
+	        cursor: pointer;
+        }
+    </style>
+</body>
+</html>
