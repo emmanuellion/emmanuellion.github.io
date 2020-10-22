@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+a{
+    text-decoration: none;
+    color: black;;
+}
+
+nav{
+    min-height: 40px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+}
+
+ul{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    list-style: none;
+}
+
+li{
+    display: flex;
+    align-items: center;
+    margin: 0em 1em 0em 1em;
+    padding: 20px;
+    border-radius: 3px;
+}
+
+ul li:hover{
+    background-color: #222;
+    cursor: pointer;
+}
+
+ul li:hover a{
+    color: white;
+}
+
+.list{
+    color: grey;
+}
+
+li:hover i{
+	transition: transform 0.3s;
+	transform: rotateZ(90deg);
+}
+
+li ul{
+    display: none;
+}
+
+li ul li{
+    padding: 0px;
+}
+
+li:hover ul li:hover{
+    background-color: transparent;
+}
+
+li:hover ul li a:hover{
+    text-decoration: underline blue;
+}
+
+.list:hover ul{
+    position: absolute;
+    transform: translate(-19px, 68px);
+	display: block;
+    background-color: white;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+}
+
+#exemple{
+    margin-top: 70px;
+    margin-bottom: 20px;
+}
+
+/*----------Responsive----------*/
+@media (min-width: 1280px){
+
+}
+@media (min-width: 1024px){
+
+}
+@media (min-width: 768px){
+
+}
+@media (min-width: 640px){
+
+}
+@media (min-width: 300px){
+
+}

@@ -94,6 +94,7 @@ li ul li{
 #sidebar{
 	float: right;
 	width: 23%;
+	height: ;
 	margin-top: 1em;
 	background-color: #000;
 	color: #fff;
@@ -139,6 +140,7 @@ article aside{
 	font-size: 0.8em;
 	color: #fff;
 	background-color: #000;
+	clear: both;
 }
 
 @media screen and (min-width: 769px) {
@@ -165,9 +167,6 @@ article aside{
 		height: 200px;
 	}
 
-	#footer{
-		margin-top: 5em;
-	}
 }
 
 
@@ -201,19 +200,11 @@ article aside{
 	}
 }
 
-
-
-
-
 @media screen and (max-width: 768px) {
 	.petit_ecran{
 		display: none;
 	}
 }
-
-
-
-
 
 @media screen and (max-width: 480px) {
 	body{
@@ -238,7 +229,7 @@ article aside{
 		margin-bottom: 50px;
 	}
 
-	article{
+	section article{
 		padding: 0.5em;
 	}
 

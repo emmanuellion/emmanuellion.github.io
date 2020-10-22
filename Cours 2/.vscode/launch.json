@@ -7,8 +7,8 @@
         {
             "type": "pwa-chrome",
             "request": "launch",
-            "name": "Open form.html",
-            "file": "c:\\Users\\drake\\Documents\\IUT INFO\\Web\\Cours 2\\produits.html"
+            "name": "Open tp4.html",
+            "file": "c:\\Users\\drake\\Documents\\IUT INFO\\Web\\Cours 2\\decouvrir.html"
         }
     ]
 }
