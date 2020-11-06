@@ -8,10 +8,9 @@
 body{
 	width: 70%;
 	margin-left: 15%;
-	background: linear-gradient(red, blue);
-	/*background-image: url("../img/gradient.png");
+	background-image: url("../img/gradient.png");
 	background-repeat: repeat-x;
-	background-attachment: fixed;*/
+	background-attachment: fixed;
 }
 
 .main_title{
