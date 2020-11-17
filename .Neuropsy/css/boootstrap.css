@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+.row{
+	display: flex;
+	flex-direction: row;
+}
+
+.column{
+	display: flex;
+	flex-direction: column;
+}
+
+.align_all{
+	display: flex;
+	align-items: center;
+	text-align: center;
+	justify-content: center;
+}
+
+.ft_italic{
+	font-style: italic;
+}
+
+.ft_bold{
+	font-weight: bold;
+}
