@@ -28,13 +28,13 @@ header{
 	display: flex;
 	-webkit-text-stroke: 0.1px #2B2B2B;
 	color: #FFFC52;
-	border: 1px solid #2B2B2B;
 	margin-right: 0;
 }
 
 .header_title img{
 	width: 7%;
 	margin-right: 8px;
+	border: 1px solid #2B2B2B;
 }
 
 div{
@@ -43,9 +43,10 @@ div{
 }
 
 .div{
+	position: relative;
 	opacity: 0;
 	transform: translateY(-30px);
-	margin: 100px auto 600px auto;
+	margin: 100px auto 500px auto;
 	font-size: 100px;
 	text-transform: uppercase;
 	line-height: 1.4em;
@@ -58,8 +59,19 @@ div{
 	0 0 100px #FFFC52;
 }
 
-.div{
-	position: relative;
+.com{
+	color: #fff;
+	margin: 50px auto 600px auto;
+	font-size:24px;
+	opacity: 0;
+	visibility: hidden;
+	transform: translateX(50px);
+	transition: 0.6s ease-in-out;
+}
+
+.com .L{
+	margin-left: 170px;
+	transition: 1s ease-in-out;
 }
 
 .bar{

@@ -18,17 +18,13 @@
 			Javascript
 			<div class="bar"></div>
 		</div>
-		<div class="normale" onload="loa()">
+		<div class="com">
 			Why do we use it?
 			It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
 		</div>
-		<div class="div">
-			Why do we use it?
-			It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
-		</div>
+		
 		<script type="text/javascript">
 			const div = document.getElementsByClassName("div")[0];
-			const diva = document.getElementsByClassName("div")[1];
 			const bar = document.getElementsByClassName("bar")[0];
 			function load(){
 				div.style.opacity = "1";
@@ -36,9 +32,31 @@
 				var t = setInterval(function(){bar.style.width = "100%";},700);
 			}
 
-			function loa(){
-				diva.style.opacity = "1";
-				diva.style.transform = "translateY(30px)";
+			window.addEventListener('scroll', () =>{
+				const com = document.getElementsByClassName("com")[0];
+				go_to_the(com,"left",220,8);
+			})
+
+			function go_to_the(el,direction,margin,factor){
+				let el_pos = el.getBoundingClientRect().top;
+				if (el_pos+margin < window.innerHeight){
+					el.style.opacity = "1";
+					el.style.visibility = "visible";
+					if(direction == "left"){
+						el.style.transform = "translateX(-50px)";
+					}else{
+						el.style.transform = "translateX(50px)";
+					}
+				}
+				if (window.innerHeight >= el_pos*factor || window.innerHeight <= el_pos+130){
+					el.style.opacity = "0";
+					el.style.visibility = "hidden";
+					if(direction == "left"){
+						el.style.transform = "translateX(50px)";
+					}else{
+						el.style.transform = "translateX(-50px)";
+					}
+				}
 			}
 		</script>
 	</body>
