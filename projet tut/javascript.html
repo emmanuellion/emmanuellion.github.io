@@ -8,6 +8,12 @@
 		<link rel="icon" type="text/css" href="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/480px-JavaScript-logo.png">
 	</head>
 	<body onload="load()">
+		<div class="onload">
+			Exposé en cours de chargement
+			<div class="first point"></div>
+			<div class="second point"></div>
+			<div class="third point"></div>
+		</div>
 		<header>
 			<div class="header_title">
 				<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/480px-JavaScript-logo.png">
@@ -18,11 +24,18 @@
 			Javascript
 			<div class="bar"></div>
 		</div>
-		<div class="com">
-			Why do we use it?
-			It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+		<div class="article">
+			<div class="com">
+				Why do we use it?
+				It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+			</div>
 		</div>
-		
+		<div class="article">
+			<div class="com">
+				Why do we use it?
+				It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
+			</div>
+		</div>
 		<script type="text/javascript">
 			const div = document.getElementsByClassName("div")[0];
 			const bar = document.getElementsByClassName("bar")[0];
@@ -34,30 +47,41 @@
 
 			window.addEventListener('scroll', () =>{
 				const com = document.getElementsByClassName("com")[0];
-				go_to_the(com,"left",220,8);
+				const coma = document.getElementsByClassName("com")[1];
+				go_to_the(com,"left",220,20);
+				go_to_the(coma,"right",220,20);
 			})
 
 			function go_to_the(el,direction,margin,factor){
 				let el_pos = el.getBoundingClientRect().top;
-				if (el_pos+margin < window.innerHeight){
+				if (direction == "left"){
+					el.style.transform = "translateX(100px)";
+				}else{
+					el.style.transform = "translateX(-100px)";
+				}
+				if (el_pos < window.innerHeight/1.3){
+					if(direction == "left"){
+						el.style.transform = "translateX(-50px)";
+					}else{
+						el.style.transform = "translateX(50px)";
+					}
 					el.style.opacity = "1";
 					el.style.visibility = "visible";
-					if(direction == "left"){
-						el.style.transform = "translateX(-50px)";
-					}else{
-						el.style.transform = "translateX(50px)";
-					}
 				}
 				if (window.innerHeight >= el_pos*factor || window.innerHeight <= el_pos+130){
+					if(direction == "left"){
+						el.style.transform = "translateX(100px)";
+					}else{
+						el.style.transform = "translateX(-100px)";
+					}
 					el.style.opacity = "0";
 					el.style.visibility = "hidden";
-					if(direction == "left"){
-						el.style.transform = "translateX(50px)";
-					}else{
-						el.style.transform = "translateX(-50px)";
-					}
 				}
 			}
+			const div_load = document.getElementsByClassName("onload")[0];
+			window.addEventListener('load', ()=>{
+				div_load.classList.add("fondu");
+			})
 		</script>
 	</body>
 </html>
