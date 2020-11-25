@@ -14,10 +14,34 @@
 			<div class="second point"></div>
 			<div class="third point"></div>
 		</div>
-		<header>
+		<header id="header">
 			<div class="header_title">
 				<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/480px-JavaScript-logo.png">
 				<h1>Javascript</h1>
+			</div>
+			<div class="summary">
+				<ul>
+					<li><a href="">Définition générale du javascript</a></li>
+					<li><a href="">Création du javascript</a></li>
+					<li><a href="">Histoire du javascript + standardisation</a></li>
+					<li><a href="">Faille et sécurité du javascript</a></li>
+					<li><a href="">Diversification avec JSON et AJAX</a></li>
+					<li><a href="">Conclusion</a></li>
+				</ul>
+			</div>
+			<div class="menu">
+				<h2>Menu</h2>
+				<div class="item">
+					<div class="base">
+						
+					</div>
+					<div class="body_item">
+						
+					</div>
+					<div class="corner">
+						
+					</div>
+				</div>
 			</div>
 		</header>
 		<div class="div">
@@ -25,6 +49,9 @@
 			<div class="bar"></div>
 		</div>
 		<div class="article">
+			<h2>
+				coco
+			</h2>
 			<div class="com">
 				Why do we use it?
 				It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).
@@ -81,7 +108,36 @@
 			const div_load = document.getElementsByClassName("onload")[0];
 			window.addEventListener('load', ()=>{
 				div_load.classList.add("fondu");
+				div_load.style.zIndex = "-1";
 			})
+
+			var item = document.getElementsByClassName("item")[0];
+			var base = document.getElementsByClassName("base")[0];
+			var corner = document.getElementsByClassName("corner")[0];
+			var summary = document.getElementsByClassName("summary")[0];
+			item.onclick = function(){
+				base.style.paddingBottom = "0px";
+				corner.style.transform = "translateY(-20px)";
+				console.log("%cIci",'color: red;');
+				setTimeout(continue_bookmark, 500);
+			}
+
+			function continue_bookmark(){
+				console.log("%cLà",'color: lime;');
+				base.style.paddingBottom = "260px";
+				corner.style.transform = "translateY(0px)";
+				var header = document.getElementById("header");
+				header.style.height = "380px";
+				summary.style.opacity = "1";
+				console.log(header.style.minHeight.value);
+			}
+
+			window.onclick = function(){
+				base.style.paddingBottom = "20px";
+				corner.style.transform = "translateY(0px)";
+				header.style.height = "100px";
+				summary.style.opacity = "0";
+			}
 		</script>
 	</body>
 </html>
