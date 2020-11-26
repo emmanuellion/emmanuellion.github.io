@@ -12,6 +12,16 @@ body{
 	background-color: #2B2B2B;
 }
 
+body::-webkit-scrollbar{
+	width: 0.25rem;
+}
+body::-webkit-scrollbar-track{
+	background-color: #2B2B2B;
+}
+body::-webkit-scrollbar-thumb{
+	background-color: #FFFC52;
+}
+
 .onload{
 	position: fixed;
 	left: 0;
@@ -122,11 +132,16 @@ header{
 }
 
 .menu{
+	color: #2B2B2B;
 	position: absolute;
 	display: flex;
 	align-items: center;
 	right: 20px;
 	top: 35px;
+}
+
+.menu:hover{
+	cursor: pointer;
 }
 
 .item{
@@ -209,6 +224,7 @@ div{
 	color: #000;
 	background-color: #FFFC52;
 	min-width: 100%;
+	margin-bottom: 400px;
 }
 
 .article:nth-child(2n){
@@ -216,9 +232,17 @@ div{
 	background-color: #000;
 }
 
+.article h2{
+	text-decoration: underline;
+	font-style: italic;
+	margin-left: 17%;
+}
+
 .com{
-	margin: 0 auto 0 auto;
-	font-size:24px;
+	margin: 30px auto 0 auto;
+	background-color: red;
+	font-size: 24px;
+	hyphens: auto;
 	opacity: 0;
 	visibility: hidden;
 	transition: 0.6s ease-in-out;
