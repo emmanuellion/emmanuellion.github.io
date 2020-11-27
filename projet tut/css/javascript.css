@@ -8,8 +8,13 @@
     font-family: 'Roboto', arial, sans-serif;
 }
 
+a{
+	color: #fff;
+}
+
 body{
 	background-color: #2B2B2B;
+	overflow-x: hidden;
 }
 
 body::-webkit-scrollbar{
@@ -81,24 +86,36 @@ body::-webkit-scrollbar-thumb{
 header{
 	position: relative;
 	background-color: #FFFC52;
-	width: 100%;
+	min-width: 100%;
 	height: 100px;
-	color: #fff;
+	color:  #2B2B2B;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
 	transition: 0.7s ease-out;
+	padding: 30px 50px;
+    overflow: hidden;
+}
+
+header.active {
+    height: 600px;
 }
 
 .header_title{
-	position: absolute;
-	left: 15px;
-	top: 30px;
+	/*position: absolute;*/
+	/*left: 15px;
+	top: 30px;*/
 	display: flex;
 	-webkit-text-stroke: 0.1px #2B2B2B;
 	color: #FFFC52;
 	margin-right: 0;
+	opacity: 1;
+	transition: opacity 0.4s;
+}
+
+.header_title.active{
+	opacity: 0;
 }
 
 .header_title img{
@@ -107,7 +124,80 @@ header{
 	border: 1px solid #2B2B2B;
 }
 
-.summary{
+.menu-container {
+	position: absolute;
+	top: 30px;
+	right: 15px;
+    display: flex;
+    align-items: center;
+    height: 40px;
+    cursor: pointer;
+    font-size: 24px;
+}
+
+.burger {
+    position: relative;
+    width: 30px;
+    height: 3px;
+    background: #2B2B2B;
+    margin-left: 15px;
+    transition: background 0.4s;
+}
+
+.burger::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #2B2B2B;
+    bottom: 7px;
+    transition: transform 0.4s, bottom 0.4s;
+}
+
+
+.burger::after {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: #2B2B2B;
+    top: 7px;
+    transition: transform 0.4s, top 0.4s;
+}
+
+.burger.active {
+    background: transparent;
+}
+
+.burger.active::before {
+    transform: rotate(-45deg);
+    bottom: 0;
+}
+
+.burger.active::after {
+    transform: rotate(45deg);
+    top: 0;
+}
+
+.nav-links {
+    position: absolute;
+    left: 50%;
+    top: 7%;
+    transform: translateX(-50%);
+    list-style: none;
+    text-align: center;
+    overflow: hidden;
+    height: 0;
+    opacity: 0;
+    transition: height 0.4s, opacity 0.4s;
+}
+
+.nav-links.active {
+    height: 600px;
+    opacity: 1;
+}
+
+/*.summary{
 	position: absolute;
 	top: 20%;
 	left: 39%;
@@ -172,21 +262,38 @@ header{
 	border-left: 1px solid #000;
 	border-right: 1px solid #000;
 	transform: translateY(-4px);
-}*/
+}
 
 .corner{
 	border-right: 5px solid #000;
     border-left: 5px solid #000;    
     border-bottom: 5px solid transparent;
     background-color: transparent;
+}*/
+
+.shader{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	background-color: #000;
+	opacity: 0.05;
+}
+
+.banner{
+	background: url('https://augnitive.com/wp-content/uploads/2019/06/javascript-.jpg') no-repeat;
+	background-position: 50%;
+	background-size: 100%;
+	width: 100%;
+	height: 100%;
 }
 
 div{
-	max-width: 600px;
 	transition: 0.6s ease-in-out;
 }
 
 .div{
+	max-width: 600px;
 	position: relative;
 	opacity: 0;
 	transform: translateY(-30px);
@@ -219,31 +326,131 @@ div{
 
 .article{
 	display: flex;
-	justify-content: center;
+	width: 100%;
 	flex-direction: column;
+	align-items: center;
 	color: #000;
 	background-color: #FFFC52;
-	min-width: 100%;
-	margin-bottom: 400px;
+	padding: 50px 0 50px 0;
 }
 
-.article:nth-child(2n){
+.article:nth-child(4n+1){
 	color: #FFFC52;
 	background-color: #000;
 }
 
 .article h2{
+	width: 100%;
 	text-decoration: underline;
 	font-style: italic;
-	margin-left: 17%;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+.article h3{
+	width: 50%;
+	margin-bottom: 10px;
+	font-size: 130%;
+	text-decoration: underline;
 }
 
 .com{
-	margin: 30px auto 0 auto;
-	background-color: red;
+	max-width: 60%;
+	margin-left: 10%;
 	font-size: 24px;
 	hyphens: auto;
-	opacity: 0;
-	visibility: hidden;
+	/*opacity: 0;
+	visibility: hidden;*/
 	transition: 0.6s ease-in-out;
+}
+
+.fl_right{
+	float: right;
+	width: 25%;
+	margin-left: 10px;
+}
+
+.p1{
+	background: url('https://d1fmx1rbmqrxrr.cloudfront.net/zdnet/optim/i/edit/ne/2018/08/code-3337044_640__w630.jpg');
+}
+.p2{
+	background: url('https://mk0testdemonsitv8fjd.kinstacdn.com/wp-content/uploads/2019/07/code-javascript-e1563276216875.jpg');
+}
+.p3{
+	background: url('https://i.redd.it/auvi7ijfursy.png');
+}
+.p4{
+	background: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3hY1tJUntumspY_cIDe1gEGGNXmNy7o3IMw&usqp=CAU');
+}
+.p5{
+	background: url('https://res.cloudinary.com/practicaldev/image/fetch/s---1w4VnJR--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_66%2Cw_880/https://thepracticaldev.s3.amazonaws.com/i/n9b2p3j0h1mdqvms3ogc.gif');
+}
+
+.parallax{
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+	background-attachment: fixed;
+	height: 300px;
+}
+/*-------------------------------------------------------------------------*/
+
+.nav-links li {
+    margin: 60px 30px 30px 30px;
+    width: 600px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: black;
+    font-size: 25px;
+    position: relative;
+}
+
+.nav-links a::after {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 3px;;
+    background: #2B2B2B;
+    left: 0;
+    bottom: -2px;
+    transition: width 0.4s;
+}
+
+.nav-links a:hover::after {
+    width: 100%;
+}
+
+@media (max-width: 400px) {
+    
+    .title {
+        font-size: 20px;
+        margin-top: 10px;
+    }
+
+    header {
+        padding: 30px 5%;
+    }
+
+    header.active {
+        height: 300px;
+    }
+    
+    .title-menu {
+        display: none;
+    }
+
+    .burger {
+        width: 25px;
+    }
+
+    .nav-links {
+        top: 10%;
+    }
+
+    .nav-links a {
+        font-size: 15px;
+    }
+
 }

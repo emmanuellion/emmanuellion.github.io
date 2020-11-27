@@ -1,0 +1,17 @@
+@media screen and (max-width: 768px){
+	header{
+		min-width: 100%;
+	}
+
+	.header_title{
+		-webkit-text-stroke: 0px;
+		-webkit-text-fill-color: #2B2B2B;
+	}
+	.article h2{
+		margin-left: -100px;
+	}
+	/*.div{
+		font-size: 100px;
+	}*/
+
+}
