@@ -19,6 +19,18 @@
 		vertical-align: middle;
 	}
 
+	.onload{
+		font-size: 20px;
+	}
+
+	.onload .point{
+		width: 10px;
+		height: 10px;
+		border-radius: 10px;
+		margin-left: 5px;
+		margin-top: 5px;
+	}
+
 	.shader{
 		display: none;
 	}
@@ -47,6 +59,7 @@
 	}
 
 	.article h2, .article h3{
+		font-size: 100%;
 		text-align: left;
 	}
 
