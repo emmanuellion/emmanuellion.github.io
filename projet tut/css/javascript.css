@@ -249,80 +249,6 @@ header.active {
     }
 }
 
-/*.summary{
-	position: absolute;
-	top: 20%;
-	left: 39%;
-	opacity: 0;
-	transform: opacity 0.6s;
-}
-
-.summary li{
-	list-style: none;
-	margin-top: 20px;
-}
-
-.summary a{
-	color: #2B2B2B;
-	font-style: italic;
-	font-size: 140%;
-	transition: font-size 0.6s;
-}
-
-.summary a:hover{
-	font-size: 150%;
-}
-
-.menu{
-	color: #2B2B2B;
-	position: absolute;
-	display: flex;
-	align-items: center;
-	right: 20px;
-	top: 35px;
-}
-
-.menu:hover{
-	cursor: pointer;
-}
-
-.item{
-	margin-left: 10px;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-}
-
-.item:hover{
-	cursor: pointer;
-}
-
-.base{
-	width: 10px;
-	padding-bottom: 20px;
-	height: 10px;
-	border-left: 1px solid #000;
-	border-top: 1px solid #000;
-	border-right: 1px solid #000;
-	background-color: #000;
-}
-
-/*.body_item{
-	width: 10px;
-	height: 10px;
-	background-color: #000;
-	border-left: 1px solid #000;
-	border-right: 1px solid #000;
-	transform: translateY(-4px);
-}
-
-.corner{
-	border-right: 5px solid #000;
-    border-left: 5px solid #000;    
-    border-bottom: 5px solid transparent;
-    background-color: transparent;
-}*/
-
 .shader{
 	position: absolute;
 	width: 100%;
@@ -415,6 +341,10 @@ div{
 	/*opacity: 0;
 	visibility: hidden;*/
 	transition: 0.6s ease-in-out;
+}
+
+#end .com{
+	margin-bottom: 0px;
 }
 
 .fl_right{
