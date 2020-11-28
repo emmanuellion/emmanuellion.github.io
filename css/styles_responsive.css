@@ -1,0 +1,16 @@
+@media screen and (min-width: 365px) and (max-width: 768px){
+	h1{
+		width: 60%;
+		font-size: 150%;
+		padding-bottom: 3px;
+		border-bottom: 2px solid red;
+	}
+}
+
+@media screen and (max-width: 364px){
+	h1{
+		width: 100%;
+		font-size: 123%;
+		padding-bottom: 1px;
+	}
+}

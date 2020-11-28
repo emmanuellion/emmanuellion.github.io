@@ -16,25 +16,36 @@ body{
 }
 
 h1{
-	width: 50%;
+	width: 46%;
+	font-size: 200%;
+	text-align: center;
+	position: relative;
 	margin: auto;
-	text-decoration: underline;
+	padding-bottom: 5px;
+	border-bottom: 3px solid red;
 }
 
 ul{
-	width: 30%;
-	margin: auto;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 li{
 	margin-top: 20px;
 	text-align: center;
 	width: 100%;
+	list-style: none;
 }
 
 a{
 	text-align: center;
-	width: 100%;
 	color: white;
 	text-decoration: underline #F13637;
+	transition: font-size 0.7s ease;
+}
+
+a:hover{
+	font-size: 200%;
 }
