@@ -53,9 +53,8 @@
 	}
 
 	.article{
-		padding: 30px 0 30px 0;
+		padding: 30px 0 30px 15px;
 		max-width: 100%;
-
 	}
 
 	.article h2, .article h3{

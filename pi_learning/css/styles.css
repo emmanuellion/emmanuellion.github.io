@@ -7,7 +7,7 @@
     font-family: 'Roboto', sans-serif;
 }
 
-div{
+.m{
 	widows: 100%;
 	min-height: 100vh;
 	display: flex;
@@ -28,8 +28,17 @@ input{
 	font-size: 20px;
 }
 
-#resp{
-	
+.m div{
+	display: flex;
+}
+
+#response{
+	color: #3CB371;
+	font-weight: bold; 
+}
+
+#bad{
+	color: #FF6347;
 }
 
 @media (min-width: 768px){

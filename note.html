@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang='fr' style='scroll-behavior: smooth;'>
+<head>
+    <link href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' integrity='sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN' crossorigin='anonymous'>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <link rel='stylesheet' type='text/css' href='css/styles_note.css'>
+    <meta charset='utf-8'>
+    <title></title>
+</head>
+<body class='body' id='body'>
+	<div class="div_canvas">
+		<canvas id="graph" class="canvas"></canvas>	
+	</div>
+	<div class="div_canvas">
+		<canvas id="graphh" class="canvas"></canvas>	
+	</div>
+	<script type="text/javascript">
+		var ctx = document.getElementById("graph").getContext("2d");
+		var ctxx = document.getElementById("graphh").getContext("2d");
+		var noir;
+		var options = {
+			responsive: true,//Adaptation ou non à son parent en terme de taille
+		}	
+		Chart.defaults.global.defaultFontColor = "darkorchid";
+		noir = {
+			type: 'line',
+			data: {
+				datasets: [{
+					label: "Variation des notes dans l'ordre chronologique",
+					borderColor: 'black',
+					backgroundColor: 'transparent',
+					data: [0,9.5,8.5,10,10,14,12.5,6,16.5,4,11]
+				}],
+				labels: [1,2,3,4,5,6,7,8,9,10,11]
+			},
+			options: options,
+		}
+		var graph1 = new Chart(ctx,noir);
+		var noirr = {
+			type: 'bar',
+			data: {
+				datasets: [{
+					label: "Variation des notes par matières",
+					backgroundColor: 'transparent',
+					borderWidth: "4",
+					borderColor: '#000',
+					barThickness: 100,
+					data: [0,9.417,12.5,13.25,4,8.5,14]
+				}],
+				labels: ["","Systèmes","Algorithmie","BDD","Maths","Economie","Anglais"]
+			},
+			options: options,
+		}
+		var graph2 = new Chart(ctxx,noirr);
+	</script>
+</body>
+</html>

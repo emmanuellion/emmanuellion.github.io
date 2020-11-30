@@ -342,8 +342,8 @@ div{
 	margin-bottom: 100px;
 	font-size: 24px;
 	hyphens: auto;
-	/*opacity: 0;
-	visibility: hidden;*/
+	opacity: 0;
+	visibility: hidden;
 	transition: 0.6s ease-in-out;
 }
 
