@@ -1,4 +1,7 @@
 @media screen and (max-width: 768px){
+	:root{
+		--travel: translateY(-15px);
+	}
 	header{
 		min-width: 100%;
 	}
@@ -53,8 +56,9 @@
 	}
 
 	.article{
-		padding: 30px 0 30px 15px;
+		padding: 30px 0 30px 0;
 		max-width: 100%;
+
 	}
 
 	.article h2, .article h3{
