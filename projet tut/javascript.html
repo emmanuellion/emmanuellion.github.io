@@ -123,6 +123,81 @@
 				div_load.classList.add("fondu");
 				div_load.style.zIndex = "-1";
 			})
+
+			window.addEventListener('scroll', () =>{
+					const com = document.getElementsByClassName("com")[0];
+					const coma = document.getElementsByClassName("com")[1];
+					const comaa = document.getElementsByClassName("com")[2];
+					const comaaa = document.getElementsByClassName("com")[3];
+					const comaaaa = document.getElementsByClassName("com")[4];
+					const comaaaaa = document.getElementsByClassName("com")[5];
+					const comaaaaaa = document.getElementsByClassName("com")[6];
+					const comaaaaaaa = document.getElementsByClassName("com")[7];
+					const comaaaaaaaa = document.getElementsByClassName("com")[8];
+					const comaaaaaaaaa = document.getElementsByClassName("com")[9];
+					if(screen.width > 930 && screen.height > 700){
+						go_to_the(com,"left",220,23);
+						go_to_the(coma,"right",220,23);
+						go_to_the(comaa,"left",220,23);
+						go_to_the(comaaa,"right",220,23);
+						go_to_the(comaaaa,"left",220,23);
+						go_to_the(comaaaaa,"right",220,23);
+						go_to_the(comaaaaaa,"left",220,23);
+						go_to_the(comaaaaaaa,"right",220,23);
+						go_to_the(comaaaaaaaa,"left",220,23);
+						go_to_the(comaaaaaaaaa,"right",220,23);
+					}else{
+						com.style.opacity = "1";
+						com.style.visibility = "visible";
+						coma.style.opacity = "1";
+						coma.style.visibility = "visible";
+						comaa.style.opacity = "1";
+						comaa.style.visibility = "visible";
+						comaaa.style.opacity = "1";
+						comaaa.style.visibility = "visible";
+						comaaaa.style.opacity = "1";
+						comaaaa.style.visibility = "visible";
+						comaaaaa.style.opacity = "1";
+						comaaaaa.style.visibility = "visible";
+						comaaaaaa.style.opacity = "1";
+						comaaaaaa.style.visibility = "visible";
+						comaaaaaaa.style.opacity = "1";
+						comaaaaaaa.style.visibility = "visible";
+						comaaaaaaaa.style.opacity = "1";
+						comaaaaaaaa.style.visibility = "visible";
+						comaaaaaaaaa.style.opacity = "1";
+						comaaaaaaaaa.style.visibility = "visible";
+
+					}
+				})
+				function go_to_the(el,direction,margin,factor){
+						let el_pos = el.getBoundingClientRect().top;
+						if (direction == "left"){
+								el.style.transform = "translateX(220px)";
+						}else{
+								el.style.transform = "translateX(-100px)";
+						}
+						if (el_pos <= window.innerHeight/1.3){
+								if(direction == "left"){
+										el.style.transform = "translateX(0px)";
+								}else{
+										el.style.transform = "translateX(0px)";
+								}
+								el.style.opacity = "1";
+								el.style.visibility = "visible";
+						}
+						if (window.innerHeight >= el_pos*factor || window.innerHeight <= el_pos+130){
+								if(direction == "left"){
+										el.style.transform = "translateX(220px)";
+										el.style.opacity = "0";
+										el.style.visibility = "hidden";
+								}else{
+										el.style.transform = "translateX(-100px)";
+										el.style.opacity = "0";
+										el.style.visibility = "hidden";
+								}
+						}
+				}
 			
 			const menuContainer = document.querySelector('.menu-container');
 			const burger = document.querySelector('.burger');
