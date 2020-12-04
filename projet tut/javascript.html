@@ -17,7 +17,7 @@
 			<div class="third point"></div>
 		</div>
 		<header id="header">
-			<div class="header_title">
+			<div class="header_title" onclick="c()">
 				<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/480px-JavaScript-logo.png">
 				<h1>Javascript</h1>
 			</div>
@@ -100,6 +100,10 @@
 			<a href="https://fr.wikipedia.org/wiki/JavaScript">source 2</a>
 		</div>
 		<script type="text/javascript">
+			function c(){
+				window.location = "index.html";
+			}
+
 			function load(){
 				const div = document.querySelector('.div');
 				const bar = document.querySelector('.bar');
