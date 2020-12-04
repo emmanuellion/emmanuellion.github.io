@@ -183,6 +183,11 @@ hr{
 	background-color: #F7E018;
 }
 
+.javascript_article h4{
+	text-transform: uppercase;
+	text-decoration: underline;
+}
+
 .javascript_article .js_logo{
 	float: right; 
 	width: 10%; 
