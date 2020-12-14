@@ -7,6 +7,20 @@
     font-family: 'Roboto', sans-serif;
 }
 
+body::-webkit-scrollbar{
+	width: 0.6rem;
+}
+body::-webkit-scrollbar-track{
+	background-color: #F13637;
+}
+body::-webkit-scrollbar-thumb{
+	background-color: blue;
+}
+
+body::-webkit-scrollbar-thumb:active{
+	background-color: yellow;
+}
+
 body{
 	background-image: url('../img/l1.gif');
 	background-repeat: no-repeat;
@@ -26,26 +40,42 @@ h1{
 }
 
 ul{
-	width: 100%;
+	width: 30%;
+	margin: auto;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 }
 
 li{
-	margin-top: 20px;
 	text-align: center;
-	width: 100%;
+	width: max-content;
+	margin: 20px auto;
 	list-style: none;
+	position: relative;
 }
 
 a{
 	text-align: center;
-	color: white;
-	text-decoration: underline #F13637;
+	color: transparent;
+	text-decoration: none;
 	transition: font-size 0.7s ease;
+	background: linear-gradient(to right, blue, yellow);
+	-webkit-background-clip: text;
+	background-clip: text;
 }
 
-a:hover{
-	font-size: 200%;
+li::before{
+	content: "";
+	position: absolute;
+	background: linear-gradient(to right, blue, yellow);
+	bottom: -3px;
+	height: 2px;
+	left: 0;
+	width: 0;
+	transition: width 0.8s ease;
+}
+
+li:hover::before{
+	width: 100%;
 }
