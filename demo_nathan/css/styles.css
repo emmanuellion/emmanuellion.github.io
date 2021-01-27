@@ -1,0 +1,18 @@
+div
+{
+	min-height: 100vh;
+	min-width: 100%;
+	background: url('https://www.journaldugeek.com/content/uploads/2018/03/nyan.gif');
+	background-size: 8%;
+	background-repeat: repeat;
+	animation: slide 350s linear infinite;
+}
+
+@keyframes slide{
+	0%{
+		background-position: 0px 0px, 0px 0px, 0px 0px;
+	}
+	100%{
+		background-position: 50000px 50000px, 10000px 20000px, -10000px 15000px;
+	}
+}
