@@ -1,3 +1,9 @@
+body{
+	overflow-y: hidden;
+	margin: 0;
+	padding: 0;
+}
+
 div
 {
 	min-height: 100vh;
