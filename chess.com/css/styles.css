@@ -13,7 +13,9 @@ body{
 	background-position: 50%;
 	background-attachment: fixed;
 	min-width: 100%;
-	min-height: 300vh;
+	min-height: 205vh;
+	margin: 0;
+    padding: 0;
 }
 
 .menu{
@@ -33,6 +35,13 @@ body{
 	list-style: none;
 }
 
+menu li::before {
+	content: "\2022";   
+	color: white;  
+	display: inline-block;  
+	width: 1em; 
+	margin-left: -1em;
+} 
 .menu .a{
 	margin-top: 25px;
 }
@@ -65,15 +74,27 @@ body{
 	margin-top: 50px;
 }
 
+.h{
+	font-size: 500%;
+	width: 100%;
+	text-align: center;
+	font-family: 'Tangerine', cursive;
+}
+
 .p{
 	font-family: 'Arial', sans-serif;
 	font-family: 100px;
 	max-width: 80%;
 }
 
-.h{
-	font-size: 500%;
-	width: 100%;
+.p span{
+	color: orange;
+}
+
+footer{
+	min-width: 100%;
 	text-align: center;
-	font-family: 'Tangerine', cursive;
+	background-color: black;
+	color: white;
+	height: 30px;
 }

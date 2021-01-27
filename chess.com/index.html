@@ -1,70 +1,95 @@
 <!DOCTYPE html>
 <html lang='fr' style='scroll-behavior: smooth;'>
 <head>
-    <link href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' integrity='sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN' crossorigin='anonymous'>
-    <link rel='icon' type='text/css' href='img/votre_logo.jpg'>
+    <link rel='icon' type='text/css' href='img/pawn.png'>
+    <link rel='stylesheet' type='text/css' href='css/normalize.css'>
     <link rel='stylesheet' type='text/css' href='css/styles.css'>
     <meta charset='utf-8'>
-    <title></title>
+    <title>Compétition d'échecs</title>
 </head>
 <body class='body' id='body'>
     <div class="menu">
     	<ul>
-    		<li><a href="">Commande "_help"</a></li>
-    		<li class="a"><a href="">Commande "register"</a></li>
-    		<li class="a"><a href="">Commande "result"</a></li>
-    		<li class="a"><a href="">Commande "result_confirm"</a></li>
-    		<li class="a"><a href="">Commande "score_class"</a></li>
-    		<li class="a"><a href="">Commande "score_player"</a></li>
-    		<li class="a"><a href="">Commande "modif_class"</a></li>
-    		<li class="a"><a href="">Commande "modif_player"</a></li>
+    		<li><a href="#help">Commande "_help"</a></li>
+    		<li class="a"><a href="#register">Commande "register"</a></li>
+    		<li class="a"><a href="#result">Commande "result"</a></li>
+    		<li class="a"><a href="#confirm">Commande "result_confirm"</a></li>
+    		<li class="a"><a href="#s_class">Commande "score_class"</a></li>
+    		<li class="a"><a href="#s_player">Commande "score_player"</a></li>
+    		<li class="a"><a href="#modif_c">Commande "modif_class"</a></li>
+    		<li class="a"><a href="#modif_p">Commande "modif_player"</a></li>
     	</ul>
     </div>
     <div class="list">
+        <div>
+            <h1 class="h" id="help">La commande help</h1>
+            <p class="p">
+                La commande (sous sa forme complète : <span>!match__help</span>) est la commande faisait un cours résumé des syntaxes des commandes du bot.
+            </p>
+        </div>
     	<div>
-    		<h1 class="h">La commande register</h1>
+    		<h1 class="h" id="register">La commande register</h1>
     		<p class="p">
-    			La commande (sous sa forme complète : !match_register) est la commande servant à s'enregister auprès du bot en y saisissant les paramètres associés, il faut donc joindre à la commande les paramètres dans l'ordre suivant : Classe Nom_joueur Poule.
+    			La commande (sous sa forme complète : <span>!match_register</span>) est la commande servant à s'enregister auprès du bot en y saisissant les paramètres associés, il faut donc joindre à la commande les paramètres dans l'ordre suivant : Classe Nom_joueur Poule.<br><br>
+                <span>
+                     Classe = classe dans laquelle vous allez être enregistré<br>Nom_joueur = votre prénom<br>Poule = poule dans laquelle vous ferez parti
+                </span>
+               
     		</p>
     	</div>
     	<div>
-    		<h1 class="h">La commande result</h1>
+    		<h1 class="h" id="result">La commande result</h1>
     		<p class="p">
-    			La commande (sous sa forme complète : !match_result) est la commande servant à fournir un résultat de match qu'il faudra confirmer par la suite, la commande s'éffectue donc accompagné des paramètres : @Joueur1 ClasseJ1 NomJ1 ScoreJ1 @Joueur2 ClasseJ2 NomJ2 ScoreJ2.
+    			La commande (sous sa forme complète : <span>!match_result</span>) est la commande servant à fournir un résultat de match qu'il faudra confirmer par la suite, la commande s'éffectue donc accompagné des paramètres : @Joueur1 ClasseJ1 NomJ1 ScoreJ1 @Joueur2 ClasseJ2 NomJ2 ScoreJ2.<br><br>
+                <span>
+                    @Joueur1 = ping discord du joueur faisant actuellement la commande<br> ClasseJ1 = classe de la personne associe à @Joueur1<br>NomJ1 = nom enregistré de la personne @Joueur1<br>ScoreJ1 = score de la personne associé à @Joueur1
+                    <br>@Joueur2 = ping discord du joueur adversaire à la personne faisant la commande<br> ClasseJ2 = classe de la personne associe à @Joueur2<br>NomJ2 = nom enregistré de la personne @Joueur2<br>ScoreJ2 = score de la personne associé à @Joueur2
+                </span>
     		</p>
     	</div>
     	<div>
-    		<h1 class="h">La commande result_confirm</h1>
+    		<h1 class="h" id="confirm">La commande result_confirm</h1>
     		<p class="p">
-    			La commande (sous sa forme complète : !match_result_confirm) est donc la commande permettant à un joueur A ayant joué une partie avec un autre joueur B qui a donné le résultat, de confirmer le résultat donné par le joueur B. Pour éviter tout soupçons de triche dans les paramètres nous allons retrouver : @Toooom#2689 @JoueurB *arg @JoueurA.<br>A savoir que le paramètre "*arg" correspond à une lettre entre 'y' et n correspondant respectivement à "yes" pour confirmer et "no" pour refuser. le résultat donné auparavant.
+    			La commande (sous sa forme complète : <span>!match_result_confirm</span>) est donc la commande permettant à un joueur A ayant joué une partie avec un autre joueur B qui a donné le résultat, de confirmer le résultat donné par le joueur B. Pour éviter tout soupçons de triche dans les paramètres nous allons retrouver : @Toooom#2689 @JoueurB *arg @JoueurA.<br>A savoir que le paramètre "*arg" correspond à une lettre entre 'y' et n correspondant respectivement à "yes" pour confirmer et "no" pour refuser. le résultat donné auparavant.<br><br>
+                <span>
+                    @Toooom#2689 = ping discord de l'administrateur Tom<br>@JoueurB = ping discord du joueur ayant fait la commande result pour le résultat de votre match<br>*arg = caractère choisit entre 'y' pour confirmer les résultats donnés auparavant et 'n' pour refuser les résultats donnés<br>@JoueurA = ping discord du joueur qui confirme actuellement la commande result envoyé précédemment
+                </span>
     		</p>
     	</div>
     	<div>
-    		<h1 class="h">La commande score_class</h1>
+    		<h1 class="h" id="s_class">La commande score_class</h1>
     		<p class="p">
-    			La commande (sous sa forme complète : !match_score_class) permet d'obtenir le score total d'une classe donné; voici les paramètres de la commande : Classe.
+    			La commande (sous sa forme complète : <span>!match_score_class</span>) permet d'obtenir le score total d'une classe donné; voici les paramètres de la commande : Classe.<br><br>Classe = classe dont vous voulez obtenir le score
     		</p>
     	</div>
     	<div>
-    		<h1 class="h">La commande score_player</h1>
+    		<h1 class="h" id="s_player">La commande score_player</h1>
     		<p class="p">
-    			La commande (sous sa forme complète : !match_score_player) permet donc d'obtenir le score total d'un joueur d'une certaine classe, la liste des paramètre est : Classe Nom_joueur.
+    			La commande (sous sa forme complète : <span>!match_score_player</span>) permet donc d'obtenir le score total d'un joueur d'une certaine classe, la liste des paramètre est : Classe Nom_joueur.<br><br>
+                <span>
+                    Classe = classe du joueur concerné<br>Nom_joueur = joueur dont vous voulez obtenir le score
+                </span>
     		</p>
     	</div>
     	<div>
-    		<h1 class="h">La commande modif_class</h1>
+    		<h1 class="h" id="modif_c">La commande modif_class</h1>
     		<p class="p">
-    			La commande (sous sa forme complète : !match_modif_class) grâce à cette commande vous allez pouvoir changer votre classe par une nouvelle, les paramètres seront donc : Classe1 Nom_joueur Classe2.
+    			La commande (sous sa forme complète : <span>!match_modif_class</span>) grâce à cette commande vous allez pouvoir changer votre classe par une nouvelle, les paramètres seront donc : Classe1 Nom_joueur Classe2.<br><br>
+                <span>
+                    Classe1 = votre classe actuelle<br>Nom_joueur = votre nom<br>Classe2 = votre future classe
+                </span>
     		</p>
     	</div>
     	<div>
-    		<h1 class="h">La commande modif_player</h1>
+    		<h1 class="h" id="modif_p">La commande modif_player</h1>
     		<p class="p">
-    			La commande (sous sa forme complète : !match_modif_player) va donc permettrre un changement de nom, il faudra donc fournir en paramètre : Classe Nom1 Nom2.<br>Nom1 = nom actuel<br>Nom2 = futur nom
+    			La commande (sous sa forme complète : <span>!match_modif_player</span>) va donc permettrre un changement de nom, il faudra donc fournir en paramètre : Classe Nom1 Nom2.<br><br>
+                <span>Classe = classe dans laquelle vous êtes<br>Nom1 = votre nom actuel<br>Nom2 = votre futur nom</span>
     		</p>
     	</div>
     </div>
-
-<script src='js/main.js'></script>
+    <footer>
+        © LION Emmanuel 2002-2021
+    </footer>
 </body>
 </html>
