@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang='fr' style='scroll-behavior: smooth;'>
+<head>
+    <link href='https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' rel='stylesheet' integrity='sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN' crossorigin='anonymous'>
+    <link rel='icon' type='text/css' href='img/votre_logo.jpg'>
+    <link rel='stylesheet' type='text/css' href='css/styles.css'>
+    <meta charset='utf-8'>
+    <title></title>
+</head>
+<body class='body' id='body'>
+    <div class="menu">
+    	<ul>
+    		<li><a href="">Commande "_help"</a></li>
+    		<li class="a"><a href="">Commande "register"</a></li>
+    		<li class="a"><a href="">Commande "result"</a></li>
+    		<li class="a"><a href="">Commande "result_confirm"</a></li>
+    		<li class="a"><a href="">Commande "score_class"</a></li>
+    		<li class="a"><a href="">Commande "score_player"</a></li>
+    		<li class="a"><a href="">Commande "modif_class"</a></li>
+    		<li class="a"><a href="">Commande "modif_player"</a></li>
+    	</ul>
+    </div>
+    <div class="list">
+    	<div>
+    		<h1 class="h">La commande register</h1>
+    		<p class="p">
+    			La commande (sous sa forme complète : !match_register) est la commande servant à s'enregister auprès du bot en y saisissant les paramètres associés, il faut donc joindre à la commande les paramètres dans l'ordre suivant : Classe Nom_joueur Poule.
+    		</p>
+    	</div>
+    	<div>
+    		<h1 class="h">La commande result</h1>
+    		<p class="p">
+    			La commande (sous sa forme complète : !match_result) est la commande servant à fournir un résultat de match qu'il faudra confirmer par la suite, la commande s'éffectue donc accompagné des paramètres : @Joueur1 ClasseJ1 NomJ1 ScoreJ1 @Joueur2 ClasseJ2 NomJ2 ScoreJ2.
+    		</p>
+    	</div>
+    	<div>
+    		<h1 class="h">La commande result_confirm</h1>
+    		<p class="p">
+    			La commande (sous sa forme complète : !match_result_confirm) est donc la commande permettant à un joueur A ayant joué une partie avec un autre joueur B qui a donné le résultat, de confirmer le résultat donné par le joueur B. Pour éviter tout soupçons de triche dans les paramètres nous allons retrouver : @Toooom#2689 @JoueurB *arg @JoueurA.<br>A savoir que le paramètre "*arg" correspond à une lettre entre 'y' et n correspondant respectivement à "yes" pour confirmer et "no" pour refuser. le résultat donné auparavant.
+    		</p>
+    	</div>
+    	<div>
+    		<h1 class="h">La commande score_class</h1>
+    		<p class="p">
+    			La commande (sous sa forme complète : !match_score_class) permet d'obtenir le score total d'une classe donné; voici les paramètres de la commande : Classe.
+    		</p>
+    	</div>
+    	<div>
+    		<h1 class="h">La commande score_player</h1>
+    		<p class="p">
+    			La commande (sous sa forme complète : !match_score_player) permet donc d'obtenir le score total d'un joueur d'une certaine classe, la liste des paramètre est : Classe Nom_joueur.
+    		</p>
+    	</div>
+    	<div>
+    		<h1 class="h">La commande modif_class</h1>
+    		<p class="p">
+    			La commande (sous sa forme complète : !match_modif_class) grâce à cette commande vous allez pouvoir changer votre classe par une nouvelle, les paramètres seront donc : Classe1 Nom_joueur Classe2.
+    		</p>
+    	</div>
+    	<div>
+    		<h1 class="h">La commande modif_player</h1>
+    		<p class="p">
+    			La commande (sous sa forme complète : !match_modif_player) va donc permettrre un changement de nom, il faudra donc fournir en paramètre : Classe Nom1 Nom2.<br>Nom1 = nom actuel<br>Nom2 = futur nom
+    		</p>
+    	</div>
+    </div>
+
+<script src='js/main.js'></script>
+</body>
+</html>

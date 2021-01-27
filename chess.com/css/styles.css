@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Tangerine:wght@700&display=swap&family=Roboto');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+
+body{
+	background: url('../img/wallpaper2.jpeg');
+	background-size: 90%;
+	background-position: 50%;
+	background-attachment: fixed;
+	min-width: 100%;
+	min-height: 300vh;
+}
+
+.menu{
+	position: fixed;
+	left: 0;
+	top: 15%;
+	height: 70%;
+	width: 300px;
+	border: 2px solid #fbece9;
+	border-radius: 0 5% 5% 0;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.menu ul{
+	list-style: none;
+}
+
+.menu .a{
+	margin-top: 25px;
+}
+
+.menu a{
+	font-family: 'Tangerine', cursive;
+	color: #fbece9;
+	font-size: 215%;
+	transition: color 0.6s;
+}
+
+.menu a:hover{
+	color: #b38076;
+}
+
+.list{
+	width: 1000px;
+	margin: auto;
+	transform: translateX(4%);
+	min-height: 200vh;
+	border: 1px solid #fbece9;
+	color: #fbece9;
+}
+
+.list div{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	margin-top: 50px;
+}
+
+.p{
+	font-family: 'Arial', sans-serif;
+	font-family: 100px;
+	max-width: 80%;
+}
+
+.h{
+	font-size: 500%;
+	width: 100%;
+	text-align: center;
+	font-family: 'Tangerine', cursive;
+}
