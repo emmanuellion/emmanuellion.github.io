@@ -18,6 +18,8 @@
     		<li class="a"><a href="#s_player">Commande "score_player"</a></li>
     		<li class="a"><a href="#modif_c">Commande "modif_class"</a></li>
     		<li class="a"><a href="#modif_p">Commande "modif_player"</a></li>
+            <li class="a"><a href="#edit_p">Commande "edit_color_profil"</a></li>
+            <li class="a"><a href="#show_p">Commande "show_profil"</a></li>
     	</ul>
     </div>
     <div class="list">
@@ -30,9 +32,13 @@
     	<div>
     		<h1 class="h" id="register">La commande register</h1>
     		<p class="p">
-    			La commande (sous sa forme complète : <span>!match_register</span>) est la commande servant à s'enregister auprès du bot en y saisissant les paramètres associés, il faut donc joindre à la commande les paramètres dans l'ordre suivant : @Joueur Classe.<br><br>
+    			La commande (sous sa forme complète : <span>!match_register</span>) est la commande servant à s'enregister auprès du bot en y saisissant les paramètres associés, <br>il faut donc joindre à la commande les paramètres dans l'ordre suivant : @Joueur Classe Nom_joueur.<br><br>
                 <span>
-                    @Joueur = ping discord de vous même<br>Classe = classe dans laquelle vous allez être enregistré<br>Nom_joueur = votre prénom
+                    @Joueur = ping discord de vous même
+                    <br>
+                    Classe = classe dans laquelle vous allez être enregistré
+                    <br>
+                    Nom_joueur = votre prénom
                 </span>
                
     		</p>
@@ -40,26 +46,38 @@
     	<div>
     		<h1 class="h" id="result">La commande result</h1>
     		<p class="p">
-    			La commande (sous sa forme complète : <span>!match_result</span>) est la commande servant à fournir un résultat de match qu'il faudra confirmer par la suite, la commande s'éffectue donc accompagné des paramètres : @Joueur1 ClasseJ1 NomJ1 ScoreJ1 @Joueur2 ClasseJ2 NomJ2 ScoreJ2.<br><br>
+    			La commande (sous sa forme complète : <span>!match_result</span>) est la commande servant à fournir un résultat de match qu'il faudra confirmer par la suite, <br>la commande s'éffectue donc accompagné des paramètres : ScoreJ1 ClasseJ2 NomJ2 ScoreJ2.<br><br>
                 <span>
-                    @Joueur1 = ping discord du joueur faisant actuellement la commande<br> ClasseJ1 = classe de la personne associe à @Joueur1<br>NomJ1 = nom enregistré de la personne @Joueur1<br>ScoreJ1 = score de la personne associé à @Joueur1
-                    <br>@Joueur2 = ping discord du joueur adversaire à la personne faisant la commande<br> ClasseJ2 = classe de la personne associe à @Joueur2<br>NomJ2 = nom enregistré de la personne @Joueur2<br>ScoreJ2 = score de la personne associé à @Joueur2
+                    ScoreJ1 = score de la personne associé à @Joueur1
+                    <br>
+                    ClasseJ2 = classe de la personne associe à @Joueur2
+                    <br
+                    >NomJ2 = nom enregistré de la personne @Joueur2
+                    <br>
+                    ScoreJ2 = score de la personne associé à @Joueur2
                 </span>
     		</p>
     	</div>
     	<div>
     		<h1 class="h" id="confirm">La commande result_confirm</h1>
     		<p class="p">
-    			La commande (sous sa forme complète : <span>!match_result_confirm</span>) est donc la commande permettant à un joueur A ayant joué une partie avec un autre joueur B qui a donné le résultat, de confirmer le résultat donné par le joueur B. Pour éviter tout soupçons de triche dans les paramètres nous allons retrouver : @Toooom#2689 @JoueurB *arg @JoueurA.<br>A savoir que le paramètre "*arg" correspond à une lettre entre 'y' et n correspondant respectivement à "yes" pour confirmer et "no" pour refuser. le résultat donné auparavant.<br><br>
+    			La commande (sous sa forme complète : <span>!match_result_confirm</span>) est donc la commande permettant à un joueur A ayant joué une partie avec un autre joueur B qui a donné le résultat, de confirmer le résultat donné par le joueur B. <br>Pour éviter tout soupçons de triche dans les paramètres nous allons retrouver : @Toooom#2689 @JoueurB *arg.<br>A savoir que le paramètre "*arg" correspond à une lettre entre 'y' et 'n' correspondant respectivement à "yes" pour confirmer et "no" pour refuser le résultat donné auparavant.<br><br>
                 <span>
-                    @Toooom#2689 = ping discord de l'administrateur Tom<br>@JoueurB = ping discord du joueur ayant fait la commande result pour le résultat de votre match<br>*arg = caractère choisit entre 'y' pour confirmer les résultats donnés auparavant et 'n' pour refuser les résultats donnés<br>@JoueurA = ping discord du joueur qui confirme actuellement la commande result envoyé précédemment
+                    @Toooom#2689 = ping discord de l'administrateur Tom
+                    <br>
+                    @JoueurB = ping discord du joueur ayant fait la commande result pour le résultat de votre match
+                    <br>
+                    arg = caractère choisit entre 'y' pour confirmer les résultats donnés auparavant et 'n' pour refuser les résultats donnés
                 </span>
     		</p>
     	</div>
     	<div>
     		<h1 class="h" id="s_class">La commande score_class</h1>
     		<p class="p">
-    			La commande (sous sa forme complète : <span>!match_score_class</span>) permet d'obtenir le score total d'une classe donné; voici les paramètres de la commande : Classe.<br><br>Classe = classe dont vous voulez obtenir le score
+    			La commande (sous sa forme complète : <span>!match_score_class</span>) permet d'obtenir le score total d'une classe donné; voici les paramètres de la commande : Classe.<br><br>
+                <span>
+                    Classe = classe dont vous voulez obtenir le score
+                </span>
     		</p>
     	</div>
     	<div>
@@ -67,16 +85,18 @@
     		<p class="p">
     			La commande (sous sa forme complète : <span>!match_score_player</span>) permet donc d'obtenir le score total d'un joueur d'une certaine classe, la liste des paramètre est : Classe Nom_joueur.<br><br>
                 <span>
-                    Classe = classe du joueur concerné<br>Nom_joueur = joueur dont vous voulez obtenir le score
+                    Classe = classe du joueur concerné
+                    <br>
+                    Nom_joueur = joueur dont vous voulez obtenir le score
                 </span>
     		</p>
     	</div>
     	<div>
     		<h1 class="h" id="modif_c">La commande modif_class</h1>
     		<p class="p">
-    			La commande (sous sa forme complète : <span>!match_modif_class</span>) grâce à cette commande vous allez pouvoir changer votre classe par une nouvelle, les paramètres seront donc : Classe1 Nom_joueur Classe2.<br><br>
+    			La commande (sous sa forme complète : <span>!match_modif_class</span>) grâce à cette commande vous allez pouvoir changer votre classe par une nouvelle, les paramètres seront donc : Classe.<br><br>
                 <span>
-                    Classe1 = votre classe actuelle<br>Nom_joueur = votre nom<br>Classe2 = votre future classe
+                    Classe = votre future classe
                 </span>
     		</p>
     	</div>
@@ -87,6 +107,21 @@
                 <span>Classe = classe dans laquelle vous êtes<br>Nom1 = votre nom actuel<br>Nom2 = votre futur nom</span>
     		</p>
     	</div>
+        <div>
+            <h1 class="h" id="edit_p">La commande edit_color_profil</h1>
+            <p class="p">
+                La commande (sous sa forme complète : <span>!match_edit_color_profil</span>) va donc permettrre un changement de la couleur lors de l'affichage du profil de la personne via la commande qui va suivre celle-ci, il faudra donc fournir en paramètre : Hexa.<br><br>
+                <span>
+                    Hexa = code héxadécimal de la couleur choisie (ex : rouge => ff0000, le signe '#' ou '0x' ne doit pas être présent devant le code héxadécimal)
+                </span>
+            </p>
+        </div>
+        <div>
+            <h1 class="h" id="show_p">La commande show_profil</h1>
+            <p class="p">
+                La commande (sous sa forme complète : <span>!match_show_profil</span>) va donc permettrre d'aficher son profil, cette commande ne requiert d'aucun paramètre
+            </p>
+        </div>
     </div>
     <footer>
         © LION Emmanuel 2002-2021
