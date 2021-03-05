@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang='fr' style='scroll-behavior: smooth;'>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel='icon' type='text/css' href='img/pawn.png'>
     <link rel='stylesheet' type='text/css' href='css/normalize.css'>
     <link rel='stylesheet' type='text/css' href='css/styles.css'>
+    <link rel='stylesheet' type='text/css' href='css/mobile.css'>
     <meta charset='utf-8'>
     <title>Compétition d'échecs</title>
 </head>
@@ -17,13 +19,14 @@
     		<li class="a"><a href="#s_player">Commande "score_player"</a></li>
             <li class="a"><a href="#edit_p">Commande "edit_color_profil"</a></li>
             <li class="a"><a href="#show_p">Commande "show_profil"</a></li>
+            <li class="a"><a href="#ans_sondage">Commande "answer_sondage"</a></li>
     	</ul>
     </div>
     <div class="list">
     	<div>
     		<h1 class="h" id="register">La commande register</h1>
     		<p class="p">
-    			La commande (sous sa forme complète : <span>!match_register</span>) est la commande servant à s'enregister auprès du bot en y saisissant les paramètres associés, <br>il faut donc joindre à la commande les paramètres dans l'ordre suivant : @Joueur Classe Nom_joueur.<br><br>
+    			La commande est la commande servant à s'enregister auprès du bot en y saisissant les paramètres associés, la commande accompagnée de paramètre ressemblera donc à ça : <br><span>!register @Joueur Classe Nom_joueur</span>.<br><br>
                 <span>
                     @Joueur = ping discord de vous même
                     <br>
@@ -37,7 +40,8 @@
     	<div>
     		<h1 class="h" id="result">La commande result</h1>
     		<p class="p">
-    			La commande (sous sa forme complète : <span>!match_result</span>) est la commande servant à fournir un résultat de match qu'il faudra confirmer par la suite, <br>la commande s'éffectue donc accompagné des paramètres : ScoreJ1 ClasseJ2 NomJ2 ScoreJ2.<br><br>
+    			La commande est la commande servant à fournir un résultat de match qu'il faudra confirmer par la suite, elle prendra la forme de : <br>
+                <span>!result ScoreJ1 ClasseJ2 NomJ2 ScoreJ2</span>.<br><br>
                 <span>
                     ScoreJ1 = votre score lors de la partie
                     <br>
@@ -52,11 +56,12 @@
     	<div>
     		<h1 class="h" id="confirm">La commande result_confirm</h1>
     		<p class="p">
-    			La commande (sous sa forme complète : <span>!match_result_confirm</span>) est donc la commande permettant à un joueur A ayant joué une partie avec un autre joueur B qui a donné le résultat, de confirmer le résultat donné par le joueur B. <br>Pour éviter tout soupçons de triche dans les paramètres nous allons retrouver : @Toooom#2689 @JoueurB *arg.<br>A savoir que le paramètre "*arg" correspond à une lettre entre 'y' et 'n' correspondant respectivement à "yes" pour confirmer et "no" pour refuser le résultat donné auparavant.<br><br>
+    			La commande sert à confirmer le résultat d'un match vous concernant déposé auparavant, la commande prendra donc la forme suivant : <br><span>!result_confirm @Toooom#2689 @JoueurB arg</span>
+                <br><br>
                 <span>
                     @Toooom#2689 = ping discord de l'administrateur Tom
                     <br>
-                    @JoueurB = ping discord du joueur ayant fait la commande result pour le résultat de votre match
+                    @JoueurB = ping discord du joueur ayant fait la commande result pour votre match
                     <br>
                     arg = caractère choisit entre 'y' pour confirmer les résultats donnés auparavant et 'n' pour refuser les résultats donnés
                 </span>
@@ -65,7 +70,7 @@
     	<div>
     		<h1 class="h" id="s_class">La commande score_class</h1>
     		<p class="p">
-    			La commande (sous sa forme complète : <span>!match_score_class</span>) permet d'obtenir le score total d'une classe donné; voici les paramètres de la commande : Classe.<br><br>
+    			La commande permet d'obtenir le score total d'une classe donné, la commade est : <br><span>!score_class Classe</span>.<br><br>
                 <span>
                     Classe = classe dont vous voulez obtenir le score
                 </span>
@@ -74,7 +79,7 @@
     	<div>
     		<h1 class="h" id="s_player">La commande score_player</h1>
     		<p class="p">
-    			La commande (sous sa forme complète : <span>!match_score_player</span>) permet donc d'obtenir le score total d'un joueur d'une certaine classe, la liste des paramètre est : Classe Nom_joueur.<br><br>
+    			La commande permet donc d'obtenir le score total d'un joueur d'une certaine classe, la commande est donc : <br><span>!score_player Classe Nom_joueur</span>.<br><br>
                 <span>
                     Classe = classe du joueur concerné
                     <br>
@@ -85,7 +90,7 @@
         <div>
             <h1 class="h" id="edit_p">La commande edit_color_profil</h1>
             <p class="p">
-                La commande (sous sa forme complète : <span>!match_edit_color_profil</span>) va donc permettrre un changement de la couleur lors de l'affichage du profil de la personne via la commande qui va suivre celle-ci, il faudra donc fournir en paramètre : Hexa.<br><br>
+                La commande va donc permettrre un changement de la couleur lors de l'affichage du profil de la personne via la commande suivant : <br><span>!edit_color_profil Hexa</span>.<br><br>
                 <span>
                     Hexa = code héxadécimal de la couleur choisie (ex : rouge => ff0000, le signe '#' ou '0x' ne doit pas être présent devant le code héxadécimal)
                 </span>
@@ -94,7 +99,18 @@
         <div>
             <h1 class="h" id="show_p">La commande show_profil</h1>
             <p class="p">
-                La commande (sous sa forme complète : <span>!match_show_profil</span>) va donc permettrre d'aficher son profil, cette commande ne requiert d'aucun paramètre
+                La commande va donc permettrre d'aficher son profil, cette commande s'exécute simplement en faisant : <br><span>!show_profil</span>
+            </p>
+        </div>
+        <div>
+            <h1 class="h" id="ans_sondage">La commande answer_sondage</h1>
+            <p class="p">
+                Cette commande vous permettra de donner votre avis à un sondage créé via son appel qui est le suivant : <br><span>!answer_sondage Id Choice</span>.<br><br>
+                <span>
+                    Id = id du sondage (demandez à un administrateur si besoin)
+                    <br>
+                    Choice = votre choix parmi les 2 choix (si les deux choix sont des suites de mots veuillez renseigner votre choix entre guillements : !answer_sondage 1 "mon choix")
+                </span>
             </p>
         </div>
     </div>

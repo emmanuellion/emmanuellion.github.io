@@ -1,0 +1,35 @@
+@media screen and (max-width: 600px){
+	.menu{
+		display: none;
+	}
+
+	.h{
+		font-size: 1000%;
+	}
+
+	.p{
+		font-size: 450%;
+	}
+
+	footer{
+		display: none;
+	}
+}
+
+@media screen and (min-width: 601px) and (max-width: 1250px){
+	.menu{
+		display: none;
+	}
+
+	.h{
+		font-size: 750%;
+	}
+
+	.p{
+		font-size: 250%;
+	}
+
+	footer{
+		display: none;
+	}
+}
