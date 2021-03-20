@@ -1,0 +1,26 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body{
+	min-height: 100vh;
+	min-width: 1300px;
+	background-color: rgb(20, 20, 20);
+	color: rgb(250, 250, 250);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+canvas div{
+	position: absolute !important;
+	z-index: 10 !important;
+	width: 300px !important;
+	height: 300px !important;
+	background-color: red !important;
+}

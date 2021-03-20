@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body{
+	min-height: 100vh;
+	min-width: 1300px;
+	background-color: rgb(20, 20, 20);
+	color: rgb(250, 250, 250);
+}
+
+p{
+	position: absolute;
+	z-index: 1001;
+	font-weight: bolder;
+}
+
+canvas{
+	height: 100px;
+	width: 100px;
+	background-color: red;
+	border-radius: 100px;
+}
