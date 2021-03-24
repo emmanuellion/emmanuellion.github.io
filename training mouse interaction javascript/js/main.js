@@ -35,3 +35,23 @@ ball.onmousedown = function(event) {
   };
 
 };
+
+function handleEnd(evt) {
+  evt.preventDefault();
+  var el = document.getElementsByTagName("canvas")[0];
+  var ctx = el.getContext("2d");
+  var touches = evt.changedTouches;
+
+  ctx.lineWidth = 4;
+
+  for (var i=0; i<touches.length; i++) {
+    var color = colorForTouch(touches[i]);
+    var idx = ongoingTouchIndexById(touches[i].identifier);
+
+    ctx.fillStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(ongoingTouches[i].pageX, ongoingTouches[i].pageY);
+    ctx.lineTo(touches[i].pageX, touches[i].pageY);
+    ongoingTouches.splice(i, 1);  // On enlève le point
+  }
+}
