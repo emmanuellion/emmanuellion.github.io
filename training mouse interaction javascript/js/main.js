@@ -36,22 +36,12 @@ ball.onmousedown = function(event) {
 
 };
 
-function handleEnd(evt) {
-  evt.preventDefault();
-  var el = document.getElementsByTagName("canvas")[0];
-  var ctx = el.getContext("2d");
-  var touches = evt.changedTouches;
-
-  ctx.lineWidth = 4;
-
-  for (var i=0; i<touches.length; i++) {
-    var color = colorForTouch(touches[i]);
-    var idx = ongoingTouchIndexById(touches[i].identifier);
-
-    ctx.fillStyle = color;
-    ctx.beginPath();
-    ctx.moveTo(ongoingTouches[i].pageX, ongoingTouches[i].pageY);
-    ctx.lineTo(touches[i].pageX, touches[i].pageY);
-    ongoingTouches.splice(i, 1);  // On enlève le point
+ball.addEventListener('touchmove', function(event) {
+  // If there's exactly one finger inside this element
+  if (event.targetTouches.length == 1) {
+    var touch = event.targetTouches[0];
+    // Place element where the finger is
+    ball.style.left = touch.pageX + 'px';
+    ball.style.top = touch.pageY + 'px';
   }
-}
+}, false);
