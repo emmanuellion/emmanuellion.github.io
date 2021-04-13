@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css"/>
+    <title>Conway's Game of Life</title>
+</head>
+<body>
+	<label id="count">0</label>
+    <div>
+        <canvas id="canvas" height="500" width="500"></canvas>
+    </div>
+    <div id="oui">
+    	<div>
+    		<label>Change width</label>
+    		<input type="range" id="range_W" min="100" max="700" onchange="actualise_width()">
+    	</div>
+    	<div>
+    		<label>Change height</label>
+    		<input type="range" id="range_H" min="100" max="700" onchange="actualise_height()">
+    	</div>
+    	<div>
+    		<label>Taille d'une celllule</label>
+    		<input type="range" id="range_C" min="5" max="20" onchange="actualise_size_cells()">
+    	</div>
+    	<div>
+    		<label>Délai entre chaque génération</label>
+    		<input type="range" id="range_T" min="10" max="1000" onchange="actualise_speed()">
+    	</div>
+    	<div>
+    		<label>Couleur des cellules vivantes</label>
+    		<input type="color" id="input_color">
+    	</div>
+    	<div>
+    		<label>Couleur des cellules visitées</label>
+    		<input type="color" id="input_color_visited">
+    	</div>
+    	<div>
+    		<label>
+    			Start
+    		</label>
+    		<input type="radio" id="go" onchange="go()">
+    	</div>
+    	<div>
+    		<label>Play/Pause</label>
+    		<input type="checkbox" id="play" onchange="play()">
+    	</div>
+    	
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

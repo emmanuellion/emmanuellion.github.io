@@ -1,0 +1,22 @@
+*{
+	padding: 0;
+	margin: 0;
+	font-family: Arial;
+}
+
+canvas{
+    border: solid 1px black;
+}
+
+#oui{
+	display: flex;
+	align-items: center;
+}
+
+#oui div{
+	margin-right: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
