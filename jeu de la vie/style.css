@@ -8,12 +8,12 @@ canvas{
     border: solid 1px black;
 }
 
-#oui{
+.oui{
 	display: flex;
 	align-items: center;
 }
 
-#oui div{
+.oui div{
 	margin-right: 10px;
 	display: flex;
 	flex-direction: column;

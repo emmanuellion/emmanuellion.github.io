@@ -6,34 +6,37 @@
     <title>Conway's Game of Life</title>
 </head>
 <body>
-	<label id="count">0</label>
+    <div class="oui">
+        Génération n°<label id="count">0</label>
+    </div>
+	
     <div>
         <canvas id="canvas" height="500" width="500"></canvas>
     </div>
-    <div id="oui">
+    <div class="oui">
     	<div>
     		<label>Change width</label>
-    		<input type="range" id="range_W" min="100" max="700" onchange="actualise_width()">
+    		<input type="range" id="range_W" min="100" max="700" value="350" onchange="actualise_width()">
     	</div>
     	<div>
     		<label>Change height</label>
-    		<input type="range" id="range_H" min="100" max="700" onchange="actualise_height()">
+    		<input type="range" id="range_H" min="100" max="700" value="350" onchange="actualise_height()">
     	</div>
     	<div>
     		<label>Taille d'une celllule</label>
-    		<input type="range" id="range_C" min="5" max="20" onchange="actualise_size_cells()">
+    		<input type="range" id="range_C" min="5" max="20" value="10" onchange="actualise_size_cells()">
     	</div>
     	<div>
     		<label>Délai entre chaque génération</label>
-    		<input type="range" id="range_T" min="10" max="1000" onchange="actualise_speed()">
+    		<input type="range" id="range_T" min="10" max="1000" value="500" onchange="actualise_speed()">
     	</div>
     	<div>
     		<label>Couleur des cellules vivantes</label>
-    		<input type="color" id="input_color">
+    		<input type="color" id="input_color" value="#000000">
     	</div>
     	<div>
     		<label>Couleur des cellules visitées</label>
-    		<input type="color" id="input_color_visited">
+    		<input type="color" id="input_color_visited" value="#000000">
     	</div>
     	<div>
     		<label>

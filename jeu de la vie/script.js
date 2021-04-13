@@ -34,8 +34,13 @@ function play(){
 function go(){
   const canvas = document.getElementById("canvas");
   params.ctx = canvas.getContext("2d");
+  params.height = parseInt(document.querySelector('#range_H').value);
+  params.width = parseInt(document.querySelector('#range_W').value);
+  params.cellSize = parseInt(document.querySelector('#range_C').value);
+  params.timeOut = parseInt(document.querySelector('#range_T').value);
   params.ALIVE = document.querySelector('#input_color').value;
   params.VISITED = document.querySelector('#input_color_visited').value;
+  console.log(params.height, params.width, params.cellSize, params.timeOut, params.ALIVE, params.VISITED);
   params.DEAD = "#ffffff";
   taked = initCells(params);
   params.cells = taked.cells;
