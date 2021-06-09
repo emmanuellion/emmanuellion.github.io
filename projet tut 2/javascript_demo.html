@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Démo javascript</title>
+</head>
+<body>
+	<button id="but" style="position: absolute; top: 45%; left: 45%; width: 10%; height: 10%;">Click me !</button>
+	<span id="hidden" style="position: absolute; top: 55%; left: 45%; width: 10%; height: 10%; display: none;">Le texte est découvert !</span>
+	<script type="text/javascript">
+		const button = document.getElementById('but');
+		const span = document.querySelector('#hidden');
+		button.addEventListener("click" , () =>{
+			console.log("%c Clicked !", "color: red;");
+			alert("Clicked !");
+			span.style.display = "block";
+		});
+	</script>
+</body>
+</html>
