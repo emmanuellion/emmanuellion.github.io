@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<meta name="author" content="Emmanuel le gros forceur "> 
+    	<meta name="description" content="Visualiseur d'objet 3D">
+
+		<link rel='stylesheet' type='text/css' href='styles.css'>
+		
+		<!-- Bootstrap CSS -->
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		
+		<title>Visualiseur de volume numérique 3D</title>
+	</head>
+	<body>
+		<div class="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
+		   <!-- Titre -->
+			<main class="px-5">
+				<h1>Visualiseur de volumes numériques 3D</h1>
+			</main>
+		
+			
+		</div>
+
+		<div id="t" class="conetent-center h-100 text-center text-white bg-dark">
+
+		<div class="d-flex justify-content-center">
+			<div class="col-md-6">
+				<div class="50 p-5 bg-light border rounded-3">
+					<div class="mb-3">
+						<!--balise import files-->
+						<label for="formFile" class="form-label">Choisissez le fichier dv à charger</label>
+						<input class="form-control" type="file" id="formFile">
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- La barre de navigation pour utiliser les différentes options -->
+		<div class="bar">
+			<ul class="ul">
+				<li class="li_p">Nuage de point</li>
+				<li class="li_c">Roue chromatique</li>
+				<li class="li_g">Nuance de gris</li>
+			</ul>
+			<div class="sec point">
+				<label class="label">Montrer les points centraux</label>
+				<input type="checkbox" class="input" id="point_middle">
+				<label class="label">Point de croute</label>
+				<input type="checkbox" class="input" id="point_de_croute">
+				<label class="label">Normal</label>
+				<input type="checkbox" class="input" id="point_normal">
+			</div>
+			<div class="sec chroma">
+				<label class="label">Un long texte</label>
+				<input type="range" class="input">
+				<label class="label">Un long texte</label>
+				<input type="range" class="input">
+			</div>
+			<div class="sec gray">
+				<label class="label">Un long texte</label>
+				<input type="range" class="input">
+				<label class="label">Un long texte</label>
+				<input type="range" class="input">
+			</div>
+		</div>
+
+		<!-- La balise dans laquelle sera visualisé le contenu du code cube1.js -->
+		<div id="visu2">En attente de fichier</div>
+		
+		<!--
+		//balise fenetre 3D
+		<div class="d-flex justify-content-center"></div>
+		  <div class="col-md-6">
+			<div class="h-100 p-5 bg-light border rounded-3">
+				<h2>Add borders</h2>
+					
+				<div class="mb-3"></div>
+
+				
+				
+		
+				
+				
+				//bouton nouvelle fenêtre
+				<button id="btnPopup" class="btn btn-outline-secondary">Nouvelle fenêtre</button>
+				<div id="overlay" class="overlay"></div>
+				<div id="popup" class="popup"></div>
+				<span id="btnClose" class="btn btn-light btn-lg mb-2">&times;</span>
+					
+				<div class='resizable draggable'></div>
+				<div class="ui-resizable-handle ui-resizable-nw"></div>
+				<div class="ui-resizable-handle ui-resizable-ne"></div>
+				<div class="ui-resizable-handle ui-resizable-sw"></div>
+				<div class="ui-resizable-handle ui-resizable-se"></div>
+				<div class="ui-resizable-handle ui-resizable-n"></div>
+				<div class="ui-resizable-handle ui-resizable-s"></div>
+				<div class="ui-resizable-handle ui-resizable-e"></div>
+				<div class="ui-resizable-handle ui-resizable-w"></div>-
+					
+			</div>
+		</div>
+		 -->
+
+		<footer class="mt-auto text-white-50">
+			<p>© Copyright 2021 LION Emmanuel, COET GOI Muriel, ZOUANIA Eliot, OUKINA Swann, SURGIS Julie - Tous droits réservés.</p>
+		</footer>
+
+		<!-- Notre code Javascript pour construire la visualisation -->
+		<script type="module" src="app.js"></script> 
+		<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+		<script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+		<!--
+		<script id="visualiseur" type="text/javascript" src="https://cdn.emersya.com/f/emersyaLoader.js" id="emersya" routing="CODE_PRODUIT" containerId="ID_DU_CONTENEUR" ></script>
+		<script id="visualiseur" type="text/javascript" src="https://cdn.emersya.com/f/emersyaLoader.js" id="emersya" routing="CODE_PRODUIT" containerId="ID_DU_CONTENEUR" ></script>
+		-->
+		<script src="Site.js"></script>
+		<script>
+			$( function() {
+				$( "#resizable" ).resizable();
+			});
+		</script>
+	</body>
+</html>
+

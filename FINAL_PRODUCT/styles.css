@@ -1,0 +1,231 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body{
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #212529 !important; /*forcer la couleur*/
+}
+
+.bar{
+    margin-top: 5px !important;
+    width: 500px;
+    height: 50px;
+    margin: auto;
+    background-color: #212529;
+    border-radius: 10px;
+    position: relative;
+}
+
+.bar .ul{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    border: 1px solid #fff;
+}
+
+.li_c{
+    margin: 0 25px;
+}
+
+.bar .ul li{
+    list-style: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+}
+
+.bar .ul li:hover{
+    cursor: pointer;
+    background-color: #333;
+    border: 1px solid #7C7C7E;
+}
+
+/*Barre de navigation*/
+.sec{
+    position: absolute;
+    bottom: 100%;
+    display: none;
+    flex-direction: column;
+    background-color: #232357;
+    padding: 10px;
+    border-radius: 10px;
+    width: 300px;
+    height: auto;
+    color: #fff;
+}
+
+/*---Les différents mode d'affichage*/
+.point{
+    left: 3%;
+}
+
+.chroma{
+    left: 36%;
+}
+
+.gray{
+    left: 71%;
+}
+
+#visu2{
+    
+}
+
+#resizable {
+    border: 1px solid #000000;
+    width: 300px;
+    height: 800px;
+    overflow: hidden;
+}
+
+.btnPopup {
+	float: right;
+	cursor: pointer;
+}
+
+.overlay {
+	position: fixed;
+	left: 0px;
+	top:0px;
+	width: 100%;
+	height: 100%;
+	z-index:1;
+	display:none;
+	margin-top: -100px;
+}
+
+.popup {
+	margin: 10% auto;
+	width : 80%;
+}
+
+.btnClose {
+	font-size: 20px;
+	cursor: pointer;
+	color: #fff;
+}
+
+
+/* Intégration CSS Julie et Eliot*/
+
+/* Modification esthétique des bars et bouton du site*/
+
+main{
+    width: 100%;
+}
+
+main h1{
+    width: 100%;
+    text-align: center;
+    color: #fff;
+}
+
+div.p-5{
+    background-color: #212529 !important;
+}
+
+.form-label{
+    color: #fff;
+}
+#nwgrip, #negrip, #swgrip, #segrip, #ngrip, #egrip, #sgrip, #wgrip {
+    width: 10px;
+    height: 10px;
+    background-color: #212529;
+    border: 1px solid #fff;
+}
+#nwgrip {
+    left: -5px;
+    top: -5px;
+}
+#negrip{
+    top: -5px;
+    right: -5px;
+}
+#swgrip{
+    bottom: -5px;
+    left: -5px;
+}
+#segrip{
+    bottom: -5px;
+    right:-5px;
+}
+#ngrip{
+    top: -5px;
+    left:50%;
+}
+#sgrip{
+    bottom: -5px;
+    left: 50%;
+}
+#wgrip{
+    left:-5px;
+    top:50%;
+}
+#egrip{
+    right:-5px;
+    top:50%;
+}
+
+/*Intégration cover CSS Eliot*/
+/*
+ * Header
+ */
+
+header h3{
+    color: #fff;
+}
+.nav-masthead .nav-link {
+    padding: .25rem 0;
+    font-weight: 700;
+    color: #fff;
+    background-color: transparent;
+    border-bottom: .25rem solid transparent;
+}
+  
+.nav-masthead .nav-link:hover,
+.nav-masthead .nav-link:focus {
+    border-bottom-color: #212529;
+}
+  
+.nav-masthead .nav-link + .nav-link {
+    margin-left: 1rem;
+}
+  
+.nav-masthead .active {
+    color: #fff;
+    border-bottom-color: #212529;
+}
+  
+
+.bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+  
+@media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+    }
+}
+
+#resizable{ 
+    width: 50px; height: 50px; padding: 0.5em; 
+}
+
+#resizable h3{
+    text-align: center; margin: 0;
+}
