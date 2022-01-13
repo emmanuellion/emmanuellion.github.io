@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="../css/common.css">
+	<link rel="stylesheet" type="text/css" href="../css/index.css">
+	<title>Accueil</title>
+</head>
+<body style="background-color: #0E002E;">
+	<h2 class="c-white u i">Ce package va vous permettre de générer vos propres barre de progression en toute simplicité !
+	</h2>
+	<p class="f-center margin-t-40 c-white">
+		Voici les fichiers dont vous aurez besoins avec un détails du code se situant à l'intérieur de chacun des fichiers
+	</p>
+	<hr class="margin-t-20 margin-b-20 w-50 margin-auto">
+	<ul class="column column_center flex_center w-100 margin-t-30">
+		<li class="w-100">
+			<a download="../css/css.css" class="c-white u i b">Cliquez ICI pour télécharger le fichier css</a><br>
+			<div class="code w-50">
+				:root{<br>
+					&emsp;--h_bar: 35px;<br>
+					&emsp;--h_border: 5px;<br>
+					&emsp;--bar_size: calc(var(--h_bar) - (var(--h_border)*2));<br>
+				}<br>
+				<br>
+				div[data-progress]{<br>
+					&emsp;width: 0%;<br>
+					&emsp;height: var(--bar_size);<br>
+					&emsp;transition: width 2s ease-in-out;<br>
+					&emsp;text-align: right;<br>
+					&emsp;padding-right: 10px;<br>
+					&emsp;font-size: 16px;<br>
+					&emsp;line-height: var(--bar_size);<br>
+					&emsp;font-weight: bolder;<br>
+					&emsp;color: 	white;<br>
+				}<br>
+				<br>
+				.bar-progress{<br>
+					&emsp;border-radius: 20px;<br>
+					&emsp;width: 250px;<br>
+					&emsp;height: var(--h_bar);<br>
+					&emsp;border: var(--h_border) solid black;<br>
+				}<br>
+				<br>
+				.crop-all{overflow: hidden;}
+			</div>
+		</li>
+		<li class="w-100 margin-t-30">
+			<a download="../js/js.js" class="c-white u i b">Cliquez ICI pour télécharger le fichier JS</a><br>	
+			<div class="code w-50">
+				let tmp = document.getElementsByTagName("div");<br>
+				for(let i = 0; i < tmp.length; i++){<br>
+					&emsp;let div = tmp.item(i);<br>
+					&emsp;if(div.dataset.bg){<br>
+						&emsp;&emsp;div.style.backgroundColor = div.dataset.bg;<br>
+						&emsp;&emsp;if(div.classList.value.includes("bar-progress")){<br>
+							&emsp;&emsp;&emsp;div.style.borderColor = div.dataset.bg;<br>
+						&emsp;&emsp;}<br>
+					&emsp;}<br>
+					&emsp;if(div.dataset.progress){<br>
+						&emsp;&emsp;div.style.width = div.dataset.progress+"%";<br>
+						&emsp;&emsp;if(div.dataset.progress>13)<br>
+							&emsp;&emsp;&emsp;div.innerHTML = div.dataset.progress+"%";<br>
+						&emsp;&emsp;else<br>
+							&emsp;&emsp;&emsp;div.innerHTML = div.dataset.progress;<br>
+					&emsp;}<br>
+				}
+
+			</div>
+		</li>
+	</ul>
+	<hr class="margin-t-20 margin-b-20 w-50 margin-auto">
+	<div class="a w-75 margin-auto">
+		<p class="f-center margin-auto c-white w-75">
+			Ainsi, il ne vous reste qu'à mettre ce code html en remplacant comme bon vous souhaite les valeurs dans les attributs "data-bg" et "data-progress"<br>
+		</p>
+		<div class="code w-75 margin-auto">
+			< div class="card row column_center flex_center" data-bg="#7D49F4"><br>
+				&emsp;< div class="bar-progress crop-all" data-bg="#3B2273"><br>
+					&emsp;&emsp;< div data-progress="100" data-bg="#0ff05e">< /div><br>
+				&emsp;< /div><br>
+			< /div>
+		</div>
+		<p class="f-center margin-t-40 c-white">
+			Et cela vous donnera le résultat ci-dessous :
+		</p>
+		<div class="card row column_center flex_center" data-bg="#7D49F4">
+			<div class="bar-progress crop-all" data-bg="#3B2273">
+				<div data-progress="100" data-bg="#0ff05e"></div>
+			</div>
+		</div>
+	</div>
+	<hr class="margin-t-20 margin-b-20 w-50 margin-auto">
+	<p class="f-center margin-auto c-white w-75">
+		Voici donc d'autres exemples possibles :
+	</p>
+		
+	
+	<div class="card row column_center flex_center" data-bg="#7D49F4">
+		<div class="bar-progress crop-all" data-bg="#3B2273">
+			<div data-progress="57" data-bg="blue"></div>
+		</div>
+	</div>
+	<div class="card row column_center flex_center" data-bg="#7D49F4">
+		<div class="bar-progress crop-all" data-bg="#3B2273">
+			<div data-progress="27" data-bg="#0ec0be"></div>
+		</div>
+	</div>
+	<div class="card row column_center flex_center" data-bg="#7D49F4">
+		<div class="bar-progress crop-all" data-bg="#3B2273">
+			<div data-progress="64" data-bg="#5f305e"></div>
+		</div>
+	</div>
+	<div class="card row column_center flex_center" data-bg="#7D49F4">
+		<div class="bar-progress crop-all" data-bg="#3B2273">
+			<div data-progress="89" data-bg="#f00"></div>
+		</div>
+	</div>
+	<a href="more.html" class="c-white u i b">Et si vous voulez voir toutes les possibilités, cliquez ICI</a>
+	<script src="../js/common.js"></script>
+</body>
+</html>

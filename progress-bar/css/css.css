@@ -1,0 +1,26 @@
+:root{
+	--h_bar: 35px;
+	--h_border: 5px;
+	--bar_size: calc(var(--h_bar) - (var(--h_border)*2));
+}
+
+div[data-progress]{
+	width: 0%;
+	height: var(--bar_size);
+	transition: width 2s ease-in-out;
+	text-align: right;
+	padding-right: 10px;
+	font-size: 16px;
+	line-height: var(--bar_size);
+	font-weight: bolder;
+	color: 	white;
+}
+
+.bar-progress{
+	border-radius: 20px;
+	width: 250px;
+	height: var(--h_bar);
+	border: var(--h_border) solid black;
+}
+
+.crop-all{overflow: hidden;}
