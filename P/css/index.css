@@ -1,0 +1,46 @@
+body{
+	background-color: #67136B;
+}
+
+h1{
+	color: #E12AEB;
+	font-size: 4em;
+	font-weight: bolder;
+	width: fit-content;
+}
+
+.description{
+	color: #E872EE;
+}
+
+.card{
+	width: 300px;
+	height: 100px;
+	border-radius: 10px;
+	transform: translateY(30px);
+	transition: .5s;
+}
+
+.card span{
+	position: absolute;
+	top: 10%;
+	color: transparent;
+}
+
+.card, .card > *{
+	background-color: transparent;
+	color: transparent;
+}
+
+.title{
+	position: relative;
+}
+
+#su{
+	position: absolute;
+	width: 0%;
+	left: 50%;
+	bottom: 0;
+	height: 5px;
+	transition: width 1s, left 1s;
+}
