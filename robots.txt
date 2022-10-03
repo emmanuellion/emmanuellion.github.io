@@ -1,0 +1,7 @@
+User-agent: Googlebot
+Disallow: /
+
+User-agent: *
+Allow: /
+
+Sitemap: https://mabule.github.io/sitemap.xml
