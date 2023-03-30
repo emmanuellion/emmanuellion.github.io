@@ -2,7 +2,7 @@ const canvas = document.querySelector("#canvas");
 const ctx = canvas.getContext('2d');
 
 //Part of : how many cases, what's the size ...
-const nb_case = 100;
+const nb_case = 200;
 case_size = 10;
 canvas.width = nb_case*case_size;
 canvas.height = nb_case*case_size;
@@ -28,7 +28,7 @@ var start;
 var end;
 const nexus_color = "white"; //Color of the two points A and B
 var path = [];
-const difficulty = 2/10;
+const difficulty = 1/10;
 
 //Creation of the grid
 for(i = 0; i <= nb_case; i++){
