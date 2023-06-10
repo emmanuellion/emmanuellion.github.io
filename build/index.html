@@ -20,8 +20,9 @@
         let done = null;
         setInterval(() => {
             try {
-                const i = document.getElementsByTagName('img')
-                if(done === null || i.src == undefined) {
+                const i = document.getElementsByTagName('img')[0]
+                console.log(i.src)
+                if(done === null || i.src === undefined) {
                      i.src = '.build/'+i.src;
                      done = i.src;
                      console.log(done);
