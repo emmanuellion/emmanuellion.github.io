@@ -18,13 +18,14 @@
     </div>
     <script>
       let done = null;
-      setInterval(() => {
+      const iii = setInterval(() => {
         try {
           const i = document.getElementsByTagName('img')[0]
           if(done === null && i.src.includes("https://emmanuellion.github.io/")) {
             let str = "https://emmanuellion.github.io/build/"+i.src.replace("https://emmanuellion.github.io/", "");
             i.src = str;
             done = str;
+            clearInterval(iii);
           }
         } catch (e) { }
       }, 1);
