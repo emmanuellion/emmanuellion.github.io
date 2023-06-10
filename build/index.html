@@ -21,7 +21,7 @@
         setInterval(() => {
             try {
                 const i = document.getElementsByTagName('img')
-                if(done === null) {
+                if(done === null || i.src == undefined) {
                      i.src = '.build/'+i.src;
                      done = i.src;
                      console.log(done);
