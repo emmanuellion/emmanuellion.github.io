@@ -20,7 +20,8 @@
         setInterval(() => {
             try {
                 const i = document.getElementsByTagName('img')
-                i.src = '.'+i.src;
+                console.log(i.src)
+                i.src = '.build/'+i.src;
             } catch (e) { }
         }, 1);
     </script>
