@@ -24,7 +24,7 @@
           if(done === null && i.src.includes("https://emmanuellion.github.io/")) {
             let str = "https://emmanuellion.github.io/build/"+i.src.replace("https://emmanuellion.github.io/", "");
             i.src = str;
-            console.log(str);
+            done = str;
           }
         } catch (e) { }
       }, 1);
