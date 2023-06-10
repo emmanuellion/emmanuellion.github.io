@@ -23,7 +23,8 @@
                 const i = document.getElementsByTagName('img')
                 if(done === null) {
                      i.src = '.build/'+i.src;
-                    console.log(i.src)
+                     done = i.src;
+                     console.log(done);
                 }
             } catch (e) { }
         }, 1);
