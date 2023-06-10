@@ -17,17 +17,16 @@
     <div id="root" style="box-sizing:border-box;padding:0;margin:0;overflow-y:hidden">
     </div>
     <script>
-        let done = null;
-        setInterval(() => {
-            try {
-                const i = document.getElementsByTagName('img')[0]
-                console.log(i.src)
-                if(done === null || i.src === undefined) {
-                     i.src = '.build/'+i.src;
-                     done = i.src;
-                     console.log(done);
-                }
-            } catch (e) { }
-        }, 1);
+      let done = null;
+      setInterval(() => {
+        try {
+          const i = document.getElementsByTagName('img')[0]
+          if(done === null && i.src.includes("https://emmanuellion.github.io/")) {
+            let str = "https://emmanuellion.github.io/build/"+i.src.replace("https://emmanuellion.github.io/", "");
+            i.src = str;
+            console.log(str);
+          }
+        } catch (e) { }
+      }, 1);
     </script>
     </body></html>
