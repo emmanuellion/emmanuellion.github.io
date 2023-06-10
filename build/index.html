@@ -21,9 +21,8 @@
         setInterval(() => {
             try {
                 const i = document.getElementsByTagName('img')
-                if(done === null) done = i.src;
-                else {
-                    i.src = '.build/'+i.src;
+                if(done === null) {
+                     i.src = '.build/'+i.src;
                     console.log(i.src)
                 }
             } catch (e) { }
