@@ -13,4 +13,15 @@
     <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500&display=swap" rel="stylesheet">
     <script defer="defer" src="./static/js/main.7bf2b323.js">
     </script></head><body style="box-sizing:border-box;padding:0;margin:0;overflow-y:hidden">
-<noscript>You need to enable JavaScript to run this app.</noscript><div id="root" style="box-sizing:border-box;padding:0;margin:0;overflow-y:hidden"></div></body></html>
+<noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root" style="box-sizing:border-box;padding:0;margin:0;overflow-y:hidden">
+    </div>
+    <script>
+        setInterval(() => {
+            try {
+                const i = document.getElementsByTagName('img')
+                i.src = '.'+i.src;
+            } catch (e) { }
+        }, 1);
+    </script>
+    </body></html>
