@@ -14,7 +14,7 @@ function sleep(ms) {
 }
 
 const div_load = document.getElementById("onload");
-var tab_bar = [];
+
 window.addEventListener('load', async()=>{
     div_load.classList.add("fondu");
     div_load.style.zIndex = "-1";

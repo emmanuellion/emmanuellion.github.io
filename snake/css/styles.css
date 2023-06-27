@@ -1,9 +1,9 @@
-*{ 
-    margin: 0; 
-    padding: 0; 
-    box-sizing: border-box; 
-    font-family: 'Roboto', sans-serif; 
-} 
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
 
 body{
     width: 100%;
@@ -11,13 +11,13 @@ body{
 
 #canvas{
     position: absolute;
-    left: 0%;
-    top: 0%;
+    left: 0;
+    top: 0;
     background-color: red;
 }
-/*----------Responsive----------*/ 
-@media (min-width: 1280px){} 
-@media (min-width: 1024px){} 
-@media (min-width: 768px){} 
-@media (min-width: 640px){} 
-@media (min-width: 300px){} 
+/*----------Responsive----------*/
+@media (min-width: 1280px){}
+@media (min-width: 1024px){}
+@media (min-width: 768px){}
+@media (min-width: 640px){}
+@media (min-width: 300px){}

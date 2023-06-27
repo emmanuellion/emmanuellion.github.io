@@ -112,7 +112,7 @@ header.active {
 
 .header_title{
 	display: flex;
-	-webkit-text-stroke: 0.1px #2B2B2B;
+	-webkit-text-stroke: 0 #2B2B2B;
 	color: #FFFC52;
 	margin-right: 0;
 	opacity: 1;
@@ -226,7 +226,7 @@ header.active {
 }
 
 @media (max-width: 400px) {
-    
+
     .title {
         font-size: 20px;
         margin-top: 10px;
@@ -239,7 +239,7 @@ header.active {
     header.active {
         height: 300px;
     }
-    
+
     .title-menu {
         display: none;
     }
@@ -288,7 +288,7 @@ div{
 	text-transform: uppercase;
 	line-height: 1.4em;
 	color: #2B2B2B;
-	-webkit-text-stroke: 0.1px #FFFC52;
+	-webkit-text-stroke: 0 #FFFC52;
 	text-shadow: 0 0 10px #FFFC52,
 	0 0 20px #FFFC52,
 	0 0 40px #FFFC52,
@@ -298,7 +298,7 @@ div{
 
 .bar{
     position: absolute;
-    width: 0px;
+    width: 0;
     height: 5px;
     box-shadow: 0 0 10px #FFFC52,
 	0 0 20px #FFFC52,
@@ -352,7 +352,7 @@ div{
 }
 
 #end .com{
-	margin-bottom: 0px;
+	margin-bottom: 0;
 }
 
 .fl_right{

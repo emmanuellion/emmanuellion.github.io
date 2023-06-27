@@ -41,7 +41,7 @@ body{
 	margin-left: 100px;
 	display: flex;
 	flex-direction: column;
-	margin-right: 0px;
+	margin-right: 0;
 }
 
 .h3{
@@ -73,7 +73,7 @@ li{
 }
 
 .start a{
-	color: #AF2830;	
+	color: #AF2830;
 }
 
 .try{
@@ -92,7 +92,7 @@ li{
 	position: absolute;
 	width: 37%;
 	background-color: grey;
-	height: 0.1px;
+	height: 0;
 	transform: rotateZ(90deg);
 	left: 28%;
 }

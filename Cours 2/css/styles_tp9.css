@@ -26,7 +26,7 @@ img{
 
 .jaune {
     color : gold;
-    text-shadow: 0px 0px 2px #000000;
+    text-shadow: 0 0 2px #000000;
 }
 
 .card a{
@@ -60,7 +60,7 @@ iframe{
 }
 
 i{
-   
+
     font-size: 30px;
     border-radius: 60px;
     color: white;
@@ -68,7 +68,7 @@ i{
 }
 
 .fa-facebook{
-    background-color: blue; 
+    background-color: blue;
     padding: 10px 15px;
 }
 

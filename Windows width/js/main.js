@@ -1,10 +1,9 @@
-var first;
-var Ls=screen.width;
+let first, Ls = screen.width;
 first = Ls;
 function size()
 {
 	Ls = screen.width;
-	if(first != Ls)
+	if(first !== Ls)
 	{
 		console.log(Ls);
 		if (Ls >= 0 && Ls <= 400){
@@ -24,9 +23,9 @@ function size()
 		}
 		else if (Ls > 1200 && Ls <= 1400){
 			window.location = "test_1400.html";
-		}	
+		}
 	}
-										
+
 }
 setInterval(size,100)
 

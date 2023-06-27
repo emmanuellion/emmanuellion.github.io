@@ -2,21 +2,16 @@ const li_p = document.getElementsByClassName("li_p")[0];
 const li_c = document.getElementsByClassName("li_c")[0];
 const li_g = document.getElementsByClassName("li_g")[0];
 
-var active = "";
+let active = "";
 
-li_p.addEventListener('click', () => {
-    open("point");
-    active = "point";
-});
-
-li_c.addEventListener('click', () => {
-    open("chroma");
-    active = "chroma";
-});
-
-li_g.addEventListener('click', () => {
-    open("gray");
-    active = "gray";
+const actions = ["point", "chroma", "gray"];
+let i = 0;
+[li_p, li_c, li_g].forEach(el => {
+    el.addEventListener('click', () => {
+        open(actions[i]);
+        active = actions[i];
+    });
+    i++;
 });
 
 function open(div){
@@ -25,7 +20,7 @@ function open(div){
 }
 
 function close(div){
-    if(active != ""){
+    if(active !== ""){
         const win = document.getElementsByClassName(div)[0];
         win.style.display = "none";
     }
@@ -34,8 +29,8 @@ function close(div){
 document.getElementsByTagName("html")[0].addEventListener("mousedown", (event) => {
     if(event.target.offsetParent != null){
         let split = event.target.offsetParent.className.split(' ')[1];
-         if(event.target.className.split(' ')[1] != active){
-             if(split == undefined){
+         if(event.target.className.split(' ')[1] !== active){
+             if(split === undefined){
                 close(active);
              }
          }

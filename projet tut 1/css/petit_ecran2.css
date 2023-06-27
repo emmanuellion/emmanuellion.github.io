@@ -4,7 +4,7 @@
 		-moz-box-sizing: border-box;
 		box-sizing: border-box;
 	}
-	
+
 	content {
 		-webkit-hyphens: auto;
 		-moz-hyphens: auto;
@@ -21,7 +21,7 @@
 		max-width: 100%;
 		overflow-x: hidden;
 	}
-	
+
 	#page {
 		max-width: 100%;
 		height: auto;
@@ -34,7 +34,7 @@
 	#naguator{
 		position: relative;
 	}
-	
+
 	#content {
 		margin-left: 8px;
 		margin-right: 7px;
@@ -47,7 +47,7 @@
 	}
 
 	.a_cross i{
-		transform: translateY(0.5px);
+		transform: translateY(1px);
 	}
 
 	.article {
@@ -59,33 +59,33 @@
 	.imgdroite .img4 {
 		float: none;
 	}
-	
+
 	.img5_1 {
 		max-width: 100%;
 	}
-	
+
 	#menu {
 		margin-left: 12px;
 		margin-right: -100px;
 	}
-	
+
 	#menu ul li {
 		text-align: left;
 	}
-	
+
 	.deux_colonnes {
 		display: inline;
 	}
-	
+
 	li:hover .javascript{
 	height: 310px;
 	}
-	
+
 	li:hover .typescript{
 	height: 350px;
 	}
 
 	.javascript_article .js_logo{
 		width: 20%;
-	}	
+	}
 }

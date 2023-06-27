@@ -8,10 +8,8 @@
 }
 
 body{
-	background: url('../img/wallpaper2.jpeg');
 	background-size: 90%;
-	background-position: 50%;
-	background-attachment: fixed;
+	background: url('../img/wallpaper2.jpeg') fixed 50%;
 	min-width: 100%;
 	min-height: 205vh;
 	margin: 0;
@@ -36,12 +34,12 @@ body{
 }
 
 menu li::before {
-	content: "\2022";   
-	color: white;  
-	display: inline-block;  
-	width: 1em; 
+	content: "\2022";
+	color: white;
+	display: inline-block;
+	width: 1em;
 	margin-left: -1em;
-} 
+}
 .menu .a{
 	margin-top: 25px;
 }
@@ -83,7 +81,6 @@ menu li::before {
 
 .p{
 	font-family: 'Arial', sans-serif;
-	font-family: 100px;
 	max-width: 80%;
 }
 

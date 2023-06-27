@@ -1,14 +1,14 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:300&display=swap');
+
 #dieu{
 	position: absolute;
 	z-index: 2;
 	background-color: black;
 	color: white;
-	right: 0px;
-	top: 0px;
+	right: 0;
+	top: 0;
 	border: none;
 }
-
-@import url('https://fonts.googleapis.com/css?family=Roboto:300&display=swap');
 
 a:hover, button:hover{
 	cursor: pointer;
@@ -31,9 +31,8 @@ button{
 	body{
 		font-family: 'Roboto', sans-serif;
 		min-height: 100vh;
-		background: url("../img/bg_body1.jpg");
 		background-size: cover;
-		background-repeat: no-repeat;
+		background: url("../img/bg_body1.jpg") no-repeat;
 		display: flex;
 		flex-direction: column;
 	}
@@ -44,9 +43,9 @@ button{
 		width: 100%;
 		background-color: grey;
 		opacity: 0.6;
-		left: 0px;
-		top: 0px;
-		bottom: 0px;
+		left: 0;
+		top: 0;
+		bottom: 0;
 		z-index: 1;
 	}
 
@@ -56,7 +55,7 @@ button{
 		display: flex;
 		justify-content: center;
 		width: 100%;
-		margin-top: 0px !important;
+		margin-top: 0 !important;
 	}
 
 	#top_presentation{
@@ -77,16 +76,13 @@ button{
 
 	#top_presentation h4{
 		text-decoration: underline #B04CF3;
-		margin: 0px;
+		margin: 0;
 	}
 
 	#menu_page button{
-		outline: none;		
+		outline: none;
 		border: 2px solid #C37AF3;
-		padding-left: 25px;
-		padding-right: 25px;
-		padding-top: 10px;
-		padding-bottom: 10px;
+		padding: 10px 25px;
 		font-size: 30px !important;
 	}
 }
@@ -95,9 +91,8 @@ button{
 	body{
 		font-family: 'Roboto', sans-serif;
 		min-height: 100vh;
-		background: url("../img/bg_body1.jpg");
 		background-size: cover;
-		background-repeat: no-repeat;
+		background: url("../img/bg_body1.jpg") no-repeat;
 		display: flex;
 		flex-direction: column;
 	}
@@ -108,9 +103,9 @@ button{
 		width: 100%;
 		background-color: grey;
 		opacity: 0.6;
-		left: 0px;
-		top: 0px;
-		bottom: 0px;
+		left: 0;
+		top: 0;
+		bottom: 0;
 		z-index: 1;
 	}
 
@@ -120,7 +115,7 @@ button{
 		display: flex;
 		justify-content: center;
 		width: 100%;
-		margin-top: 0px !important;
+		margin-top: 0 !important;
 	}
 
 	#top_presentation{
@@ -141,18 +136,15 @@ button{
 
 	#top_presentation h4{
 		text-decoration: underline #B04CF3;
-		margin: 0px;
+		margin: 0;
 	}
 
 	#menu_page button{
-		outline: none;		
+		outline: none;
 		border: 2px solid #C37AF3;
-		padding-left: 25px;
-		padding-right: 25px;
-		padding-top: 10px;
-		padding-bottom: 10px;
+		padding: 10px 25px;
 		font-size: 25px !important;
-		margin-right: 5%; 
+		margin-right: 5%;
 		text-transform: uppercase;
 	}
 }
@@ -161,9 +153,8 @@ button{
 	body{
 		font-family: 'Roboto', sans-serif;
 		min-height: 100vh;
-		background: url("../img/bg_body1.jpg");
 		background-size: cover;
-		background-repeat: no-repeat;
+		background: url("../img/bg_body1.jpg") no-repeat;
 		display: flex;
 		flex-direction: column;
 	}
@@ -174,9 +165,9 @@ button{
 		width: 100%;
 		background-color: grey;
 		opacity: 0.6;
-		left: 0px;
-		top: 0px;
-		bottom: 0px;
+		left: 0;
+		top: 0;
+		bottom: 0;
 		z-index: 1;
 	}
 
@@ -186,7 +177,7 @@ button{
 		display: flex;
 		justify-content: center;
 		width: 100%;
-		margin-top: 0px !important;
+		margin-top: 0 !important;
 	}
 
 	#top_presentation{
@@ -208,18 +199,15 @@ button{
 	#top_presentation h4{
 		font-size: 140%;
 		text-decoration: underline #B04CF3;
-		margin: 0px;
+		margin: 0;
 	}
 
 	#menu_page button{
-		outline: none;		
+		outline: none;
 		border: 3px solid #C37AF3;
-		padding-left: 30px;
-		padding-right: 30px;
-		padding-top: 13px;
-		padding-bottom: 13px;
+		padding: 13px 30px;
 		font-size: 30px;
-		margin-right: 5%; 
+		margin-right: 5%;
 		text-transform: uppercase;
 	}
 }
@@ -228,9 +216,8 @@ button{
 	body{
 		font-family: 'Roboto', sans-serif;
 		min-height: 100vh;
-		background: url("../img/bg_body1.jpg");
 		background-size: cover;
-		background-repeat: no-repeat;
+		background: url("../img/bg_body1.jpg") no-repeat;
 		display: flex;
 		flex-direction: column;
 		max-width: 100%;
@@ -242,10 +229,10 @@ button{
 		width: 100%;
 		background-color: grey;
 		opacity: 0.6;
-		left: 0px;
-		top: 0px;
-		bottom: 0px;
-		right: 0px;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		right: 0;
 		z-index: 1;
 	}
 
@@ -255,7 +242,7 @@ button{
 		display: flex;
 		justify-content: center;
 		width: 100%;
-		margin-top: 0px !important
+		margin-top: 0 !important
 	}
 
 	#section_menu{
@@ -285,18 +272,15 @@ button{
 	#top_presentation h4{
 		font-size: 180%;
 		text-decoration: underline #B04CF3;
-		margin: 0px;
+		margin: 0;
 	}
 
 	#menu_page button{
-		outline: none;		
+		outline: none;
 		border: 3px solid #C37AF3;
-		padding-left: 30px;
-		padding-right: 30px;
-		padding-top: 15px;
-		padding-bottom: 15px;
+		padding: 15px 30px;
 		font-size: 16px;
-		margin-right: 5%; 
+		margin-right: 5%;
 		text-transform: uppercase;
 		font-weight: bold;
 	}
@@ -306,13 +290,11 @@ button{
 	body{
 		max-height: 100%;
 		font-family: 'Roboto', sans-serif;
-		background: url("../img/bg_body1.jpg");
 		background-size: cover;
-		background-repeat: no-repeat;
 		display: flex;
 		flex-direction: column;
 		max-width: 100%;
-		background-position: 90%;
+		background: url("../img/bg_body1.jpg") no-repeat 90%;
 	}
 
 	#overlay{
@@ -321,10 +303,10 @@ button{
 		width: 100%;
 		background-color: grey;
 		opacity: 0.6;
-		left: 0px;
-		top: 0px;
-		bottom: 0px;
-		right: 0px;
+		left: 0;
+		top: 0;
+		bottom: 0;
+		right: 0;
 		z-index: 1;
 	}
 
@@ -335,7 +317,7 @@ button{
 		justify-content: center;
 		width: 100%;
 		max-height: 500px;
-		margin-top: 0px !important;
+		margin-top: 0 !important;
 	}
 
 	#top_presentation{
@@ -357,7 +339,7 @@ button{
 	#top_presentation h4{
 		font-size: 180%;
 		text-decoration: underline #B04CF3;
-		margin: 0px;
+		margin: 0;
 	}
 
 	#menu_page{
@@ -365,14 +347,11 @@ button{
 	}
 
 	#menu_page button{
-		outline: none;		
+		outline: none;
 		border: 3px solid #C37AF3;
-		padding-left: 23px;
-		padding-right: 23px;
-		padding-top: 10px;
-		padding-bottom: 10px;
+		padding: 10px 23px;
 		font-size: 14px;
-		margin-right: 5%; 
+		margin-right: 5%;
 		text-transform: uppercase;
 		font-weight: bold;
 	}
@@ -432,13 +411,11 @@ button{
 	body{
 		max-height: 100%;
 		font-family: 'Roboto', sans-serif;
-		background: url("../img/bg_body1.jpg");
 		background-size: cover;
-		background-repeat: no-repeat;
 		display: flex;
 		flex-direction: column;
 		max-width: 100%;
-		background-position: 90%;
+		background: url("../img/bg_body1.jpg") no-repeat 90%;
 	}
 
 	#overlay{
@@ -447,10 +424,10 @@ button{
 		width: 100% !important;
 		background-color: grey !important;
 		opacity: 0.6 !important;
-		left: 0px !important;
-		top: 0px !important;
-		bottom: 0px !important;
-		right: 0px !important;
+		left: 0 !important;
+		top: 0 !important;
+		bottom: 0 !important;
+		right: 0 !important;
 		z-index: 1 !important;
 	}
 
@@ -461,7 +438,7 @@ button{
 		justify-content: center;
 		width: 100%;
 		max-height: 500px;
-		margin-top: 0px !important
+		margin-top: 0 !important
 	}
 
 	#top_presentation{
@@ -483,7 +460,7 @@ button{
 	#top_presentation h4{
 		font-size: 180%;
 		text-decoration: underline #B04CF3;
-		margin: 0px;
+		margin: 0;
 	}
 
 	#menu_page{
@@ -491,14 +468,11 @@ button{
 	}
 
 	#menu_page button{
-		outline: none;		
+		outline: none;
 		border: 3px solid #C37AF3;
-		padding-left: 23px;
-		padding-right: 23px;
-		padding-top: 10px;
-		padding-bottom: 10px;
+		padding: 10px 23px;
 		font-size: 14px;
-		margin-right: 5%; 
+		margin-right: 5%;
 		text-transform: uppercase;
 		font-weight: bold;
 	}

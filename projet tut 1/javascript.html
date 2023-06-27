@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html style="scroll-behavior: smooth;">
+<html style="scroll-behavior: smooth;" lang="fr">
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +18,7 @@
 		</div>
 		<header id="header">
 			<div class="header_title" onclick="c()">
-				<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/480px-JavaScript-logo.png">
+				<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/JavaScript-logo.png/480px-JavaScript-logo.png" alt="">
 				<h1>Javascript</h1>
 			</div>
 			<label for="menu" class="menu-container">
@@ -44,7 +44,7 @@
 		<div class="article first_article">
 			<h2 id="def">Définition générale du javascript</h2>
 			<div class="com">
-				<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1200px-Unofficial_JavaScript_logo_2.svg.png" class="fl_right">
+				<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Unofficial_JavaScript_logo_2.svg/1200px-Unofficial_JavaScript_logo_2.svg.png" class="fl_right" alt="">
 				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent posuere dui id elit mattis, et condimentum sapien fringilla. Nunc posuere dolor nisi, et pellentesque enim luctus in. Cras ac pretium tortor, quis ornare ligula. Nulla at risus sed dolor venenatis euismod in sit amet enim. Duis mollis felis sit amet sem posuere tempus. Nulla pretium sapien ac lorem gravida ullamcorper. Ut eu dictum nunc. Donec at ex eget arcu auctor commodo eget vel leo. Curabitur consectetur vitae nibh id facilisis. Praesent sed laoreet odio. Quisque a sodales velit. Quisque id nibh sed tellus dapibus blandit bibendum ut dui. Duis mollis rutrum egestas. In tellus magna, tempus id nisi id, mollis ultricies massa. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Curabitur vel augue quis felis vulputate elementum quis quis purus.
 			</div>
 		</div>
@@ -100,7 +100,7 @@
 			<a href="https://fr.wikipedia.org/wiki/JavaScript">source 2</a>
 		</div>
 		<script type="text/javascript">
-			
+
 			function c(){
 				window.location = "index.html";
 			}
@@ -111,7 +111,9 @@
 				div.style.opacity = "1";
 				div.style.transform = "translateY(30px)";
 				div.style.zIndex = "-1";
-				var t = setInterval(function(){bar.style.width = "100%";},700);
+				setInterval(() => {
+					bar.style.width = "100%";
+				}, 700);
 			}
 
 			const div_load = document.getElementsByClassName("onload")[0];
@@ -168,13 +170,13 @@
 				})
 				function go_to_the(el,direction,margin,factor){
 						let el_pos = el.getBoundingClientRect().top;
-						if (direction == "left"){
+						if (direction === "left"){
 								el.style.transform = "translateX(220px)";
 						}else{
 								el.style.transform = "translateX(-100px)";
 						}
 						if (el_pos <= window.innerHeight/1.3){
-								if(direction == "left"){
+								if(direction === "left"){
 										el.style.transform = "translateX(0px)";
 								}else{
 										el.style.transform = "translateX(0px)";
@@ -183,7 +185,7 @@
 								el.style.visibility = "visible";
 						}
 						if (window.innerHeight >= el_pos*factor || window.innerHeight <= el_pos+130){
-								if(direction == "left"){
+								if(direction === "left"){
 										el.style.transform = "translateX(220px)";
 										el.style.opacity = "0";
 										el.style.visibility = "hidden";
@@ -194,7 +196,7 @@
 								}
 						}
 				}
-			
+
 			const menuContainer = document.querySelector('.menu-container');
 			const burger = document.querySelector('.burger');
 			const header = document.querySelector('header');

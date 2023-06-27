@@ -7,7 +7,7 @@ body{
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	background-size: cover;
-	margin: 0px;
+	margin: 0;
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
@@ -27,13 +27,13 @@ body{
 #header h1{
 	font-size: 300%;
 	color: white;
-	margin-bottom: 0px;
+	margin-bottom: 0;
 }
 
 #header h2{
 	font-size: 120%;
 	color: white;
-	margin-top: 0px;
+	margin-top: 0;
 }
 
 #containment{
@@ -52,7 +52,7 @@ body{
 
 #menu li{
 	background-color: rgba(255, 255, 255, 0.5);
-	border-radius: 0px 5px 5px 0px;
+	border-radius: 0 5px 5px 0;
 	margin-bottom: 5px;
 	width: 100px;
 	text-align: center;
@@ -84,12 +84,12 @@ img{
 }
 img.gauche{
 	float: left;
-	margin: 0px 10px 10px 0px;
+	margin: 0 10px 10px 0;
 }
 
 img.droite{
 	float: right;
-	margin: 0px 0px 10px 10px;
+	margin: 0 0 10px 10px;
 }
 
 .deux_colonnes{

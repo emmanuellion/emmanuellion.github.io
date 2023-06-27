@@ -42,7 +42,7 @@ function go(){
   params.VISITED = document.querySelector('#input_color_visited').value;
   console.log(params.height, params.width, params.cellSize, params.timeOut, params.ALIVE, params.VISITED);
   params.DEAD = "#ffffff";
-  taked = initCells(params);
+  let taked = initCells(params);
   params.cells = taked.cells;
   params.wasVisited = taked.wasVisited;
   params.generation = 1;
@@ -77,7 +77,8 @@ function showGrid(params) {
 }
 
 function updateCells() {
-  if (params.play === false){
+  let animation;
+  if (params.play === false) {
     document.querySelector('#count').innerHTML = params.generation;
     const newcells = [];
 
@@ -90,17 +91,17 @@ function updateCells() {
           newcells[i][j] = params.ALIVE;
         } else if (nb_neighboors_alive === 2) {
           newcells[i][j] = params.cells[i][j];
-        } else if (nb_neighboors_alive < 2 || nb_neighboors_alive > 3){
-          if (params.cells[i][j] === params.ALIVE){
+        } else if (nb_neighboors_alive < 2 || nb_neighboors_alive > 3) {
+          if (params.cells[i][j] === params.ALIVE) {
             params.wasVisited[i][j] = 1;
           }
-          if(params.wasVisited[i][j] === 1){
+          if (params.wasVisited[i][j] === 1) {
             newcells[i][j] = params.VISITED;
-          }else{
+          } else {
             newcells[i][j] = params.DEAD;
           }
         }
-      //--------------ERROR------------
+        //--------------ERROR------------
       }
     }
     delete params.cells;
@@ -109,8 +110,10 @@ function updateCells() {
     showGrid(params);
     params.timeOut = parseInt(document.querySelector('#range_T').value);
     params.generation++;
-    setTimeout(() => {window.requestAnimationFrame(updateCells);}, params.timeOut);
-  }else{
+    setTimeout(() => {
+      window.requestAnimationFrame(updateCells);
+    }, params.timeOut);
+  } else {
     animation = window.requestAnimationFrame(updateCells);
     window.cancelAnimationFrame(animation);
   }
@@ -120,11 +123,11 @@ function neighborhood(params, i, j) {
   let nb_neighboors_alive = 0;
   for (let di = -1; di <= 1; di++) {
     for (let dj = -1; dj <= 1; dj++) {
-      if (di == 0 && dj == 0) {
+      if (di === 0 && dj === 0) {
       } else {
         if (i + di >= 0 && i + di < params.width / params.cellSize) {
           if (j + dj >= 0 && j + dj < params.height / params.cellSize) {
-            if (params.cells[i + di][j + dj] == params.ALIVE) {
+            if (params.cells[i + di][j + dj] === params.ALIVE) {
               nb_neighboors_alive++;
             }
           }

@@ -16,7 +16,7 @@ function up(children){
 }
 
 function down(obj, children){
-	if(obj.value == "" || obj.value == " "){
+	if(obj.value === "" || obj.value === " "){
 		children.style.transform = "translate(10px,30px)";
 		children.style.fontSize = "90%";
 		children.style.color = "#6C757D";
@@ -67,16 +67,16 @@ function good_verif(obj, children){
 }
 
 res.addEventListener('click', () => {
-    if(i1.value != "" && i1.value != " "){
+    if(i1.value !== "" && i1.value !== " "){
 		good_verif(i1, s1);
 	}
-	if(i2.value != "" && i2.value != " "){
+	if(i2.value !== "" && i2.value !== " "){
 		good_verif(i2, s2);
 	}
-	if(i3.value != "" && i3.value != " "){
+	if(i3.value !== "" && i3.value !== " "){
 		good_verif(i3, s3);
 	}
-	if(i4.value != "" && i4.value != " "){
+	if(i4.value !== "" && i4.value !== " "){
 		good_verif(i4, s4);
 	}
 });

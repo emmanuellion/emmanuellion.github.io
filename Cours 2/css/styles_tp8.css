@@ -30,7 +30,7 @@ ul{
 li{
     display: flex;
     align-items: center;
-    margin: 0em 1em 0em 1em;
+    margin: 0 1em;
     padding: 20px;
     border-radius: 3px;
 }
@@ -58,7 +58,7 @@ li ul{
 }
 
 li ul li{
-    padding: 0px;
+    padding: 0;
 }
 
 li:hover ul li:hover{

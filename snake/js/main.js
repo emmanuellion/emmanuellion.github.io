@@ -8,26 +8,17 @@ canvas.width = nb_case*case_size;
 canvas.height = nb_case*case_size;
 
 //Part for all of the variable that is used
-var grid = new Array (nb_case);
-var i;
-var j;
-var xA;
-var yA;
-var xB;
-var yB; 
-var closedList = [];	//closedList gonna contain all the cell that were been visited
-var openList = [];		//openList gonna contain all the neighbors for the last cell visited
-
+const grid = new Array(nb_case);
+let i, j, xA, yA, xB, yB, closedList = [], openList = [];
 //Random spawn for the point A and B
 xA = Math.floor(Math.random() * (nb_case - 1) + 1) - 1;
 yA = Math.floor(Math.random() * (nb_case - 1) + 1) - 1;
 xB = Math.floor(Math.random() * (nb_case - 1) + 1) - 1;
 yB = Math.floor(Math.random() * (nb_case - 1) + 1) - 1;
 
-var start;
-var end;
+let start, end;
 const nexus_color = "white"; //Color of the two points A and B
-var path = [];
+const path = [];
 const difficulty = 1/10;
 
 //Creation of the grid
@@ -80,7 +71,7 @@ function Cells(i,j){
 //Function to remove an element from an array
 function RemoveFromArray(arr, elt){
 	for (i = arr.length - 1; i >= 0; i--) {
-		if (arr[i] == elt){
+		if (arr[i] === elt){
 			arr.splice(i, 1);
 		}
 	}
@@ -88,8 +79,7 @@ function RemoveFromArray(arr, elt){
 
 //Function to calculate the actual heuristic of the current cell compared to point B
 function heuristic(a,b){
-	var d = Math.abs(a.i - b.i) + Math.abs(a.j - b.j);
-	return d;
+	return Math.abs(a.i - b.i) + Math.abs(a.j - b.j);
 }
 
 //Initialisation of all the cell
@@ -115,7 +105,7 @@ for (i = 0; i < nb_case; i++){
 			grid[i][j].wall = true;
 			grid[i][j].show("#000");
 		}
-	}		
+	}
 }
 
 //Initialising the two points
@@ -126,31 +116,31 @@ grid[xB][yB].show(nexus_color);
 start.wall = false;
 end.wall = false;
 
-var zetta = 0;
+let zetta = 0;
 openList.push(start);
 
 //Principal function
 function A(){
 	if (openList.length > 0){
-		var lowestIndex = 0;
+		let lowestIndex = 0;
 
 		//Searching of the cell with the littler index of path to go to the point 2
 		for(i = 0; i < openList.length; i++){
 			if (openList[i].f < openList[lowestIndex].f){
 				lowestIndex = i;
 			}
-			if (openList[i].f == openList[lowestIndex].f){
-				if (openList[i].g == openList[lowestIndex].g){
+			if (openList[i].f === openList[lowestIndex].f){
+				if (openList[i].g === openList[lowestIndex].g){
 					lowestIndex = i;
 				}
 			}
 		}
-		var current = openList[lowestIndex];
+		const current = openList[lowestIndex];
 
 		//Try if the current cell is the point 2
 		if (current === end){
 			console.log("Terminé !");
-			var temp = current;
+			let temp = current;
 			path.push(temp);
 			while(temp.previous){
 				path.push(temp.previous);
@@ -175,14 +165,14 @@ function A(){
 		closedList.push(current);
 
 		//Testing all of the neighbors of the current cell (max 3)
-		var neighbors = current.neighbors;
+		const neighbors = current.neighbors;
 		for(i = 0; i < neighbors.length; i++){
-			var neighbor = neighbors[i];
+			const neighbor = neighbors[i];
 
 			//If he's not a wall and he's not yet visited
 			if (!closedList.includes(neighbor) && !neighbor.wall){
-				var tempG =  current.g + heuristic(neighbor, current);	//Potential futur cost of the cell (increase by 1)
-				
+				const tempG = current.g + heuristic(neighbor, current);	//Potential futur cost of the cell (increase by 1)
+
 				//If the neighbor is unknow of the list... We add it
 				if (!openList.includes(neighbor)){
 					openList.push(neighbor);
@@ -212,4 +202,4 @@ function A(){
 	}
 }
 
-var interval = setInterval(A,0);
+const interval = setInterval(A, 0);

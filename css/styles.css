@@ -38,8 +38,7 @@ h1, h2, h3{
 	width: 46%;
 	text-align: center;
 	position: relative;
-	margin: auto;
-	margin-top: 15px;
+	margin: 15px auto auto;
 	padding-bottom: 5px;
 }
 

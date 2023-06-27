@@ -5,7 +5,7 @@
 }
 
 div[data-progress]{
-	width: 0%;
+	width: 0;
 	height: var(--bar_size);
 	transition: width 2s ease-in-out;
 	text-align: right;

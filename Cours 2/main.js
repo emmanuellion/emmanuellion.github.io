@@ -1,7 +1,3 @@
-const footer = document.querySelector('#footer');
-function get_year(){
-	date = new Date;
-	year = date.getFullYear();
-	footer.innerHTML = "© Copyright "+year+" Emmanuel LION - Tous droits réservés";
-}
-clock = setInterval(get_year, 2000);
+clock = setInterval(() => {
+	document.querySelector('#footer').innerHTML = "© Copyright "+new Date.getFullYear()+" Emmanuel LION - Tous droits réservés";
+}, 2000);

@@ -4,7 +4,7 @@
 	box-sizing: border-box;
 	margin: 0;
 	padding: 0;
-	font-family: Arial;
+	font-family: Arial, sans-serif;
 }
 
 body{
@@ -57,7 +57,7 @@ button, input{
 
 .crop-all{overflow: hidden;}
 
-.margin-auto{margin: 0px auto;}
+.margin-auto{margin: 0 auto;}
 .margin-r-10{margin-right: 10px;}
 .margin-r-20{margin-right: 20px;}
 .margin-r-30{margin-right: 30px;}
@@ -111,7 +111,7 @@ button, input{
 }
 
 div[data-progress]{
-	width: 0%;
+	width: 0;
 	height: var(--bar_size);
 	transition: width 2s ease-in-out;
 	text-align: right;

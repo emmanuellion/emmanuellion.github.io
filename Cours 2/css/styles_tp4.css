@@ -33,7 +33,7 @@ a{
 
 header h1{
 	font-size: 300%;
-	margin: 0px;
+	margin: 0;
 	color: #fff;
 	text-align: center;
 	line-height: 211px;
@@ -94,7 +94,6 @@ li ul li{
 #sidebar{
 	float: right;
 	width: 23%;
-	height: ;
 	margin-top: 1em;
 	background-color: #000;
 	color: #fff;
@@ -107,7 +106,7 @@ li ul li{
 section article{
 	padding: 1em;
 	margin-top: 1em;
-	background-color: #fff; 
+	background-color: #fff;
 }
 
 article h2{

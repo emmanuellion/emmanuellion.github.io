@@ -167,7 +167,7 @@ header.active .title-header{
 	}
 }
 
-@media (min-width: 1024px) { 
+@media (min-width: 1024px) {
 	.div-presentation h2{
 		font-size: 23px !important;
 	}
@@ -236,12 +236,12 @@ header.active .title-header{
 		width: 75% !important;
 		margin: auto !important;
 	}
-} 
+}
 
 /*----------------------------------------------------------------------------------------------*/
 
 @media (max-width: 400px) {
-    
+
     header {
         padding: 30px 5%;
     }
@@ -249,7 +249,7 @@ header.active .title-header{
     header.active {
         height: 340px;
     }
-    
+
     .burger {
         width: 25px;
     }
@@ -276,7 +276,6 @@ header.active .title-header{
 	}
 
 	.title-header{
-		display: block;
 		color: white;
 		text-transform: uppercase;
 		text-decoration: underline white;
@@ -310,7 +309,7 @@ header.active .title-header{
 	}
 
 	.div-presentation h2{
-		margin: 30px 0px;
+		margin: 30px 0;
 		text-transform: uppercase;
 		font-size: 20px;
 	}
@@ -320,7 +319,7 @@ header.active .title-header{
 	}
 
 	.div-presentation h3{
-		margin: 20px 0px;
+		margin: 20px 0;
 	}
 	.gallerie{
 		width: 50%;
@@ -345,5 +344,5 @@ header.active .title-header{
 		color: white;
 		text-transform: uppercase;
 	}
-} 
+}
 
