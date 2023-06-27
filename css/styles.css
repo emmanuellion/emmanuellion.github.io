@@ -30,13 +30,17 @@ body{
 }
 
 h1{
-	width: 46%;
 	font-size: 200%;
+	border-bottom: 3px solid red;
+}
+
+h1, h2, h3{
+	width: 46%;
 	text-align: center;
 	position: relative;
 	margin: auto;
+	margin-top: 15px;
 	padding-bottom: 5px;
-	border-bottom: 3px solid red;
 }
 
 ul{
@@ -57,18 +61,18 @@ li{
 
 a{
 	text-align: center;
-	color: transparent;
 	text-decoration: none;
 	transition: font-size 0.7s ease;
-	background: linear-gradient(to right, blue, yellow);
+	color: #F1363A;
+	/* background: linear-gradient(to right, blue, yellow);
 	-webkit-background-clip: text;
-	background-clip: text;
+	background-clip: text; */
 }
 
 li::before{
 	content: "";
 	position: absolute;
-	background: linear-gradient(to right, blue, yellow);
+	background: #F1363A;
 	bottom: -3px;
 	height: 2px;
 	left: 0;
