@@ -28,7 +28,7 @@ var start;
 var end;
 const nexus_color = "white"; //Color of the two points A and B
 var path = [];
-const difficulty = 2/10;
+const difficulty = 1/10;
 
 //Creation of the grid
 for(i = 0; i <= nb_case; i++){

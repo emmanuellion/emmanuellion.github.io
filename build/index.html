@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="fr" style="box-sizing:border-box;padding:0;margin:0;overflow-y:hidden">
+<head>
+    <meta charset="utf-8"/>
+    <link rel="icon" href="/katana.png"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="theme-color" content="#000000"/>
+    <meta name="description" content="Web site created using create-react-app"/>
+    <link rel="apple-touch-icon" href="/katana.png"/>
+    <link rel="manifest" href="/manifest.json"/>
+    <title>React App</title><link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:wght@500&display=swap" rel="stylesheet">
+    <script defer="defer" src="./static/js/main.7bf2b323.js">
+    </script></head><body style="box-sizing:border-box;padding:0;margin:0;overflow-y:hidden">
+<noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root" style="box-sizing:border-box;padding:0;margin:0;overflow-y:hidden">
+    </div>
+    <script>
+      let done = null;
+      const iii = setInterval(() => {
+        try {
+          const i = document.getElementsByTagName('img')[0]
+          if(done === null && i.src.includes("https://emmanuellion.github.io/")) {
+            let str = "https://emmanuellion.github.io/build/"+i.src.replace("https://emmanuellion.github.io/", "");
+            i.src = str;
+            done = str;
+            clearInterval(iii);
+          }
+        } catch (e) { }
+      }, 1);
+    </script>
+    </body></html>
