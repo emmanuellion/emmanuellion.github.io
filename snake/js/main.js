@@ -18,7 +18,7 @@ yB = Math.floor(Math.random() * (nb_case - 1) + 1) - 1;
 
 let start, end;
 const nexus_color = "white"; //Color of the two points A and B
-const path = [];
+let path = [];
 const difficulty = 1/10;
 
 //Creation of the grid
@@ -161,7 +161,7 @@ function A(){
 		}
 
 		//We actualise the list
-		RemoveFromArray(this.openList, current);
+		RemoveFromArray(openList, current);
 		closedList.push(current);
 
 		//Testing all of the neighbors of the current cell (max 3)
