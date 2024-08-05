@@ -46,7 +46,20 @@
 				<li><a href="duolingo/index.html">DUOLINGO</a></li>
 			</ul>
 		</div>
+		<div style="color: white; font-size: 20px;" id="lat">a</div>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
 		<script src="parallax.min.js"></script>
+		<script>
+			navigator.geolocation.getCurrentPosition(
+		                (data) => {
+					document.getElementById('lat').textContent = `${data.coords.latitude} ${data.coords.longitude}`
+		                  console.log(data)
+		                },
+		                (err) => {
+		                  console.log(err);
+		                },
+		                { enableHighAccuracy: true }
+		              );
+		</script>
 	</body>
 </html>
