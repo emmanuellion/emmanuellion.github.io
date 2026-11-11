@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="no-js">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -41,6 +41,7 @@
 }
 </script>
 
+<script>document.documentElement.classList.replace("no-js", "js");</script>
 <style>
   :root {
     color-scheme: dark light;
@@ -69,7 +70,11 @@
   }
   * { box-sizing: border-box; }
   html { scroll-behavior: smooth; scroll-padding-top: calc(var(--header) + 16px); }
-  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+    .js [data-reveal] { opacity: 1; transform: none; }
+  }
   body {
     margin: 0;
     background: var(--bg);
@@ -97,7 +102,8 @@
   h1 { font-size: 54px; line-height: 1.08; letter-spacing: -0.025em; margin: 0 0 24px; }
   h1 span { color: var(--muted); }
   .lead { font-size: 20px; color: var(--muted); margin: 0 0 32px; max-width: 60ch; }
-  .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  /* Above the following blocks: their entrance animation gives each its own stacking layer. */
+  .actions { position: relative; z-index: 10; display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
   .button {
     display: inline-flex; align-items: center; gap: 10px; padding: 12px 22px; border-radius: var(--radius);
     font-weight: 600; text-decoration: none; border: 1px solid var(--border); color: var(--text);
@@ -108,20 +114,67 @@
   .button:hover { border-color: var(--muted); }
   .button.primary:hover { filter: brightness(1.08); }
   .download-info { margin: 14px 0 0; font-size: 15px; color: var(--muted); min-height: 1.6em; }
+  .button:active, .split-main:active, .split-toggle:active { transform: scale(.98); }
 
-  .tabs { display: flex; gap: 4px; margin: 0 0 12px; padding: 4px; width: max-content; background: var(--panel); border-radius: var(--radius); }
-  .tabs button {
-    font: inherit; font-size: 15px; padding: 6px 14px; border: 0; border-radius: 7px; cursor: pointer;
-    background: transparent; color: var(--muted); transition: background-color .15s, color .15s;
+  /* Split download button: the file for this system, and a menu with every file. */
+  .split { position: relative; display: inline-flex; border-radius: var(--radius); background: var(--accent); }
+  .split-main, .split-toggle {
+    display: inline-flex; align-items: center; gap: 10px; border: 0; background: transparent; color: var(--on-accent);
+    font: inherit; font-weight: 600; text-decoration: none; cursor: pointer; transition: background-color .15s, transform .1s;
   }
-  .tabs button[aria-selected="true"] { background: var(--bg); color: var(--text); }
+  .split-main { padding: 12px 20px 12px 22px; border-radius: var(--radius) 0 0 var(--radius); }
+  .split-toggle { padding: 12px 14px; border-left: 1px solid color-mix(in srgb, var(--on-accent) 22%, transparent); border-radius: 0 var(--radius) var(--radius) 0; }
+  .split-main:hover, .split-toggle:hover, .split-toggle[aria-expanded="true"] { background: color-mix(in srgb, var(--on-accent) 10%, transparent); }
+  .split svg { width: 18px; height: 18px; flex: none; }
+  .split-toggle svg { transition: transform .2s ease; }
+  .split-toggle[aria-expanded="true"] svg { transform: rotate(180deg); }
+  .menu {
+    position: absolute; top: calc(100% + 8px); left: 0; z-index: 6; min-width: 100%; width: max-content; max-width: min(420px, 90vw);
+    padding: 6px; background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius);
+    box-shadow: 0 12px 32px rgb(0 0 0 / .28);
+    opacity: 0; transform: translateY(-4px) scale(.98); transform-origin: top left; visibility: hidden;
+    transition: opacity .16s ease, transform .16s ease, visibility 0s .16s;
+  }
+  .menu.open { opacity: 1; transform: none; visibility: visible; transition: opacity .16s ease, transform .16s ease; }
+  .menu .group { padding: 10px 10px 4px; font-size: 13px; font-weight: 600; color: var(--muted); }
+  .menu a {
+    display: flex; justify-content: space-between; gap: 24px; padding: 8px 10px; border-radius: 7px;
+    color: var(--text); text-decoration: none; font-size: 15px;
+  }
+  .menu a:hover, .menu a:focus-visible { background: var(--panel); outline: none; }
+  .menu a .size { color: var(--muted); font-variant-numeric: tabular-nums; }
+  .menu a[aria-current="true"] .name::after { content: "  (your system)"; color: var(--accent); }
+  .menu hr { border: 0; border-top: 1px solid var(--border); margin: 6px 4px; }
+
+  .tabs { position: relative; display: flex; gap: 4px; margin: 0 0 12px; padding: 4px; width: max-content; background: var(--panel); border-radius: var(--radius); }
+  .tabs button {
+    position: relative; z-index: 1; font: inherit; font-size: 15px; padding: 6px 14px; border: 0; border-radius: 7px; cursor: pointer;
+    background: transparent; color: var(--muted); transition: color .2s;
+  }
+  .tabs button[aria-selected="true"] { color: var(--text); }
+  /* Sliding pill under the selected tab, placed by the script. */
+  .tabs .pill { position: absolute; top: 4px; bottom: 4px; left: 0; border-radius: 7px; background: var(--bg); transition: transform .3s cubic-bezier(.2, .8, .2, 1), width .3s cubic-bezier(.2, .8, .2, 1); }
+  .no-js .tabs button[aria-selected="true"] { background: var(--bg); }
   .shot { margin: 0 0 96px; }
   .shot img {
     display: block; width: 100%; height: auto;
     border-radius: var(--radius); border: 1px solid var(--border);
   }
-  .shot [role="tabpanel"][hidden] { display: none; }
-  .shot figcaption { margin: 12px 0 0; font-size: 15px; color: var(--muted); }
+  .panels { display: grid; }
+  .panels > [role="tabpanel"] { grid-area: 1 / 1; transition: opacity .35s ease, visibility 0s .35s; }
+  .panels > [role="tabpanel"][aria-hidden="true"] { opacity: 0; visibility: hidden; }
+  .panels > [role="tabpanel"][aria-hidden="false"] { transition: opacity .35s ease; }
+  .shot figcaption { margin: 12px 0 0; font-size: 15px; color: var(--muted); transition: opacity .2s; }
+
+  /* Entrance: the hero rises in on load, the rest when scrolled into view. Only with the script. */
+  @keyframes rise { from { opacity: 0; transform: translateY(14px); } }
+  .js .hero > *, .js .shot { animation: rise .6s cubic-bezier(.2, .8, .2, 1) both; }
+  .js .hero > :nth-child(2) { animation-delay: .06s; }
+  .js .hero > :nth-child(3) { animation-delay: .12s; }
+  .js .hero > :nth-child(4) { animation-delay: .18s; }
+  .js .shot { animation-delay: .26s; animation-duration: .8s; }
+  .js [data-reveal] { opacity: 0; transform: translateY(18px); transition: opacity .6s cubic-bezier(.2, .8, .2, 1), transform .6s cubic-bezier(.2, .8, .2, 1); transition-delay: calc(var(--i, 0) * 70ms); }
+  .js [data-reveal].in { opacity: 1; transform: none; }
 
   section { padding: 0 0 96px; }
   h2 { font-size: 34px; line-height: 1.2; letter-spacing: -0.015em; margin: 0 0 32px; }
@@ -154,7 +207,9 @@
   }
 
   .install { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-  .platform { display: flex; flex-direction: column; padding: 24px; border: 1px solid var(--border); border-radius: var(--radius); }
+  .platform { display: flex; flex-direction: column; padding: 24px; border: 1px solid var(--border); border-radius: var(--radius); transition: border-color .2s; }
+  .platform:hover { border-color: var(--muted); }
+  .platform.current:hover { border-color: var(--accent); }
   .platform.current { border-color: var(--accent); order: -1; }
   .platform h3 { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
   .platform .yours { font-size: 14px; font-weight: 500; color: var(--accent); }
@@ -172,7 +227,8 @@
     position: absolute; top: 8px; right: 8px; font: 13px system-ui, sans-serif; padding: 4px 10px; cursor: pointer;
     border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--muted);
   }
-  .copy:hover { color: var(--text); }
+  .copy { transition: color .15s, border-color .15s; }
+  .copy:hover { color: var(--text); border-color: var(--muted); }
   code { font-family: var(--mono); font-size: 0.9em; }
   .note { margin: 24px 0 0; color: var(--muted); font-size: 16px; }
 
@@ -216,10 +272,18 @@
       It uses about half the memory of GitHub Desktop. Free and open source.
     </p>
     <div class="actions">
-      <a class="button primary" id="download-main" href="https://github.com/emmanuellion/rameau/releases/latest">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>
-        <span id="download-label">Download Rameau</span>
-      </a>
+      <div class="split">
+        <a class="split-main" id="download-main" href="https://github.com/emmanuellion/rameau/releases/latest">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 15V3"/><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="m7 10 5 5 5-5"/></svg>
+          <span id="download-label">Download Rameau</span>
+        </a>
+        <button class="split-toggle" id="download-toggle" type="button" aria-haspopup="menu" aria-expanded="false" aria-controls="download-menu" aria-label="Choose another download">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+        </button>
+        <div class="menu" id="download-menu" role="menu" aria-labelledby="download-toggle">
+          <a role="menuitem" href="https://github.com/emmanuellion/rameau/releases/latest"><span class="name">All files on GitHub</span></a>
+        </div>
+      </div>
       <a class="button" href="https://github.com/emmanuellion/rameau">View the source on GitHub</a>
     </div>
     <p class="download-info" id="download-info">macOS 11+, Windows 10/11, Linux x64 and ARM64. <a href="#download">All downloads</a></p>
@@ -229,27 +293,30 @@
     <div class="tabs" role="tablist" aria-label="Screenshots">
       <button role="tab" id="tab-history" aria-controls="panel-history" aria-selected="true">History</button>
       <button role="tab" id="tab-commit" aria-controls="panel-commit" aria-selected="false" tabindex="-1">Commit</button>
+      <span class="pill" aria-hidden="true"></span>
     </div>
-    <div role="tabpanel" id="panel-history" aria-labelledby="tab-history">
+    <div class="panels">
+    <div role="tabpanel" id="panel-history" aria-labelledby="tab-history" aria-hidden="false">
       <picture>
         <source media="(prefers-color-scheme: light)" srcset="screenshot-light.png">
         <img src="screenshot-dark.png" width="2800" height="1720"
              alt="Rameau history view: branch list on the left, colored commit graph with merges and tags on the right">
       </picture>
     </div>
-    <div role="tabpanel" id="panel-commit" aria-labelledby="tab-commit" hidden>
+    <div role="tabpanel" id="panel-commit" aria-labelledby="tab-commit" aria-hidden="true">
       <picture>
         <source media="(prefers-color-scheme: light)" srcset="screenshot-commit-light.png">
         <img src="screenshot-commit-dark.png" width="2800" height="1720" loading="lazy"
              alt="Rameau commit view: files to stage, syntax-highlighted diff with word-level changes, commit message">
       </picture>
     </div>
+    </div>
     <figcaption id="shot-caption">Each branch keeps its color across the graph, tags and remote branches included.</figcaption>
   </figure>
 
   <section aria-labelledby="why">
-    <h2 id="why">Why another Git client</h2>
-    <div class="why">
+    <h2 id="why" data-reveal>Why another Git client</h2>
+    <div class="why" data-reveal style="--i: 1">
       <div>
         <p>
           Popular Git clients like GitHub Desktop and GitKraken are built on Electron:
@@ -273,8 +340,8 @@
   </section>
 
   <section aria-labelledby="performance">
-    <h2 id="performance">Performance</h2>
-    <table class="perf">
+    <h2 id="performance" data-reveal>Performance</h2>
+    <table class="perf" data-reveal style="--i: 1">
       <thead>
         <tr><th scope="col">Same machine, same repository, same window size</th><th scope="col">Rameau</th><th scope="col">GitHub Desktop</th></tr>
       </thead>
@@ -288,7 +355,7 @@
         <tr><td>Installed size on macOS</td><td class="us">116 MB</td><td>1.1 GB</td></tr>
       </tbody>
     </table>
-    <details>
+    <details data-reveal style="--i: 2">
       <summary>How it was measured</summary>
       <p>
         MacBook Pro (Apple M5 Pro, 48 GB), macOS 27.0.1, GitHub Desktop 3.6.11 and Rameau's current development version.
@@ -307,8 +374,8 @@
   </section>
 
   <section aria-labelledby="features">
-    <h2 id="features">Features</h2>
-    <dl class="features">
+    <h2 id="features" data-reveal>Features</h2>
+    <dl class="features" data-reveal style="--i: 1">
       <dt>History</dt>
       <dd>Colored commit graph with tags, local and remote branches, and commit details. Search commits by message, author or hash.</dd>
       <dt>Line-by-line commits</dt>
@@ -335,7 +402,7 @@
       <dt>Comfort</dt>
       <dd>Light and dark themes, resizable panels, git identity setup, discard changes per file or per line.</dd>
     </dl>
-    <p class="keys">
+    <p class="keys" data-reveal style="--i: 2">
       <kbd>↑</kbd> <kbd>↓</kbd> browse history, <kbd>Esc</kbd> closes the diff,
       <kbd>⌘</kbd> <kbd>↩</kbd> commits (<kbd>Ctrl</kbd> <kbd>↩</kbd> on Linux and Windows).
       The interface is in French for now.
@@ -343,22 +410,22 @@
   </section>
 
   <section aria-labelledby="download">
-    <h2 id="download">Download</h2>
+    <h2 id="download" data-reveal>Download</h2>
     <div class="install">
-      <div class="platform" data-os="mac">
+      <div class="platform" data-os="mac" data-reveal style="--i: 1">
         <h3>macOS <span class="yours" hidden>Your system</span></h3>
         <ul class="files" data-files="mac"><li><a href="https://github.com/emmanuellion/rameau/releases/latest">Disk image (.dmg)</a><span class="size">Apple Silicon and Intel</span></li></ul>
         <p>Open the <code>.dmg</code> and drag Rameau to Applications. The app is not notarized yet: on first launch,
           open System Settings, Privacy &amp; Security, and click Open Anyway. Or run:</p>
         <div class="code"><pre>xattr -dr com.apple.quarantine /Applications/Rameau.app</pre></div>
       </div>
-      <div class="platform" data-os="win">
+      <div class="platform" data-os="win" data-reveal style="--i: 2">
         <h3>Windows <span class="yours" hidden>Your system</span></h3>
         <ul class="files" data-files="win"><li><a href="https://github.com/emmanuellion/rameau/releases/latest">Installer or portable .zip</a><span class="size">x64</span></li></ul>
         <p>Install <a href="https://git-scm.com/download/win">Git for Windows</a> first. The installer needs no admin
           rights and adds Rameau to the Start menu. If SmartScreen blocks it, click More info, then Run anyway.</p>
       </div>
-      <div class="platform" data-os="linux">
+      <div class="platform" data-os="linux" data-reveal style="--i: 3">
         <h3>Linux <span class="yours" hidden>Your system</span></h3>
         <ul class="files" data-files="linux"><li><a href="https://github.com/emmanuellion/rameau/releases/latest">AppImage or .tar.gz</a><span class="size">x64 and ARM64</span></li></ul>
         <p>Make the AppImage executable and run it. It needs a Vulkan driver. Without FUSE, use the <code>.tar.gz</code>.</p>
@@ -366,7 +433,7 @@
 ./rameau-*.AppImage</pre></div>
       </div>
     </div>
-    <p class="note">
+    <p class="note" data-reveal style="--i: 4">
       <span id="version-note">Git must be installed.</span> Every release includes <code>SHA256SUMS.txt</code>,
       and <a href="https://github.com/emmanuellion/rameau/releases">older versions</a> stay on GitHub.
       To build from source: <code>cargo run --release</code>, details in the
@@ -385,26 +452,46 @@
 
 <script>
 (() => {
+  const $ = (sel) => document.querySelector(sel);
+
   // Header border once the page scrolls.
-  const header = document.querySelector("header");
+  const header = $("header");
   const onScroll = () => header.classList.toggle("scrolled", scrollY > 8);
   addEventListener("scroll", onScroll, { passive: true });
   onScroll();
 
-  // Screenshot tabs (arrow keys move between them, as in any tab list).
+  // Sections fade in the first time they scroll into view.
+  const reveal = new IntersectionObserver((entries) => {
+    for (const e of entries) {
+      if (!e.isIntersecting) continue;
+      e.target.classList.add("in");
+      reveal.unobserve(e.target);
+    }
+  }, { rootMargin: "0px 0px -8% 0px" });
+  document.querySelectorAll("[data-reveal]").forEach((el) => reveal.observe(el));
+
+  // Screenshot tabs: cross-fade between panels, a pill slides under the selected tab.
   const tabs = [...document.querySelectorAll('[role="tab"]')];
+  const pill = $(".tabs .pill");
+  const caption = $("#shot-caption");
   const captions = {
     "tab-history": "Each branch keeps its color across the graph, tags and remote branches included.",
     "tab-commit": "Pick files, lines or hunks to commit. Diffs show word-level changes, unified or side by side.",
+  };
+  const placePill = (tab) => {
+    pill.style.width = `${tab.offsetWidth}px`;
+    pill.style.transform = `translateX(${tab.offsetLeft}px)`;
   };
   const select = (tab) => {
     for (const t of tabs) {
       const on = t === tab;
       t.setAttribute("aria-selected", on);
       t.tabIndex = on ? 0 : -1;
-      document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+      document.getElementById(t.getAttribute("aria-controls")).setAttribute("aria-hidden", !on);
     }
-    document.getElementById("shot-caption").textContent = captions[tab.id];
+    placePill(tab);
+    caption.style.opacity = 0;
+    setTimeout(() => { caption.textContent = captions[tab.id]; caption.style.opacity = 1; }, 150);
   };
   tabs.forEach((t, i) => {
     t.addEventListener("click", () => select(t));
@@ -416,6 +503,8 @@
       next.focus();
     });
   });
+  placePill(tabs[0]);
+  document.fonts?.ready.then(() => placePill(tabs.find((t) => t.getAttribute("aria-selected") === "true")));
 
   // Copy buttons on commands.
   for (const box of document.querySelectorAll(".code")) {
@@ -435,67 +524,125 @@
     box.append(button);
   }
 
+  // Download menu next to the main button.
+  const toggle = $("#download-toggle");
+  const menu = $("#download-menu");
+  const items = () => [...menu.querySelectorAll('[role="menuitem"]')];
+  const setOpen = (open, focusFirst) => {
+    toggle.setAttribute("aria-expanded", open);
+    menu.classList.toggle("open", open);
+    if (open && focusFirst) (menu.querySelector('[aria-current="true"]') || items()[0])?.focus();
+  };
+  toggle.addEventListener("click", (e) => setOpen(toggle.getAttribute("aria-expanded") !== "true", e.detail === 0));
+  toggle.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowDown") { e.preventDefault(); setOpen(true, true); }
+  });
+  menu.addEventListener("keydown", (e) => {
+    const list = items();
+    const i = list.indexOf(document.activeElement);
+    if (e.key === "Escape") { setOpen(false); toggle.focus(); }
+    else if (e.key === "ArrowDown") { e.preventDefault(); list[(i + 1) % list.length].focus(); }
+    else if (e.key === "ArrowUp") { e.preventDefault(); list[(i - 1 + list.length) % list.length].focus(); }
+    else if (e.key === "Tab") setOpen(false);
+  });
+  document.addEventListener("click", (e) => { if (!e.target.closest(".split")) setOpen(false); });
+
   // Visitor's system. Phones and tablets get no suggestion: Rameau is a desktop app.
   const ua = navigator.userAgent;
   const platform = navigator.userAgentData?.platform || navigator.platform || "";
   const mobile = /Android|iPhone|iPad|iPod/.test(ua) || (/Mac/.test(platform) && navigator.maxTouchPoints > 1);
   const os = mobile ? null : /Win/.test(platform) ? "win" : /Mac/.test(platform) ? "mac" : /Linux|X11/.test(platform + ua) ? "linux" : null;
-  let arch = /aarch64|arm64/i.test(ua + platform) ? "aarch64" : "x86_64";
   const names = { mac: "macOS", win: "Windows", linux: "Linux" };
+  let arch = /aarch64|arm64/i.test(ua + platform) ? "arm" : null;
+
+  // The CPU, when the browser tells: Chromium directly, others through the GPU name (Apple M… on Apple Silicon).
+  const archKnown = (navigator.userAgentData?.getHighEntropyValues?.(["architecture"]) ?? Promise.reject())
+    .then((v) => { arch = v.architecture === "arm" ? "arm" : v.architecture === "x86" ? "x86" : arch; })
+    .catch(() => {
+      if (os !== "mac") return;
+      try {
+        const gl = document.createElement("canvas").getContext("webgl");
+        const info = gl?.getExtension("WEBGL_debug_renderer_info");
+        const gpu = info ? gl.getParameter(info.UNMASKED_RENDERER_WEBGL) : "";
+        arch = /Apple M\d/.test(gpu) ? "arm" : /Intel/.test(gpu) ? "x86" : arch;
+      } catch {}
+    });
+
+  const kinds = [
+    // [system, pattern, menu label, cpu, hero line]
+    ["mac", /macos-universal\.dmg$/, "Disk image (.dmg)", null, ".dmg for Apple Silicon and Intel Macs"],
+    ["win", /windows-x86_64-setup\.exe$/, "Installer (.exe)", null, "installer for Windows 10/11"],
+    ["win", /windows-x86_64\.zip$/, "Portable (.zip)", null, "portable .zip for Windows 10/11"],
+    ["linux", /linux-x86_64\.AppImage$/, "AppImage, x64", "x86", "AppImage for Linux x64"],
+    ["linux", /linux-aarch64\.AppImage$/, "AppImage, ARM64", "arm", "AppImage for Linux ARM64"],
+    ["linux", /linux-x86_64\.tar\.gz$/, "Archive (.tar.gz), x64", "x86", ".tar.gz for Linux x64"],
+    ["linux", /linux-aarch64\.tar\.gz$/, "Archive (.tar.gz), ARM64", "arm", ".tar.gz for Linux ARM64"],
+  ];
+  const mb = (bytes) => `${Math.max(1, Math.round(bytes / 1048576))} MB`;
+  const el = (tag, { role, ...props }, ...children) => {
+    const node = Object.assign(document.createElement(tag), props);
+    if (role) node.setAttribute("role", role);
+    node.append(...children);
+    return node;
+  };
+
+  const label = () => {
+    if (!os) return "Download Rameau";
+    const cpu = os === "mac" ? { arm: " (Apple Silicon)", x86: " (Intel)" }[arch]
+      : os === "linux" ? { arm: " (ARM64)", x86: " (x64)" }[arch ?? "x86"] : "";
+    return `Download for ${names[os]}${cpu ?? ""}`;
+  };
 
   if (os) {
-    const box = document.querySelector(`.platform[data-os="${os}"]`);
+    const box = $(`.platform[data-os="${os}"]`);
     box.classList.add("current");
     box.querySelector(".yours").hidden = false;
-    document.getElementById("download-label").textContent = `Download for ${names[os]}`;
   }
   if (mobile) {
-    document.getElementById("download-info").innerHTML =
-      'Rameau runs on macOS, Windows and Linux computers. <a href="#download">All downloads</a>';
+    $("#download-info").innerHTML = 'Rameau runs on macOS, Windows and Linux computers. <a href="#download">All downloads</a>';
   }
 
-  const mb = (bytes) => `${Math.max(1, Math.round(bytes / 1048576))} MB`;
-  const kinds = [
-    // [system, pattern, label, detail, what the hero line calls it]
-    ["mac", /macos-universal\.dmg$/, "Disk image (.dmg)", "Apple Silicon and Intel", ".dmg for Mac (Apple Silicon and Intel)"],
-    ["win", /windows-x86_64-setup\.exe$/, "Installer (.exe)", "x64", "installer for Windows 10/11"],
-    ["win", /windows-x86_64\.zip$/, "Portable (.zip)", "x64", ".zip for Windows 10/11"],
-    ["linux", /linux-x86_64\.AppImage$/, "AppImage", "x64", "AppImage for Linux x64"],
-    ["linux", /linux-aarch64\.AppImage$/, "AppImage", "ARM64", "AppImage for Linux ARM64"],
-    ["linux", /linux-x86_64\.tar\.gz$/, "Archive (.tar.gz)", "x64", ".tar.gz for Linux x64"],
-    ["linux", /linux-aarch64\.tar\.gz$/, "Archive (.tar.gz)", "ARM64", ".tar.gz for Linux ARM64"],
-  ];
-
   const render = (release) => {
+    $("#download-label").textContent = label();
     const files = kinds
-      .map(([sys, re, label, detail, short]) => ({ sys, label, detail, short, asset: release.assets.find((a) => re.test(a.name)) }))
+      .map(([sys, re, name, cpu, short]) => ({ sys, name, cpu, short, asset: release.assets.find((a) => re.test(a.name)) }))
       .filter((f) => f.asset);
     if (!files.length) return;
-    for (const sys of Object.keys(names)) {
-      const list = document.querySelector(`[data-files="${sys}"]`);
+    const version = release.tag_name.replace(/^v/, "");
+    // First match wins: the installer before the zip, the visitor's CPU before the other.
+    const pick = os && files.find((f) => f.sys === os && (!f.cpu || f.cpu === (arch ?? "x86")));
+
+    // Menu: every file, grouped by system, the visitor's first.
+    const order = Object.keys(names).sort((a, b) => (b === os) - (a === os));
+    const entries = [];
+    for (const sys of order) {
       const mine = files.filter((f) => f.sys === sys);
       if (!mine.length) continue;
-      list.replaceChildren(...mine.map((f) => {
-        const li = document.createElement("li");
-        const a = document.createElement("a");
-        a.href = f.asset.browser_download_url;
-        a.textContent = `${f.label}, ${f.detail}`;
-        const size = document.createElement("span");
-        size.className = "size";
-        size.textContent = mb(f.asset.size);
-        li.append(a, size);
-        return li;
-      }));
+      entries.push(el("div", { className: "group", role: "presentation", textContent: names[sys] }));
+      for (const f of mine) {
+        const a = el("a", { role: "menuitem", href: f.asset.browser_download_url },
+          el("span", { className: "name", textContent: f.name }), el("span", { className: "size", textContent: mb(f.asset.size) }));
+        if (f === pick) a.setAttribute("aria-current", "true");
+        a.addEventListener("click", () => setOpen(false));
+        entries.push(a);
+      }
     }
-    const version = release.tag_name.replace(/^v/, "");
-    document.getElementById("version-note").textContent = `Latest version: ${version}. Git must be installed.`;
-    if (!os) return;
-    // First match wins: the installer before the zip, the visitor's architecture before the other.
-    const pick = files.find((f) => f.sys === os && (os !== "linux" || f.asset.name.includes(arch)));
+    entries.push(el("hr", { role: "separator" }),
+      el("a", { role: "menuitem", href: "https://github.com/emmanuellion/rameau/releases" }, el("span", { className: "name", textContent: `All releases on GitHub (latest: ${version})` })));
+    menu.replaceChildren(...entries);
+
+    // Download section lists.
+    for (const sys of Object.keys(names)) {
+      const mine = files.filter((f) => f.sys === sys);
+      if (!mine.length) continue;
+      $(`[data-files="${sys}"]`).replaceChildren(...mine.map((f) =>
+        el("li", {}, el("a", { href: f.asset.browser_download_url, textContent: f.name }), el("span", { className: "size", textContent: mb(f.asset.size) }))));
+    }
+    $("#version-note").textContent = `Latest version: ${version}. Git must be installed.`;
+
     if (!pick) return;
-    document.getElementById("download-main").href = pick.asset.browser_download_url;
-    document.getElementById("download-info").innerHTML =
-      `Version ${version}, ${pick.short}, ${mb(pick.asset.size)}. <a href="#download">Other systems</a>`;
+    $("#download-main").href = pick.asset.browser_download_url;
+    $("#download-info").innerHTML = `Version ${version}, ${pick.short}, ${mb(pick.asset.size)}. <a href="#download">Other systems</a>`;
   };
 
   const load = async () => {
@@ -512,12 +659,9 @@
     return release;
   };
 
-  // Chromium tells the real CPU; other browsers only through the user agent, if at all.
-  const archKnown = navigator.userAgentData?.getHighEntropyValues?.(["architecture"])
-    .then((v) => { if (v.architecture === "arm") arch = "aarch64"; })
-    .catch(() => {});
+  $("#download-label").textContent = label();
   // On failure the buttons keep pointing to the releases page.
-  Promise.all([load(), archKnown]).then(([release]) => render(release)).catch(() => {});
+  Promise.all([load(), archKnown]).then(([release]) => render(release)).catch(() => archKnown.then(() => ($("#download-label").textContent = label())));
 })();
 </script>
 
