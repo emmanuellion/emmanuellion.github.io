@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rameau: a fast, native Git client for macOS, Linux and Windows</title>
+<meta name="description" content="Rameau is a free, open source Git GUI client written in Rust with GPUI. Colored commit graph, line-by-line staging, interactive rebase. About half the memory of GitHub Desktop.">
+<link rel="canonical" href="https://emmanuellion.github.io/rameau/">
+<link rel="icon" type="image/png" href="icon.png">
+<link rel="apple-touch-icon" href="icon.png">
+<meta name="theme-color" content="#14161b" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Rameau">
+<meta property="og:title" content="Rameau: a fast, native Git client">
+<meta property="og:description" content="Free, open source Git GUI written in Rust with GPUI. Colored commit graph, line-by-line staging, interactive rebase. About half the memory of GitHub Desktop. macOS, Linux and Windows.">
+<meta property="og:url" content="https://emmanuellion.github.io/rameau/">
+<meta property="og:image" content="https://emmanuellion.github.io/rameau/social-preview.png">
+<meta property="og:image:width" content="1280">
+<meta property="og:image:height" content="640">
+<meta property="og:image:alt" content="Rameau window showing a colored Git commit graph">
+<meta name="twitter:card" content="summary_large_image">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "Rameau",
+  "description": "Fast, native Git GUI client written in Rust with GPUI.",
+  "applicationCategory": "DeveloperApplication",
+  "operatingSystem": "macOS 11+, Windows 10/11, Linux",
+  "url": "https://emmanuellion.github.io/rameau/",
+  "downloadUrl": "https://github.com/emmanuellion/rameau/releases/latest",
+  "codeRepository": "https://github.com/emmanuellion/rameau",
+  "license": "https://www.gnu.org/licenses/gpl-3.0.html",
+  "image": "https://emmanuellion.github.io/rameau/social-preview.png",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+  "author": { "@type": "Person", "name": "Emmanuel Lion", "url": "https://github.com/emmanuellion" }
+}
+</script>
+
+<style>
+  :root {
+    color-scheme: dark light;
+    /* Rameau's own theme (src/theme.rs). */
+    --bg: #14161b;
+    --panel: #1a1d23;
+    --border: #262a33;
+    --text: #e4e7ee;
+    --muted: #8a90a0;
+    --accent: #5ab0f6;
+    --on-accent: #0b1220;
+    --radius: 10px;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #ffffff;
+      --panel: #f6f7f9;
+      --border: #e3e5ea;
+      --text: #1d2129;
+      --muted: #5f6673;
+      --accent: #2f7fd1;
+      --on-accent: #ffffff;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 17px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+  header .wrap { display: flex; align-items: center; justify-content: space-between; height: 72px; }
+  .brand { display: flex; align-items: center; gap: 12px; color: var(--text); text-decoration: none; font-weight: 600; font-size: 19px; }
+  .brand img { width: 32px; height: 32px; }
+  header nav { display: flex; gap: 24px; font-size: 15px; }
+  header nav a { color: var(--muted); text-decoration: none; }
+  header nav a:hover { color: var(--text); }
+
+  .hero { padding: 64px 0 48px; max-width: 720px; }
+  h1 { font-size: 54px; line-height: 1.08; letter-spacing: -0.025em; margin: 0 0 24px; }
+  h1 span { color: var(--muted); }
+  .lead { font-size: 20px; color: var(--muted); margin: 0 0 32px; max-width: 60ch; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .button {
+    display: inline-block; padding: 12px 22px; border-radius: var(--radius);
+    font-weight: 600; text-decoration: none; border: 1px solid var(--border); color: var(--text);
+  }
+  .button.primary { background: var(--accent); border-color: var(--accent); color: var(--on-accent); }
+  .button:hover { border-color: var(--muted); }
+  .button.primary:hover { filter: brightness(1.08); }
+  .platforms { margin: 16px 0 0; font-size: 15px; color: var(--muted); }
+
+  .shot { margin: 0 0 96px; }
+  .shot img {
+    display: block; width: 100%; height: auto;
+    border-radius: var(--radius); border: 1px solid var(--border);
+  }
+
+  section { padding: 0 0 96px; }
+  h2 { font-size: 34px; line-height: 1.2; letter-spacing: -0.015em; margin: 0 0 32px; }
+  h3 { font-size: 19px; margin: 0 0 8px; }
+
+  .why { display: grid; grid-template-columns: 1.2fr 1fr; gap: 48px; align-items: start; }
+  .why p { margin: 0 0 16px; max-width: 62ch; }
+  .why ul { margin: 0; padding: 24px 24px 24px 44px; background: var(--panel); border-radius: var(--radius); }
+  .why li { margin: 0 0 8px; }
+  .why li:last-child { margin: 0; }
+
+  .features { display: grid; grid-template-columns: max-content 1fr; gap: 0 32px; margin: 0; border-top: 1px solid var(--border); }
+  .features dt, .features dd { padding: 16px 0; border-bottom: 1px solid var(--border); margin: 0; }
+  .features dt { font-weight: 600; }
+  .features dd { color: var(--muted); }
+  .keys { margin: 24px 0 0; color: var(--muted); font-size: 15px; }
+  kbd {
+    font: 13px var(--mono); padding: 2px 6px; border: 1px solid var(--border);
+    border-bottom-width: 2px; border-radius: 5px; color: var(--text);
+  }
+
+  .perf { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  .perf th, .perf td { padding: 12px 0; border-bottom: 1px solid var(--border); text-align: right; }
+  .perf th:first-child, .perf td:first-child { text-align: left; padding-right: 24px; }
+  .perf thead th { font-size: 15px; color: var(--muted); font-weight: 500; }
+  .perf td { color: var(--muted); }
+  .perf td.us { color: var(--text); font-weight: 600; }
+  .perf td:first-child { color: var(--text); }
+  details { margin: 24px 0 0; color: var(--muted); font-size: 16px; max-width: 80ch; }
+  summary { cursor: pointer; color: var(--text); }
+  .figure { margin: 0 0 48px; }
+  .figure img { display: block; width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--border); }
+
+  .install { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; }
+  .install p { margin: 0 0 12px; color: var(--muted); font-size: 16px; }
+  pre {
+    margin: 0 0 12px; padding: 12px 14px; background: var(--panel); border-radius: var(--radius);
+    font: 13.5px/1.5 var(--mono); overflow-x: auto; color: var(--text);
+  }
+  code { font-family: var(--mono); font-size: 0.9em; }
+  .note { margin: 32px 0 0; color: var(--muted); font-size: 16px; }
+
+  footer { border-top: 1px solid var(--border); padding: 32px 0 48px; color: var(--muted); font-size: 15px; }
+  footer p { margin: 0 0 8px; }
+
+  @media (max-width: 860px) {
+    h1 { font-size: 40px; }
+    .hero { padding-top: 40px; }
+    .why, .install { grid-template-columns: 1fr; }
+    .features { grid-template-columns: 1fr; }
+    .features dt { padding-bottom: 0; border-bottom: 0; }
+    .features dd { padding-top: 4px; }
+    .perf { font-size: 15px; }
+    header nav a.optional { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <a class="brand" href="./"><img src="icon.png" alt="" width="32" height="32">Rameau</a>
+    <nav aria-label="Main">
+      <a class="optional" href="#features">Features</a>
+      <a class="optional" href="#performance">Performance</a>
+      <a class="optional" href="#install">Install</a>
+      <a href="https://github.com/emmanuellion/rameau">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="hero">
+    <h1>Rameau, a fast Git client <span>written in Rust.</span></h1>
+    <p class="lead">
+      A native desktop app to browse history, stage individual lines and rebase interactively.
+      Rendered by the GPU with GPUI, the framework behind the Zed editor.
+      It uses about half the memory of GitHub Desktop. Free and open source.
+    </p>
+    <div class="actions">
+      <a class="button primary" href="https://github.com/emmanuellion/rameau/releases/latest">Download Rameau</a>
+      <a class="button" href="https://github.com/emmanuellion/rameau">View the source on GitHub</a>
+    </div>
+    <p class="platforms">macOS 11+ (Apple Silicon and Intel), Windows 10/11, Linux x64 and ARM64.</p>
+  </div>
+
+  <figure class="shot">
+    <picture>
+      <source media="(prefers-color-scheme: light)" srcset="screenshot-light.png">
+      <img src="screenshot-dark.png" width="2800" height="1720"
+           alt="Rameau history view: branch list on the left, colored commit graph with merges and tags on the right">
+    </picture>
+  </figure>
+
+  <section aria-labelledby="why">
+    <h2 id="why">Why another Git client</h2>
+    <div class="why">
+      <div>
+        <p>
+          Popular Git clients like GitHub Desktop and GitKraken are built on Electron:
+          each one ships a web browser to draw its window.
+          Rameau is a single Rust process that draws its interface directly on the GPU.
+          On the same repository, it needs about half the memory of GitHub Desktop
+          and its window is up in under a fifth of a second.
+        </p>
+        <p>
+          It does not hide Git. Rameau runs the <code>git</code> already on your machine, with your config,
+          hooks and credentials. What you do in the app is what you would type in a terminal.
+        </p>
+      </div>
+      <ul>
+        <li>No Electron, no bundled browser</li>
+        <li>No account, no telemetry</li>
+        <li>Each branch keeps its color, <code>origin/x</code> included</li>
+        <li>GPL-3.0, built in the open</li>
+      </ul>
+    </div>
+  </section>
+
+  <section aria-labelledby="performance">
+    <h2 id="performance">Performance</h2>
+    <table class="perf">
+      <thead>
+        <tr><th scope="col">Same machine, same repository, same window size</th><th scope="col">Rameau</th><th scope="col">GitHub Desktop</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Memory, small repository, idle</td><td class="us">76 MB</td><td>221 MB</td></tr>
+        <tr><td>Memory, small repository, after browsing its history</td><td class="us">100 MB</td><td>213 MB</td></tr>
+        <tr><td>Memory, git/git (82,925 commits), idle</td><td class="us">122 MB</td><td>247 MB</td></tr>
+        <tr><td>Memory, git/git, after browsing 50 commits</td><td class="us">154 MB</td><td>248 MB</td></tr>
+        <tr><td>Time until the window appears</td><td class="us">0.18 s</td><td>0.87 s</td></tr>
+        <tr><td>Processes</td><td class="us">1</td><td>4</td></tr>
+        <tr><td>Installed size on macOS</td><td class="us">116 MB</td><td>1.1 GB</td></tr>
+      </tbody>
+    </table>
+    <details>
+      <summary>How it was measured</summary>
+      <p>
+        MacBook Pro (Apple M5 Pro, 48 GB), macOS 27.0.1, GitHub Desktop 3.6.11 and Rameau's current development version.
+        Memory is the physical footprint reported by macOS <code>footprint</code>, the figure Activity Monitor shows,
+        summed over every process of the app. Each app was quit, relaunched on the repository, resized to 1400×900 and
+        switched to its history view. Memory was sampled 20 s after launch, then again after pressing the down arrow
+        50 times in the history. Each value is the median of 5 samples, then the median of 3 launches.
+        The small repository has 18 commits.
+      </p>
+      <p>
+        GitHub Desktop also renders the diff of the first file of each selected commit, while Rameau shows the commit
+        details and its file list. GitHub Desktop's installed size includes 652 MB for its own copy of Git;
+        Rameau uses the Git installed on your machine. Rameau's 116 MB holds both the Intel and Apple Silicon builds.
+      </p>
+    </details>
+  </section>
+
+  <section aria-labelledby="features">
+    <h2 id="features">Features</h2>
+    <figure class="figure">
+      <picture>
+        <source media="(prefers-color-scheme: light)" srcset="screenshot-commit-light.png">
+        <img src="screenshot-commit-dark.png" width="2800" height="1720" loading="lazy"
+             alt="Rameau commit view: files to stage, syntax-highlighted diff with word-level changes, commit message">
+      </picture>
+    </figure>
+    <dl class="features">
+      <dt>History</dt>
+      <dd>Colored commit graph with tags, local and remote branches, and commit details. Search commits by message, author or hash.</dd>
+      <dt>Line-by-line commits</dt>
+      <dd>Stage whole files, or pick single lines and hunks in the diff. Shift+click selects a range.</dd>
+      <dt>Amend and undo</dt>
+      <dd>Amend the last commit, or undo it: its changes come back staged, with its message.</dd>
+      <dt>Interactive rebase</dt>
+      <dd>Reorder, reword, squash or drop commits from a list.</dd>
+      <dt>Diffs</dt>
+      <dd>Syntax highlighting and word-level changes, unified or side by side, for a commit or for your local changes.</dd>
+      <dt>Branches</dt>
+      <dd>Checkout, merge, rebase, create, and delete locally or on the remote, from a right-click.</dd>
+      <dt>Conflicts</dt>
+      <dd>A banner shows a merge or rebase in progress, with Continue and Abort.</dd>
+      <dt>Stash</dt>
+      <dd>Stash your changes, then apply or delete a stash.</dd>
+      <dt>GitHub</dt>
+      <dd>Sign in with the device flow, clone one of your repositories from a list, see the pull request and CI result
+        of each branch, and open a pull request in one click. The token goes to git's credential manager.</dd>
+      <dt>Remotes</dt>
+      <dd>Push, pull and fetch.</dd>
+      <dt>Projects</dt>
+      <dd>Open a folder, clone a URL, create a repository or drop a folder on the window. Switch projects from the top bar.</dd>
+      <dt>Comfort</dt>
+      <dd>Light and dark themes, resizable panels, git identity setup, discard changes per file or per line.</dd>
+    </dl>
+    <p class="keys">
+      <kbd>↑</kbd> <kbd>↓</kbd> browse history, <kbd>Esc</kbd> closes the diff,
+      <kbd>⌘</kbd> <kbd>↩</kbd> commits (<kbd>Ctrl</kbd> <kbd>↩</kbd> on Linux and Windows).
+      The interface is in French for now.
+    </p>
+  </section>
+
+  <section aria-labelledby="install">
+    <h2 id="install">Install</h2>
+    <div class="install">
+      <div>
+        <h3>macOS</h3>
+        <p>Open the <code>.dmg</code> and drag Rameau to Applications. The app is not notarized yet: on first launch,
+          open System Settings, Privacy &amp; Security, and click Open Anyway. Or run:</p>
+        <pre>xattr -dr com.apple.quarantine \
+  /Applications/Rameau.app</pre>
+      </div>
+      <div>
+        <h3>Windows</h3>
+        <p>Install <a href="https://git-scm.com/download/win">Git for Windows</a>, unzip the archive and run
+          <code>rameau.exe</code>. If SmartScreen blocks it, click More info, then Run anyway.</p>
+      </div>
+      <div>
+        <h3>Linux</h3>
+        <p>Make the AppImage executable and run it. It needs a Vulkan driver.
+          Without FUSE, use the <code>.tar.gz</code> archive.</p>
+        <pre>chmod +x rameau-*.AppImage
+./rameau-*.AppImage</pre>
+      </div>
+    </div>
+    <p class="note">
+      Git must be installed. Every release includes <code>SHA256SUMS.txt</code>.
+      To build from source: <code>cargo run --release</code>, details in the
+      <a href="https://github.com/emmanuellion/rameau#build-from-source">README</a>.
+    </p>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p>Rameau is free software under the GPL-3.0-or-later license, made by
+      <a href="https://github.com/emmanuellion">Emmanuel Lion</a>.</p>
+    <p>Found a bug or have an idea? <a href="https://github.com/emmanuellion/rameau/issues">Open an issue</a>.</p>
+  </div>
+</footer>
+
+</body>
+</html>
