@@ -784,8 +784,9 @@
   const REPO = "https://github.com/emmanuellion/rameau";
   const ua = navigator.userAgent;
   const platform = navigator.userAgentData?.platform || navigator.platform || "";
-  const mobile = /Android|iPhone|iPad|iPod/.test(ua) || (/Mac/.test(platform) && navigator.maxTouchPoints > 1);
-  const os = mobile ? null : /Win/.test(platform) ? "win" : /Mac/.test(platform) ? "mac" : /Linux|X11/.test(platform + ua) ? "linux" : null;
+  // Case-insensitive: Chromium says "macOS", Safari and Firefox "MacIntel".
+  const mobile = /android|iphone|ipad|ipod/i.test(ua) || (/mac/i.test(platform) && navigator.maxTouchPoints > 1);
+  const os = mobile ? null : /win/i.test(platform) ? "win" : /mac/i.test(platform) ? "mac" : /linux|x11/i.test(platform + ua) ? "linux" : null;
   const names = { mac: "macOS", win: "Windows", linux: "Linux" };
   let arch = /aarch64|arm64/i.test(ua + platform) ? "arm" : null;
 
