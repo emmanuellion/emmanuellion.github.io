@@ -813,7 +813,7 @@
     ["linux", /linux-x86_64\.tar\.gz$/, "Archive (.tar.gz), x64", "x86", ".tar.gz for Linux x64", "rameau-linux-x86_64.tar.gz"],
     ["linux", /linux-aarch64\.tar\.gz$/, "Archive (.tar.gz), ARM64", "arm", ".tar.gz for Linux ARM64", "rameau-linux-aarch64.tar.gz"],
   ];
-  const mb = (bytes) => `${Math.max(1, Math.round(bytes / 1048576))} MB`;
+  const mb = (bytes) => (bytes ? `${Math.max(1, Math.round(bytes / 1048576))} MB` : "");
   const fits = (sys, cpu) => sys === os && (!cpu || cpu === (arch ?? "x86"));
   const label = () => {
     if (!os) return "Download Rameau";
@@ -871,7 +871,9 @@
   }
   if (mobile) $(".download-info").innerHTML = 'Rameau runs on macOS, Windows and Linux computers. <a href="#download">All downloads</a>';
 
-  const render = (release) => {
+  // `final`: the real release list. Without it (before it arrives), every file of `kinds` is listed
+  // under its version-free name, the .exe installer included, but nothing is picked yet.
+  const render = (release, final = true) => {
     setLabels();
     const files = kinds
       .map(([sys, re, name, cpu, short]) => ({ sys, name, cpu, short, asset: release.assets.find((a) => re.test(a.name)) }))
@@ -896,7 +898,7 @@
         }
       }
       entries.push(el("hr", { role: "separator" }),
-        el("a", { role: "menuitem", href: `${REPO}/releases` }, el("span", { className: "name", textContent: `All releases on GitHub (latest: ${version})` })));
+        el("a", { role: "menuitem", href: `${REPO}/releases` }, el("span", { className: "name", textContent: final ? `All releases on GitHub (latest: ${version})` : "All releases on GitHub" })));
       $(".menu", split).replaceChildren(...entries);
     }
     for (const sys of Object.keys(names)) {
@@ -905,6 +907,7 @@
       $(`[data-files="${sys}"]`).replaceChildren(...mine.map((f) =>
         el("li", {}, el("a", { href: f.asset.browser_download_url, textContent: f.name }), el("span", { className: "size", textContent: mb(f.asset.size) }))));
     }
+    if (!final) return;
     $(".version-note").textContent = `Version ${version}, like every release,`;
     if (!pick) return;
     target = pick.asset.browser_download_url;
@@ -925,6 +928,7 @@
   };
 
   setLabels();
+  render({ tag_name: "latest", assets: kinds.map((k) => ({ name: k[5], size: 0, browser_download_url: `${REPO}/releases/latest/download/${k[5]}` })) }, false);
   ready = Promise.all([load(), archKnown])
     .then(([release]) => render(release))
     .catch(() => archKnown.then(() => {
