@@ -169,14 +169,16 @@ h2 .grad { background: linear-gradient(100deg, var(--cyan), var(--indigo) 50%, v
 .ribbon p b { color: var(--ink); }
 
 /* ---------- Tour: sticky window, scrolling steps ---------- */
-.tour .grid { display: grid; grid-template-columns: 5fr 7fr; gap: 64px; }
+/* Wider than the other sections: the screenshots are the point here. */
+.tour .wrap { max-width: 1640px; }
+.tour .grid { display: grid; grid-template-columns: minmax(300px, 4fr) 9fr; gap: 72px; }
 .tour .steps .step { min-height: 78vh; display: flex; flex-direction: column; justify-content: center; opacity: .25; transition: opacity .5s; }
 .tour .steps .step.on { opacity: 1; }
-.tour .step .num { font: 700 64px/1 var(--mono); color: transparent; -webkit-text-stroke: 1px rgb(124 140 255 / 0.6); margin-bottom: 14px; }
+.tour .step .num { font: 800 96px/1 var(--sans); letter-spacing: -0.04em; margin-bottom: 10px; background: linear-gradient(135deg, var(--cyan), var(--indigo) 55%, var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent; filter: drop-shadow(0 0 28px rgb(124 140 255 / 0.55)); }
 .tour .step h3 { font-size: 34px; letter-spacing: -0.02em; margin: 0 0 12px; line-height: 1.1; }
 .tour .step p { color: var(--muted); margin: 0; font-size: 18px; max-width: 440px; }
 .tour .step kbd { font: 12px var(--mono); padding: 2px 6px; border-radius: 5px; border: 1px solid var(--line); background: rgb(255 255 255 / 0.05); color: var(--ink); }
-.tour .frame { position: sticky; top: 14vh; height: 72vh; display: flex; align-items: center; }
+.tour .frame { position: sticky; top: 10vh; height: 80vh; display: flex; align-items: center; }
 .tour .shots { position: relative; width: 100%; border-radius: 14px; }
 /* The first screenshot gives the frame its height; the others lie on top of it. */
 .tour .shots img { position: absolute; top: 0; left: 0; width: 100%; height: auto; border-radius: 14px; opacity: 0; transform: scale(.94) rotateY(-8deg); filter: blur(6px); transition: opacity .8s var(--ease), transform .8s var(--ease), filter .8s; box-shadow: 0 40px 100px -30px rgb(0 0 0 / 0.9), 0 0 0 1px rgb(255 255 255 / 0.08); }
@@ -260,7 +262,9 @@ h2 .grad { background: linear-gradient(100deg, var(--cyan), var(--indigo) 50%, v
 
 /* ---------- Footer ---------- */
 footer { position: relative; padding: 60px 24px 50px; border-top: 1px solid var(--line); overflow: hidden; }
-footer .big { font: 800 clamp(80px, 19vw, 260px)/0.85 var(--sans); letter-spacing: -0.06em; color: transparent; -webkit-text-stroke: 1px rgb(255 255 255 / 0.1); text-align: center; margin: 0 0 40px; user-select: none; }
+/* A fill, not a stroke: the system font's letters overlap inside, a stroke would draw those seams. */
+footer .big { font: 800 clamp(80px, 19vw, 260px)/0.9 var(--sans); letter-spacing: -0.06em; text-align: center; margin: 0 0 40px; user-select: none;
+  background: linear-gradient(180deg, rgb(124 140 255 / 0.28), rgb(124 140 255 / 0.02) 85%); -webkit-background-clip: text; background-clip: text; color: transparent; }
 footer .cols { max-width: 1180px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 20px 40px; justify-content: space-between; color: var(--dim); font-size: 14px; }
 footer .cols p { margin: 0; max-width: 560px; }
 footer .cols nav { display: flex; gap: 22px; }
