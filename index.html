@@ -1,67 +1,158 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
-	<head>
-		<title>Accueil multi-tâche Emmanuel</title>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<meta name="description" content="Site d'Emmanuel LION recensent tous ses sites réalisés et vous permettant de les découvrir !">
-		<link rel="stylesheet" type="text/css" href="css/styles.css">
-		<link rel="stylesheet" type="text/css" href="css/styles_responsive.css">
-		<link rel="icon" type="text/css" href="img/connection.png">
-		<meta charset="utf-8">
-	</head>
-	<body>
-		<div class="parallax" data-parallax="scroll" data-z-index="-1" data-image-src="img/l1.gif">
-			<h1>Bienvenue sur le site multi-tâche de Manu</h1>
-			<h2>Le site recense tous mes projets</h2>
-			<h3>N'hésitez pas à tous les découvrir un à un</h3>
-			<ul>
-				<li><a href="rameau/">Rameau, client Git rapide en Rust</a></li>
-				<li><a href="akolade/">Akolade, éditeur de code natif en Rust</a></li>
-				<li><a href="Portfolio V2 remise à niveau avant catastrophe/index.html">Portfolio en cours de création</a></li>
-				<li><a href="Hack/index.html">Mon tout premier site $érieux :')</a></li>
-				<li><a href="karaté site/index.html">Site de karaté</a></li>
-				<li><a href="Linux.py" download="Linux.py">Gestionnaire de fichier et dossier (python)</a></li>
-				<li><a href="Linux.bat" download="Linux.bat">Initialisateur de projet web (batch)</a></li>
-				<li><a href="Bot_discord.py" download="Bot_discord.py">Bot discord (python) customisable si besoin</a></li>
-				<li><a href="https://www.linkedin.com/in/emmanuel-lion-/">Linkedin personnel</a></li>
-				<li><a href="Windows width/index.html">Connaitre la taille de l'écran en pixel</a></li>
-				<li><a href="snake/index.html">Algorithme de Path Finding</a></li>
-				<li><a href="Design/index.html">Lien pour les sites temporaires</a></li>
-				<li><a href="Cours 2/index.html">Site pour les cours</a> /ou/ <a href="https://emmanuel-lion-etu.pedaweb.univ-amu.fr/" title="https://emmanuel-lion-etu.pedaweb.univ-amu.fr/">Lien etu</a></li>
-				<li><a href="Neuropsy/index.html">Site neuropsychologie</a></li>
-				<li><a href="Parallax/index.html">Site avec effet de parallax</a></li>
-				<li><a href="projet tut 1/Projet.html">Projet tutoré premier semestre</a></li>
-				<li><a href="pi_learning/index.html">PI</a></li>
-				<li><a href="chess.com/index.html">Règle bot - jeu d'échec</a></li>
-				<li><a href="projet tut 2/index.html">Interaction type drag and drop sur forme 3D WebGl</a></li>
-				<li><a href="jeu de la vie/index.html">Jeu de la vie de Conway</a></li>
-				<li><a href="Esquisse projet tut/index.html">Esquisse navbar projet tut</a></li>
-				<li><a href="progress-bar/html/index.html">Barre de progression</a></li>
-				<li><a href="P/html/index.html">Portfolio 2022</a></li>
-				<li><a href="weather/index.html">Projet javascript 2nd année IUT</a></li>
-				<li><a href="react/index.html">Projet react</a></li>
-				<li><a href="pokemon/index.html">Pokemon game react</a></li>
-				<li><a href="build/index.html">PWA</a></li>
-				<li><a href="https://github.com/Mabule/boitille">Projet JAVA en LP CODESI</a></li>
-				<li><a href="https://github.com/Mabule/RESTChezToi">Projet d'API REST en LP CODESI</a></li>
-				<li><a href="UI/index.html">Test d'ui</a></li>
-				<li><a href="duolingo/index.html">DUOLINGO</a></li>
-			</ul>
-		</div>
-		<div style="color: white; font-size: 20px;" id="lat">a</div>
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-		<script src="parallax.min.js"></script>
-		<script>
-			navigator.geolocation.getCurrentPosition(
-		                (data) => {
-					document.getElementById('lat').textContent = `${data.coords.latitude} ${data.coords.longitude}`
-		                  console.log(data)
-		                },
-		                (err) => {
-		                  console.log(err);
-		                },
-		                { enableHighAccuracy: true }
-		              );
-		</script>
-	</body>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Emmanuel Lion : tous mes projets</title>
+<meta name="description" content="Site d'Emmanuel Lion qui recense tous ses projets : Rameau, Akolade, sites web, expériences, projets d'études et scripts.">
+<meta name="theme-color" content="#1a1b23">
+<link rel="icon" href="img/connection.png">
+<style>
+:root {
+  --bg: #1a1b23;
+  --surface: #20212b;
+  --line: #2e3040;
+  --ink: #eceef5;
+  --muted: #9a9db0;
+  --red: #f1363a;
+  --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Segoe UI", Roboto, sans-serif;
+  --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: var(--ink);
+  font: 17px/1.6 var(--sans);
+  -webkit-font-smoothing: antialiased;
+  background: var(--bg) url("img/l1.gif") center / cover fixed no-repeat;
+}
+::selection { background: rgb(241 54 58 / 0.4); }
+a { color: inherit; text-decoration: none; }
+:focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-radius: 4px; }
+main { max-width: 920px; margin: 0 auto; padding: 96px 24px 64px; }
+
+header { margin-bottom: 72px; }
+header p { margin: 0; }
+.hello { font: 14px var(--mono); color: var(--red); margin-bottom: 12px; }
+h1 { font-size: clamp(36px, 6vw, 56px); line-height: 1.1; letter-spacing: -0.02em; margin: 0 0 16px; }
+.intro { color: var(--muted); max-width: 56ch; font-size: 19px; }
+.elsewhere { display: flex; gap: 24px; margin-top: 24px; }
+
+h2 { font-size: 22px; margin: 64px 0 8px; letter-spacing: -0.01em; }
+
+.featured { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+.featured a {
+  display: grid; grid-template-columns: 56px 1fr; gap: 4px 16px; align-items: center;
+  padding: 24px; background: var(--surface); border-radius: 12px;
+  border: 1px solid var(--line); transition: border-color .2s;
+}
+.featured a:hover { border-color: var(--red); }
+.featured img { width: 56px; height: 56px; grid-row: span 2; }
+.featured strong { font-size: 24px; letter-spacing: -0.01em; }
+.featured span { color: var(--muted); font-size: 15px; line-height: 1.5; }
+.featured .tech { grid-column: 2; font: 13px var(--mono); color: var(--muted); margin-top: 8px; }
+
+ul { list-style: none; margin: 0; padding: 0; }
+li { border-bottom: 1px solid var(--line); }
+li > a, li > .row { display: flex; justify-content: space-between; gap: 24px; padding: 14px 0; }
+li .name { position: relative; }
+li .name::after {
+  content: ""; position: absolute; left: 0; bottom: -2px; height: 2px; width: 0;
+  background: var(--red); transition: width .5s ease;
+}
+li a:hover .name::after, li a:focus-visible .name::after { width: 100%; }
+li .what { color: var(--muted); font-size: 15px; text-align: right; }
+.elsewhere a { color: var(--muted); }
+.elsewhere a:hover { color: var(--ink); }
+
+footer { margin-top: 96px; color: var(--muted); font-size: 14px; }
+
+@media (max-width: 680px) {
+  main { padding-top: 56px; }
+  .featured { grid-template-columns: 1fr; }
+  li > a, li > .row { flex-direction: column; gap: 0; }
+  li .what { text-align: left; }
+}
+@media (prefers-reduced-motion: reduce) {
+  body { background-image: none; }
+  * { transition: none !important; }
+}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="hello">emmanuellion.github.io</p>
+    <h1>Bienvenue sur le site multi-tâche de Manu</h1>
+    <p class="intro">Le site recense tous mes projets, des logiciels en Rust jusqu'à mon tout premier site. N'hésitez pas à les découvrir un à un.</p>
+    <p class="elsewhere">
+      <a href="https://github.com/emmanuellion">GitHub</a>
+      <a href="https://www.linkedin.com/in/emmanuel-lion-/">LinkedIn</a>
+    </p>
+  </header>
+
+  <h2>Logiciels</h2>
+  <div class="featured">
+    <a href="rameau/" hreflang="en">
+      <img src="rameau/icon.png" alt="">
+      <strong>Rameau</strong>
+      <span>Client Git rapide et natif pour macOS, Linux et Windows.</span>
+      <span class="tech">Rust, GPUI, libre</span>
+    </a>
+    <a href="akolade/">
+      <img src="akolade/images/akolade.svg" alt="">
+      <strong>Akolade</strong>
+      <span>Éditeur de code natif : Git, un terminal et Claude Code dans une seule fenêtre.</span>
+      <span class="tech">Rust, GPUI, libre</span>
+    </a>
+  </div>
+
+  <h2>Sites web</h2>
+  <ul>
+    <li><a href="Portfolio V2 remise à niveau avant catastrophe/index.html"><span class="name">Portfolio</span><span class="what">En cours de création</span></a></li>
+    <li><a href="P/html/index.html"><span class="name">Portfolio 2022</span></a></li>
+    <li><a href="karaté site/index.html"><span class="name">Site de karaté</span></a></li>
+    <li><a href="Neuropsy/index.html"><span class="name">Site de neuropsychologie</span></a></li>
+    <li><a href="Parallax/index.html"><span class="name">Site avec effet de parallax</span></a></li>
+    <li><a href="duolingo/index.html"><span class="name">Duolingo</span></a></li>
+    <li><a href="UI/index.html"><span class="name">Test d'UI</span></a></li>
+    <li><a href="Design/index.html"><span class="name">Sites temporaires</span></a></li>
+    <li><div class="row"><a href="Cours 2/index.html"><span class="name">Site pour les cours</span></a><a class="what" href="https://emmanuel-lion-etu.pedaweb.univ-amu.fr/"><span class="name">Version étudiante (AMU)</span></a></div></li>
+    <li><a href="Hack/index.html"><span class="name">Mon tout premier site $érieux :')</span></a></li>
+  </ul>
+
+  <h2>Expériences et algorithmes</h2>
+  <ul>
+    <li><a href="snake/index.html"><span class="name">Path finding</span><span class="what">Algorithme de recherche de chemin</span></a></li>
+    <li><a href="jeu de la vie/index.html"><span class="name">Jeu de la vie</span><span class="what">Automate cellulaire de Conway</span></a></li>
+    <li><a href="chess.com/index.html"><span class="name">Bot d'échecs</span><span class="what">Règles du jeu</span></a></li>
+    <li><a href="projet tut 2/index.html"><span class="name">Drag and drop en 3D</span><span class="what">Interaction sur une forme WebGL</span></a></li>
+    <li><a href="pi_learning/index.html"><span class="name">PI</span></a></li>
+    <li><a href="progress-bar/html/index.html"><span class="name">Barre de progression</span></a></li>
+    <li><a href="Windows width/index.html"><span class="name">Taille de l'écran</span><span class="what">En pixels</span></a></li>
+  </ul>
+
+  <h2>Projets d'études</h2>
+  <ul>
+    <li><a href="projet tut 1/Projet.html"><span class="name">Projet tutoré</span><span class="what">Premier semestre</span></a></li>
+    <li><a href="Esquisse projet tut/index.html"><span class="name">Esquisse de navbar</span><span class="what">Projet tutoré</span></a></li>
+    <li><a href="weather/index.html"><span class="name">Projet JavaScript</span><span class="what">2e année d'IUT</span></a></li>
+    <li><a href="react/index.html"><span class="name">Projet React</span></a></li>
+    <li><a href="pokemon/index.html"><span class="name">Jeu Pokémon</span><span class="what">React</span></a></li>
+    <li><a href="build/index.html"><span class="name">PWA</span></a></li>
+    <li><a href="https://github.com/Mabule/boitille"><span class="name">Boitille</span><span class="what">Java, LP CODESI, sur GitHub</span></a></li>
+    <li><a href="https://github.com/Mabule/RESTChezToi"><span class="name">RESTChezToi</span><span class="what">API REST, LP CODESI, sur GitHub</span></a></li>
+  </ul>
+
+  <h2>Scripts à télécharger</h2>
+  <ul>
+    <li><a href="Linux.py" download><span class="name">Gestionnaire de fichiers et dossiers</span><span class="what">Python</span></a></li>
+    <li><a href="Linux.bat" download><span class="name">Initialisateur de projet web</span><span class="what">Batch</span></a></li>
+    <li><a href="Bot_discord.py" download><span class="name">Bot Discord personnalisable</span><span class="what">Python</span></a></li>
+  </ul>
+
+  <footer>Emmanuel Lion</footer>
+</main>
+</body>
 </html>
