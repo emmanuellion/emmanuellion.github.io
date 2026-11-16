@@ -461,7 +461,7 @@ footer a { color: var(--muted); }
           <article class="step" data-shot="0" data-glow="#4b55ff">
             <div class="num">01</div>
             <h3>Ouvrir et écrire</h3>
-            <p>L'explorateur marque les fichiers modifiés, la complétion classe les mots selon le contexte, <kbd>⌘.</kbd> propose des corrections rapides et <kbd>⌘R</kbd> lance le fichier ouvert.</p>
+            <p>L'explorateur marque les fichiers modifiés, la complétion classe les mots selon le contexte, <kbd>⌘.</kbd> propose des corrections rapides et <kbd>⌘R</kbd> lance le fichier ouvert. Glissez un dossier ou des fichiers depuis le Finder : ils s'ouvrent, ou rejoignent le projet.</p>
           </article>
           <article class="step" data-shot="1" data-glow="#28c840">
             <div class="num">02</div>
@@ -471,7 +471,7 @@ footer a { color: var(--muted); }
           <article class="step" data-shot="2" data-glow="#d97757">
             <div class="num">03</div>
             <h3>Déléguer à Claude</h3>
-            <p>Il lit, modifie et lance ses commandes sous vos yeux. Chaque action a sa carte, chaque fichier modifié se garde ou s'annule, et le coût de la session reste affiché à droite.</p>
+            <p>Il lit, modifie et lance ses commandes sous vos yeux. Chaque action a sa carte, chaque fichier modifié se garde ou s'annule, et le coût de la session reste affiché à droite. En cartes, ou en style terminal.</p>
           </article>
           <article class="step" data-shot="3" data-glow="#a35cff">
             <div class="num">04</div>
@@ -527,10 +527,10 @@ footer a { color: var(--muted); }
 
   <section class="mux-sec" id="multiplexeur">
     <div class="wrap">
-      <p class="kick">Le Multiplexeur · nouveau dans la 0.2</p>
+      <p class="kick">Le Multiplexeur · copies, dispositions et style terminal dans la 0.3</p>
       <h2 class="reveal">Plusieurs Claude à la fois.<br><span class="grad">Sans qu'ils se marchent dessus.</span></h2>
-      <p class="sub reveal">Lancez autant de sessions Claude Code que vous voulez, côte à côte : une par projet, ou plusieurs sur le même projet, chacune dans son propre worktree Git.</p>
-      <div class="mux-demo" role="img" aria-label="Le Multiplexeur : trois sessions Claude Code côte à côte. Sur le projet meteo, la session api travaille et réserve src/meteo.rs ; la session tests, qui voulait l'écrire, est refusée et attend votre accord pour une commande ; la session site travaille sur un autre projet. En bas, la branche de api a été fusionnée dans akolade/integration après 214 tests réussis.">
+      <p class="sub reveal">Lancez autant de sessions Claude Code que vous voulez, côte à côte : une par projet, ou plusieurs sur le même projet, chacune dans sa propre copie du dossier (sans Git) ou dans son worktree.</p>
+      <div class="mux-demo" role="img" aria-label="Le Multiplexeur : trois sessions Claude Code côte à côte. Sur le projet meteo, la session api travaille et réserve src/meteo.rs ; la session tests, qui voulait l'écrire, est refusée et attend votre accord pour une commande ; la session site travaille sur un autre projet. En bas, la branche de api a été fusionnée dans la branche d'intégration après 214 tests réussis, et la copie de la session docs a été réintégrée, un conflit tranché par Claude.">
         <div class="mh" aria-hidden="true">
           <strong>Multiplexeur</strong><small>3 sessions · 2 projets · 1,84 $</small>
           <div class="seg"><span class="on">Par projet (3)</span><span>À plat</span></div>
@@ -544,7 +544,7 @@ footer a { color: var(--muted); }
               <div class="u">Ajoute un endpoint /semaine qui renvoie le relevé le plus chaud.</div>
               <div class="t"><b>✓</b> claim_files src/meteo.rs</div>
               <div class="t"><b>✓</b> Edit src/meteo.rs (+24 −3)</div>
-              <div class="t"><b>✓</b> request_merge akolade/api</div>
+              <div class="t"><b>✓</b> request_merge</div>
             </div>
             <div class="pc"><b>Opus</b><span>Élevé</span>Modifs auto</div>
           </div>
@@ -567,14 +567,14 @@ footer a { color: var(--muted); }
             <div class="pc"><b>Opus</b><span>Élevé</span>Demander</div>
           </div>
         </div>
-        <div class="queue" aria-hidden="true">Intégration : <span class="ok">✓ akolade/api fusionnée · 214 tests réussis</span><span class="wait">akolade/tests en attente</span><span class="go">Fusionner dans votre branche</span></div>
+        <div class="queue" aria-hidden="true">Intégration : <span class="ok">✓ branche de api fusionnée · 214 tests réussis</span><span class="ok">✓ copie de docs réintégrée · 1 conflit tranché par Claude</span><span class="wait">branche de tests en attente</span><span class="go">Fusionner dans votre branche</span></div>
       </div>
       <ul class="mux-points">
-        <li><b>Chacune dans son worktree</b>Plusieurs sessions sur un même projet travaillent chacune sur sa branche, dans son propre dossier, jamais dans le vôtre.</li>
+        <li><b>Chacune dans sa copie</b>Sur un même projet, chaque session travaille dans sa copie du dossier, sans Git. Un fichier changé des deux côtés est fusionné, ou tranché par Claude. Avec Git, un worktree au choix.</li>
         <li><b>Des fichiers réservés</b>Une session réserve un fichier avant de le modifier. Si une autre veut l'écrire, elle est refusée, avec le nom de celle qui le tient et la raison.</li>
         <li><b>Elles se parlent</b>Les sessions s'écrivent entre elles, même d'un projet à l'autre. Depuis les Échanges, vous écrivez à une session, à un projet ou à toutes.</li>
-        <li><b>Fusionnées si les tests passent</b>Une branche terminée rejoint <code>akolade/integration</code> seulement si le projet compile et que ses tests passent. Rien n'est poussé, et rien n'arrive dans votre branche sans votre clic.</li>
-        <li><b>Par projet ou à plat</b>Deux vues, chacune avec ses propres sessions. Un clic lance un nouveau Claude dans l'un de vos projets, la croix le ferme. Le modèle et l'effort se choisissent comme dans l'app Claude.</li>
+        <li><b>Fusionnées si les tests passent</b>Une branche terminée rejoint la branche d'intégration du projet seulement si le projet compile et que ses tests passent. Rien n'est poussé, et rien n'arrive dans votre branche sans votre clic.</li>
+        <li><b>Disposées à votre goût</b>Par projet ou à plat, en grille, colonnes, lignes ou onglets. Glissez un panneau pour le déplacer. Chaque discussion s'affiche en cartes ou comme dans le terminal, une par une ou toutes à la fois.</li>
         <li><b>Statistiques et reprise</b>Coût et tokens de chaque session, avec les chiffres de Claude Code : sessions, messages, activité sur 30 jours. Après un redémarrage, chaque session reprend sa conversation.</li>
       </ul>
     </div>
@@ -623,7 +623,7 @@ footer a { color: var(--muted); }
         <p class="sub">Un dépôt téléchargé peut cacher des commandes que vos outils lancent tout seuls. Akolade ne les exécute pas tant que vous ne faites pas confiance au dossier.</p>
         <ul>
           <li><b>Git</b> se met en pause si le dépôt configure une commande.</li>
-          <li><b>ESLint et Clippy</b> attendent : ils exécutent la configuration du projet.</li>
+          <li><b>ESLint, Clippy et rust-analyzer</b> attendent : ils exécutent le code ou la configuration du projet.</li>
           <li><b>Claude Code, les tests et les scripts</b> demandent votre accord.</li>
         </ul>
       </div>
@@ -896,7 +896,7 @@ const ICON = {
 const TOOLS = [
   ['git', 'Git', '⇧⌘G', '#f07178', "Modifications et diff, indexation, commits, branches, remises, push et pull. Les fichiers modifiés se colorent dans l'explorateur.", 1],
   ['claude', 'Claude Code', 'conversation', '#d97757', "Votre propre Claude Code dans un onglet : cartes d'actions, autorisations d'un clic, coût et limites de l'abonnement.", 1],
-  ['mux', 'Multiplexeur', 'plusieurs Claude', '#d97757', "Plusieurs sessions Claude Code côte à côte, chacune dans son worktree : fichiers réservés, messages entre elles, fusion seulement si les tests passent.", 1],
+  ['mux', 'Multiplexeur', 'plusieurs Claude', '#d97757', "Plusieurs sessions Claude Code côte à côte, chacune dans sa copie ou son worktree : conflits tranchés par Claude, fichiers réservés, messages entre elles, fusion seulement si les tests passent.", 1],
   ['http', 'Client HTTP', 'API', '#4d9df0', "Une requête, ses en-têtes et son corps ; la réponse avec son code, sa durée et le JSON mis en forme.", 1],
   ['docker', 'Docker', 'conteneurs', '#2496ed', 'Démarrer, arrêter, supprimer un conteneur, lire ses logs ou ouvrir un shell dans le terminal.', 1],
   ['tests', 'Tests', 'cargo, go, pytest, jest, vitest', '#28c840', "Ce qui passe, ce qui casse, le message de chaque échec, et un clic pour ouvrir le test.", 1],
