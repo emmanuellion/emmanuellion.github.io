@@ -11,6 +11,7 @@
 <meta property="og:type" content="website">
 <meta name="theme-color" content="#07080d">
 <link rel="icon" href="images/akolade.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://api.github.com">
 <style>
 :root {
   --bg: #07080d;
@@ -48,8 +49,12 @@ img { max-width: 100%; display: block; }
 .nav .brand img { width: 24px; height: 24px; }
 .nav a.l { text-decoration: none; color: var(--muted); font-size: 14px; padding: 6px 11px; border-radius: 999px; transition: color .2s, background .2s; }
 .nav a.l:hover { color: var(--ink); background: rgb(255 255 255 / 0.06); }
-.nav a.gh { text-decoration: none; font-size: 14px; font-weight: 600; padding: 7px 14px; border-radius: 999px; background: var(--ink); color: var(--bg); margin-left: 6px; }
+.nav a.navdl { display: inline-flex; align-items: center; gap: 7px; text-decoration: none; font-size: 14px; font-weight: 650; padding: 7px 14px 7px 12px; border-radius: 999px; color: #fff; margin-left: 6px;
+  background: linear-gradient(135deg, #5b66ff, #9b5cff); box-shadow: 0 6px 24px -8px rgb(124 92 255 / 0.9); transition: transform .2s var(--ease); }
+.nav a.navdl:hover { transform: translateY(-1px); }
+.nav a.navdl svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
 @media (max-width: 820px) { .nav a.l { display: none; } }
+@media (max-width: 420px) { .nav .brand span { display: none; } }
 
 /* ---------- Hero ---------- */
 .hero { position: relative; min-height: 100vh; padding: 150px 24px 0; overflow: hidden; isolation: isolate; }
@@ -73,8 +78,6 @@ img { max-width: 100%; display: block; }
   color: transparent; -webkit-text-stroke: 1.5px rgb(180 140 255 / 0.22); letter-spacing: -0.1em; white-space: nowrap; user-select: none;
   animation: breathe 6s ease-in-out infinite; }
 @keyframes breathe { 50% { -webkit-text-stroke-color: rgb(94 224 255 / 0.32); transform: translateX(-50%) scale(1.03); } }
-.eyebrow { display: inline-flex; align-items: center; gap: 10px; font-size: 14px; color: var(--muted); padding: 6px 14px 6px 8px; border: 1px solid var(--line); border-radius: 999px; background: rgb(255 255 255 / 0.03); }
-.eyebrow b { font-weight: 600; color: var(--bg); background: linear-gradient(90deg, var(--cyan), var(--indigo)); padding: 2px 9px; border-radius: 999px; font-size: 12px; }
 h1 { margin: 28px 0 22px; font-size: clamp(48px, 9vw, 116px); line-height: .95; letter-spacing: -0.045em; font-weight: 800; }
 h1 .w { display: inline-block; overflow: hidden; vertical-align: bottom; padding-bottom: .08em; }
 h1 .w > span { display: inline-block; transform: translateY(110%); animation: rise .9s var(--ease) forwards; }
@@ -259,6 +262,37 @@ h2 .grad { background: linear-gradient(100deg, var(--cyan), var(--indigo) 50%, v
 .copy { font: 600 14px var(--sans); color: var(--bg); background: var(--ink); border: 0; border-radius: 10px; padding: 9px 16px; cursor: pointer; transition: transform .2s; }
 .copy:hover { transform: translateY(-1px); }
 .install .reqs { margin-top: 30px; color: var(--muted); font-size: 15px; }
+.btn.dl svg { width: 18px; height: 18px; stroke: currentColor; fill: none; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; }
+.btn.dl.waiting { opacity: .7; cursor: progress; }
+.hero-info { margin: 16px auto 0 !important; font-size: 14px !important; opacity: 0; animation: fade 1s 1.1s var(--ease) forwards; }
+.hero-info a, .install .all a { color: var(--ink); }
+.get { max-width: 760px; margin: 48px auto 0; text-align: left; padding: 34px 34px 26px; border-radius: 22px; border: 1px solid var(--line);
+  background: radial-gradient(120% 140% at 0% 0%, rgb(91 102 255 / 0.18), transparent 55%), radial-gradient(120% 140% at 100% 100%, rgb(155 92 255 / 0.16), transparent 55%), rgb(255 255 255 / 0.02); }
+.btn.big { font-size: 19px; padding: 18px 30px; border-radius: 16px; }
+.get .dl-info { margin: 14px 0 22px; color: var(--muted); font-size: 15px; }
+.get .how { margin: 0; padding-left: 22px; color: var(--muted); }
+.get .main-info { margin-bottom: 26px; }
+.tabs { display: inline-flex; gap: 4px; padding: 4px; border-radius: 12px; background: rgb(255 255 255 / 0.04); border: 1px solid var(--line); margin-bottom: 18px; }
+.tabs button { font: 600 14px var(--sans); color: var(--muted); background: none; border: 0; padding: 8px 16px; border-radius: 9px; cursor: pointer; transition: background .2s, color .2s; }
+.tabs button[aria-selected="true"] { color: var(--ink); background: rgb(124 140 255 / 0.22); }
+.tabs button .here { font-weight: 500; color: var(--cyan); margin-left: 6px; font-size: 12px; }
+.plat[hidden] { display: none; }
+.files { list-style: none; margin: 0 0 18px; padding: 0; display: grid; gap: 8px; }
+.files li { display: flex; align-items: center; gap: 12px; padding: 11px 14px; border-radius: 10px; background: rgb(255 255 255 / 0.03); border: 1px solid var(--line); }
+.files a { color: var(--ink); font-weight: 600; text-decoration: none; flex: 1; }
+.files a:hover { color: var(--cyan); }
+.files .size { color: var(--dim); font-size: 13px; }
+.files li.pick { border-color: rgb(94 224 255 / 0.5); background: rgb(94 224 255 / 0.06); }
+.get .how li { margin-bottom: 14px; padding-left: 6px; }
+.get .how li::marker { color: var(--cyan); font-weight: 700; }
+.get .how b { color: var(--ink); }
+.get .cmd { display: flex; align-items: center; gap: 10px; margin-top: 10px; padding: 10px 10px 10px 14px; border-radius: 10px; background: #0b0c12; border: 1px solid var(--line); }
+.get .cmd code { flex: 1; font: 13.5px var(--mono); color: #d5d8e6; overflow-x: auto; white-space: nowrap; }
+.copy.small { padding: 6px 12px; font-size: 13px; border-radius: 8px; }
+.get .all { margin: 18px 0 0; padding-top: 16px; border-top: 1px solid var(--line); font-size: 14px; color: var(--muted); }
+.get .all code { font: 12.5px var(--mono); color: var(--ink); }
+.src-title { margin: 80px 0 0; font-size: 26px; letter-spacing: -0.02em; color: var(--ink); }
+.install .box { margin-top: 24px; }
 
 /* ---------- Footer ---------- */
 footer { position: relative; padding: 60px 24px 50px; border-top: 1px solid var(--line); overflow: hidden; }
@@ -282,13 +316,14 @@ footer a { color: var(--muted); }
 <a class="skip" href="#demo">Aller au contenu</a>
 
 <nav class="nav" aria-label="Sections">
-  <a class="brand" href="#top"><img src="images/akolade.svg" alt="">Akolade</a>
+  <a class="brand" href="#top"><img src="images/akolade.svg" alt=""><span>Akolade</span></a>
   <a class="l" href="#visite">Visite</a>
   <a class="l" href="#themes">Thèmes</a>
   <a class="l" href="#outils">Outils</a>
   <a class="l" href="#securite">Sécurité</a>
   <a class="l" href="#installer">Installer</a>
-  <a class="gh" href="https://github.com/emmanuellion/akolade">GitHub</a>
+  <a class="l gh-l" href="https://github.com/emmanuellion/akolade">GitHub</a>
+  <a class="navdl dl" href="#installer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg><span class="dl-label">Télécharger</span></a>
 </nav>
 
 <header class="hero" id="top">
@@ -297,7 +332,6 @@ footer a { color: var(--muted); }
   <div class="spot" aria-hidden="true"></div>
   <div class="hero-copy">
     <div class="braces" aria-hidden="true">{ }</div>
-    <span class="eyebrow"><b>Libre</b>Rust, gpui, macOS</span>
     <h1>
       <span class="w"><span style="animation-delay:.05s">Le</span></span>
       <span class="w"><span style="animation-delay:.12s">code,</span></span>
@@ -310,9 +344,10 @@ footer a { color: var(--muted); }
     </h1>
     <p>Akolade est un éditeur de code natif, dessiné par la carte graphique. Il s'ouvre en <strong>0,05 s</strong> et embarque Git, un terminal, Claude Code et quinze outils.</p>
     <div class="cta">
-      <a class="btn main" href="#installer">Installer Akolade</a>
+      <a class="btn main dl" href="#installer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg><span class="dl-label">Télécharger Akolade</span></a>
       <a class="btn ghost" href="#visite">Faire la visite</a>
     </div>
+    <p class="dl-info hero-info">Pour macOS, Windows et Linux. <a href="#installer">Tous les téléchargements</a></p>
   </div>
 
   <div class="stage" id="demo">
@@ -470,17 +505,54 @@ footer a { color: var(--muted); }
 
   <section class="install" id="installer">
     <div class="wrap">
-      <p class="kick">Installer</p>
-      <h2 class="reveal">Trois commandes.<br><span class="grad">C'est parti.</span></h2>
+      <p class="kick">Télécharger</p>
+      <h2 class="reveal">Un fichier, une installation.<br><span class="grad">Sur les trois systèmes.</span></h2>
+      <div class="get">
+        <a class="btn main dl big" href="#installer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg><span class="dl-label">Télécharger Akolade</span></a>
+        <p class="dl-info main-info">macOS 11+, Windows 10/11 et Linux, en x64 comme en ARM.</p>
+        <div class="tabs" role="tablist" aria-label="Système">
+          <button role="tab" type="button" data-tab="mac" aria-selected="true">macOS</button>
+          <button role="tab" type="button" data-tab="win" aria-selected="false">Windows</button>
+          <button role="tab" type="button" data-tab="linux" aria-selected="false">Linux</button>
+        </div>
+        <div class="plat" data-os="mac" role="tabpanel">
+          <ul class="files" data-files="mac"><li><a href="https://github.com/emmanuellion/akolade/releases/latest/download/akolade-macos-universal.dmg">Image disque (.dmg)</a><span class="size">Apple Silicon et Intel</span></li></ul>
+          <ol class="how">
+            <li><b>Ouvrez le .dmg</b> et glissez Akolade dans Applications.</li>
+            <li><b>Au premier lancement</b>, macOS bloque l'app : elle n'est pas signée par Apple. Allez dans Réglages Système › Confidentialité et sécurité, puis « Ouvrir quand même ». Ou dans un terminal :
+              <span class="cmd"><code id="xattr">xattr -dr com.apple.quarantine /Applications/Akolade.app</code><button class="copy small" type="button" data-copy="xattr">Copier</button></span></li>
+            <li><b>C'est tout.</b> Ouverte depuis le Dock, l'app retrouve le PATH de votre shell : Homebrew, Node.js, Claude Code, Docker.</li>
+          </ol>
+        </div>
+        <div class="plat" data-os="win" role="tabpanel">
+          <ul class="files" data-files="win"><li><a href="https://github.com/emmanuellion/akolade/releases/latest/download/akolade-windows-x86_64-setup.exe">Installateur (.exe)</a><span class="size">x64</span></li><li><a href="https://github.com/emmanuellion/akolade/releases/latest/download/akolade-windows-x86_64.zip">Version portable (.zip)</a><span class="size">x64</span></li></ul>
+          <ol class="how">
+            <li><b>Lancez l'installateur</b> : il installe Akolade pour votre compte, sans droits administrateur, avec un raccourci dans le menu Démarrer. Version portable : dézippez et lancez <code>akolade.exe</code>.</li>
+            <li><b>SmartScreen</b> peut afficher « Windows a protégé votre ordinateur » : l'app n'est pas signée. Cliquez sur Informations complémentaires, puis Exécuter quand même.</li>
+            <li><b>Le terminal intégré</b> utilise PowerShell. Installez <a href="https://git-scm.com/download/win">Git pour Windows</a> pour l'outil Git.</li>
+          </ol>
+        </div>
+        <div class="plat" data-os="linux" role="tabpanel">
+          <ul class="files" data-files="linux"><li><a href="https://github.com/emmanuellion/akolade/releases/latest/download/akolade-linux-x86_64.AppImage">AppImage, x64</a><span class="size"></span></li><li><a href="https://github.com/emmanuellion/akolade/releases/latest/download/akolade-linux-aarch64.AppImage">AppImage, ARM64</a><span class="size"></span></li><li><a href="https://github.com/emmanuellion/akolade/releases/latest/download/akolade-linux-x86_64.tar.gz">Archive .tar.gz, x64</a><span class="size"></span></li><li><a href="https://github.com/emmanuellion/akolade/releases/latest/download/akolade-linux-aarch64.tar.gz">Archive .tar.gz, ARM64</a><span class="size"></span></li></ul>
+          <ol class="how">
+            <li><b>Rendez l'AppImage exécutable</b> et lancez-la :
+              <span class="cmd"><code id="appimage">chmod +x akolade-linux-*.AppImage &amp;&amp; ./akolade-linux-*.AppImage</code><button class="copy small" type="button" data-copy="appimage">Copier</button></span></li>
+            <li><b>Il faut un pilote Vulkan</b> : <code>mesa-vulkan-drivers</code> sur Intel et AMD, le pilote propriétaire sur NVIDIA.</li>
+            <li><b>Si l'AppImage ne démarre pas</b> (FUSE absent), prenez l'archive .tar.gz : le binaire, son icône et son entrée de menu.</li>
+          </ol>
+        </div>
+        <p class="all"><span class="version-note">Chaque version</span> publie aussi <code>SHA256SUMS.txt</code>. <a href="https://github.com/emmanuellion/akolade/releases">Toutes les versions sur GitHub</a></p>
+      </div>
+      <h3 class="src-title">Ou compilez-le depuis les sources</h3>
       <div class="box">
         <div class="in">
-<pre id="cmd"><span class="pr">$ </span>git clone https://github.com/emmanuellion/akolade.git
+<pre id="cmdsrc"><span class="pr">$ </span>git clone https://github.com/emmanuellion/akolade.git
 <span class="pr">$ </span>cd akolade
 <span class="pr">$ </span>cargo run --release</pre>
-          <div class="row"><span id="copyMsg">La première compilation prend quelques minutes.</span><button class="copy" id="copy" type="button">Copier les commandes</button></div>
+          <div class="row"><span id="copyMsg">La première compilation prend quelques minutes.</span><button class="copy" type="button" data-copy="cmdsrc">Copier les commandes</button></div>
         </div>
       </div>
-      <p class="reqs">Un Mac, <a href="https://rustup.rs">Rust 1.85</a> ou plus récent, et Git. Xcode n'est pas nécessaire.</p>
+      <p class="reqs"><a href="https://rustup.rs">Rust 1.85</a> ou plus récent et Git, sur macOS, Windows ou Linux (avec ses bibliothèques Vulkan et X11/Wayland).</p>
     </div>
   </section>
 </main>
@@ -725,17 +797,96 @@ new IntersectionObserver(async ([e], obs) => {
 const rev = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add('seen'); rev.unobserve(e.target); } }), { threshold: 0.2 });
 document.querySelectorAll('.reveal').forEach((el) => rev.observe(el));
 
-/* ---------- Copy the install commands ---------- */
-$('#copy').addEventListener('click', async () => {
-  const text = 'git clone https://github.com/emmanuellion/akolade.git\ncd akolade\ncargo run --release';
-  const msg = $('#copyMsg');
-  try {
-    await navigator.clipboard.writeText(text);
-    msg.textContent = 'Copié. Collez-les dans le Terminal.';
-  } catch {
-    msg.textContent = 'La copie a échoué : sélectionnez les commandes à la main.';
-  }
-});
+/* ---------- Copy buttons ---------- */
+document.querySelectorAll('[data-copy]').forEach((b) => b.addEventListener('click', async () => {
+  const text = document.getElementById(b.dataset.copy).textContent.replace(/^\$ /gm, '').trim();
+  const label = b.textContent;
+  try { await navigator.clipboard.writeText(text); b.textContent = 'Copié'; }
+  catch { b.textContent = 'Sélectionnez le texte'; }
+  setTimeout(() => (b.textContent = label), 1600);
+}));
+
+/* ---------- Download: the right file for this system, from the latest release ---------- */
+(() => {
+  const REPO = 'https://github.com/emmanuellion/akolade';
+  const ua = navigator.userAgent, platform = navigator.userAgentData?.platform || navigator.platform || '';
+  // Case-insensitive: Chromium says "macOS", Safari and Firefox "MacIntel".
+  const mobile = /android|iphone|ipad|ipod/i.test(ua) || (/mac/i.test(platform) && navigator.maxTouchPoints > 1);
+  const os = mobile ? null : /win/i.test(platform) ? 'win' : /mac/i.test(platform) ? 'mac' : /linux|x11/i.test(platform + ua) ? 'linux' : null;
+  const names = { mac: 'macOS', win: 'Windows', linux: 'Linux' };
+  let arch = /aarch64|arm64/i.test(ua + platform) ? 'arm' : null;
+  // The CPU when the browser tells: Chromium directly, others through the GPU name (Apple M… on Apple Silicon).
+  const archKnown = (navigator.userAgentData?.getHighEntropyValues?.(['architecture']) ?? Promise.reject())
+    .then((v) => { arch = v.architecture === 'arm' ? 'arm' : v.architecture === 'x86' ? 'x86' : arch; })
+    .catch(() => {});
+  // [system, pattern, label, cpu, short description, version-free name]
+  const KINDS = [
+    ['mac', /macos-universal\.dmg$/, 'Image disque (.dmg)', null, 'un .dmg pour Mac Apple Silicon et Intel', 'akolade-macos-universal.dmg'],
+    ['win', /windows-x86_64-setup\.exe$/, 'Installateur (.exe)', null, "l'installateur pour Windows 10/11", 'akolade-windows-x86_64-setup.exe'],
+    ['win', /windows-x86_64\.zip$/, 'Version portable (.zip)', null, 'la version portable pour Windows 10/11', 'akolade-windows-x86_64.zip'],
+    ['linux', /linux-x86_64\.AppImage$/, 'AppImage, x64', 'x86', "l'AppImage pour Linux x64", 'akolade-linux-x86_64.AppImage'],
+    ['linux', /linux-aarch64\.AppImage$/, 'AppImage, ARM64', 'arm', "l'AppImage pour Linux ARM64", 'akolade-linux-aarch64.AppImage'],
+    ['linux', /linux-x86_64\.tar\.gz$/, 'Archive .tar.gz, x64', 'x86', "l'archive pour Linux x64", 'akolade-linux-x86_64.tar.gz'],
+    ['linux', /linux-aarch64\.tar\.gz$/, 'Archive .tar.gz, ARM64', 'arm', "l'archive pour Linux ARM64", 'akolade-linux-aarch64.tar.gz'],
+  ];
+  const fits = (sys, cpu) => sys === os && (!cpu || cpu === (arch ?? 'x86'));
+  const mb = (bytes) => (bytes ? `${Math.max(1, Math.round(bytes / 1048576))} Mo` : '');
+  const buttons = [...document.querySelectorAll('.dl')];
+  const label = () => (os ? `Télécharger pour ${names[os]}` : 'Télécharger Akolade');
+
+  // Tabs: the visitor's system first.
+  const tabs = [...document.querySelectorAll('.tabs [role="tab"]')], panels = [...document.querySelectorAll('.plat')];
+  const show = (sys) => {
+    tabs.forEach((t) => t.setAttribute('aria-selected', t.dataset.tab === sys));
+    panels.forEach((p) => (p.hidden = p.dataset.os !== sys));
+  };
+  tabs.forEach((t) => t.addEventListener('click', () => show(t.dataset.tab)));
+  show(os || 'mac');
+  if (os) document.querySelector(`.tabs [data-tab="${os}"]`).insertAdjacentHTML('beforeend', '<span class="here">votre système</span>');
+
+  // `release`: assets with name, size and URL (sizes 0 before the real list arrives).
+  const render = (release, final) => {
+    buttons.forEach((b) => (b.querySelector('.dl-label').textContent = b.classList.contains('navdl') ? (os ? `Télécharger pour ${names[os]}` : 'Télécharger') : label()));
+    const files = KINDS.map(([sys, re, name, cpu, short]) => ({ sys, name, cpu, short, asset: release.assets.find((a) => re.test(a.name)) })).filter((f) => f.asset);
+    const pick = os && files.find((f) => fits(f.sys, f.cpu));
+    for (const sys of Object.keys(names)) {
+      const ul = document.querySelector(`[data-files="${sys}"]`);
+      const mine = files.filter((f) => f.sys === sys);
+      if (!mine.length) continue;
+      ul.replaceChildren(...mine.map((f) => {
+        const li = document.createElement('li');
+        if (f === pick) li.className = 'pick';
+        const a = Object.assign(document.createElement('a'), { href: f.asset.browser_download_url, textContent: f.name });
+        const size = Object.assign(document.createElement('span'), { className: 'size', textContent: mb(f.asset.size) || (f.cpu ? '' : sys === 'mac' ? 'Apple Silicon et Intel' : 'x64') });
+        li.append(a, size);
+        return li;
+      }));
+    }
+    const url = pick ? pick.asset.browser_download_url : '#installer';
+    buttons.forEach((b) => (b.href = url));
+    if (!final) return;
+    const v = release.tag_name.replace(/^v/, '');
+    document.querySelector('.version-note').textContent = `La version ${v}, comme chaque version,`;
+    const info = pick ? `Version ${v}, ${pick.short}${pick.asset.size ? `, ${mb(pick.asset.size)}` : ''}.` : `Version ${v}, pour macOS, Windows et Linux.`;
+    document.querySelector('.hero-info').innerHTML = `${info} <a href="#installer">Autres systèmes</a>`;
+    document.querySelector('.main-info').textContent = info;
+  };
+  const load = async () => {
+    // One API call per visit at most (GitHub allows 60 per hour per visitor).
+    const cached = sessionStorage.getItem('akolade-release-v2');
+    if (cached) return JSON.parse(cached);
+    const res = await fetch('https://api.github.com/repos/emmanuellion/akolade/releases/latest', { headers: { Accept: 'application/vnd.github+json' } });
+    if (!res.ok) throw new Error(res.status);
+    const { tag_name, assets } = await res.json();
+    const release = { tag_name, assets: assets.map(({ name, size, browser_download_url }) => ({ name, size, browser_download_url })) };
+    sessionStorage.setItem('akolade-release-v2', JSON.stringify(release));
+    return release;
+  };
+  // Right away: the version-free files of the latest release, direct downloads too.
+  const guess = { tag_name: 'latest', assets: KINDS.map((k) => ({ name: k[5], size: 0, browser_download_url: `${REPO}/releases/latest/download/${k[5]}` })) };
+  render(guess, false);
+  Promise.all([load(), archKnown]).then(([release]) => render(release, true)).catch(() => archKnown.then(() => render(guess, false)));
+})();
 </script>
 </body>
 </html>
