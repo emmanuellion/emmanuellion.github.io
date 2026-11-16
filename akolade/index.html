@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Akolade : l'éditeur de code où Claude écrit avec vous</title>
-<meta name="description" content="Akolade est un éditeur de code natif écrit en Rust, avec Claude Code intégré. 35 langages colorés, un terminal, Git et quinze outils de développement, pour macOS, Windows et Linux.">
+<meta name="description" content="Akolade est un éditeur de code natif écrit en Rust, avec Claude Code intégré. 35 langages colorés, un terminal, Git et seize outils de développement, pour macOS, Windows et Linux.">
 <meta property="og:title" content="Akolade : l'éditeur de code où Claude écrit avec vous">
 <meta property="og:description" content="Un éditeur de code natif écrit en Rust avec gpui, avec Claude Code intégré. Libre, sans compte.">
 <meta property="og:image" content="https://emmanuellion.github.io/akolade/images/editeur.png">
@@ -318,10 +318,49 @@ h2 .grad { color: var(--muted); }
 .src-title { margin: 80px 0 0; font-size: 26px; letter-spacing: -0.02em; color: var(--ink); }
 .install .box { margin-top: 24px; }
 
+/* ---------- Multiplexeur: several Claude sessions side by side ---------- */
+.mux-sec .sub { margin-bottom: 44px; }
+.mux-demo { border: 1px solid #262a33; border-radius: 16px; background: #0f1014; overflow: hidden; font-size: 13px; color: #c9ccd4; box-shadow: 0 40px 120px -40px rgb(124 140 255 / 0.35); }
+.mux-demo .mh { display: flex; align-items: center; gap: 10px; padding: 14px 18px; border-bottom: 1px solid #1b1d23; flex-wrap: wrap; }
+.mux-demo .mh strong { color: #e4e6eb; font-size: 14px; }
+.mux-demo .mh small { color: #868c97; flex: 1; min-width: 160px; }
+.mux-demo .seg { display: flex; gap: 2px; padding: 2px; border-radius: 8px; background: rgb(255 255 255 / 0.05); }
+.mux-demo .seg span, .mux-demo .pill-b { padding: 4px 10px; border-radius: 6px; font-size: 12px; color: #c9ccd4; }
+.mux-demo .seg .on { background: #8b9cff; color: #0f1014; font-weight: 600; }
+.mux-demo .leases { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; padding: 10px 18px 0; font-size: 12px; color: #868c97; }
+.mux-demo .leases code { font: 11.5px var(--mono); color: #e4e6eb; background: rgb(255 255 255 / 0.05); border-radius: 6px; padding: 2px 8px; }
+.mux-demo .panels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; padding: 12px 18px; }
+.mux-demo .panel { border: 1px solid #262a33; border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; min-height: 250px; }
+.mux-demo .pb { display: flex; align-items: center; gap: 7px; padding: 8px 10px; border-bottom: 1px solid #1b1d23; }
+.mux-demo .pb.ask { background: rgb(255 207 92 / 0.08); }
+.mux-demo .pb i { width: 8px; height: 8px; border-radius: 50%; flex: none; }
+.mux-demo .pb b { color: #e4e6eb; font-size: 12.5px; }
+.mux-demo .pb em { font-style: normal; font-size: 11.5px; }
+.mux-demo .pb .st { margin-left: auto; font-size: 10.5px; padding: 1px 6px; border-radius: 4px; white-space: nowrap; }
+.mux-demo .pb .cost { margin-left: auto; color: #868c97; font-size: 11.5px; }
+.mux-demo .log { flex: 1; padding: 10px; display: grid; gap: 7px; align-content: start; font-size: 12px; line-height: 1.45; }
+.mux-demo .log .u { justify-self: end; max-width: 90%; background: rgb(139 156 255 / 0.12); border-radius: 8px; padding: 5px 9px; color: #e4e6eb; }
+.mux-demo .log .t { font: 11px var(--mono); color: #868c97; }
+.mux-demo .log .t b { color: #28c840; font-weight: 600; }
+.mux-demo .log .note-m { border-left: 2px solid #b48cff; padding-left: 8px; color: #c9b8ff; }
+.mux-demo .log .no { color: #f07178; }
+.mux-demo .log .askc { border: 1px solid rgb(255 207 92 / 0.4); border-radius: 8px; padding: 6px 8px; color: #ffcf5c; }
+.mux-demo .pc { margin: 0 8px 8px; border: 1px solid #262a33; border-radius: 8px; padding: 6px 9px; display: flex; gap: 8px; font-size: 11px; color: #5c6773; }
+.mux-demo .pc b { color: #e4e6eb; font-weight: 500; } .mux-demo .pc span { color: #868c97; }
+.mux-demo .queue { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; padding: 0 18px 14px; font-size: 12px; color: #868c97; }
+.mux-demo .queue .ok { color: #28c840; } .mux-demo .queue .wait { color: #ffcf5c; }
+.mux-demo .queue .go { margin-left: auto; background: #8b9cff; color: #0f1014; font-weight: 600; border-radius: 6px; padding: 4px 10px; }
+.mux-points { list-style: none; padding: 0; margin: 48px 0 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0 40px; color: var(--muted); }
+.mux-points li { padding: 16px 0; border-top: 1px solid var(--line); }
+.mux-points li b { display: block; color: var(--ink); margin-bottom: 4px; }
+.mux-points code { font: 14px var(--mono); color: var(--ink); }
+@media (max-width: 900px) { .mux-demo .panels, .mux-points { grid-template-columns: 1fr; } .mux-demo .panel { min-height: 0; } }
+
 /* ---------- Footer ---------- */
 footer { position: relative; padding: 60px 24px 50px; border-top: 1px solid var(--line); overflow: hidden; }
 /* A fill, not a stroke: the system font's letters overlap inside, a stroke would draw those seams. */
-footer .big { font: 800 clamp(80px, 19vw, 260px)/0.9 var(--sans); letter-spacing: -0.06em; text-align: center; margin: 0 0 40px; user-select: none; color: rgb(124 140 255 / 0.1); }
+footer .big { font: 800 clamp(80px, 19vw, 260px)/0.9 var(--sans); letter-spacing: -0.06em; text-align: center; margin: 0 0 40px; user-select: none;
+  background: linear-gradient(180deg, rgb(124 140 255 / 0.28), rgb(124 140 255 / 0.02) 85%); -webkit-background-clip: text; background-clip: text; color: transparent; }
 footer .cols { max-width: 1180px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 20px 40px; justify-content: space-between; color: var(--dim); font-size: 14px; }
 footer .cols p { margin: 0; max-width: 560px; }
 footer .cols nav { display: flex; gap: 22px; }
@@ -342,6 +381,7 @@ footer a { color: var(--muted); }
   <a class="brand" href="#top"><img src="images/akolade.svg" alt=""><span>Akolade</span></a>
   <a class="l" href="#visite">Visite</a>
   <a class="l" href="#claude">Claude</a>
+  <a class="l" href="#multiplexeur">Multiplexeur</a>
   <a class="l" href="#themes">Thèmes</a>
   <a class="l" href="#outils">Outils</a>
   <a class="l" href="#securite">Sécurité</a>
@@ -365,7 +405,7 @@ footer a { color: var(--muted); }
       <span class="w"><span style="animation-delay:.49s">avec</span></span>
       <span class="w"><span style="animation-delay:.56s">vous.</span></span>
     </h1>
-    <p>Akolade est un éditeur de code natif, dessiné par la carte graphique. Il colore 35 langages, s'ouvre en <strong>0,05 s</strong> et laisse Claude Code lire et modifier votre projet sous vos yeux. Un terminal, Git et quinze outils sont aussi de la partie.</p>
+    <p>Akolade est un éditeur de code natif, dessiné par la carte graphique. Il colore 35 langages, s'ouvre en <strong>0,05 s</strong> et laisse Claude Code lire et modifier votre projet sous vos yeux. Un terminal, Git et seize outils sont aussi de la partie, dont le Multiplexeur pour faire travailler plusieurs Claude à la fois.</p>
     <div class="cta">
       <a class="btn main dl" href="#installer"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg><span class="dl-label">Télécharger Akolade</span></a>
       <a class="btn ghost" href="#visite">Faire la visite</a>
@@ -485,6 +525,61 @@ footer a { color: var(--muted); }
     </div>
   </section>
 
+  <section class="mux-sec" id="multiplexeur">
+    <div class="wrap">
+      <p class="kick">Le Multiplexeur · nouveau dans la 0.2</p>
+      <h2 class="reveal">Plusieurs Claude à la fois.<br><span class="grad">Sans qu'ils se marchent dessus.</span></h2>
+      <p class="sub reveal">Lancez autant de sessions Claude Code que vous voulez, côte à côte : une par projet, ou plusieurs sur le même projet, chacune dans son propre worktree Git.</p>
+      <div class="mux-demo" role="img" aria-label="Le Multiplexeur : trois sessions Claude Code côte à côte. Sur le projet meteo, la session api travaille et réserve src/meteo.rs ; la session tests, qui voulait l'écrire, est refusée et attend votre accord pour une commande ; la session site travaille sur un autre projet. En bas, la branche de api a été fusionnée dans akolade/integration après 214 tests réussis.">
+        <div class="mh" aria-hidden="true">
+          <strong>Multiplexeur</strong><small>3 sessions · 2 projets · 1,84 $</small>
+          <div class="seg"><span class="on">Par projet (3)</span><span>À plat</span></div>
+          <span class="pill-b">Échanges (2)</span><span class="pill-b">Statistiques</span>
+        </div>
+        <div class="leases" aria-hidden="true">Fichiers réservés : <code>src/meteo.rs · api</code><code>tests/meteo.rs · tests</code></div>
+        <div class="panels" aria-hidden="true">
+          <div class="panel">
+            <div class="pb"><i style="background:#7c8cff"></i><b>api</b><span class="st" style="color:#28c840;background:rgb(40 200 64 / .14)">En cours</span></div>
+            <div class="log">
+              <div class="u">Ajoute un endpoint /semaine qui renvoie le relevé le plus chaud.</div>
+              <div class="t"><b>✓</b> claim_files src/meteo.rs</div>
+              <div class="t"><b>✓</b> Edit src/meteo.rs (+24 −3)</div>
+              <div class="t"><b>✓</b> request_merge akolade/api</div>
+            </div>
+            <div class="pc"><b>Opus</b><span>Élevé</span>Modifs auto</div>
+          </div>
+          <div class="panel">
+            <div class="pb ask"><i style="background:#7c8cff"></i><b>tests</b><span class="st" style="color:#ffcf5c;background:rgb(255 207 92 / .14)">Attend votre accord</span></div>
+            <div class="log">
+              <div class="t no">✕ Edit src/meteo.rs : réservé par « api »</div>
+              <div class="note-m">[Message de api] L'endpoint est prêt, tu peux écrire ses tests.</div>
+              <div class="askc">Lancer <code>cargo test meteo</code> ? Autoriser · Refuser</div>
+            </div>
+            <div class="pc"><b>Sonnet</b><span>Moyen</span>Demander</div>
+          </div>
+          <div class="panel">
+            <div class="pb"><i style="background:#28c840"></i><b>site</b><em style="color:#28c840">vitrine</em><span class="cost">0,41 $</span></div>
+            <div class="log">
+              <div class="u">Mets à jour la page avec les nouveautés.</div>
+              <div class="t"><b>✓</b> Read index.html</div>
+              <div class="t"><b>✓</b> Edit index.html (+86 −4)</div>
+            </div>
+            <div class="pc"><b>Opus</b><span>Élevé</span>Demander</div>
+          </div>
+        </div>
+        <div class="queue" aria-hidden="true">Intégration : <span class="ok">✓ akolade/api fusionnée · 214 tests réussis</span><span class="wait">akolade/tests en attente</span><span class="go">Fusionner dans votre branche</span></div>
+      </div>
+      <ul class="mux-points">
+        <li><b>Chacune dans son worktree</b>Plusieurs sessions sur un même projet travaillent chacune sur sa branche, dans son propre dossier, jamais dans le vôtre.</li>
+        <li><b>Des fichiers réservés</b>Une session réserve un fichier avant de le modifier. Si une autre veut l'écrire, elle est refusée, avec le nom de celle qui le tient et la raison.</li>
+        <li><b>Elles se parlent</b>Les sessions s'écrivent entre elles, même d'un projet à l'autre. Depuis les Échanges, vous écrivez à une session, à un projet ou à toutes.</li>
+        <li><b>Fusionnées si les tests passent</b>Une branche terminée rejoint <code>akolade/integration</code> seulement si le projet compile et que ses tests passent. Rien n'est poussé, et rien n'arrive dans votre branche sans votre clic.</li>
+        <li><b>Par projet ou à plat</b>Deux vues, chacune avec ses propres sessions. Un clic lance un nouveau Claude dans l'un de vos projets, la croix le ferme. Le modèle et l'effort se choisissent comme dans l'app Claude.</li>
+        <li><b>Statistiques et reprise</b>Coût et tokens de chaque session, avec les chiffres de Claude Code : sessions, messages, activité sur 30 jours. Après un redémarrage, chaque session reprend sa conversation.</li>
+      </ul>
+    </div>
+  </section>
+
   <section class="lab" id="themes">
     <div class="wrap">
       <p class="kick">L'atelier des thèmes</p>
@@ -507,7 +602,7 @@ footer a { color: var(--muted); }
     <div class="wrap grid">
       <div>
         <p class="kick">Les outils</p>
-        <h2 class="reveal">Quinze outils<br><span class="grad">en orbite.</span></h2>
+        <h2 class="reveal">Seize outils<br><span class="grad">en orbite.</span></h2>
         <div class="info" id="info" aria-live="polite">
           <p class="sub">Chaque outil ajouté depuis le Store a son icône dans la barre de gauche. Survolez-en un pour savoir ce qu'il fait.</p>
         </div>
@@ -795,11 +890,13 @@ const ICON = {
   k8s: '<circle cx="12" cy="12" r="8"/><path d="M12 2v7.5"/><path d="m19 5-5.23 5.23"/><path d="M22 12h-7.5"/><path d="m19 19-5.23-5.23"/><path d="M12 14.5V22"/><path d="M10.23 13.77 5 19"/><path d="M9.5 12H2"/><path d="M10.23 10.23 5 5"/><circle cx="12" cy="12" r="2.5"/>',
   compare: '<path d="M12 3v14"/><path d="M5 10h14"/><path d="M5 21h14"/>',
   deps: '<path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><path d="m3.3 7 7.703 4.734a2 2 0 0 0 1.994 0L20.7 7"/>',
+  mux: '<rect width="7" height="9" x="3" y="3" rx="1"/><rect width="7" height="5" x="14" y="3" rx="1"/><rect width="7" height="9" x="14" y="12" rx="1"/><rect width="7" height="5" x="3" y="16" rx="1"/>',
   stats: '<path d="M21 12c.552 0 1.005-.449.95-.998a10 10 0 0 0-8.953-8.951c-.55-.055-.998.398-.998.95v8a1 1 0 0 0 1 1z"/><path d="M21.21 15.89A10 10 0 1 1 8 2.83"/>',
 };
 const TOOLS = [
   ['git', 'Git', '⇧⌘G', '#f07178', "Modifications et diff, indexation, commits, branches, remises, push et pull. Les fichiers modifiés se colorent dans l'explorateur.", 1],
   ['claude', 'Claude Code', 'conversation', '#d97757', "Votre propre Claude Code dans un onglet : cartes d'actions, autorisations d'un clic, coût et limites de l'abonnement.", 1],
+  ['mux', 'Multiplexeur', 'plusieurs Claude', '#d97757', "Plusieurs sessions Claude Code côte à côte, chacune dans son worktree : fichiers réservés, messages entre elles, fusion seulement si les tests passent.", 1],
   ['http', 'Client HTTP', 'API', '#4d9df0', "Une requête, ses en-têtes et son corps ; la réponse avec son code, sa durée et le JSON mis en forme.", 1],
   ['docker', 'Docker', 'conteneurs', '#2496ed', 'Démarrer, arrêter, supprimer un conteneur, lire ses logs ou ouvrir un shell dans le terminal.', 1],
   ['tests', 'Tests', 'cargo, go, pytest, jest, vitest', '#28c840', "Ce qui passe, ce qui casse, le message de chaque échec, et un clic pour ouvrir le test.", 1],
