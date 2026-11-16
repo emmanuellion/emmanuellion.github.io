@@ -6,6 +6,10 @@
 <title>Emmanuel Lion : tous mes projets</title>
 <meta name="description" content="Site d'Emmanuel Lion qui recense tous ses projets : Rameau, Akolade, sites web, expériences, projets d'études et scripts.">
 <meta name="theme-color" content="#1a1b23">
+<meta property="og:title" content="Emmanuel Lion : tous mes projets">
+<meta property="og:description" content="Rameau, Akolade, sites web, expériences et projets d'études.">
+<meta property="og:image" content="https://emmanuellion.github.io/img/apercu.jpg">
+<meta property="og:type" content="website">
 <link rel="icon" href="img/connection.png">
 <style>
 :root {
@@ -14,7 +18,7 @@
   --line: #2e3040;
   --ink: #eceef5;
   --muted: #9a9db0;
-  --red: #f1363a;
+  --red: #f4504f;
   --sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, "Segoe UI", Roboto, sans-serif;
   --mono: ui-monospace, "SF Mono", "JetBrains Mono", Menlo, monospace;
 }
@@ -25,9 +29,13 @@ body {
   color: var(--ink);
   font: 17px/1.6 var(--sans);
   -webkit-font-smoothing: antialiased;
-  background: var(--bg) url("img/l1.gif") center / cover fixed no-repeat;
+  background: var(--bg);
 }
-::selection { background: rgb(241 54 58 / 0.4); }
+/* A fixed element rather than background-attachment: fixed, which iOS Safari ignores. */
+.fond { position: fixed; inset: 0; z-index: -1; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+/* iOS Low Power Mode blocks playback and would show its play button over the poster. */
+.fond::-webkit-media-controls-start-playback-button { display: none !important; }
+::selection { background: rgb(244 80 79 / 0.4); }
 a { color: inherit; text-decoration: none; }
 :focus-visible { outline: 2px solid var(--red); outline-offset: 3px; border-radius: 4px; }
 main { max-width: 920px; margin: 0 auto; padding: 96px 24px 64px; }
@@ -75,12 +83,12 @@ footer { margin-top: 96px; color: var(--muted); font-size: 14px; }
   li .what { text-align: left; }
 }
 @media (prefers-reduced-motion: reduce) {
-  body { background-image: none; }
   * { transition: none !important; }
 }
 </style>
 </head>
 <body>
+<video class="fond" src="img/fond.mp4" poster="img/fond.jpg" muted loop playsinline preload="none" aria-hidden="true"></video>
 <main>
   <header>
     <p class="hello">emmanuellion.github.io</p>
@@ -141,8 +149,6 @@ footer { margin-top: 96px; color: var(--muted); font-size: 14px; }
     <li><a href="react/index.html"><span class="name">Projet React</span></a></li>
     <li><a href="pokemon/index.html"><span class="name">Jeu Pokémon</span><span class="what">React</span></a></li>
     <li><a href="build/index.html"><span class="name">PWA</span></a></li>
-    <li><a href="https://github.com/Mabule/boitille"><span class="name">Boitille</span><span class="what">Java, LP CODESI, sur GitHub</span></a></li>
-    <li><a href="https://github.com/Mabule/RESTChezToi"><span class="name">RESTChezToi</span><span class="what">API REST, LP CODESI, sur GitHub</span></a></li>
   </ul>
 
   <h2>Scripts à télécharger</h2>
@@ -154,5 +160,9 @@ footer { margin-top: 96px; color: var(--muted); font-size: 14px; }
 
   <footer>Emmanuel Lion</footer>
 </main>
+<script>
+// Reduced motion: the still poster stays, and the video is never downloaded.
+if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.querySelector(".fond").play().catch(() => {});
+</script>
 </body>
 </html>

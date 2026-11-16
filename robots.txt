@@ -1,6 +1,6 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mabule.github.io/sitemap.xml
+Sitemap: https://emmanuellion.github.io/sitemap.xml
 Sitemap: https://emmanuellion.github.io/rameau/sitemap.xml
 Sitemap: https://emmanuellion.github.io/akolade/sitemap.xml
